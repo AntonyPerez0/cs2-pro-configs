@@ -671,7 +671,7 @@ async function runPlayer() {
       <a class="btn ghost small" href="cfg/${esc(rec.slug)}.cfg" download="${esc(rec.slug)}.cfg">Download</a>
     </div>
     <details class="raw"><summary>Show raw config file</summary><div class="cmd" id="raw-cmd"><pre>…</pre></div></details>
-    <p class="note">The exact autoexec.cfg file. Alternative to pasting: save as <code>autoexec.cfg</code> in <code>…/Counter-Strike Global Offensive/game/csgo/cfg/</code> and run <code>exec autoexec</code> in console.</p>`;
+    <p class="note">The exact autoexec.cfg file from the source site — in the <b>original pre-patch format</b> (some crosshair convars in it were removed by the Sept 22, 2026 update). For applying settings use the copy blocks above; this file is kept for reference. Alternative to pasting: save as <code>autoexec.cfg</code> in <code>…/Counter-Strike Global Offensive/game/csgo/cfg/</code> and run <code>exec autoexec</code> in console.</p>`;
   main.appendChild(raw);
   const rawCmd = $("#raw-cmd", raw);
   const rawBtn = $("[data-copy-raw]", raw);
