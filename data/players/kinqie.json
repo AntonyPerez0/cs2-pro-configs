@@ -1,0 +1,71 @@
+{
+  "slug": "kinqie",
+  "nick": "kinqie",
+  "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9KcWFXOHNQWjYzOWhPTmxnZzBvckoyLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.HAMpV2jTf_loCItGgIIRsPVuqbcIXn7wLU_uQ1YDI_Y",
+  "real_name": "Semyon Lisitsyn",
+  "crosshair_code": "CSGO-8fMDN-CjQ3o-HGNn9-WRxTL-F9xXD",
+  "steamid64": "76561198002372151",
+  "launch_options": null,
+  "tables": {
+    "Mouse": {
+      "DPI": "800",
+      "Mouse Sensitivity": "1.25",
+      "Zoom Sensitivity Multiplier": "1",
+      "Polling rate": "1000 Hz"
+    },
+    "Video Settings": {
+      "Brightness": "",
+      "Scaling mode": "Native",
+      "Aspect Ratio": "16:9",
+      "Resolution": "1920x1080",
+      "Display Mode": "Fullscreen"
+    },
+    "Advanced Video": {
+      "Boost Player Contrast": "",
+      "V-Sync": "Disabled",
+      "Multisampling Anti-Aliasing Mode": "",
+      "Global Shadow Quality": "",
+      "Model / Texture Detail": "",
+      "Texture Filtering Mode": "",
+      "Shader Detail": "",
+      "Particle Detail": "",
+      "Dynamic Shadows": "",
+      "Ambient Occlusion": "",
+      "High Dynamic Range": "",
+      "FidelityFX Super Resolution": "",
+      "NVIDIA Reflex Low Latency": ""
+    }
+  },
+  "convars": {
+    "sensitivity": "1.25",
+    "viewmodel_fov": "68",
+    "cl_crosshair_t": "false",
+    "cl_crosshairdot": "true",
+    "cl_crosshairgap": "-5",
+    "cl_crosshairsize": "1",
+    "cl_crosshairalpha": "255",
+    "cl_crosshaircolor": "1",
+    "cl_crosshairstyle": "4",
+    "setting.defaultres": "1920",
+    "viewmodel_offset_x": "2.5",
+    "viewmodel_offset_y": "0",
+    "viewmodel_offset_z": "-1.5",
+    "cl_crosshair_recoil": "false",
+    "cl_crosshaircolor_b": "0",
+    "cl_crosshaircolor_g": "255",
+    "cl_crosshaircolor_r": "0",
+    "cl_crosshairusealpha": "true",
+    "cl_fixedcrosshairgap": "3",
+    "cl_crosshairthickness": "1",
+    "zoom_sensitivity_ratio": "1",
+    "cl_crosshair_drawoutline": "false",
+    "setting.defaultresheight": "1080",
+    "cl_crosshair_outlinethickness": "1",
+    "cl_crosshair_dynamic_splitdist": "7",
+    "cl_crosshairgap_useweaponvalue": "false",
+    "cl_crosshair_dynamic_maxdist_splitratio": "0.3",
+    "cl_crosshair_dynamic_splitalpha_innermod": "1",
+    "cl_crosshair_dynamic_splitalpha_outermod": "0.5"
+  },
+  "avatar": "data/avatars/kinqie.png"
+}

@@ -1,0 +1,70 @@
+{
+  "slug": "svyat",
+  "nick": "svyat",
+  "avatar_url": null,
+  "real_name": "Svyatoslav Dovbakh",
+  "crosshair_code": "CSGO-H3cJo-iHwpP-vx5tp-6uzFt-YMbEC",
+  "steamid64": "76561197995898576",
+  "launch_options": null,
+  "tables": {
+    "Mouse": {
+      "DPI": "1200",
+      "Mouse Sensitivity": "0.625",
+      "Zoom Sensitivity Multiplier": "0.8",
+      "Polling rate": "1000 Hz"
+    },
+    "Video Settings": {
+      "Brightness": "",
+      "Scaling mode": "Native",
+      "Aspect Ratio": "16:9",
+      "Resolution": "1920x1080",
+      "Display Mode": "Fullscreen"
+    },
+    "Advanced Video": {
+      "Boost Player Contrast": "",
+      "V-Sync": "Disabled",
+      "Multisampling Anti-Aliasing Mode": "",
+      "Global Shadow Quality": "",
+      "Model / Texture Detail": "",
+      "Texture Filtering Mode": "",
+      "Shader Detail": "",
+      "Particle Detail": "",
+      "Dynamic Shadows": "",
+      "Ambient Occlusion": "",
+      "High Dynamic Range": "",
+      "FidelityFX Super Resolution": "",
+      "NVIDIA Reflex Low Latency": ""
+    }
+  },
+  "convars": {
+    "sensitivity": "0.625",
+    "viewmodel_fov": "68",
+    "cl_crosshair_t": "false",
+    "cl_crosshairdot": "false",
+    "cl_crosshairgap": "-2",
+    "cl_crosshairsize": "2",
+    "cl_crosshairalpha": "255",
+    "cl_crosshaircolor": "5",
+    "cl_crosshairstyle": "4",
+    "setting.defaultres": "1920",
+    "viewmodel_offset_x": "2",
+    "viewmodel_offset_y": "2",
+    "viewmodel_offset_z": "-2",
+    "cl_crosshair_recoil": "false",
+    "cl_crosshaircolor_b": "255",
+    "cl_crosshaircolor_g": "255",
+    "cl_crosshaircolor_r": "255",
+    "cl_crosshairusealpha": "true",
+    "cl_fixedcrosshairgap": "-2",
+    "cl_crosshairthickness": "0.5",
+    "zoom_sensitivity_ratio": "0.8",
+    "cl_crosshair_drawoutline": "true",
+    "setting.defaultresheight": "1080",
+    "cl_crosshair_outlinethickness": "1",
+    "cl_crosshair_dynamic_splitdist": "7",
+    "cl_crosshairgap_useweaponvalue": "false",
+    "cl_crosshair_dynamic_maxdist_splitratio": "0.3",
+    "cl_crosshair_dynamic_splitalpha_innermod": "1",
+    "cl_crosshair_dynamic_splitalpha_outermod": "0.5"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "slug": "ponter",
+  "nick": "ponter",
+  "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9yREFKZzNBaHd5RHBPMnBKN2lveWNyLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.N_aAdUvwu7BkNq5TGeOqiKIHURPtTdCdEEbB9s-pTgI",
+  "real_name": "Gabriel Amaral",
+  "crosshair_code": "CSGO-JhaJt-XoSMs-Ke3oq-Roi7d-xGCEB",
+  "steamid64": "76561198161674889",
+  "launch_options": null,
+  "tables": {
+    "Mouse": {
+      "DPI": "400",
+      "Mouse Sensitivity": "1.35",
+      "Zoom Sensitivity Multiplier": "1",
+      "Polling rate": "1000 Hz"
+    },
+    "Video Settings": {
+      "Brightness": "80%",
+      "Scaling mode": "Native",
+      "Aspect Ratio": "16:9",
+      "Resolution": "1920x1080",
+      "Display Mode": "Fullscreen"
+    },
+    "Advanced Video": {
+      "Boost Player Contrast": "Disabled",
+      "V-Sync": "Disabled",
+      "Multisampling Anti-Aliasing Mode": "8x MSAA",
+      "Global Shadow Quality": "High",
+      "Model / Texture Detail": "Medium",
+      "Texture Filtering Mode": "Anisotropic 4X",
+      "Shader Detail": "High",
+      "Particle Detail": "Low",
+      "Dynamic Shadows": "",
+      "Ambient Occlusion": "High",
+      "High Dynamic Range": "Quality",
+      "FidelityFX Super Resolution": "Disabled (Highest Quality)",
+      "NVIDIA Reflex Low Latency": "Disabled"
+    }
+  },
+  "convars": {
+    "sensitivity": "1.35",
+    "viewmodel_fov": "68",
+    "cl_crosshair_t": "false",
+    "cl_crosshairdot": "false",
+    "cl_crosshairgap": "-3",
+    "cl_crosshairsize": "2",
+    "cl_crosshairalpha": "255",
+    "cl_crosshaircolor": "1",
+    "cl_crosshairstyle": "4",
+    "r_fullscreen_gamma": "2.6",
+    "setting.defaultres": "1920",
+    "viewmodel_offset_x": "2.5",
+    "viewmodel_offset_y": "0",
+    "viewmodel_offset_z": "-1.5",
+    "cl_crosshair_recoil": "false",
+    "cl_crosshaircolor_b": "0",
+    "cl_crosshaircolor_g": "255",
+    "cl_crosshaircolor_r": "0",
+    "cl_crosshairusealpha": "true",
+    "cl_fixedcrosshairgap": "3",
+    "cl_crosshairthickness": "0",
+    "zoom_sensitivity_ratio": "1",
+    "cl_crosshair_drawoutline": "true",
+    "setting.defaultresheight": "1080",
+    "cl_crosshair_outlinethickness": "0",
+    "cl_crosshair_dynamic_splitdist": "3",
+    "cl_crosshairgap_useweaponvalue": "false",
+    "cl_crosshair_dynamic_maxdist_splitratio": "1",
+    "cl_crosshair_dynamic_splitalpha_innermod": "0",
+    "cl_crosshair_dynamic_splitalpha_outermod": "1"
+  },
+  "avatar": "data/avatars/ponter.png"
+}

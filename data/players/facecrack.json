@@ -1,0 +1,71 @@
+{
+  "slug": "facecrack",
+  "nick": "facecrack",
+  "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9mSDFwU2Y4bkxqc0l4NS1qT1BUeWpPLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.UHidE1gW8aFLdJdVRT8cM3URKtW9YIhyLccL6AXBrJQ",
+  "real_name": "Dmitriy Alekseyev",
+  "crosshair_code": "CSGO-sdDV7-eqEbU-3MdJZ-9SAPZ-SwzQN",
+  "steamid64": "76561198076007873",
+  "launch_options": null,
+  "tables": {
+    "Mouse": {
+      "DPI": "400",
+      "Mouse Sensitivity": "1.725",
+      "Zoom Sensitivity Multiplier": "1",
+      "Polling rate": "1000 Hz"
+    },
+    "Video Settings": {
+      "Brightness": "",
+      "Scaling mode": "Stretched",
+      "Aspect Ratio": "4:3",
+      "Resolution": "1280x960",
+      "Display Mode": "Fullscreen"
+    },
+    "Advanced Video": {
+      "Boost Player Contrast": "",
+      "V-Sync": "Disabled",
+      "Multisampling Anti-Aliasing Mode": "",
+      "Global Shadow Quality": "",
+      "Model / Texture Detail": "",
+      "Texture Filtering Mode": "",
+      "Shader Detail": "",
+      "Particle Detail": "",
+      "Dynamic Shadows": "",
+      "Ambient Occlusion": "",
+      "High Dynamic Range": "",
+      "FidelityFX Super Resolution": "",
+      "NVIDIA Reflex Low Latency": ""
+    }
+  },
+  "convars": {
+    "sensitivity": "1.725",
+    "viewmodel_fov": "68",
+    "cl_crosshair_t": "false",
+    "cl_crosshairdot": "false",
+    "cl_crosshairgap": "-3",
+    "cl_crosshairsize": "0.5",
+    "cl_crosshairalpha": "255",
+    "cl_crosshaircolor": "2",
+    "cl_crosshairstyle": "4",
+    "setting.defaultres": "1280",
+    "viewmodel_offset_x": "2.5",
+    "viewmodel_offset_y": "0",
+    "viewmodel_offset_z": "-1.5",
+    "cl_crosshair_recoil": "false",
+    "cl_crosshaircolor_b": "0",
+    "cl_crosshaircolor_g": "255",
+    "cl_crosshaircolor_r": "255",
+    "cl_crosshairusealpha": "true",
+    "cl_fixedcrosshairgap": "-9",
+    "cl_crosshairthickness": "1",
+    "zoom_sensitivity_ratio": "1",
+    "cl_crosshair_drawoutline": "true",
+    "setting.defaultresheight": "960",
+    "cl_crosshair_outlinethickness": "0",
+    "cl_crosshair_dynamic_splitdist": "7",
+    "cl_crosshairgap_useweaponvalue": "false",
+    "cl_crosshair_dynamic_maxdist_splitratio": "0.3",
+    "cl_crosshair_dynamic_splitalpha_innermod": "1",
+    "cl_crosshair_dynamic_splitalpha_outermod": "0.5"
+  },
+  "avatar": "data/avatars/facecrack.png"
+}

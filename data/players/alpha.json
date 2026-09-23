@@ -1,0 +1,72 @@
+{
+  "slug": "alpha",
+  "nick": "alpha",
+  "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy94aG1aRnUzenBCdlhnREp6ZkpqT2txLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.hXPRVKds9Zie4OW9X4GLDIj_AeW3tYE6pBmbFOqUGsA",
+  "real_name": "Daniil Demin",
+  "crosshair_code": "CSGO-6pEY7-TKBaj-dKkMy-zxEWr-HBtdA",
+  "steamid64": "76561198845426189",
+  "launch_options": null,
+  "tables": {
+    "Mouse": {
+      "DPI": "400",
+      "Mouse Sensitivity": "1.69",
+      "Zoom Sensitivity Multiplier": "1",
+      "Polling rate": "1000 Hz"
+    },
+    "Video Settings": {
+      "Brightness": "93%",
+      "Scaling mode": "Stretched",
+      "Aspect Ratio": "4:3",
+      "Resolution": "1280x960",
+      "Display Mode": "Fullscreen"
+    },
+    "Advanced Video": {
+      "Boost Player Contrast": "",
+      "V-Sync": "Disabled",
+      "Multisampling Anti-Aliasing Mode": "",
+      "Global Shadow Quality": "",
+      "Model / Texture Detail": "",
+      "Texture Filtering Mode": "",
+      "Shader Detail": "",
+      "Particle Detail": "",
+      "Dynamic Shadows": "",
+      "Ambient Occlusion": "",
+      "High Dynamic Range": "",
+      "FidelityFX Super Resolution": "",
+      "NVIDIA Reflex Low Latency": ""
+    }
+  },
+  "convars": {
+    "sensitivity": "1.69",
+    "viewmodel_fov": "68",
+    "cl_crosshair_t": "false",
+    "cl_crosshairdot": "false",
+    "cl_crosshairgap": "-3.3",
+    "cl_crosshairsize": "0.8",
+    "cl_crosshairalpha": "255",
+    "cl_crosshaircolor": "5",
+    "cl_crosshairstyle": "4",
+    "r_fullscreen_gamma": "2.2",
+    "setting.defaultres": "1280",
+    "viewmodel_offset_x": "2.5",
+    "viewmodel_offset_y": "0",
+    "viewmodel_offset_z": "-1.5",
+    "cl_crosshair_recoil": "false",
+    "cl_crosshaircolor_b": "0",
+    "cl_crosshaircolor_g": "255",
+    "cl_crosshaircolor_r": "0",
+    "cl_crosshairusealpha": "true",
+    "cl_fixedcrosshairgap": "3",
+    "cl_crosshairthickness": "0.8",
+    "zoom_sensitivity_ratio": "1",
+    "cl_crosshair_drawoutline": "false",
+    "setting.defaultresheight": "960",
+    "cl_crosshair_outlinethickness": "1",
+    "cl_crosshair_dynamic_splitdist": "3",
+    "cl_crosshairgap_useweaponvalue": "false",
+    "cl_crosshair_dynamic_maxdist_splitratio": "1",
+    "cl_crosshair_dynamic_splitalpha_innermod": "0",
+    "cl_crosshair_dynamic_splitalpha_outermod": "1"
+  },
+  "avatar": "data/avatars/alpha.png"
+}

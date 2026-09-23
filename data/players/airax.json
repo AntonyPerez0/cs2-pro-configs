@@ -1,0 +1,71 @@
+{
+  "slug": "airax",
+  "nick": "Airax",
+  "avatar_url": null,
+  "real_name": "Jussi Airaksinen",
+  "crosshair_code": "CSGO-78xuD-LJU9q-sWEyo-ieDQq-WswTC",
+  "steamid64": "76561198010426775",
+  "launch_options": null,
+  "tables": {
+    "Mouse": {
+      "DPI": "800",
+      "Mouse Sensitivity": "1.175",
+      "Zoom Sensitivity Multiplier": "1.35",
+      "Polling rate": "1000 Hz"
+    },
+    "Video Settings": {
+      "Brightness": "80%",
+      "Scaling mode": "Stretched",
+      "Aspect Ratio": "4:3",
+      "Resolution": "1280x1024",
+      "Display Mode": "Fullscreen"
+    },
+    "Advanced Video": {
+      "Boost Player Contrast": "",
+      "V-Sync": "Disabled",
+      "Multisampling Anti-Aliasing Mode": "",
+      "Global Shadow Quality": "",
+      "Model / Texture Detail": "",
+      "Texture Filtering Mode": "",
+      "Shader Detail": "",
+      "Particle Detail": "",
+      "Dynamic Shadows": "",
+      "Ambient Occlusion": "",
+      "High Dynamic Range": "",
+      "FidelityFX Super Resolution": "",
+      "NVIDIA Reflex Low Latency": ""
+    }
+  },
+  "convars": {
+    "sensitivity": "1.175",
+    "viewmodel_fov": "68",
+    "cl_crosshair_t": "false",
+    "cl_crosshairdot": "false",
+    "cl_crosshairgap": "0",
+    "cl_crosshairsize": "1",
+    "cl_crosshairalpha": "255",
+    "cl_crosshaircolor": "1",
+    "cl_crosshairstyle": "4",
+    "r_fullscreen_gamma": "2.6",
+    "setting.defaultres": "1280",
+    "viewmodel_offset_x": "1",
+    "viewmodel_offset_y": "2",
+    "viewmodel_offset_z": "-1.5",
+    "cl_crosshair_recoil": "false",
+    "cl_crosshaircolor_b": "0",
+    "cl_crosshaircolor_g": "255",
+    "cl_crosshaircolor_r": "0",
+    "cl_crosshairusealpha": "true",
+    "cl_fixedcrosshairgap": "-2",
+    "cl_crosshairthickness": "1",
+    "zoom_sensitivity_ratio": "1.35",
+    "cl_crosshair_drawoutline": "false",
+    "setting.defaultresheight": "1024",
+    "cl_crosshair_outlinethickness": "0.5",
+    "cl_crosshair_dynamic_splitdist": "7",
+    "cl_crosshairgap_useweaponvalue": "false",
+    "cl_crosshair_dynamic_maxdist_splitratio": "0.3",
+    "cl_crosshair_dynamic_splitalpha_innermod": "1",
+    "cl_crosshair_dynamic_splitalpha_outermod": "0.5"
+  }
+}

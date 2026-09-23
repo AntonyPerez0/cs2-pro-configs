@@ -1,0 +1,72 @@
+{
+  "slug": "7nation",
+  "nick": "7nation",
+  "avatar_url": null,
+  "real_name": "Pyak Gil En",
+  "crosshair_code": "CSGO-VxFE7-k2coD-skW4o-GLhM7-WsdqA",
+  "steamid64": "76561198253438070",
+  "launch_options": "-threads 9 -nojoy -freq 360 -high +rate 786432 -worldwide",
+  "tables": {
+    "Mouse": {
+      "DPI": "400",
+      "Mouse Sensitivity": "2",
+      "Zoom Sensitivity Multiplier": "1",
+      "Polling rate": "1000 Hz"
+    },
+    "Video Settings": {
+      "Brightness": "",
+      "Scaling mode": "",
+      "Aspect Ratio": "",
+      "Resolution": "",
+      "Display Mode": ""
+    },
+    "Advanced Video": {
+      "Boost Player Contrast": "",
+      "V-Sync": "Disabled",
+      "Multisampling Anti-Aliasing Mode": "",
+      "Global Shadow Quality": "",
+      "Model / Texture Detail": "",
+      "Texture Filtering Mode": "",
+      "Shader Detail": "",
+      "Particle Detail": "",
+      "Dynamic Shadows": "",
+      "Ambient Occlusion": "",
+      "High Dynamic Range": "",
+      "FidelityFX Super Resolution": "",
+      "NVIDIA Reflex Low Latency": ""
+    }
+  },
+  "convars": {
+    "hud_scaling": "0",
+    "sensitivity": "2",
+    "cl_hud_color": "0",
+    "viewmodel_fov": "68",
+    "cl_crosshair_t": "false",
+    "cl_radar_scale": "0",
+    "cl_crosshairdot": "false",
+    "cl_crosshairgap": "-3",
+    "cl_crosshairsize": "2",
+    "cl_crosshairalpha": "255",
+    "cl_crosshaircolor": "1",
+    "cl_crosshairstyle": "4",
+    "cl_hud_radar_scale": "1",
+    "viewmodel_offset_x": "2.5",
+    "viewmodel_offset_y": "0",
+    "viewmodel_offset_z": "-1.5",
+    "cl_crosshair_recoil": "false",
+    "cl_crosshaircolor_b": "0",
+    "cl_crosshaircolor_g": "255",
+    "cl_crosshaircolor_r": "0",
+    "cl_crosshairusealpha": "true",
+    "cl_fixedcrosshairgap": "3",
+    "cl_crosshairthickness": "0",
+    "zoom_sensitivity_ratio": "1",
+    "cl_crosshair_drawoutline": "false",
+    "cl_crosshair_outlinethickness": "1",
+    "cl_crosshair_dynamic_splitdist": "3",
+    "cl_crosshairgap_useweaponvalue": "false",
+    "cl_crosshair_dynamic_maxdist_splitratio": "1",
+    "cl_crosshair_dynamic_splitalpha_innermod": "0",
+    "cl_crosshair_dynamic_splitalpha_outermod": "1"
+  }
+}

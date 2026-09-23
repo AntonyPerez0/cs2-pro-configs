@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS2 Pro Configs - Pro Player Settings as Console Commands</title>
+  <meta name="description" content="Browse CS2 pro players' full settings and copy ready-to-paste console commands: crosshair, sensitivity, viewmodel, HUD, radar and full configs.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23ff8a3c'/><text x='50' y='68' font-size='52' text-anchor='middle' font-family='monospace' font-weight='bold' fill='%231a0e02'>CS</text></svg>">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="index">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="logo" href="index.html">CS2<span class="dot">//</span>PROS <small>configs</small></a>
+      <div class="spacer"></div>
+      <label class="search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search 620 players… (press / )" autocomplete="off">
+        <kbd>/</kbd>
+      </label>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>Play like a pro<span class="dot">.</span> One paste.</h1>
+      <p>Full CS2 settings from the world's best players, converted into ready-to-paste console commands.
+         Pick a player, hit copy, paste into your console — crosshair, sensitivity, viewmodel, HUD and radar apply instantly.</p>
+      <div class="steps">
+        <div class="step"><b><span class="num">1</span>Pick a pro</b>Search by nickname and open their profile.</div>
+        <div class="step"><b><span class="num">2</span>Copy the config</b>Grab the full config or just a section like crosshair.</div>
+        <div class="step"><b><span class="num">3</span>Paste in CS2 console</b>Press <b>~</b> in CS2, paste, Enter. Done — settings applied.</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <label for="sort">Sort</label>
+      <select id="sort">
+        <option value="recent">Recently updated</option>
+        <option value="edpi-desc">eDPI high → low</option>
+        <option value="edpi-asc">eDPI low → high</option>
+        <option value="sens-desc">Sens high → low</option>
+        <option value="sens-asc">Sens low → high</option>
+        <option value="name">Name A → Z</option>
+      </select>
+      <label for="res">Resolution</label>
+      <select id="res"><option value="">Any</option></select>
+      <span class="result-count" id="result-count"></span>
+    </div>
+
+    <div class="grid" id="grid">
+      <div class="loading" style="grid-column:1/-1"><span class="spin"></span>Loading players…</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <p><span id="meta-stamp"></span> · Data source: <a href="https://settings.gg/players" target="_blank" rel="noopener">settings.gg</a> (community-generated pro configs).</p>
+      <p>Unofficial fan-made tool. Not affiliated with settings.gg, Valve or any player. CS2, Counter-Strike and all related marks belong to Valve.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <script src="assets/app.js"></script>
+</body>
+</html>
