@@ -8,12 +8,22 @@ Browse CS2 pro players' full settings and copy ready-to-paste console commands t
 
 1. Open a player page from the list on the site.
 2. Hit **Copy full config** to copy the entire ready-to-paste config.
-3. In CS2, open the console (`~` or `` ` `` key) and paste + press Enter. Done!
+3. In CS2, open the console (`~` or `` ` `` key), paste, press Enter. Done!
+
+The config is a **single `;`-separated line** on purpose: the CS2 console is a
+single-line input, so multi-line pastes are unreliable. All commands are joined
+with `;` so one paste applies everything at once.
+
+Crosshair: paste the player's `CSGO-…` share code in **Settings → Game →
+Crosshair → Share or Import** (the old `apply_crosshair_code` console command
+was removed in CS2). Every other crosshair setting is already included in the
+console config via the raw `cl_crosshair_*` convars.
 
 Notes:
 
 - **Mouse DPI / polling rate** are set in your mouse software, not the game — make sure your driver matches the player's DPI shown on their page.
 - **Video settings** (resolution, aspect ratio, stretched scaling) can't be applied via console. They're shown on each player page as manual tables, and the resolution can be forced with launch options.
+- Convars that don't exist in CS2 or are cheat-protected (`cl_radar_size`, `cl_drawhud`, `setting.defaultres`, `setting.defaultresheight`) are filtered out of the copy-paste blocks automatically.
 - Alternative: save the config as `autoexec.cfg` in `Counter-Strike Global Offensive/game/csgo/cfg` and run `exec autoexec` in the console.
 
 ## Features

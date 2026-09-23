@@ -103,11 +103,32 @@ function bucketConvars(convars) {
   return out;
 }
 
+/* Convars that must NOT go into a console paste:
+   - cl_drawhud is cheat-protected in CS2 (errors without sv_cheats)
+   - cl_radar_size was removed in CS2
+   - setting.defaultres/-height are cs2_video.txt file keys, not console convars */
+const CONSOLE_SKIP = new Set([
+  "cl_drawhud",
+  "cl_radar_size",
+  "setting.defaultres",
+  "setting.defaultresheight",
+]);
+
+/* commands in paste order: crosshair first (most important lands first even
+   if a very long paste ever gets truncated), misc last */
+function consoleCommands(rec) {
+  const buckets = bucketConvars(rec.convars);
+  const out = [];
+  for (const b of BUCKETS) {
+    for (const [k, v] of buckets[b.key] || []) {
+      if (!CONSOLE_SKIP.has(k)) out.push(`${k} ${v}`);
+    }
+  }
+  return out;
+}
+
 function buildFullBlock(rec) {
-  const lines = [];
-  if (rec.crosshair_code) lines.push(`apply_crosshair_code ${rec.crosshair_code}`);
-  for (const [k, v] of Object.entries(rec.convars || {})) lines.push(`${k} ${v}`);
-  return lines.join("\n");
+  return consoleCommands(rec).join("; ");
 }
 
 /* ---------------- crosshair preview ---------------- */
@@ -382,7 +403,7 @@ async function runPlayer() {
     const cv = rec.convars || {};
     const sec = document.createElement("section");
     sec.className = "section";
-    sec.innerHTML = `<div class="section-head"><h2>Crosshair <span class="tag">1 command</span></h2></div>`;
+    sec.innerHTML = `<div class="section-head"><h2>Crosshair <span class="tag">share code</span></h2></div>`;
     const box = document.createElement("div");
     box.className = "xhair-box";
     const canvas = document.createElement("canvas");
@@ -393,19 +414,21 @@ async function runPlayer() {
     metaBox.className = "xhair-meta";
     if (rec.crosshair_code) {
       metaBox.innerHTML = `
-        <p class="note" style="margin:2px 0 6px">One command applies the exact crosshair (share code):</p>
-        <div class="code-line">${esc(rec.crosshair_code)}</div>`;
+        <div class="code-line">${esc(rec.crosshair_code)}</div>
+        <p class="note" style="margin:2px 0 6px">Paste this code in <b>Settings → Game → Crosshair → Share or Import</b> (the old <code>apply_crosshair_code</code> console command no longer works in CS2).</p>`;
       const b = document.createElement("button");
       b.className = "btn small";
-      b.dataset.copy = `apply_crosshair_code ${rec.crosshair_code}`;
-      b.textContent = "Copy crosshair command";
+      b.dataset.copy = rec.crosshair_code;
+      b.textContent = "Copy crosshair code";
       metaBox.appendChild(b);
       if (buckets.crosshair) {
         const b2 = document.createElement("button");
         b2.className = "btn ghost small";
         b2.style.marginLeft = "8px";
-        b2.dataset.copy = buckets.crosshair.map(([k, v]) => `${k} ${v}`).join("\n");
-        b2.textContent = "Copy raw convars instead";
+        b2.dataset.copy = buckets.crosshair
+          .filter(([k]) => !CONSOLE_SKIP.has(k))
+          .map(([k, v]) => `${k} ${v}`).join("; ");
+        b2.textContent = "Copy crosshair console commands";
         metaBox.appendChild(b2);
       }
     }
@@ -425,8 +448,8 @@ async function runPlayer() {
     btn.dataset.copy = fullBlock;
     btn.textContent = "Copy all";
     $(".section-head", sec).appendChild(btn);
-    sec.appendChild(cmdBlock(fullBlock, true));
-    sec.insertAdjacentHTML("beforeend", `<p class="note">Press <b>~</b> (or <b>\\</b>) in CS2 to open the console, paste everything, hit Enter. Every setting applies instantly.</p>`);
+    sec.appendChild(cmdBlock(fullBlock));
+    sec.insertAdjacentHTML("beforeend", `<p class="note">One single line, <code>;</code>-separated so the console runs every command: press <b>~</b> in CS2, paste, hit Enter — done. (The CS2 console is single-line input, so multi-line pastes are unreliable — this is why everything is joined into one line.) If a very long paste ever gets cut off, use the shorter per-section commands below instead. Invalid/removed CS2 convars from the source config are already filtered out.</p>`);
     main.appendChild(sec);
   }
 
@@ -438,7 +461,9 @@ async function runPlayer() {
     const b = BUCKETS.find((x) => x.key === key);
     const lines = buckets[key];
     if (!lines || !lines.length) continue;
-    const text = lines.map(([k, v]) => `${k} ${v}`).join("\n");
+    const text = lines
+      .filter(([k]) => !CONSOLE_SKIP.has(k))
+      .map(([k, v]) => `${k} ${v}`).join("; ");
     const sec = document.createElement("section");
     sec.className = "section";
     const headHtml = `<div class="section-head"><h2>${esc(b.title)} <span class="tag">${esc(b.tag || "")}</span></h2></div>`;
