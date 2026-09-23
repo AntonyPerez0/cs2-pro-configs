@@ -114,21 +114,128 @@ const CONSOLE_SKIP = new Set([
   "setting.defaultresheight",
 ]);
 
-/* commands in paste order: crosshair first (most important lands first even
-   if a very long paste ever gets truncated), misc last */
-function consoleCommands(rec) {
-  const buckets = bucketConvars(rec.convars);
-  const out = [];
-  for (const b of BUCKETS) {
-    for (const [k, v] of buckets[b.key] || []) {
-      if (!CONSOLE_SKIP.has(k)) out.push(`${k} ${v}`);
-    }
+/* ---- Sept 22, 2026 "Rush Hour" crosshair migration ----
+   The patch removed 6 legacy crosshair convars and replaced the geometry
+   system. Conversion model + ranges follow the community reference
+   (small-indie-crosshair-company, build 2000914 dump), which reproduces the
+   published post-patch values for donk/m0NESY/s1mple exactly. */
+const XHAIR_REMOVED = new Set([
+  "cl_crosshairgap", "cl_crosshairusealpha", "cl_crosshaircolor",
+  "cl_crosshair_outlinethickness", "cl_crosshairgap_useweaponvalue",
+  "cl_fixedcrosshairgap",
+]);
+const XHAIR_HIDDEN_LEGACY = new Set([
+  "cl_crosshairsize", "cl_crosshairthickness", "cl_crosshairalpha",
+]);
+const XHAIR_PRESET_RGB = [
+  [250, 50, 50],   // 0 red
+  [50, 250, 50],   // 1 green
+  [250, 250, 50],  // 2 yellow
+  [50, 50, 250],   // 3 blue
+  [50, 250, 250],  // 4 cyan
+];
+
+const clampInt = (v, min, max) => Math.max(min, Math.min(max, Math.round(v)));
+
+function resHeightOf(rec) {
+  const cv = rec.convars || {};
+  const fromCfg = parseInt(cv["setting.defaultresheight"], 10);
+  if (Number.isFinite(fromCfg) && fromCfg >= 240) return fromCfg;
+  const res = rec.tables && rec.tables["Video Settings"] && rec.tables["Video Settings"]["Resolution"];
+  if (res) {
+    const m = String(res).match(/(\d+)\s*x\s*(\d+)/i);
+    if (m) return clampInt(parseInt(m[2], 10), 240, 8640);
   }
-  return out;
+  return 1080;
 }
 
-function buildFullBlock(rec) {
-  return consoleCommands(rec).join("; ");
+function convertCrosshair(cv, height) {
+  const H = Math.max(240, height || 1080);
+  const scale = H / 480;
+  const num = (k, d) => {
+    const v = parseFloat(cv[k]);
+    return Number.isFinite(v) ? v : d;
+  };
+  const has = (k) => cv[k] !== undefined;
+  const boolStr = (v) => (v === "1" || String(v).trim().toLowerCase() === "true" ? "true" : "false");
+  const commands = [];
+  const warnings = [];
+
+  const style = Math.round(num("cl_crosshairstyle", 4));
+  commands.push(`cl_crosshairstyle ${style}`);
+  if (style !== 4) {
+    warnings.push(`Style ${style} was renumbered in the Sept 2026 patch (4 = Static Cross). Non-static styles may need a manual pick in Settings → Crosshair/Scopes.`);
+  }
+
+  if (has("cl_crosshairsize")) {
+    commands.push(`cl_crosshair_length ${clampInt(Math.trunc(scale * num("cl_crosshairsize", 5)), 0, 255)}`);
+  }
+  if (has("cl_crosshairthickness")) {
+    const t = num("cl_crosshairthickness", 0.6);
+    commands.push(`cl_crosshair_thickness ${t === 0 ? 0 : clampInt(Math.max(1, Math.trunc(scale * t)), 0, 31)}`);
+  }
+  if (has("cl_crosshairgap")) {
+    const oldGap = num("cl_crosshairgap", 0);
+    const px = Math.trunc(oldGap + 4);
+    if (px < 0) {
+      warnings.push(`Old gap ${oldGap} put the lines past the center — the new system's gap can't go below 0, so that overlap is clamped (closest possible look).`);
+    }
+    commands.push(`cl_crosshair_gap ${clampInt(px, 0, 128)}`);
+  }
+
+  for (const k of ["cl_crosshairdot", "cl_crosshair_t", "cl_crosshair_drawoutline", "cl_crosshair_recoil"]) {
+    if (has(k)) commands.push(`${k} ${boolStr(cv[k])}`);
+  }
+
+  let rgb = null;
+  const idx = has("cl_crosshaircolor") ? Math.round(num("cl_crosshaircolor", 5)) : null;
+  if (idx === 5 || (idx === null && has("cl_crosshaircolor_r"))) {
+    rgb = [
+      clampInt(num("cl_crosshaircolor_r", 255), 0, 255),
+      clampInt(num("cl_crosshaircolor_g", 255), 0, 255),
+      clampInt(num("cl_crosshaircolor_b", 255), 0, 255),
+    ];
+  } else if (idx !== null && XHAIR_PRESET_RGB[idx]) {
+    rgb = XHAIR_PRESET_RGB[idx];
+    warnings.push("Old color preset converted to its legacy RGB values.");
+  }
+  if (rgb) {
+    commands.push(`cl_crosshaircolor_r ${rgb[0]}`, `cl_crosshaircolor_g ${rgb[1]}`, `cl_crosshaircolor_b ${rgb[2]}`);
+  }
+
+  if (has("cl_crosshairalpha") || has("cl_crosshairusealpha")) {
+    const enabled = String(cv["cl_crosshairusealpha"]).trim().toLowerCase() === "true" || cv["cl_crosshairusealpha"] === "1";
+    const a = enabled ? clampInt(num("cl_crosshairalpha", 200), 0, 255) : 200;
+    commands.push(`cl_crosshaircolor_a ${a}`);
+    if (!enabled) warnings.push("Old config had the alpha slider disabled; opacity is reconstructed as 200 (new system changed how alpha works).");
+  }
+
+  for (const [k, v] of Object.entries(cv)) {
+    if (/^cl_crosshair_dynamic_/.test(k) || k === "cl_crosshair_sniper_width") commands.push(`${k} ${v}`);
+  }
+
+  commands.push(`cl_crosshair_screen_height ${H}`);
+  return { commands, warnings };
+}
+
+/* commands in paste order: converted crosshair first (most important lands
+   first even if a very long paste ever gets truncated), misc last */
+function consoleCommands(rec, resHeight) {
+  const buckets = bucketConvars(rec.convars);
+  const out = [];
+  const xc = convertCrosshair(rec.convars || {}, resHeight);
+  out.push(...xc.commands);
+  for (const b of BUCKETS) {
+    if (b.key === "crosshair") continue;
+    for (const [k, v] of buckets[b.key] || []) {
+      if (!CONSOLE_SKIP.has(k) && !XHAIR_REMOVED.has(k) && !XHAIR_HIDDEN_LEGACY.has(k)) out.push(`${k} ${v}`);
+    }
+  }
+  return { commands: out, warnings: xc.warnings };
+}
+
+function buildFullBlock(rec, resHeight) {
+  return consoleCommands(rec, resHeight).commands.join("; ");
 }
 
 /* ---------------- crosshair preview ---------------- */
@@ -361,7 +468,9 @@ async function runPlayer() {
   document.title = `${rec.nick} CS2 Settings & Config Commands - CS2 Pro Configs`;
 
   const buckets = bucketConvars(rec.convars);
-  const fullBlock = buildFullBlock(rec);
+  const resHeight = resHeightOf(rec);
+  const xc = convertCrosshair(rec.convars || {}, resHeight);
+  const fullBlock = buildFullBlock(rec, resHeight);
   const mouse = (rec.tables && rec.tables["Mouse"]) || {};
   const video = (rec.tables && rec.tables["Video Settings"]) || {};
   const adv = (rec.tables && rec.tables["Advanced Video"]) || {};
@@ -399,11 +508,11 @@ async function runPlayer() {
   ph.insertBefore(avatarEl(rec), ph.firstChild);
 
   /* crosshair */
-  if (rec.crosshair_code || buckets.crosshair) {
+  if (rec.crosshair_code || xc.commands.length) {
     const cv = rec.convars || {};
     const sec = document.createElement("section");
     sec.className = "section";
-    sec.innerHTML = `<div class="section-head"><h2>Crosshair <span class="tag">share code</span></h2></div>`;
+    sec.innerHTML = `<div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2></div>`;
     const box = document.createElement("div");
     box.className = "xhair-box";
     const canvas = document.createElement("canvas");
@@ -412,28 +521,34 @@ async function runPlayer() {
     box.appendChild(canvas);
     const metaBox = document.createElement("div");
     metaBox.className = "xhair-meta";
+    metaBox.innerHTML = `
+      <p class="note" style="margin:0 0 6px">CS2's Sept 22, 2026 "Rush Hour" patch replaced the crosshair system. Old share codes now fail to import (<i>"invalid or old crosshair code"</i>), so use the <b>console commands</b> below — converted to the new convars from this player's original settings.</p>`;
+    const b2 = document.createElement("button");
+    b2.className = "btn small";
+    b2.dataset.copy = xc.commands.join("; ");
+    b2.textContent = "Copy crosshair commands";
+    metaBox.appendChild(b2);
     if (rec.crosshair_code) {
-      metaBox.innerHTML = `
-        <div class="code-line">${esc(rec.crosshair_code)}</div>
-        <p class="note" style="margin:2px 0 6px">Paste this code in <b>Settings → Game → Crosshair → Share or Import</b> (the old <code>apply_crosshair_code</code> console command no longer works in CS2).</p>`;
       const b = document.createElement("button");
-      b.className = "btn small";
+      b.className = "btn ghost small";
+      b.style.marginLeft = "8px";
       b.dataset.copy = rec.crosshair_code;
-      b.textContent = "Copy crosshair code";
+      b.textContent = "Copy legacy share code (no longer importable)";
       metaBox.appendChild(b);
-      if (buckets.crosshair) {
-        const b2 = document.createElement("button");
-        b2.className = "btn ghost small";
-        b2.style.marginLeft = "8px";
-        b2.dataset.copy = buckets.crosshair
-          .filter(([k]) => !CONSOLE_SKIP.has(k))
-          .map(([k, v]) => `${k} ${v}`).join("; ");
-        b2.textContent = "Copy crosshair console commands";
-        metaBox.appendChild(b2);
-      }
+      metaBox.insertAdjacentHTML("beforeend", `<div class="code-line" style="margin-top:8px">${esc(rec.crosshair_code)}</div>`);
     }
+    if (xc.warnings.length) {
+      metaBox.insertAdjacentHTML("beforeend",
+        `<p class="note" style="margin-top:8px">${xc.warnings.map((w) => `⚠ ${esc(w)}`).join("<br>")}</p>`);
+    }
+    metaBox.insertAdjacentHTML("beforeend",
+      `<p class="note" style="margin-top:8px">Conversion reference: <a href="https://github.com/sebastianspicker/small-indie-crosshair-company" target="_blank" rel="noopener">community crosshair migration study</a> (build 2000914) — validated against published post-patch pro settings.</p>`);
     box.appendChild(metaBox);
     sec.appendChild(box);
+    const cmdWrap = document.createElement("div");
+    cmdWrap.style.marginTop = "12px";
+    cmdWrap.appendChild(cmdBlock(xc.commands.join("; ")));
+    sec.appendChild(cmdWrap);
     main.appendChild(sec);
     drawCrosshair(canvas, cv);
   }
@@ -449,7 +564,7 @@ async function runPlayer() {
     btn.textContent = "Copy all";
     $(".section-head", sec).appendChild(btn);
     sec.appendChild(cmdBlock(fullBlock));
-    sec.insertAdjacentHTML("beforeend", `<p class="note">One single line, <code>;</code>-separated so the console runs every command: press <b>~</b> in CS2, paste, hit Enter — done. (The CS2 console is single-line input, so multi-line pastes are unreliable — this is why everything is joined into one line.) If a very long paste ever gets cut off, use the shorter per-section commands below instead. Invalid/removed CS2 convars from the source config are already filtered out.</p>`);
+    sec.insertAdjacentHTML("beforeend", `<p class="note">One single line, <code>;</code>-separated so the console runs every command: press <b>~</b> in CS2, paste, hit Enter — done. (The CS2 console is single-line input, so multi-line pastes are unreliable — this is why everything is joined into one line.) The crosshair part is converted to the convars added by the Sept 22, 2026 patch; convars that were removed, renamed, cheat-protected or nonexistent in CS2 are filtered out. If a very long paste ever gets cut off, use the shorter per-section commands below instead.</p>`);
     main.appendChild(sec);
   }
 
@@ -462,7 +577,7 @@ async function runPlayer() {
     const lines = buckets[key];
     if (!lines || !lines.length) continue;
     const text = lines
-      .filter(([k]) => !CONSOLE_SKIP.has(k))
+      .filter(([k]) => !CONSOLE_SKIP.has(k) && !XHAIR_REMOVED.has(k) && !XHAIR_HIDDEN_LEGACY.has(k))
       .map(([k, v]) => `${k} ${v}`).join("; ");
     const sec = document.createElement("section");
     sec.className = "section";

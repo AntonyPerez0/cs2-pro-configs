@@ -14,10 +14,16 @@ The config is a **single `;`-separated line** on purpose: the CS2 console is a
 single-line input, so multi-line pastes are unreliable. All commands are joined
 with `;` so one paste applies everything at once.
 
-Crosshair: paste the player's `CSGO-…` share code in **Settings → Game →
-Crosshair → Share or Import** (the old `apply_crosshair_code` console command
-was removed in CS2). Every other crosshair setting is already included in the
-console config via the raw `cl_crosshair_*` convars.
+Crosshair: CS2's Sept 22, 2026 "Rush Hour" patch replaced the crosshair system.
+Legacy share codes (`CSGO-…`) no longer import, and the old `cl_crosshair*`
+convars (`cl_crosshairgap`, `cl_crosshaircolor`, `cl_crosshairusealpha`,
+`cl_crosshair_outlinethickness`, `cl_crosshairgap_useweaponvalue`,
+`cl_fixedcrosshairgap`) were removed. The site converts every player's original
+crosshair into the new convars (`cl_crosshair_length`, `cl_crosshair_thickness`,
+`cl_crosshair_gap`, `cl_crosshaircolor_a`, `cl_crosshair_screen_height`, …)
+before pasting, using the community reference converter's validated model —
+for donk/m0NESY/s1mple it reproduces the published post-patch values
+(length 2 / thickness 2 / gap 0) exactly.
 
 Notes:
 
