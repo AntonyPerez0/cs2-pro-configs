@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-09-23T00:38:48Z",
+    "generated": "2026-09-23T00:56:32Z",
     "source": "https://settings.gg/players",
     "count": 620
   },
@@ -28,17 +28,6 @@
       "avatar": "data/avatars/zywoo.png"
     },
     {
-      "slug": "m0nesy",
-      "nick": "m0NESY",
-      "real_name": "Ilya Osipov",
-      "crosshair_code": "CSGO-QKB9N-pqqyO-OX8bw-n78wK-5tbJD",
-      "dpi": "400",
-      "sens": "2.3",
-      "edpi": 919,
-      "res": "1280x960",
-      "avatar": "data/avatars/m0nesy.png"
-    },
-    {
       "slug": "luchov",
       "nick": "luchov",
       "real_name": "Luciano Herrera",
@@ -59,6 +48,17 @@
       "edpi": 800,
       "res": "1280x960",
       "avatar": "data/avatars/latto.png"
+    },
+    {
+      "slug": "m0nesy",
+      "nick": "m0NESY",
+      "real_name": "Ilya Osipov",
+      "crosshair_code": "CSGO-QKB9N-pqqyO-OX8bw-n78wK-5tbJD",
+      "dpi": "400",
+      "sens": "2.3",
+      "edpi": 919,
+      "res": "1280x960",
+      "avatar": "data/avatars/m0nesy.png"
     },
     {
       "slug": "heavygod",
@@ -3075,17 +3075,6 @@
       "avatar": null
     },
     {
-      "slug": "shane",
-      "nick": "shane",
-      "real_name": "Shane Dressler",
-      "crosshair_code": "CSGO-9zibp-u8vPs-vJyCd-ADpFY-YcOUD",
-      "dpi": "400",
-      "sens": "1.7",
-      "edpi": 680,
-      "res": "1440x1080",
-      "avatar": "data/avatars/shane.png"
-    },
-    {
       "slug": "peeping",
       "nick": "Peeping",
       "real_name": "Jaxon Cornwell",
@@ -3095,6 +3084,17 @@
       "edpi": 1376,
       "res": "1600x1024",
       "avatar": "data/avatars/peeping.png"
+    },
+    {
+      "slug": "shane",
+      "nick": "shane",
+      "real_name": "Shane Dressler",
+      "crosshair_code": "CSGO-9zibp-u8vPs-vJyCd-ADpFY-YcOUD",
+      "dpi": "400",
+      "sens": "1.7",
+      "edpi": 680,
+      "res": "1440x1080",
+      "avatar": "data/avatars/shane.png"
     },
     {
       "slug": "juanflatroo",
