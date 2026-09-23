@@ -215,7 +215,7 @@ select:focus { outline: 1px solid var(--accent); }
 .cmd {
   position: relative;
   background: #0b0e12; border: 1px solid var(--line);
-  border-radius: 10px; overflow: auto; max-height: 320px;
+  border-radius: 10px; overflow: auto; max-height: 320px; max-width: 100%;
 }
 .cmd pre {
   margin: 0; padding: 12px 14px;
@@ -228,6 +228,9 @@ select:focus { outline: 1px solid var(--accent); }
   display: grid; gap: 14px;
   grid-template-columns: 1fr;
 }
+/* let grid children shrink below their content's min-width, otherwise a long
+   unbreakable <pre> line forces the column (and the page) extremely wide */
+.cols > * { min-width: 0; }
 @media (min-width: 900px) {
   .cols { grid-template-columns: 1fr 1fr; }
   .cols .full { grid-column: 1 / -1; }
