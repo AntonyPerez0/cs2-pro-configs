@@ -47,24 +47,25 @@ async function copyText(text) {
   return ok;
 }
 
-function wireCopyButtons(root = document) {
-  root.querySelectorAll("[data-copy]").forEach((btn) => {
-    if (btn._wired) return;
-    btn._wired = true;
-    btn.addEventListener("click", async () => {
-      const ok = await copyText(btn.dataset.copy);
-      if (ok) {
-        const prev = btn.textContent;
-        btn.textContent = "Copied!";
-        btn.classList.add("copied");
-        setTimeout(() => {
-          btn.textContent = prev;
-          btn.classList.remove("copied");
-        }, 1200);
-      }
-    });
-  });
-}
+/* One delegated listener handles every copy button, including ones created
+   or given their data-copy value later (the DPI-adjusted config, the
+   sensitivity line, the raw cfg after its fetch resolves). Reads data-copy
+   at click time, so late-set values work. */
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest("[data-copy]");
+  if (!btn || !btn.dataset.copy) return;
+  const ok = await copyText(btn.dataset.copy);
+  if (ok) {
+    const prev = btn.textContent;
+    btn.textContent = "Copied!";
+    btn.classList.add("copied");
+    clearTimeout(btn._t);
+    btn._t = setTimeout(() => {
+      btn.textContent = prev;
+      btn.classList.remove("copied");
+    }, 1200);
+  }
+});
 
 /* ---------------- command building ---------------- */
 
@@ -860,8 +861,6 @@ async function runPlayer() {
       rawCmd.querySelector("pre").textContent = "raw config not available";
       rawBtn.remove();
     });
-
-  wireCopyButtons(main);
 }
 
 /* ---------------- boot ---------------- */
