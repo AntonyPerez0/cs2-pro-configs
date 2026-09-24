@@ -87,9 +87,10 @@ def bucket_convars(convars):
 
 
 def full_commands(rec):
-    """Console command list in paste order (crosshair first) — mirrors app.js."""
+    """Console command list in paste order (crosshair first) — mirrors app.js.
+    Returns (commands, warnings) with warnings as readable strings."""
     cv = rec.get("convars") or {}
-    xc_cmds, _ = convert_crosshair(cv)
+    xc_cmds, warnings = convert_crosshair(cv)
     out = [f"{k} {v}" for k, v in xc_cmds]
     buckets = bucket_convars(cv)
     for key, _title, _tag, _t in BUCKETS:
@@ -101,7 +102,7 @@ def full_commands(rec):
             sv = safe_value(v)
             if sv is not None:
                 out.append(f"{k} {sv}")
-    return out, xc_cmds
+    return out, warnings
 
 
 def letter_hue(nick: str) -> int:
@@ -202,7 +203,7 @@ def player_page(rec: dict, generated: str, top10_rank=None) -> str:
 
     cmds, warnings = full_commands(rec)
     full_block = "; ".join(cmds)
-    xc_cmds, _ = convert_crosshair(cv)
+    xc_cmds, warnings = convert_crosshair(cv)
     xh_text = "; ".join(f"{k} {v}" for k, v in xc_cmds)
 
     dpi = mouse.get("DPI", "")
