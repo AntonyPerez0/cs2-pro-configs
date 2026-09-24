@@ -35,6 +35,7 @@ Notes:
 ## Features
 
 - Search and sort across 620 pro players
+- **HLTV Top 10 section** on the front page (latest official HLTV player ranking, links straight to each pro's config)
 - **Your-DPI sensitivity matcher**: enter your mouse DPI once, get the in-game sensitivity that matches each pro's speed (eDPI match), or copy the whole config with the sensitivity rewritten for your DPI
 - Per-category copy blocks (crosshair, sensitivity, viewmodel, HUD/radar)
 - Live crosshair preview rendered on a canvas
