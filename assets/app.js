@@ -495,337 +495,161 @@ function drawCrosshair(trueCanvas, zoomCanvas, cv, xcCommands) {
   return { zoom, lengthPx: geo.lengthPx, thickPx: geo.thickPx, screenH };
 }
 
-/* ---------------- avatars ---------------- */
+/* ---------------- index page: DOM filter over prerendered cards ---------------- */
 
-function avatarEl(rec) {
-  if (rec.avatar) {
-    const img = document.createElement("img");
-    img.className = "avatar";
-    img.loading = "lazy";
-    img.src = rec.avatar;
-    img.alt = "";
-    img.onerror = () => img.replaceWith(letterAvatar(rec.nick || rec.slug));
-    return img;
-  }
-  return letterAvatar(rec.nick || rec.slug);
-}
-
-function letterAvatar(name) {
-  const d = document.createElement("div");
-  d.className = "avatar-letter";
-  let h = 0;
-  for (const ch of String(name)) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-  const hue = h % 360;
-  d.style.background = `linear-gradient(135deg, hsl(${hue} 45% 30%), hsl(${(hue + 40) % 360} 45% 22%))`;
-  d.textContent = String(name || "?").charAt(0).toUpperCase();
-  return d;
-}
-
-/* ---------------- index page ---------------- */
-
-async function runIndex() {
-  const main = $("#app");
-  let data;
-  try {
-    data = await fetchJSON("data/index.json");
-  } catch (e) {
-    main.innerHTML = `<div class="error-box">Failed to load player data: ${esc(e.message)}</div>`;
-    return;
-  }
-  const players = data.players;
-  $("#meta-stamp").textContent = `${data.meta.count} players · data refreshed ${new Date(data.meta.generated).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}`;
-
-  const state = { q: "", sort: "recent", res: "" };
-
+function runIndex() {
   const grid = $("#grid");
   const count = $("#result-count");
   const input = $("#q");
   const sortSel = $("#sort");
   const resSel = $("#res");
+  if (!grid || !grid.querySelector(".card")) return;
 
-  const resValues = [...new Set(players.map((p) => p.res).filter(Boolean))].sort(
-    (a, b) => (parseInt(a, 10) || 0) - (parseInt(b, 10) || 0)
-  );
-  for (const rv of resValues) {
-    const o = document.createElement("option");
-    o.value = rv; o.textContent = rv;
-    resSel.appendChild(o);
+  const cards = [...grid.querySelectorAll(".card")];
+  const state = { q: "", sort: "recent", res: "" };
+
+  let empty = grid.querySelector(".empty");
+  if (!empty) {
+    empty = document.createElement("div");
+    empty.className = "empty";
+    grid.appendChild(empty);
   }
-
-  const num = (s) => (s === null || s === undefined || s === "" ? NaN : parseFloat(s));
-
-  /* ---- HLTV Top 10 section ---- */
-  renderTop10(players);
-
-/* ---------------- HLTV Top 10 section ---------------- */
-
-async function renderTop10(players) {
-  let top10;
-  try {
-    top10 = await fetchJSON("data/top10.json");
-  } catch (_) {
-    return; // section is optional
-  }
-  const bySlug = new Map(players.map((p) => [p.slug.toLowerCase(), p]));
-  const host = $("#top10");
-  if (!host) return;
-
-  const sec = document.createElement("section");
-  sec.className = "top10";
-  sec.innerHTML = `
-    <div class="top10-head">
-      <h2>${esc(top10.title)}</h2>
-      <span class="top10-list">${esc(top10.listName)} · as of ${esc(top10.asOf)}</span>
-      <a class="top10-src" href="${esc(top10.sourceUrl)}" target="_blank" rel="noopener">source: HLTV ↗</a>
-    </div>`;
-  const ol = document.createElement("ol");
-  ol.className = "top10-grid";
-  for (const t of top10.players) {
-    const ours = t.slug ? bySlug.get(t.slug.toLowerCase()) : null;
-    const li = document.createElement("li");
-    li.className = "top10-card";
-    li.dataset.rank = t.rank;
-    const a = document.createElement("a");
-    if (ours) {
-      a.href = `player.html?p=${encodeURIComponent(ours.slug)}`;
-    } else {
-      a.href = t.hltv;
-      a.target = "_blank";
-      a.rel = "noopener";
-    }
-    a.title = t.slug ? `${t.nick} — open config` : `${t.nick} on HLTV`;
-    const rank = document.createElement("span");
-    rank.className = "top10-rank" + (t.rank <= 3 ? " medal" : "");
-    rank.textContent = "#" + t.rank;
-    a.appendChild(rank);
-    a.appendChild(avatarEl(ours || { nick: t.nick, slug: t.slug || t.nick }));
-    const nick = document.createElement("span");
-    nick.className = "top10-nick";
-    nick.textContent = t.nick;
-    a.appendChild(nick);
-    const team = document.createElement("span");
-    team.className = "top10-team";
-    team.textContent = t.team || "";
-    a.appendChild(team);
-    li.appendChild(a);
-    ol.appendChild(li);
-  }
-  sec.appendChild(ol);
-  sec.insertAdjacentHTML("beforeend", `<p class="top10-note">${esc(top10.note)}</p>`);
-  host.replaceWith(sec);
-}
 
   function apply() {
-    let list = players.slice();
     const q = state.q.trim().toLowerCase();
-    if (q) {
-      list = list.filter((p) =>
-        (p.nick || "").toLowerCase().includes(q) ||
-        (p.real_name || "").toLowerCase().includes(q) ||
-        (p.slug || "").toLowerCase().includes(q));
+    let visible = 0;
+    for (const card of cards) {
+      const hay = ((card.dataset.nick || "") + " " + (card.dataset.real || "") + " " + (card.dataset.slug || "")).toLowerCase();
+      const show = (!q || hay.includes(q)) && (!state.res || card.dataset.res === state.res);
+      card.hidden = !show;
+      if (show) visible++;
     }
-    if (state.res) list = list.filter((p) => p.res === state.res);
-    const by = {
-      "edpi-desc": (a, b) => (num(b.edpi) || 0) - (num(a.edpi) || 0),
-      "edpi-asc": (a, b) => (num(a.edpi) || 0) - (num(b.edpi) || 0),
-      "sens-desc": (a, b) => (num(b.sens) || 0) - (num(a.sens) || 0),
-      "sens-asc": (a, b) => (num(a.sens) || 0) - (num(b.sens) || 0),
-      "name": (a, b) => (a.nick || "").localeCompare(b.nick || ""),
+    const cmp = {
+      "recent": null,
+      "edpi-desc": (a, b) => (parseFloat(b.dataset.edpi) || 0) - (parseFloat(a.dataset.edpi) || 0),
+      "edpi-asc": (a, b) => (parseFloat(a.dataset.edpi) || 0) - (parseFloat(b.dataset.edpi) || 0),
+      "sens-desc": (a, b) => (parseFloat(b.dataset.sens) || 0) - (parseFloat(a.dataset.sens) || 0),
+      "sens-asc": (a, b) => (parseFloat(a.dataset.sens) || 0) - (parseFloat(b.dataset.sens) || 0),
+      "name": (a, b) => (a.dataset.nick || "").localeCompare(b.dataset.nick || ""),
     }[state.sort];
-    if (by) list.sort(by);
+    if (cmp) [...cards].sort(cmp).forEach((c) => grid.appendChild(c));
+    grid.appendChild(empty);
 
-    count.textContent = `${list.length} player${list.length === 1 ? "" : "s"}`;
-    grid.innerHTML = "";
-    if (!list.length) {
-      grid.innerHTML = `<div class="empty">No players match "${esc(state.q)}".</div>`;
-      return;
-    }
-    const frag = document.createDocumentFragment();
-    for (const p of list) {
-      const a = document.createElement("a");
-      a.className = "card";
-      a.href = `player.html?p=${encodeURIComponent(p.slug)}`;
-      a.appendChild(avatarEl(p));
-      const nick = document.createElement("div");
-      nick.className = "nick";
-      nick.textContent = p.nick || p.slug;
-      a.appendChild(nick);
-      const real = document.createElement("div");
-      real.className = "real";
-      real.textContent = p.real_name || "";
-      a.appendChild(real);
-      const chips = document.createElement("div");
-      chips.className = "chips";
-      if (p.edpi !== null && p.edpi !== undefined) {
-        chips.insertAdjacentHTML("beforeend", `<span class="chip"><b>${p.edpi}</b> eDPI</span>`);
-      }
-      if (p.sens) chips.insertAdjacentHTML("beforeend", `<span class="chip">sens ${esc(p.sens)}</span>`);
-      if (p.res) chips.insertAdjacentHTML("beforeend", `<span class="chip">${esc(p.res)}</span>`);
-      a.appendChild(chips);
-      frag.appendChild(a);
-    }
-    grid.appendChild(frag);
+    count.textContent = `${visible} player${visible === 1 ? "" : "s"}`;
+    empty.textContent = `No players match "${state.q}".`;
+    empty.hidden = visible !== 0;
   }
 
-  input.addEventListener("input", () => { state.q = input.value; apply(); });
-  sortSel.addEventListener("change", () => { state.sort = sortSel.value; apply(); });
-  resSel.addEventListener("change", () => { state.res = resSel.value; apply(); });
+  function syncUrl() {
+    const params = new URLSearchParams();
+    if (state.q) params.set("q", state.q);
+    if (state.res) params.set("res", state.res);
+    if (state.sort && state.sort !== "recent") params.set("sort", state.sort);
+    const qs = params.toString();
+    history.replaceState(null, "", qs ? `?${qs}` : location.pathname);
+  }
+
+  input.addEventListener("input", () => { state.q = input.value; syncUrl(); apply(); });
+  sortSel.addEventListener("change", () => { state.sort = sortSel.value; syncUrl(); apply(); });
+  resSel.addEventListener("change", () => { state.res = resSel.value; syncUrl(); apply(); });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "/" && document.activeElement !== input && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
+    if (e.key === "/" && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
       e.preventDefault();
       input.focus();
     }
   });
 
+  // restore from URL (?q= is the SearchAction sitelink target)
+  const params = new URLSearchParams(location.search);
+  if (params.get("q")) { state.q = params.get("q"); input.value = state.q; }
+  if (params.get("res")) { state.res = params.get("res"); resSel.value = state.res; }
+  if (params.get("sort")) { state.sort = params.get("sort"); sortSel.value = state.sort; }
   apply();
 }
 
-/* ---------------- player page ---------------- */
+/* ---------------- static player pages: enhancement only ----------------
+   Content is prerendered; this wires the interactive bits: crosshair
+   canvases, the DPI sensitivity matcher and the "Copy all at my DPI"
+   button, all driven by the embedded #player-data JSON. */
 
-function cmdBlock(text, hlFirst = false) {
-  const div = document.createElement("div");
-  div.className = "cmd";
-  const pre = document.createElement("pre");
-  const lines = String(text).split("\n");
-  pre.innerHTML = lines
-    .map((l, i) => (hlFirst && i === 0 ? `<span class="hl">${esc(l)}</span>` : esc(l)))
-    .join("\n");
-  div.appendChild(pre);
-  return div;
-}
-
-async function runPlayer() {
-  const main = $("#app");
-  const slug = new URLSearchParams(location.search).get("p");
-
-  main.innerHTML = `<div class="loading"><span class="spin"></span>Loading profile…</div>`;
-
-  let rec, meta;
+function runPlayerStatic() {
+  let data;
   try {
-    [rec, meta] = await Promise.all([
-      fetchJSON(`data/players/${encodeURIComponent(slug)}.json`),
-      fetchJSON("data/meta.json"),
-    ]);
-  } catch (e) {
-    main.innerHTML = `<div class="error-box">Player not found. <a href="index.html">Back to all players</a></div>`;
+    data = JSON.parse(document.getElementById("player-data").textContent);
+  } catch (_) {
     return;
   }
-  main.innerHTML = "";
+  const rec = {
+    slug: data.slug,
+    nick: data.nick,
+    convars: data.convars,
+    tables: { Mouse: { DPI: data.dpi } },
+  };
 
-  document.title = `${rec.nick} CS2 Settings & Config Commands - CS2 Pro Configs`;
-
-  const buckets = bucketConvars(rec.convars);
-  const xc = convertCrosshair(rec.convars || {});
-  const fullBlock = buildFullBlock(rec);
-  const mouse = (rec.tables && rec.tables["Mouse"]) || {};
-  const video = (rec.tables && rec.tables["Video Settings"]) || {};
-  const adv = (rec.tables && rec.tables["Advanced Video"]) || {};
-
-  /* header */
-  const head = document.createElement("div");
-  head.innerHTML = `
-    <a class="back" href="index.html">← All players</a>
-    <div class="profile-head">
-      <div>
-        <h1>${esc(rec.nick)}</h1>
-        <div class="real">${esc(rec.real_name || "")}</div>
-        <div class="links">
-          ${rec.steamid64 ? `<a href="https://steamcommunity.com/profiles/${esc(rec.steamid64)}" target="_blank" rel="noopener">Steam profile</a>` : ""}
-          <a href="https://settings.gg/players/${esc(rec.slug)}" target="_blank" rel="noopener">settings.gg</a>
-          ${rec.crosshair_code ? `<a href="https://procrosshairs.com/player/${esc(rec.steamid64 || "")}/${esc(rec.slug)}" target="_blank" rel="noopener">crosshair history</a>` : ""}
-        </div>
-      </div>
-    </div>
-    <div class="chips" style="margin-top:14px">
-      ${mouse["DPI"] ? `<span class="chip"><b>${esc(mouse["DPI"])}</b> DPI</span>` : ""}
-      ${mouse["Polling rate"] ? `<span class="chip">${esc(mouse["Polling rate"])}</span>` : ""}
-      ${video["Resolution"] ? `<span class="chip">${esc(video["Resolution"])}</span>` : ""}
-      ${video["Aspect Ratio"] ? `<span class="chip">${esc(video["Aspect Ratio"])}</span>` : ""}
-      ${video["Scaling Mode"] ? `<span class="chip">${esc(video["Scaling Mode"])}</span>` : ""}
-    </div>
-    <div class="head-actions">
-      ${fullBlock ? `<button class="btn" data-copy="${esc(fullBlock)}">Copy full config</button>` : ""}
-      <a class="btn ghost" href="cfg/${esc(rec.slug)}.cfg" download="${esc(rec.slug)}.cfg">Download .cfg</a>
-    </div>
-    <p class="note">Dataset refreshed ${new Date(meta.generated).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })} · source settings.gg</p>
-  `;
-  main.appendChild(head);
-  const ph = $(".profile-head", head);
-  ph.insertBefore(avatarEl(rec), ph.firstChild);
-
-  /* crosshair */
-  if (rec.crosshair_code || xc.commands.length) {
-    const cv = rec.convars || {};
-    const sec = document.createElement("section");
-    sec.className = "section";
-    sec.innerHTML = `<div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2></div>`;
-    const box = document.createElement("div");
-    box.className = "xhair-box";
-    const canvases = document.createElement("div");
-    canvases.className = "xhair-canvases";
-    const canvas = document.createElement("canvas");
-    canvas.id = "xhair";
-    const canvasZoom = document.createElement("canvas");
-    canvasZoom.id = "xhair-zoom";
-    canvases.appendChild(canvas);
-    canvases.insertAdjacentHTML("beforeend", `<div class="xhair-label">true scale on your screen</div>`);
-    canvases.appendChild(canvasZoom);
-    canvases.insertAdjacentHTML("beforeend", `<div class="xhair-label">pixel zoom</div>`);
-    box.appendChild(canvases);
-    const metaBox = document.createElement("div");
-    metaBox.className = "xhair-meta";
-    metaBox.innerHTML = `
-      <p class="note" style="margin:0 0 6px">CS2's Sept 22, 2026 "Rush Hour" patch replaced the crosshair system. Old share codes now fail to import (<i>"invalid or old crosshair code"</i>), so use the <b>console commands</b> below — converted to the new convars from this player's original settings.</p>`;
-    const b2 = document.createElement("button");
-    b2.className = "btn small";
-    b2.dataset.copy = xc.commands.join("; ");
-    b2.textContent = "Copy crosshair commands";
-    metaBox.appendChild(b2);
-    if (rec.crosshair_code) {
-      const b = document.createElement("button");
-      b.className = "btn ghost small";
-      b.style.marginLeft = "8px";
-      b.dataset.copy = rec.crosshair_code;
-      b.textContent = "Copy legacy share code (no longer importable)";
-      metaBox.appendChild(b);
-      metaBox.insertAdjacentHTML("beforeend", `<div class="code-line" style="margin-top:8px">${esc(rec.crosshair_code)}</div>`);
-    }
-    if (xc.warnings.length) {
-      metaBox.insertAdjacentHTML("beforeend",
-        `<p class="note" style="margin-top:8px">${xc.warnings.map((w) => `⚠ ${esc(w)}`).join("<br>")}</p>`);
-    }
-    metaBox.insertAdjacentHTML("beforeend",
-      `<p class="note" style="margin-top:8px">Conversion reference: <a href="https://github.com/sebastianspicker/small-indie-crosshair-company" target="_blank" rel="noopener">community crosshair migration study</a> (build 2000914) — validated against published post-patch pro settings. The converted crosshair commands are included at the start of the <b>Full config</b> below.</p>`);
-    box.appendChild(metaBox);
-    sec.appendChild(box);
-    main.appendChild(sec);
-    const info = drawCrosshair(canvas, canvasZoom, cv, xc.commands);
-    const px = `${Math.round(info.lengthPx)}px arms × ${Math.round(info.thickPx)}px thick (authored at 1080p)`;
-    metaBox.insertAdjacentHTML("beforeend",
-      `<p class="note" style="margin-top:8px">Preview: <b>${esc(px)}</b>. Left is the true size as the game draws it on your ~${info.screenH}p screen — most pros genuinely play dot-to-3px crosshairs — right is the same thing zoomed so you can inspect the shape. The game rescales it to your resolution automatically.</p>`);
+  const trueCanvas = $("#xhair");
+  const zoomCanvas = $("#xhair-zoom");
+  if (trueCanvas && zoomCanvas) {
+    try {
+      drawCrosshair(trueCanvas, zoomCanvas, data.convars, data.xhairCmds);
+    } catch (_) { /* preview is optional */ }
   }
 
-  /* full config */
-  if (fullBlock) {
-    const sec = document.createElement("section");
-    sec.className = "section";
-    sec.innerHTML = `<div class="section-head"><h2>Full config <span class="tag">paste in console</span></h2></div>`;
-    const btn = document.createElement("button");
-    btn.className = "btn small";
-    btn.dataset.copy = fullBlock;
-    btn.textContent = "Copy all";
-    $(".section-head", sec).appendChild(btn);
+  /* DPI matcher widget -> #dpi-slot */
+  const dpiSlot = $("#dpi-slot");
+  const base = proEdpi(rec);
+  if (dpiSlot && base) {
+    const box = document.createElement("div");
+    box.className = "dpi-match";
+    box.innerHTML = `
+      <div class="dpi-line">
+        <label class="dpi-label">Your mouse DPI
+          <input type="number" min="50" step="50" inputmode="numeric" class="dpi-input" placeholder="e.g. 1600">
+        </label>
+        <span class="dpi-result"></span>
+        <button type="button" class="btn ghost small" data-copy-sens style="display:none"></button>
+      </div>
+      <p class="note">Matching keeps the same <b>eDPI</b> (${Math.round(base.edpi)}) — that's <b>${base.cm.toFixed(1)} cm</b> per 360° turn at any DPI. Enter your DPI and use this sensitivity instead of theirs (or use <b>Copy all at my DPI</b> in the Full config above, which rewrites the <code>sensitivity</code> line for you).</p>`;
+    dpiSlot.replaceWith(box);
+    const input = $(".dpi-input", box);
+    const result = $(".dpi-result", box);
+    const btnSens = $("[data-copy-sens]", box);
+    const saved = getUserDpi();
+    if (saved) input.value = saved;
+    const update = () => {
+      const dpi = parseInt(input.value, 10);
+      const r = sensForDpi(rec, dpi);
+      if (r) {
+        localStorage.setItem(DPI_KEY, String(dpi));
+        result.innerHTML = `→ in-game <b>sensitivity ${r.sens}</b>`;
+        btnSens.dataset.copy = `sensitivity ${r.sens}`;
+        btnSens.textContent = `Copy sensitivity ${r.sens}`;
+        btnSens.style.display = "";
+      } else {
+        result.textContent = "";
+        btnSens.style.display = "none";
+      }
+      if (window._refreshAdjusted) window._refreshAdjusted();
+    };
+    input.addEventListener("input", update);
+    if (saved) update();
+  }
+
+  /* "Copy all at my DPI" button -> #btn-mydpi-slot */
+  const mySlot = $("#btn-mydpi-slot");
+  if (mySlot && Array.isArray(data.commands)) {
     const btnMy = document.createElement("button");
     btnMy.id = "btn-copy-mydpi";
     btnMy.className = "btn ghost small";
     btnMy.style.display = "none";
     btnMy.title = "Same config, but the sensitivity line is rewritten so the speed (eDPI) matches this pro on YOUR mouse DPI";
-    $(".section-head", sec).appendChild(btnMy);
+    mySlot.appendChild(btnMy);
     const refreshAdjusted = () => {
       const dpi = getUserDpi();
-      const val = dpi ? consoleCommandsWithSens(rec, dpi) : null;
-      if (val) {
-        btnMy.dataset.copy = val;
+      const m = sensForDpi(rec, dpi);
+      if (m) {
+        btnMy.dataset.copy = data.commands
+          .map((c) => (c.startsWith("sensitivity ") ? `sensitivity ${m.sens}` : c))
+          .join("; ");
         btnMy.textContent = `Copy all at my DPI (${dpi})`;
         btnMy.style.display = "";
       } else {
@@ -834,173 +658,11 @@ async function runPlayer() {
     };
     refreshAdjusted();
     window._refreshAdjusted = refreshAdjusted;
-    sec.appendChild(cmdBlock(fullBlock));
-    sec.insertAdjacentHTML("beforeend", `<p class="note">One single line, <code>;</code>-separated so the console runs every command: press <b>~</b> in CS2, paste, hit Enter — done. (The CS2 console is single-line input, so multi-line pastes are unreliable — this is why everything is joined into one line.) The crosshair part is converted to the convars added by the Sept 22, 2026 patch; convars that were removed, renamed, cheat-protected or nonexistent in CS2 are filtered out. If a very long paste ever gets cut off, use the shorter per-section commands below instead.</p>`);
-    main.appendChild(sec);
   }
-
-  /* category blocks */
-  const cols = document.createElement("div");
-  cols.className = "cols";
-  const order = ["mouse", "viewmodel", "hud", "radar", "misc"];
-  for (const key of order) {
-    const b = BUCKETS.find((x) => x.key === key);
-    const lines = buckets[key];
-    if (!lines || !lines.length) continue;
-    const text = lines
-      .filter(([k]) => !CONSOLE_SKIP.has(k) && !XHAIR_REMOVED.has(k) && !XHAIR_HIDDEN_LEGACY.has(k))
-      .map(([k, v]) => { const sv = safeValue(v); return sv === null ? null : `${k} ${sv}`; })
-      .filter(Boolean).join("; ");
-    const sec = document.createElement("section");
-    sec.className = "section";
-    const headHtml = `<div class="section-head"><h2>${esc(b.title)} <span class="tag">${esc(b.tag || "")}</span></h2></div>`;
-    sec.innerHTML = headHtml;
-    const btn = document.createElement("button");
-    btn.className = "btn ghost small";
-    btn.dataset.copy = text;
-    btn.textContent = "Copy";
-    $(".section-head", sec).appendChild(btn);
-    sec.appendChild(cmdBlock(text));
-    if (key === "mouse") {
-      const bits = [];
-      if (mouse["DPI"]) bits.push(`DPI ${esc(mouse["DPI"])}`);
-      if (mouse["DPI"] && rec.convars && rec.convars.sensitivity) {
-        bits.push(`eDPI ${esc(String(Math.round(parseFloat(mouse["DPI"]) * parseFloat(rec.convars.sensitivity))))}`);
-      }
-      if (mouse["Polling rate"]) bits.push(`polling ${esc(mouse["Polling rate"])}`);
-      if (bits.length) {
-        sec.insertAdjacentHTML("beforeend", `<p class="note">DPI & polling rate are set in your <b>mouse software</b>, not in-game. Recommended: ${bits.join(" · ")}</p>`);
-      }
-
-      /* sensitivity converter: your DPI -> matching in-game sens */
-      const m = proEdpi(rec);
-      if (m) {
-        const box = document.createElement("div");
-        box.className = "dpi-match";
-        box.innerHTML = `
-          <div class="dpi-line">
-            <label class="dpi-label">Your mouse DPI
-              <input type="number" min="50" step="50" inputmode="numeric" class="dpi-input" placeholder="e.g. 1600">
-            </label>
-            <span class="dpi-result"></span>
-            <button class="btn ghost small" data-copy-sens style="display:none"></button>
-          </div>
-          <p class="note">Matching keeps the same <b>eDPI</b> (${Math.round(m.edpi)}) — that's <b>${m.cm.toFixed(1)} cm</b> per 360° turn at any DPI. Enter your DPI and use this sensitivity instead of theirs (or use <b>Copy all at my DPI</b> in the Full config above, which rewrites the <code>sensitivity</code> line for you).</p>`;
-        const input = $(".dpi-input", box);
-        const result = $(".dpi-result", box);
-        const btnSens = $("[data-copy-sens]", box);
-        const saved = getUserDpi();
-        if (saved) input.value = saved;
-        const update = () => {
-          const dpi = parseInt(input.value, 10);
-          const r = sensForDpi(rec, dpi);
-          if (r) {
-            localStorage.setItem(DPI_KEY, String(dpi));
-            result.innerHTML = `→ in-game <b>sensitivity ${r.sens}</b>`;
-            btnSens.dataset.copy = `sensitivity ${r.sens}`;
-            btnSens.textContent = `Copy sensitivity ${r.sens}`;
-            btnSens.style.display = "";
-          } else {
-            result.textContent = "";
-            btnSens.style.display = "none";
-          }
-          if (window._refreshAdjusted) window._refreshAdjusted();
-        };
-        input.addEventListener("input", update);
-        box._update = update;
-        sec.appendChild(box);
-        if (saved) update();
-      }
-    }
-    if (key === "misc") {
-      sec.insertAdjacentHTML("beforeend", `<p class="note">Misc convars (fps caps, gamma, gameplay toggles) captured from this player's config.</p>`);
-    }
-    cols.appendChild(sec);
-  }
-
-  /* launch options */
-  const suggested = (() => {
-    if (video["Resolution"] && (video["Display Mode"] || "").toLowerCase().includes("fullscreen")) {
-      const [w, h] = video["Resolution"].split("x");
-      if (w && h) return `-w ${w} -h ${h} -fullscreen`;
-    }
-    return null;
-  })();
-  if (rec.launch_options || suggested) {
-    const sec = document.createElement("section");
-    sec.className = "section";
-    const text = rec.launch_options || suggested;
-    const label = rec.launch_options ? "Launch Options" : "Launch Options (derived from resolution)";
-    sec.innerHTML = `<div class="section-head"><h2>${esc(label)} <span class="tag">Steam</span></h2></div>`;
-    const btn = document.createElement("button");
-    btn.className = "btn ghost small";
-    btn.dataset.copy = text;
-    btn.textContent = "Copy";
-    $(".section-head", sec).appendChild(btn);
-    const pre = document.createElement("div");
-    pre.className = "cmd";
-    pre.innerHTML = `<pre>${esc(text)}</pre>`;
-    sec.appendChild(pre);
-    sec.insertAdjacentHTML("beforeend", `<p class="note">Steam → right-click Counter-Strike 2 → Properties → Launch Options → paste.${rec.launch_options ? "" : " This player didn't publish launch options; this line just forces their resolution + fullscreen."}</p>`);
-    cols.appendChild(sec);
-  }
-  main.appendChild(cols);
-
-  /* video settings (manual) */
-  if (Object.keys(video).length || Object.keys(adv).length) {
-    const sec = document.createElement("section");
-    sec.className = "section";
-    sec.innerHTML = `<div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>`;
-    const inner = document.createElement("div");
-    inner.className = "cols";
-    if (Object.keys(video).length) {
-      inner.insertAdjacentHTML("beforeend", `
-        <div>
-          <table class="set"><tbody>
-            ${Object.entries(video).map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join("")}
-          </tbody></table>
-        </div>`);
-    }
-    if (Object.keys(adv).length) {
-      inner.insertAdjacentHTML("beforeend", `
-        <div>
-          <table class="set"><tbody>
-            ${Object.entries(adv).map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join("")}
-          </tbody></table>
-        </div>`);
-    }
-    sec.appendChild(inner);
-    sec.insertAdjacentHTML("beforeend", `<p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel (or use the resolution launch options above).</p>`);
-    main.appendChild(sec);
-  }
-
-  /* raw config */
-  const raw = document.createElement("section");
-  raw.className = "section";
-  raw.innerHTML = `
-    <div class="section-head"><h2>Raw autoexec.cfg <span class="tag">file</span></h2>
-      <button class="btn ghost small" data-copy-raw>Copy raw</button>
-      <a class="btn ghost small" href="cfg/${esc(rec.slug)}.cfg" download="${esc(rec.slug)}.cfg">Download</a>
-    </div>
-    <details class="raw"><summary>Show raw config file</summary><div class="cmd" id="raw-cmd"><pre>…</pre></div></details>
-    <p class="note">The exact autoexec.cfg file from the source site — in the <b>original pre-patch format</b> (some crosshair convars in it were removed by the Sept 22, 2026 update). For applying settings use the copy blocks above; this file is kept for reference. Alternative to pasting: save as <code>autoexec.cfg</code> in <code>…/Counter-Strike Global Offensive/game/csgo/cfg/</code> and run <code>exec autoexec</code> in console.</p>`;
-  main.appendChild(raw);
-  const rawCmd = $("#raw-cmd", raw);
-  const rawBtn = $("[data-copy-raw]", raw);
-  fetch(`cfg/${encodeURIComponent(rec.slug)}.cfg`)
-    .then((r) => (r.ok ? r.text() : Promise.reject(r.status)))
-    .then((t) => {
-      rawCmd.querySelector("pre").textContent = t;
-      rawBtn.dataset.copy = t;
-    })
-    .catch(() => {
-      rawCmd.querySelector("pre").textContent = "raw config not available";
-      rawBtn.remove();
-    });
 }
 
 /* ---------------- boot ---------------- */
 
 const page = document.body.dataset.page;
 if (page === "index") runIndex();
-else if (page === "player") runPlayer();
+else if (page === "player-static") runPlayerStatic();

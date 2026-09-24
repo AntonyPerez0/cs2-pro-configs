@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luken CS2 Settings, Crosshair &amp; Sensitivity — Copy-Paste Config</title>
+  <meta name="description" content="Copy Luken&#39;s full CS2 config in one paste: converted crosshair, 800 DPI x 0.9 sens (720 eDPI), 1280x960, viewmodel, HUD, radar and launch options - ready for the CS2 console.">
+  <link rel="canonical" href="https://copyprosta.com/p/luken/">
+  <meta name="theme-color" content="#0d1014">
+  <meta property="og:site_name" content="CS2 Pro Configs">
+  <meta property="og:title" content="Luken — CS2 Settings &amp; Config Commands">
+  <meta property="og:description" content="Copy Luken&#39;s full CS2 config in one paste: crosshair, sensitivity (720 eDPI), viewmodel, HUD, radar.">
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://copyprosta.com/p/luken/">
+  <meta property="og:image" content="https://copyprosta.com/data/avatars/luken.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Luken — CS2 Settings &amp; Config Commands">
+  <meta name="twitter:description" content="Copy Luken&#39;s full CS2 config in one paste: crosshair, sensitivity (720 eDPI), viewmodel, HUD, radar.">
+  <meta name="twitter:image" content="https://copyprosta.com/data/avatars/luken.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23ff8a3c'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' font-family='monospace' font-weight='bold' fill='%231a0e02'%3ECS%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/assets/style.css">
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "ProfilePage", "mainEntity": {"@type": "Person", "name": "Luken", "alternateName": "Luca Nadotti", "jobTitle": "CS2 professional player", "identifier": "76561198006379986", "url": "https://copyprosta.com/p/luken/"}}
+  </script>
+</head>
+<body data-page="player-static">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="logo" href="/">CS2<span class="dot">//</span>PROS <small>configs</small></a>
+      <div class="spacer"></div>
+      <a class="btn ghost small" href="/">All players</a>
+    </div>
+  </header>
+
+  <main class="wrap" id="main">
+    <nav aria-label="Breadcrumb"><a class="back" href="/">← All players</a></nav>
+    <div class="profile-head">
+      <img class="avatar" src="/data/avatars/luken.png" alt="" width="92" height="92">
+      <div>
+        <h1>Luken</h1>
+        <div class="real">Luca Nadotti</div>
+        <div class="links"><a href="https://steamcommunity.com/profiles/76561198006379986" target="_blank" rel="noopener">Steam profile</a><a href="https://settings.gg/players/luken" target="_blank" rel="noopener">settings.gg</a><a href="https://procrosshairs.com/player/76561198006379986/luken" target="_blank" rel="noopener">crosshair history</a></div>
+      </div>
+    </div>
+    <div class="chips" style="margin-top:14px"><span class="chip"><b>800</b> DPI</span><span class="chip">4000 Hz</span><span class="chip">1280x960</span><span class="chip">4:3</span></div>
+    <div class="head-actions">
+      <button type="button" class="btn" data-copy="cl_crosshairstyle 4; cl_crosshair_length 2; cl_crosshair_thickness 2; cl_crosshair_gap 0; cl_crosshairdot 0; cl_crosshair_t 0; cl_crosshair_drawoutline 0; cl_crosshair_recoil 0; cl_crosshaircolor_r 255; cl_crosshaircolor_g 255; cl_crosshaircolor_b 255; cl_crosshaircolor_a 255; cl_crosshair_dynamic_splitdist 3; cl_crosshair_dynamic_maxdist_splitratio 1; cl_crosshair_dynamic_splitalpha_innermod 0; cl_crosshair_dynamic_splitalpha_outermod 1; cl_crosshair_screen_height 1080; m_yaw 0.022; sensitivity 0.9; zoom_sensitivity_ratio 1; viewmodel_fov 68; viewmodel_offset_x 2.5; viewmodel_offset_y 0; viewmodel_offset_z -1.5; cl_radar_scale 0.4; cl_radar_rotate 1; cl_hud_radar_scale 1; cl_radar_icon_scale_min 0.6; cl_radar_always_centered 1; cl_radar_square_with_scoreboard 1; safezonex 1; safezoney 1; hud_scaling 0.8; cl_hud_color 1; fps_max 0; cl_showloadout 1; r_fullscreen_gamma 1.9">Copy full config</button>
+      <a class="btn ghost" href="/cfg/luken.cfg" download="luken.cfg">Download .cfg</a>
+    </div>
+    <p class="note">Dataset refreshed 2026-09-23T00:56:32Z · source <a href="https://settings.gg/players/luken" target="_blank" rel="noopener">settings.gg</a></p>
+
+    <section class="section">
+      <div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2></div>
+      <div class="xhair-box">
+        <div class="xhair-canvases">
+          <canvas id="xhair" width="300" height="300" role="img" aria-label="Crosshair preview: 2 pixel arms, 2 pixel thick, gap 0"></canvas>
+          <div class="xhair-label">true scale on your screen</div>
+          <canvas id="xhair-zoom" width="300" height="300" role="img" aria-label="Zoomed crosshair shape"></canvas>
+          <div class="xhair-label">pixel zoom</div>
+        </div>
+        <div class="xhair-meta">
+          <p class="note" style="margin:0 0 6px">CS2's Sept 22, 2026 "Rush Hour" patch replaced the crosshair system. Old share codes no longer import, so use the <b>console commands</b> below — converted to the new convars from Luken's original settings.</p>
+          <button type="button" class="btn small" data-copy="cl_crosshairstyle 4; cl_crosshair_length 2; cl_crosshair_thickness 2; cl_crosshair_gap 0; cl_crosshairdot 0; cl_crosshair_t 0; cl_crosshair_drawoutline 0; cl_crosshair_recoil 0; cl_crosshaircolor_r 255; cl_crosshaircolor_g 255; cl_crosshaircolor_b 255; cl_crosshaircolor_a 255; cl_crosshair_dynamic_splitdist 3; cl_crosshair_dynamic_maxdist_splitratio 1; cl_crosshair_dynamic_splitalpha_innermod 0; cl_crosshair_dynamic_splitalpha_outermod 1; cl_crosshair_screen_height 1080">Copy crosshair commands</button><button type="button" class="btn ghost small" style="margin-left:8px" data-copy="CSGO-2R3RD-dBh8Z-mBZZU-yA5mE-bkMHA">Copy legacy share code (no longer importable)</button><div class="code-line" style="margin-top:8px">CSGO-2R3RD-dBh8Z-mBZZU-yA5mE-bkMHA</div>
+          <p class="note" style="margin-top:8px">⚠ (&#39;cl_crosshairstyle&#39;, 4)<br>⚠ (&#39;cl_crosshair_length&#39;, 2)<br>⚠ (&#39;cl_crosshair_thickness&#39;, 2)<br>⚠ (&#39;cl_crosshair_gap&#39;, 0)<br>⚠ (&#39;cl_crosshairdot&#39;, 0)<br>⚠ (&#39;cl_crosshair_t&#39;, 0)<br>⚠ (&#39;cl_crosshair_drawoutline&#39;, 0)<br>⚠ (&#39;cl_crosshair_recoil&#39;, 0)<br>⚠ (&#39;cl_crosshaircolor_r&#39;, 255)<br>⚠ (&#39;cl_crosshaircolor_g&#39;, 255)<br>⚠ (&#39;cl_crosshaircolor_b&#39;, 255)<br>⚠ (&#39;cl_crosshaircolor_a&#39;, 255)<br>⚠ (&#39;cl_crosshair_dynamic_splitdist&#39;, &#39;3&#39;)<br>⚠ (&#39;cl_crosshair_dynamic_maxdist_splitratio&#39;, &#39;1&#39;)<br>⚠ (&#39;cl_crosshair_dynamic_splitalpha_innermod&#39;, &#39;0&#39;)<br>⚠ (&#39;cl_crosshair_dynamic_splitalpha_outermod&#39;, &#39;1&#39;)<br>⚠ (&#39;cl_crosshair_screen_height&#39;, 1080)</p>
+          <p class="note" style="margin-top:8px">Conversion reference: <a href="https://github.com/sebastianspicker/small-indie-crosshair-company" target="_blank" rel="noopener">community crosshair migration study</a> (build 2000914). The converted crosshair commands are included at the start of the <b>Full config</b> below.</p>
+          <noscript><div class="cmd" style="margin-top:8px"><pre>cl_crosshairstyle 4; cl_crosshair_length 2; cl_crosshair_thickness 2; cl_crosshair_gap 0; cl_crosshairdot 0; cl_crosshair_t 0; cl_crosshair_drawoutline 0; cl_crosshair_recoil 0; cl_crosshaircolor_r 255; cl_crosshaircolor_g 255; cl_crosshaircolor_b 255; cl_crosshaircolor_a 255; cl_crosshair_dynamic_splitdist 3; cl_crosshair_dynamic_maxdist_splitratio 1; cl_crosshair_dynamic_splitalpha_innermod 0; cl_crosshair_dynamic_splitalpha_outermod 1; cl_crosshair_screen_height 1080</pre></div></noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>Full config <span class="tag">paste in console</span></h2>
+        <button type="button" class="btn small" data-copy="cl_crosshairstyle 4; cl_crosshair_length 2; cl_crosshair_thickness 2; cl_crosshair_gap 0; cl_crosshairdot 0; cl_crosshair_t 0; cl_crosshair_drawoutline 0; cl_crosshair_recoil 0; cl_crosshaircolor_r 255; cl_crosshaircolor_g 255; cl_crosshaircolor_b 255; cl_crosshaircolor_a 255; cl_crosshair_dynamic_splitdist 3; cl_crosshair_dynamic_maxdist_splitratio 1; cl_crosshair_dynamic_splitalpha_innermod 0; cl_crosshair_dynamic_splitalpha_outermod 1; cl_crosshair_screen_height 1080; m_yaw 0.022; sensitivity 0.9; zoom_sensitivity_ratio 1; viewmodel_fov 68; viewmodel_offset_x 2.5; viewmodel_offset_y 0; viewmodel_offset_z -1.5; cl_radar_scale 0.4; cl_radar_rotate 1; cl_hud_radar_scale 1; cl_radar_icon_scale_min 0.6; cl_radar_always_centered 1; cl_radar_square_with_scoreboard 1; safezonex 1; safezoney 1; hud_scaling 0.8; cl_hud_color 1; fps_max 0; cl_showloadout 1; r_fullscreen_gamma 1.9">Copy all</button>
+        <span id="btn-mydpi-slot"></span></div>
+      <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>cl_crosshairstyle 4; cl_crosshair_length 2; cl_crosshair_thickness 2; cl_crosshair_gap 0; cl_crosshairdot 0; cl_crosshair_t 0; cl_crosshair_drawoutline 0; cl_crosshair_recoil 0; cl_crosshaircolor_r 255; cl_crosshaircolor_g 255; cl_crosshaircolor_b 255; cl_crosshaircolor_a 255; cl_crosshair_dynamic_splitdist 3; cl_crosshair_dynamic_maxdist_splitratio 1; cl_crosshair_dynamic_splitalpha_innermod 0; cl_crosshair_dynamic_splitalpha_outermod 1; cl_crosshair_screen_height 1080; m_yaw 0.022; sensitivity 0.9; zoom_sensitivity_ratio 1; viewmodel_fov 68; viewmodel_offset_x 2.5; viewmodel_offset_y 0; viewmodel_offset_z -1.5; cl_radar_scale 0.4; cl_radar_rotate 1; cl_hud_radar_scale 1; cl_radar_icon_scale_min 0.6; cl_radar_always_centered 1; cl_radar_square_with_scoreboard 1; safezonex 1; safezoney 1; hud_scaling 0.8; cl_hud_color 1; fps_max 0; cl_showloadout 1; r_fullscreen_gamma 1.9</pre></div>
+      <p class="note">One single line, <code>;</code>-separated so the console runs every command: press <b>~</b> in CS2, paste, hit Enter — done. (The CS2 console is single-line input, so multi-line pastes are unreliable.) The crosshair part is converted to the convars added by the Sept 22, 2026 patch; convars that were removed, renamed, cheat-protected or nonexistent in CS2 are filtered out. If a very long paste ever gets cut off, use the shorter per-section commands below instead.</p>
+      <noscript><div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>cl_crosshairstyle 4; cl_crosshair_length 2; cl_crosshair_thickness 2; cl_crosshair_gap 0; cl_crosshairdot 0; cl_crosshair_t 0; cl_crosshair_drawoutline 0; cl_crosshair_recoil 0; cl_crosshaircolor_r 255; cl_crosshaircolor_g 255; cl_crosshaircolor_b 255; cl_crosshaircolor_a 255; cl_crosshair_dynamic_splitdist 3; cl_crosshair_dynamic_maxdist_splitratio 1; cl_crosshair_dynamic_splitalpha_innermod 0; cl_crosshair_dynamic_splitalpha_outermod 1; cl_crosshair_screen_height 1080; m_yaw 0.022; sensitivity 0.9; zoom_sensitivity_ratio 1; viewmodel_fov 68; viewmodel_offset_x 2.5; viewmodel_offset_y 0; viewmodel_offset_z -1.5; cl_radar_scale 0.4; cl_radar_rotate 1; cl_hud_radar_scale 1; cl_radar_icon_scale_min 0.6; cl_radar_always_centered 1; cl_radar_square_with_scoreboard 1; safezonex 1; safezoney 1; hud_scaling 0.8; cl_hud_color 1; fps_max 0; cl_showloadout 1; r_fullscreen_gamma 1.9</pre></div></noscript>
+    </section>
+
+    <section class="section">
+  <div class="section-head"><h2>Mouse &amp; Sensitivity <span class="tag">sensitivity</span></h2>
+  <button type="button" class="btn ghost small" data-copy="m_yaw 0.022; sensitivity 0.9; zoom_sensitivity_ratio 1">Copy</button></div>
+  <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>m_yaw 0.022; sensitivity 0.9; zoom_sensitivity_ratio 1</pre></div>
+  <p class="note">DPI &amp; polling rate are set in your <b>mouse software</b>, not in-game. Recommended: DPI 800 · eDPI 720 · polling 4000 Hz</p>
+  <div id="dpi-slot"></div>
+</section>
+<section class="section">
+  <div class="section-head"><h2>Viewmodel <span class="tag">viewmodel_*</span></h2>
+  <button type="button" class="btn ghost small" data-copy="viewmodel_fov 68; viewmodel_offset_x 2.5; viewmodel_offset_y 0; viewmodel_offset_z -1.5">Copy</button></div>
+  <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>viewmodel_fov 68; viewmodel_offset_x 2.5; viewmodel_offset_y 0; viewmodel_offset_z -1.5</pre></div>
+</section>
+<section class="section">
+  <div class="section-head"><h2>Radar <span class="tag">cl_radar_*</span></h2>
+  <button type="button" class="btn ghost small" data-copy="cl_radar_scale 0.4; cl_radar_rotate 1; cl_hud_radar_scale 1; cl_radar_icon_scale_min 0.6; cl_radar_always_centered 1; cl_radar_square_with_scoreboard 1">Copy</button></div>
+  <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>cl_radar_scale 0.4; cl_radar_rotate 1; cl_hud_radar_scale 1; cl_radar_icon_scale_min 0.6; cl_radar_always_centered 1; cl_radar_square_with_scoreboard 1</pre></div>
+</section>
+<section class="section">
+  <div class="section-head"><h2>HUD <span class="tag">hud_*</span></h2>
+  <button type="button" class="btn ghost small" data-copy="safezonex 1; safezoney 1; hud_scaling 0.8; cl_hud_color 1">Copy</button></div>
+  <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>safezonex 1; safezoney 1; hud_scaling 0.8; cl_hud_color 1</pre></div>
+</section>
+<section class="section">
+  <div class="section-head"><h2>Performance &amp; Other <span class="tag">misc</span></h2>
+  <button type="button" class="btn ghost small" data-copy="fps_max 0; cl_showloadout 1; r_fullscreen_gamma 1.9">Copy</button></div>
+  <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>fps_max 0; cl_showloadout 1; r_fullscreen_gamma 1.9</pre></div>
+  <p class="note">Misc convars (fps caps, gamma, gameplay toggles) captured from this player's config.</p>
+</section>
+    <section class="section">
+  <div class="section-head"><h2>Launch Options <span class="tag">Steam</span></h2>
+  <button type="button" class="btn ghost small" data-copy="-allow_third_party_software -noreflex +fps_max 0">Copy</button></div>
+  <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>-allow_third_party_software -noreflex +fps_max 0</pre></div>
+  <p class="note">Steam → right-click Counter-Strike 2 → Properties → Launch Options → paste.</p>
+</section>
+    <section class="section">
+  <div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>
+  <div class="cols"><div><table class="set"><caption class="sr-only">Video settings</caption><tbody><tr><th scope="row">Brightness</th><td>103%</td></tr><tr><th scope="row">Scaling mode</th><td>Stretched</td></tr><tr><th scope="row">Aspect Ratio</th><td>4:3</td></tr><tr><th scope="row">Resolution</th><td>1280x960</td></tr><tr><th scope="row">Display Mode</th><td>Fullscreen</td></tr></tbody></table></div><div><table class="set"><tbody><tr><th scope="row">Boost Player Contrast</th><td>Enabled</td></tr><tr><th scope="row">V-Sync</th><td>Disabled</td></tr><tr><th scope="row">Multisampling Anti-Aliasing Mode</th><td>4x MSAA</td></tr><tr><th scope="row">Global Shadow Quality</th><td>Low</td></tr><tr><th scope="row">Model / Texture Detail</th><td>Low</td></tr><tr><th scope="row">Texture Filtering Mode</th><td>Bilinear</td></tr><tr><th scope="row">Shader Detail</th><td>Low</td></tr><tr><th scope="row">Particle Detail</th><td>Low</td></tr><tr><th scope="row">Dynamic Shadows</th><td>All</td></tr><tr><th scope="row">Ambient Occlusion</th><td>Disabled</td></tr><tr><th scope="row">High Dynamic Range</th><td>Quality</td></tr><tr><th scope="row">FidelityFX Super Resolution</th><td>Disabled (Highest Quality)</td></tr><tr><th scope="row">NVIDIA Reflex Low Latency</th><td>Disabled</td></tr></tbody></table></div></div>
+  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel (or use the resolution launch options below).</p>
+</section>
+
+    <section class="section">
+      <div class="section-head"><h2>Raw autoexec.cfg <span class="tag">file</span></h2>
+        <button type="button" class="btn ghost small" data-copy="&quot;m_yaw&quot; &quot;0.022&quot;
+&quot;fps_max&quot; &quot;0&quot;
+&quot;safezonex&quot; &quot;1&quot;
+&quot;safezoney&quot; &quot;1&quot;
+&quot;hud_scaling&quot; &quot;0.8&quot;
+&quot;sensitivity&quot; &quot;0.9&quot;
+&quot;cl_hud_color&quot; &quot;1&quot;
+&quot;cl_radar_size&quot; &quot;1&quot;
+&quot;viewmodel_fov&quot; &quot;68&quot;
+&quot;cl_crosshair_t&quot; &quot;false&quot;
+&quot;cl_radar_scale&quot; &quot;0.4&quot;
+&quot;cl_showloadout&quot; &quot;true&quot;
+&quot;cl_crosshairdot&quot; &quot;false&quot;
+&quot;cl_crosshairgap&quot; &quot;-4&quot;
+&quot;cl_radar_rotate&quot; &quot;1&quot;
+&quot;cl_crosshairsize&quot; &quot;1&quot;
+&quot;cl_crosshairalpha&quot; &quot;255&quot;
+&quot;cl_crosshaircolor&quot; &quot;5&quot;
+&quot;cl_crosshairstyle&quot; &quot;4&quot;
+&quot;cl_hud_radar_scale&quot; &quot;1&quot;
+&quot;r_fullscreen_gamma&quot; &quot;1.9&quot;
+&quot;setting.defaultres&quot; &quot;1280&quot;
+&quot;viewmodel_offset_x&quot; &quot;2.5&quot;
+&quot;viewmodel_offset_y&quot; &quot;0&quot;
+&quot;viewmodel_offset_z&quot; &quot;-1.5&quot;
+&quot;cl_crosshair_recoil&quot; &quot;false&quot;
+&quot;cl_crosshaircolor_b&quot; &quot;255&quot;
+&quot;cl_crosshaircolor_g&quot; &quot;255&quot;
+&quot;cl_crosshaircolor_r&quot; &quot;255&quot;
+&quot;cl_crosshairusealpha&quot; &quot;true&quot;
+&quot;cl_fixedcrosshairgap&quot; &quot;3&quot;
+&quot;cl_crosshairthickness&quot; &quot;1&quot;
+&quot;zoom_sensitivity_ratio&quot; &quot;1&quot;
+&quot;cl_radar_icon_scale_min&quot; &quot;0.6&quot;
+&quot;cl_crosshair_drawoutline&quot; &quot;false&quot;
+&quot;cl_radar_always_centered&quot; &quot;1&quot;
+&quot;setting.defaultresheight&quot; &quot;960&quot;
+&quot;cl_crosshair_outlinethickness&quot; &quot;0.5&quot;
+&quot;cl_crosshair_dynamic_splitdist&quot; &quot;3&quot;
+&quot;cl_crosshairgap_useweaponvalue&quot; &quot;false&quot;
+&quot;cl_radar_square_with_scoreboard&quot; &quot;1&quot;
+&quot;cl_crosshair_dynamic_maxdist_splitratio&quot; &quot;1&quot;
+&quot;cl_crosshair_dynamic_splitalpha_innermod&quot; &quot;0&quot;
+&quot;cl_crosshair_dynamic_splitalpha_outermod&quot; &quot;1&quot;
+">Copy raw</button>
+        <a class="btn ghost small" href="/cfg/luken.cfg" download="luken.cfg">Download</a>
+      </div>
+      <details class="raw"><summary>Show raw config file</summary><div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>&quot;m_yaw&quot; &quot;0.022&quot;
+&quot;fps_max&quot; &quot;0&quot;
+&quot;safezonex&quot; &quot;1&quot;
+&quot;safezoney&quot; &quot;1&quot;
+&quot;hud_scaling&quot; &quot;0.8&quot;
+&quot;sensitivity&quot; &quot;0.9&quot;
+&quot;cl_hud_color&quot; &quot;1&quot;
+&quot;cl_radar_size&quot; &quot;1&quot;
+&quot;viewmodel_fov&quot; &quot;68&quot;
+&quot;cl_crosshair_t&quot; &quot;false&quot;
+&quot;cl_radar_scale&quot; &quot;0.4&quot;
+&quot;cl_showloadout&quot; &quot;true&quot;
+&quot;cl_crosshairdot&quot; &quot;false&quot;
+&quot;cl_crosshairgap&quot; &quot;-4&quot;
+&quot;cl_radar_rotate&quot; &quot;1&quot;
+&quot;cl_crosshairsize&quot; &quot;1&quot;
+&quot;cl_crosshairalpha&quot; &quot;255&quot;
+&quot;cl_crosshaircolor&quot; &quot;5&quot;
+&quot;cl_crosshairstyle&quot; &quot;4&quot;
+&quot;cl_hud_radar_scale&quot; &quot;1&quot;
+&quot;r_fullscreen_gamma&quot; &quot;1.9&quot;
+&quot;setting.defaultres&quot; &quot;1280&quot;
+&quot;viewmodel_offset_x&quot; &quot;2.5&quot;
+&quot;viewmodel_offset_y&quot; &quot;0&quot;
+&quot;viewmodel_offset_z&quot; &quot;-1.5&quot;
+&quot;cl_crosshair_recoil&quot; &quot;false&quot;
+&quot;cl_crosshaircolor_b&quot; &quot;255&quot;
+&quot;cl_crosshaircolor_g&quot; &quot;255&quot;
+&quot;cl_crosshaircolor_r&quot; &quot;255&quot;
+&quot;cl_crosshairusealpha&quot; &quot;true&quot;
+&quot;cl_fixedcrosshairgap&quot; &quot;3&quot;
+&quot;cl_crosshairthickness&quot; &quot;1&quot;
+&quot;zoom_sensitivity_ratio&quot; &quot;1&quot;
+&quot;cl_radar_icon_scale_min&quot; &quot;0.6&quot;
+&quot;cl_crosshair_drawoutline&quot; &quot;false&quot;
+&quot;cl_radar_always_centered&quot; &quot;1&quot;
+&quot;setting.defaultresheight&quot; &quot;960&quot;
+&quot;cl_crosshair_outlinethickness&quot; &quot;0.5&quot;
+&quot;cl_crosshair_dynamic_splitdist&quot; &quot;3&quot;
+&quot;cl_crosshairgap_useweaponvalue&quot; &quot;false&quot;
+&quot;cl_radar_square_with_scoreboard&quot; &quot;1&quot;
+&quot;cl_crosshair_dynamic_maxdist_splitratio&quot; &quot;1&quot;
+&quot;cl_crosshair_dynamic_splitalpha_innermod&quot; &quot;0&quot;
+&quot;cl_crosshair_dynamic_splitalpha_outermod&quot; &quot;1&quot;
+</pre></div></details>
+      <p class="note">The exact autoexec.cfg from the source site — in the <b>original pre-patch format</b> (some crosshair convars in it were removed by the Sept 22, 2026 update). For applying settings use the copy blocks above.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Settings data from <a href="https://settings.gg/players" target="_blank" rel="noopener">settings.gg</a> · Unofficial fan-made tool, not affiliated with Valve or settings.gg. CS2 and Counter-Strike are trademarks of Valve.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="application/json" id="player-data">{"slug":"luken","nick":"Luken","dpi":"800","sens":"0.9","convars":{"m_yaw":"0.022","fps_max":"0","safezonex":"1","safezoney":"1","hud_scaling":"0.8","sensitivity":"0.9","cl_hud_color":"1","cl_radar_size":"1","viewmodel_fov":"68","cl_crosshair_t":"false","cl_radar_scale":"0.4","cl_showloadout":"true","cl_crosshairdot":"false","cl_crosshairgap":"-4","cl_radar_rotate":"1","cl_crosshairsize":"1","cl_crosshairalpha":"255","cl_crosshaircolor":"5","cl_crosshairstyle":"4","cl_hud_radar_scale":"1","r_fullscreen_gamma":"1.9","setting.defaultres":"1280","viewmodel_offset_x":"2.5","viewmodel_offset_y":"0","viewmodel_offset_z":"-1.5","cl_crosshair_recoil":"false","cl_crosshaircolor_b":"255","cl_crosshaircolor_g":"255","cl_crosshaircolor_r":"255","cl_crosshairusealpha":"true","cl_fixedcrosshairgap":"3","cl_crosshairthickness":"1","zoom_sensitivity_ratio":"1","cl_radar_icon_scale_min":"0.6","cl_crosshair_drawoutline":"false","cl_radar_always_centered":"1","setting.defaultresheight":"960","cl_crosshair_outlinethickness":"0.5","cl_crosshair_dynamic_splitdist":"3","cl_crosshairgap_useweaponvalue":"false","cl_radar_square_with_scoreboard":"1","cl_crosshair_dynamic_maxdist_splitratio":"1","cl_crosshair_dynamic_splitalpha_innermod":"0","cl_crosshair_dynamic_splitalpha_outermod":"1"},"xhairCmds":["cl_crosshairstyle 4","cl_crosshair_length 2","cl_crosshair_thickness 2","cl_crosshair_gap 0","cl_crosshairdot 0","cl_crosshair_t 0","cl_crosshair_drawoutline 0","cl_crosshair_recoil 0","cl_crosshaircolor_r 255","cl_crosshaircolor_g 255","cl_crosshaircolor_b 255","cl_crosshaircolor_a 255","cl_crosshair_dynamic_splitdist 3","cl_crosshair_dynamic_maxdist_splitratio 1","cl_crosshair_dynamic_splitalpha_innermod 0","cl_crosshair_dynamic_splitalpha_outermod 1","cl_crosshair_screen_height 1080"],"commands":["cl_crosshairstyle 4","cl_crosshair_length 2","cl_crosshair_thickness 2","cl_crosshair_gap 0","cl_crosshairdot 0","cl_crosshair_t 0","cl_crosshair_drawoutline 0","cl_crosshair_recoil 0","cl_crosshaircolor_r 255","cl_crosshaircolor_g 255","cl_crosshaircolor_b 255","cl_crosshaircolor_a 255","cl_crosshair_dynamic_splitdist 3","cl_crosshair_dynamic_maxdist_splitratio 1","cl_crosshair_dynamic_splitalpha_innermod 0","cl_crosshair_dynamic_splitalpha_outermod 1","cl_crosshair_screen_height 1080","m_yaw 0.022","sensitivity 0.9","zoom_sensitivity_ratio 1","viewmodel_fov 68","viewmodel_offset_x 2.5","viewmodel_offset_y 0","viewmodel_offset_z -1.5","cl_radar_scale 0.4","cl_radar_rotate 1","cl_hud_radar_scale 1","cl_radar_icon_scale_min 0.6","cl_radar_always_centered 1","cl_radar_square_with_scoreboard 1","safezonex 1","safezoney 1","hud_scaling 0.8","cl_hud_color 1","fps_max 0","cl_showloadout 1","r_fullscreen_gamma 1.9"]}</script>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
