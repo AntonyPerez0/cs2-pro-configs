@@ -128,6 +128,8 @@ def convert_crosshair(cv):
     has_size = "cl_crosshairsize" in cv
     has_th = "cl_crosshairthickness" in cv
     has_gap = "cl_crosshairgap" in cv
+    legacy_dot_on = _b(cv.get("cl_crosshairdot", "false"))
+    forced_dot = False
     if has_size or has_th or has_gap:
         geo = convert_geometry(
             _f(cv, "cl_crosshairsize", 0.0),
@@ -136,17 +138,27 @@ def convert_crosshair(cv):
         if has_size:
             commands.append(("cl_crosshair_length", geo["length"]))
         if has_th:
-            commands.append(("cl_crosshair_thickness", geo["thickness"]))
+            t_new = geo["thickness"]
+            if (geo["length"] == 0 or legacy_dot_on) and t_new < 1:
+                t_new = 1  # zero-width dot renders nothing in the new system
+            commands.append(("cl_crosshair_thickness", t_new))
         if has_gap:
             if geo["gapClamped"]:
                 warnings.append(
                     "Old gap put the lines past the center - the new gap can't go below 0, "
                     "so the closest possible look is used.")
             commands.append(("cl_crosshair_gap", geo["gap"]))
+        if geo["length"] == 0 and not legacy_dot_on:
+            forced_dot = True
+            warnings.append(
+                "Dot-only crosshair: the arms are zero-length, so the center dot is enabled "
+                "(a zero-length crosshair without a dot renders nothing in the new system).")
 
     for k in ("cl_crosshairdot", "cl_crosshair_t",
               "cl_crosshair_drawoutline", "cl_crosshair_recoil"):
-        if k in cv:
+        if k == "cl_crosshairdot":
+            commands.append((k, 1 if (forced_dot or legacy_dot_on) else 0))
+        elif k in cv:
             commands.append((k, 1 if _b(cv[k]) else 0))
 
     # color: legacy presets resolve to their mapped RGB; 5 = custom RGB

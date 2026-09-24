@@ -215,22 +215,41 @@ function convertCrosshair(cv) {
   const hasSize = cv.cl_crosshairsize !== undefined;
   const hasTh = cv.cl_crosshairthickness !== undefined;
   const hasGap = cv.cl_crosshairgap !== undefined;
+  const legacyDotOn = boolOn(cv.cl_crosshairdot ?? "false");
+  let forcedDot = false;
   if (hasSize || hasTh || hasGap) {
     const geo = convertGeometry(
       numv(cv.cl_crosshairsize, 0),
       numv(cv.cl_crosshairthickness, 0),
       numv(cv.cl_crosshairgap, 0));
     if (hasSize) commands.push(`cl_crosshair_length ${geo.length}`);
-    if (hasTh) commands.push(`cl_crosshair_thickness ${geo.thickness}`);
+    if (hasTh) {
+      // A dot-design with converted thickness 0 renders a ZERO-WIDTH dot
+      // (i.e. nothing at all) in the new system. The legacy engine rendered
+      // thickness 0 as a 1px minimum, so clamp dot designs to >= 1.
+      let tVal = geo.thickness;
+      if ((geo.length === 0 || legacyDotOn) && tVal < 1) tVal = 1;
+      commands.push(`cl_crosshair_thickness ${tVal}`);
+    }
     if (hasGap) {
       if (geo.gapClamped) {
         warnings.push("Old gap put the lines past the center — the new gap can't go below 0, so the closest possible look is used.");
       }
       commands.push(`cl_crosshair_gap ${geo.gap}`);
     }
+    if (geo.length === 0 && !legacyDotOn) {
+      // zero-length arms render nothing in the new system: dot designs must
+      // be rebuilt as zero arm length + center dot (reference construction)
+      forcedDot = true;
+      warnings.push("Dot-only crosshair: the arms are zero-length, so the center dot is enabled (a zero-length crosshair without a dot renders nothing in the new system).");
+    }
   }
 
   for (const k of ["cl_crosshairdot", "cl_crosshair_t", "cl_crosshair_drawoutline", "cl_crosshair_recoil"]) {
+    if (k === "cl_crosshairdot") {
+      commands.push(`cl_crosshairdot ${(forcedDot || legacyDotOn) ? 1 : 0}`);
+      continue;
+    }
     if (cv[k] !== undefined) commands.push(`${k} ${boolOn(cv[k]) ? 1 : 0}`);
   }
 
