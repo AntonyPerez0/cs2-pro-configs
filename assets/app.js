@@ -542,13 +542,9 @@ async function runPlayer() {
         `<p class="note" style="margin-top:8px">${xc.warnings.map((w) => `⚠ ${esc(w)}`).join("<br>")}</p>`);
     }
     metaBox.insertAdjacentHTML("beforeend",
-      `<p class="note" style="margin-top:8px">Conversion reference: <a href="https://github.com/sebastianspicker/small-indie-crosshair-company" target="_blank" rel="noopener">community crosshair migration study</a> (build 2000914) — validated against published post-patch pro settings.</p>`);
+      `<p class="note" style="margin-top:8px">Conversion reference: <a href="https://github.com/sebastianspicker/small-indie-crosshair-company" target="_blank" rel="noopener">community crosshair migration study</a> (build 2000914) — validated against published post-patch pro settings. The converted crosshair commands are included at the start of the <b>Full config</b> below.</p>`);
     box.appendChild(metaBox);
     sec.appendChild(box);
-    const cmdWrap = document.createElement("div");
-    cmdWrap.style.marginTop = "12px";
-    cmdWrap.appendChild(cmdBlock(xc.commands.join("; ")));
-    sec.appendChild(cmdWrap);
     main.appendChild(sec);
     drawCrosshair(canvas, cv);
   }
