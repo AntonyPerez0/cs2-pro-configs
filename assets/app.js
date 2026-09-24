@@ -157,7 +157,10 @@ function convertCrosshair(cv, height) {
     return Number.isFinite(v) ? v : d;
   };
   const has = (k) => cv[k] !== undefined;
-  const boolStr = (v) => (v === "1" || String(v).trim().toLowerCase() === "true" ? "true" : "false");
+  // Post-Rush-Hook convars are int-typed: "true"/"false" fails to parse
+  // ("Error parsing string 'false' as int"). 0/1 is accepted by both legacy
+  // bool convars and the new int convars.
+  const boolStr = (v) => (v === "1" || String(v).trim().toLowerCase() === "true" ? "1" : "0");
   const commands = [];
   const warnings = [];
 
@@ -211,11 +214,28 @@ function convertCrosshair(cv, height) {
   }
 
   for (const [k, v] of Object.entries(cv)) {
-    if (/^cl_crosshair_dynamic_/.test(k) || k === "cl_crosshair_sniper_width") commands.push(`${k} ${v}`);
+    if (/^cl_crosshair_dynamic_/.test(k) || k === "cl_crosshair_sniper_width") {
+      const sv = safeValue(v);
+      if (sv !== null) commands.push(`${k} ${sv}`);
+    }
   }
 
   commands.push(`cl_crosshair_screen_height ${H}`);
   return { commands, warnings };
+}
+
+/* values are joined straight into a console line, so anything containing
+   ; or quotes or newlines would inject extra commands - drop those (none
+   exist in the current dataset; this guards future scrapes). Booleans are
+   normalized to 1/0: post-Rush-Hour convars are int-typed and reject
+   "true"/"false", while 0/1 is accepted everywhere. */
+function safeValue(v) {
+  const s = String(v).trim();
+  if (!s || /[;"'\n\r]/.test(s)) return null;
+  const low = s.toLowerCase();
+  if (low === "true") return "1";
+  if (low === "false") return "0";
+  return s;
 }
 
 /* commands in paste order: converted crosshair first (most important lands
@@ -228,7 +248,9 @@ function consoleCommands(rec, resHeight) {
   for (const b of BUCKETS) {
     if (b.key === "crosshair") continue;
     for (const [k, v] of buckets[b.key] || []) {
-      if (!CONSOLE_SKIP.has(k) && !XHAIR_REMOVED.has(k) && !XHAIR_HIDDEN_LEGACY.has(k)) out.push(`${k} ${v}`);
+      if (CONSOLE_SKIP.has(k) || XHAIR_REMOVED.has(k) || XHAIR_HIDDEN_LEGACY.has(k)) continue;
+      const sv = safeValue(v);
+      if (sv !== null) out.push(`${k} ${sv}`);
     }
   }
   return { commands: out, warnings: xc.warnings };
@@ -574,7 +596,8 @@ async function runPlayer() {
     if (!lines || !lines.length) continue;
     const text = lines
       .filter(([k]) => !CONSOLE_SKIP.has(k) && !XHAIR_REMOVED.has(k) && !XHAIR_HIDDEN_LEGACY.has(k))
-      .map(([k, v]) => `${k} ${v}`).join("; ");
+      .map(([k, v]) => { const sv = safeValue(v); return sv === null ? null : `${k} ${sv}`; })
+      .filter(Boolean).join("; ");
     const sec = document.createElement("section");
     sec.className = "section";
     const headHtml = `<div class="section-head"><h2>${esc(b.title)} <span class="tag">${esc(b.tag || "")}</span></h2></div>`;
