@@ -498,7 +498,7 @@ def index_page(players, top10_data, generated) -> str:
       <div class="spacer"></div>
       <label class="search">
         <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="q" type="search" placeholder="Search {count} players… (press / )" autocomplete="off" aria-label="Search players by nickname or real name">
+        <input id="q" type="search" placeholder="Search players… ( / )" autocomplete="off" aria-label="Search players by nickname or real name">
         <kbd aria-hidden="true">/</kbd>
       </label>
     </div>
