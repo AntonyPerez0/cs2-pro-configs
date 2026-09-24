@@ -41,7 +41,6 @@ Notes:
 - Live crosshair preview rendered on a canvas
 - Launch options for forcing resolution
 - Downloadable per-player `.cfg` file
-- Crosshair share code per player
 - Weekly auto-refresh of data via a GitHub Action
 
 ## Repo layout

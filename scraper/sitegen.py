@@ -250,18 +250,12 @@ def player_page(rec: dict, generated: str, top10_rank=None) -> str:
     if rec.get("steamid64"):
         links.append(f'<a href="https://steamcommunity.com/profiles/{esc(rec["steamid64"])}" target="_blank" rel="noopener">Steam profile</a>')
     links.append(f'<a href="https://settings.gg/players/{esc(slug)}" target="_blank" rel="noopener">settings.gg</a>')
-    if rec.get("crosshair_code"):
-        links.append(f'<a href="https://procrosshairs.com/player/{esc(rec.get("steamid64") or "")}/{esc(slug)}" target="_blank" rel="noopener">crosshair history</a>')
+    if rec.get("steamid64"):
+        links.append(f'<a href="https://procrosshairs.com/player/{esc(rec["steamid64"])}/{esc(slug)}" target="_blank" rel="noopener">crosshair history</a>')
 
     avatar_html = (f'<img class="avatar" src="/data/avatars/{esc(slug)}.png" alt="" width="92" height="92">'
                    if rec.get("avatar") else
                    f'<div class="avatar-letter" role="img" aria-label="{esc(nick)}">{esc(nick[:1].upper())}</div>')
-
-    share_code_html = ""
-    if rec.get("crosshair_code"):
-        share_code_html = (f'<button type="button" class="btn ghost small" style="margin-left:8px" '
-                           f'data-copy="{esc(rec["crosshair_code"])}">Copy legacy share code (no longer importable)</button>'
-                           f'<div class="code-line" style="margin-top:8px">{esc(rec["crosshair_code"])}</div>')
 
     warnings_html = ""
     if warnings:
@@ -360,8 +354,8 @@ def player_page(rec: dict, generated: str, top10_rank=None) -> str:
           <div class="xhair-label">pixel zoom</div>
         </div>
         <div class="xhair-meta">
-          <p class="note" style="margin:0 0 6px">CS2's Sept 22, 2026 "Rush Hour" patch replaced the crosshair system. Old share codes no longer import, so use the <b>console commands</b> below — converted to the new convars from {esc(nick)}'s original settings.</p>
-          <button type="button" class="btn small" data-copy="{esc(xh_text)}">Copy crosshair commands</button>{share_code_html}
+          <p class="note" style="margin:0 0 6px">CS2's Sept 22, 2026 "Rush Hour" patch replaced the crosshair system, so these commands are converted to the new convars from {esc(nick)}'s original settings — paste them straight into the console.</p>
+          <button type="button" class="btn small" data-copy="{esc(xh_text)}">Copy crosshair commands</button>
           {warnings_html}
           <p class="note" style="margin-top:8px">Conversion reference: <a href="https://github.com/sebastianspicker/small-indie-crosshair-company" target="_blank" rel="noopener">community crosshair migration study</a> (build 2000914). The converted crosshair commands are included at the start of the <b>Full config</b> below.</p>
           <noscript><div class="cmd" style="margin-top:8px"><pre>{esc(xh_text)}</pre></div></noscript>
