@@ -247,13 +247,13 @@ def edpi(rec: dict):
         return None
 
 
-def res_label(rec: dict) -> str:
+def res_label(rec: dict) -> str | None:
     v = rec.get("tables", {}).get("Video Settings", {}).get("Resolution")
-    if v:
+    if v and "x" in v and v.split("x")[0].strip().isdigit():
         return v
     cv = rec.get("convars", {})
     w, h = cv.get("setting.defaultres"), cv.get("setting.defaultresheight")
-    if w and h:
+    if w and h and str(w).strip().isdigit() and str(h).strip().isdigit():
         return f"{w}x{h}"
     return None
 

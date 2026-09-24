@@ -3808,7 +3808,7 @@
       "dpi": "400",
       "sens": "2",
       "edpi": 800,
-      "res": "nullxnull",
+      "res": null,
       "avatar": "data/avatars/avn.png"
     },
     {
@@ -4589,7 +4589,7 @@
       "dpi": "800",
       "sens": "1.1",
       "edpi": 880,
-      "res": "nullxnull",
+      "res": null,
       "avatar": "data/avatars/avid.png"
     },
     {
@@ -5403,7 +5403,7 @@
       "dpi": "400",
       "sens": "1.55",
       "edpi": 620,
-      "res": "nullxnull",
+      "res": null,
       "avatar": null
     },
     {
@@ -6470,7 +6470,7 @@
       "dpi": "400",
       "sens": "2.4",
       "edpi": 960,
-      "res": "nullxnull",
+      "res": null,
       "avatar": "data/avatars/veccil.png"
     },
     {
