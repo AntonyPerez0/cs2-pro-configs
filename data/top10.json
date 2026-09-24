@@ -1,0 +1,20 @@
+{
+  "title": "HLTV Top 10 players",
+  "listName": "HLTV Top 20 Players of 2025",
+  "asOf": "2026-01-10",
+  "retrieved": "2026-09-23",
+  "sourceUrl": "https://www.hltv.org/news/43492/top-20-players-of-2025-final-list",
+  "note": "HLTV's latest official player ranking (first 10 of the year-end Top 20 of 2025, order confirmed by HLTV, Liquipedia and Wikipedia). HLTV publishes no live player ranking; the 2026 edition is due January 2027. Refresh attempts run weekly and keep this file when HLTV is unreachable.",
+  "players": [
+    { "rank": 1, "nick": "ZywOo", "team": "Team Vitality", "slug": "zywoo", "hltv": "https://www.hltv.org/player/11893/zywoo" },
+    { "rank": 2, "nick": "donk", "team": "Team Spirit", "slug": "donk", "hltv": "https://www.hltv.org/player/21167/donk" },
+    { "rank": 3, "nick": "ropz", "team": "Team Vitality", "slug": "ropz", "hltv": "https://www.hltv.org/player/11816/ropz" },
+    { "rank": 4, "nick": "m0NESY", "team": "Team Falcons", "slug": "m0nesy", "hltv": "https://www.hltv.org/player/19230/m0nesy" },
+    { "rank": 5, "nick": "sh1ro", "team": "Team Spirit", "slug": "sh1ro", "hltv": "https://www.hltv.org/player/16920/sh1ro" },
+    { "rank": 6, "nick": "molodoy", "team": "FURIA", "slug": "molodoy", "hltv": "https://www.hltv.org/player/24144/molodoy" },
+    { "rank": 7, "nick": "flameZ", "team": "Team Vitality", "slug": "flamez", "hltv": "https://www.hltv.org/player/16693/flamez" },
+    { "rank": 8, "nick": "frozen", "team": "FaZe", "slug": "frozen", "hltv": "https://www.hltv.org/player/9960/frozen" },
+    { "rank": 9, "nick": "KSCERATO", "team": "FURIA", "slug": "kscerato", "hltv": "https://www.hltv.org/player/15631/kscerato" },
+    { "rank": 10, "nick": "Spinx", "team": "MOUZ", "slug": "spinx", "hltv": "https://www.hltv.org/player/18221/spinx" }
+  ]
+}

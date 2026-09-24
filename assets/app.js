@@ -554,6 +554,67 @@ async function runIndex() {
 
   const num = (s) => (s === null || s === undefined || s === "" ? NaN : parseFloat(s));
 
+  /* ---- HLTV Top 10 section ---- */
+  renderTop10(players);
+
+/* ---------------- HLTV Top 10 section ---------------- */
+
+async function renderTop10(players) {
+  let top10;
+  try {
+    top10 = await fetchJSON("data/top10.json");
+  } catch (_) {
+    return; // section is optional
+  }
+  const bySlug = new Map(players.map((p) => [p.slug.toLowerCase(), p]));
+  const host = $("#top10");
+  if (!host) return;
+
+  const sec = document.createElement("section");
+  sec.className = "top10";
+  sec.innerHTML = `
+    <div class="top10-head">
+      <h2>${esc(top10.title)}</h2>
+      <span class="top10-list">${esc(top10.listName)} · as of ${esc(top10.asOf)}</span>
+      <a class="top10-src" href="${esc(top10.sourceUrl)}" target="_blank" rel="noopener">source: HLTV ↗</a>
+    </div>`;
+  const ol = document.createElement("ol");
+  ol.className = "top10-grid";
+  for (const t of top10.players) {
+    const ours = t.slug ? bySlug.get(t.slug.toLowerCase()) : null;
+    const li = document.createElement("li");
+    li.className = "top10-card";
+    li.dataset.rank = t.rank;
+    const a = document.createElement("a");
+    if (ours) {
+      a.href = `player.html?p=${encodeURIComponent(ours.slug)}`;
+    } else {
+      a.href = t.hltv;
+      a.target = "_blank";
+      a.rel = "noopener";
+    }
+    a.title = t.slug ? `${t.nick} — open config` : `${t.nick} on HLTV`;
+    const rank = document.createElement("span");
+    rank.className = "top10-rank" + (t.rank <= 3 ? " medal" : "");
+    rank.textContent = "#" + t.rank;
+    a.appendChild(rank);
+    a.appendChild(avatarEl(ours || { nick: t.nick, slug: t.slug || t.nick }));
+    const nick = document.createElement("span");
+    nick.className = "top10-nick";
+    nick.textContent = t.nick;
+    a.appendChild(nick);
+    const team = document.createElement("span");
+    team.className = "top10-team";
+    team.textContent = t.team || "";
+    a.appendChild(team);
+    li.appendChild(a);
+    ol.appendChild(li);
+  }
+  sec.appendChild(ol);
+  sec.insertAdjacentHTML("beforeend", `<p class="top10-note">${esc(top10.note)}</p>`);
+  host.replaceWith(sec);
+}
+
   function apply() {
     let list = players.slice();
     const q = state.q.trim().toLowerCase();

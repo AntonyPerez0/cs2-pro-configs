@@ -29,6 +29,9 @@ jobs:
       - name: Run scraper
         run: python3 scraper/scrape.py
 
+      - name: Try refresh HLTV top 10 (kept as-is when HLTV is blocked)
+        run: python3 scraper/top10.py
+
       - name: Commit and push data changes
         run: |
           git config user.name "github-actions[bot]"
