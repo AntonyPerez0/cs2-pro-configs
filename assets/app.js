@@ -383,16 +383,14 @@ const XHAIR_COLORS = {
   4: [0, 255, 255],
 };
 
-function drawCrosshair(canvas, cv, xcCommands) {
-  const ctx = canvas.getContext("2d");
-  const S = canvas.width;
+function xhairGeometry(cv, xcCommands) {
   const num = (x, d) => {
     const n = parseFloat(x);
     return Number.isFinite(n) ? n : d;
   };
   const bool = (x, d = false) => (x === undefined ? d : x === "1" || String(x).trim().toLowerCase() === "true");
 
-  // Prefer the NEW system convars (post Sept 2026) when available
+  // prefer the NEW system convars (post Sept 2026) when available
   const ncv = {};
   for (const cmd of xcCommands || []) {
     const i = cmd.indexOf(" ");
@@ -411,6 +409,8 @@ function drawCrosshair(canvas, cv, xcCommands) {
     ? num(ncv.cl_crosshair_gap, 4)
     : Math.trunc(num(cv.cl_crosshairgap, 0) + 4);
   const dot = bool(ncv.cl_crosshairdot ?? cv.cl_crosshairdot);
+  const tShape = bool(ncv.cl_crosshair_t ?? cv.cl_crosshair_t);
+  const outline = bool(ncv.cl_crosshair_drawoutline ?? cv.cl_crosshair_drawoutline);
 
   let rgb;
   if (ncv.cl_crosshaircolor_r !== undefined) {
@@ -422,29 +422,77 @@ function drawCrosshair(canvas, cv, xcCommands) {
       rgb = [num(cv.cl_crosshaircolor_r, 255), num(cv.cl_crosshaircolor_g, 255), num(cv.cl_crosshaircolor_b, 255)];
     }
   }
+  const alpha = (ncv.cl_crosshaircolor_a !== undefined
+    ? num(ncv.cl_crosshaircolor_a, 255)
+    : (bool(cv.cl_crosshairusealpha, true) ? num(cv.cl_crosshairalpha, 255) : 255)) / 255;
 
-  // new geometry: bars start floor(th/2)+gap px from center, extend length px
+  // bars start floor(th/2)+gap px from center, extend length px outward
   const nearPx = Math.floor(thickPx / 2) + gapPx;
-  const halfSpan = nearPx + lengthPx + 2;
-  const zoom = Math.max(1, Math.floor((S / 2 - 12) / Math.max(4, halfSpan)));
-
-  const c = S / 2;
   const arms = [];
   if (lengthPx > 0) {
-    arms.push([-nearPx - lengthPx, -thickPx / 2, lengthPx, thickPx]);
-    arms.push([nearPx, -thickPx / 2, lengthPx, thickPx]);
-    arms.push([-thickPx / 2, -nearPx - lengthPx, thickPx, lengthPx]);
-    arms.push([-thickPx / 2, nearPx, thickPx, lengthPx]);
+    arms.push([-(nearPx + lengthPx), -thickPx / 2, lengthPx, thickPx]); // left
+    arms.push([nearPx, -thickPx / 2, lengthPx, thickPx]);               // right
+    if (!tShape) arms.push([-thickPx / 2, -(nearPx + lengthPx), thickPx, lengthPx]); // top (T omits it)
+    arms.push([-thickPx / 2, nearPx, thickPx, lengthPx]);               // bottom
   }
   if (dot) arms.push([-thickPx / 2, -thickPx / 2, thickPx, thickPx]);
 
-  ctx.fillStyle = "#23282f";
+  return { arms, rgb: rgb.map(Math.round), alpha, outline, lengthPx, thickPx, span: nearPx + lengthPx };
+}
+
+function xhairPaint(ctx, geo, pxPerGamePx, S) {
+  ctx.fillStyle = "#20242b";
   ctx.fillRect(0, 0, S, S);
-  ctx.fillStyle = `rgb(${rgb.map(Math.round).join(",")})`;
-  for (const [x, y, w, h] of arms) {
-    ctx.fillRect(Math.round(c + x * zoom), Math.round(c + y * zoom), Math.max(1, Math.round(w * zoom)), Math.max(1, Math.round(h * zoom)));
+  const c = S / 2;
+  const rects = geo.arms.map(([x, y, w, h]) => [
+    Math.round(c + x * pxPerGamePx),
+    Math.round(c + y * pxPerGamePx),
+    Math.max(1, Math.round(w * pxPerGamePx)),
+    Math.max(1, Math.round(h * pxPerGamePx)),
+  ]);
+  if (geo.outline) {
+    // 1 game-px dark edge under the colored bars (outline width convar was
+    // removed by the patch; the game's outline is a thin dark edge)
+    ctx.fillStyle = "rgba(0,0,0,0.9)";
+    for (const [dx, dy, dw, dh] of rects) {
+      const o = Math.max(1, Math.round(pxPerGamePx));
+      ctx.fillRect(dx - o, dy - o, dw + o * 2, dh + o * 2);
+    }
   }
-  return { zoom, lengthPx, thickPx, widthGame: (nearPx + lengthPx) * 2 };
+  ctx.fillStyle = `rgba(${geo.rgb.join(",")},${geo.alpha})`;
+  for (const [dx, dy, dw, dh] of rects) ctx.fillRect(dx, dy, dw, dh);
+}
+
+/* Two-view preview: true in-game scale on the user's screen + pixel zoom. */
+function drawCrosshair(trueCanvas, zoomCanvas, cv, xcCommands) {
+  const geo = xhairGeometry(cv, xcCommands);
+  const dpr = window.devicePixelRatio || 1;
+  const CSS = 150;
+  const screenH = (window.screen && window.screen.height) || 1080;
+
+  // true scale: the game rescales the authored-1080px size to your resolution
+  trueCanvas.width = CSS * dpr;
+  trueCanvas.height = CSS * dpr;
+  xhairPaint(trueCanvas.getContext("2d"), geo, (screenH / 1080) * dpr, CSS * dpr);
+
+  // pixel zoom inspector with a game-pixel grid
+  const zoom = Math.max(2, Math.min(40, Math.floor((CSS / 2 - 10) / Math.max(3, geo.span + 2))));
+  zoomCanvas.width = CSS * dpr;
+  zoomCanvas.height = CSS * dpr;
+  const zctx = zoomCanvas.getContext("2d");
+  zctx.fillStyle = "#20242b";
+  zctx.fillRect(0, 0, CSS * dpr, CSS * dpr);
+  if (zoom * dpr >= 6) {
+    zctx.fillStyle = "rgba(255,255,255,0.05)";
+    for (let i = -40; i <= 40; i++) {
+      const off = Math.round((CSS * dpr) / 2 + i * zoom * dpr);
+      zctx.fillRect(off, 0, 1, CSS * dpr);
+      zctx.fillRect(0, off, CSS * dpr, 1);
+    }
+  }
+  xhairPaint(zctx, geo, zoom * dpr, CSS * dpr);
+
+  return { zoom, lengthPx: geo.lengthPx, thickPx: geo.thickPx, screenH };
 }
 
 /* ---------------- avatars ---------------- */
@@ -652,10 +700,17 @@ async function runPlayer() {
     sec.innerHTML = `<div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2></div>`;
     const box = document.createElement("div");
     box.className = "xhair-box";
+    const canvases = document.createElement("div");
+    canvases.className = "xhair-canvases";
     const canvas = document.createElement("canvas");
     canvas.id = "xhair";
-    canvas.width = 300; canvas.height = 300;
-    box.appendChild(canvas);
+    const canvasZoom = document.createElement("canvas");
+    canvasZoom.id = "xhair-zoom";
+    canvases.appendChild(canvas);
+    canvases.insertAdjacentHTML("beforeend", `<div class="xhair-label">true scale on your screen</div>`);
+    canvases.appendChild(canvasZoom);
+    canvases.insertAdjacentHTML("beforeend", `<div class="xhair-label">pixel zoom</div>`);
+    box.appendChild(canvases);
     const metaBox = document.createElement("div");
     metaBox.className = "xhair-meta";
     metaBox.innerHTML = `
@@ -683,10 +738,10 @@ async function runPlayer() {
     box.appendChild(metaBox);
     sec.appendChild(box);
     main.appendChild(sec);
-    const info = drawCrosshair(canvas, cv, xc.commands);
-    const px = `${Math.round(info.lengthPx)}px arms × ${Math.round(info.thickPx)}px thick at 1080p`;
+    const info = drawCrosshair(canvas, canvasZoom, cv, xc.commands);
+    const px = `${Math.round(info.lengthPx)}px arms × ${Math.round(info.thickPx)}px thick (authored at 1080p)`;
     metaBox.insertAdjacentHTML("beforeend",
-      `<p class="note" style="margin-top:8px">Preview: <b>${esc(px)}</b>, shown ${info.zoom}× zoom${info.lengthPx <= 3 ? " — yes, it really is this tiny. Roughly 3 out of 4 pros on the site use dot-sized crosshairs (size ≤ 1.5 in the old system)." : "."} The in-game size scales with your resolution; the game handles that automatically.</p>`);
+      `<p class="note" style="margin-top:8px">Preview: <b>${esc(px)}</b>. Left is the true size as the game draws it on your ~${info.screenH}p screen — most pros genuinely play dot-to-3px crosshairs — right is the same thing zoomed so you can inspect the shape. The game rescales it to your resolution automatically.</p>`);
   }
 
   /* full config */

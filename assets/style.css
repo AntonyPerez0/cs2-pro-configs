@@ -259,9 +259,15 @@ select:focus { outline: 1px solid var(--accent); }
 .xhair-box {
   display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;
 }
-#xhair {
+.xhair-canvases {
+  display: flex; flex-direction: column; gap: 6px; flex: none;
+}
+#xhair, #xhair-zoom {
   width: 150px; height: 150px; border-radius: 10px;
-  border: 1px solid var(--line); background: #23282f; flex: none;
+  border: 1px solid var(--line); background: #20242f; flex: none;
+}
+.xhair-label {
+  font-size: 11px; color: var(--faint); text-align: center;
 }
 .xhair-meta { flex: 1; min-width: 220px; }
 .code-line {
