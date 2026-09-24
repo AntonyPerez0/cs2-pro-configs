@@ -138,9 +138,10 @@ def convert_crosshair(cv):
         if has_size:
             commands.append(("cl_crosshair_length", geo["length"]))
         if has_th:
-            t_new = geo["thickness"]
-            if (geo["length"] == 0 or legacy_dot_on) and t_new < 1:
-                t_new = 1  # zero-width dot renders nothing in the new system
+            # New system renders thickness 0 as NOTHING (confirmed in-game:
+            # woxic bars, Jame dot). Legacy thickness 0 rendered as 1px, so
+            # clamp to >= 1 - the thinnest visible new-system setting.
+            t_new = max(1, geo["thickness"])
             commands.append(("cl_crosshair_thickness", t_new))
         if has_gap:
             if geo["gapClamped"]:

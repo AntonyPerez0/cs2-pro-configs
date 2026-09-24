@@ -224,11 +224,12 @@ function convertCrosshair(cv) {
       numv(cv.cl_crosshairgap, 0));
     if (hasSize) commands.push(`cl_crosshair_length ${geo.length}`);
     if (hasTh) {
-      // A dot-design with converted thickness 0 renders a ZERO-WIDTH dot
-      // (i.e. nothing at all) in the new system. The legacy engine rendered
-      // thickness 0 as a 1px minimum, so clamp dot designs to >= 1.
-      let tVal = geo.thickness;
-      if ((geo.length === 0 || legacyDotOn) && tVal < 1) tVal = 1;
+      // The new system renders thickness 0 as NOTHING (no bars, and a
+      // zero-width dot if dot-only) - confirmed in-game (woxic, Jame).
+      // The legacy engine rendered thickness 0 as a 1px minimum, so the
+      // faithful conversion of "thickness 0" is 1 (the thinnest visible
+      // setting the new system's UI offers).
+      const tVal = Math.max(1, geo.thickness);
       commands.push(`cl_crosshair_thickness ${tVal}`);
     }
     if (hasGap) {
