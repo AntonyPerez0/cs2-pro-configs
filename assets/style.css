@@ -236,6 +236,25 @@ select:focus { outline: 1px solid var(--accent); }
   .cols .full { grid-column: 1 / -1; }
 }
 
+/* sensitivity converter */
+.dpi-line {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-top: 12px;
+}
+.dpi-label {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--muted); font-size: 13px; white-space: nowrap;
+}
+.dpi-input {
+  width: 110px; background: var(--panel2);
+  border: 1px solid var(--line); border-radius: 8px;
+  color: var(--text); font-family: var(--mono); font-size: 13.5px;
+  padding: 6px 10px;
+}
+.dpi-input:focus { outline: none; border-color: var(--accent); }
+.dpi-result { font-size: 13px; }
+.dpi-result b { color: var(--accent2); }
+
 /* crosshair preview */
 .xhair-box {
   display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;

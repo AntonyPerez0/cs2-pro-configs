@@ -308,6 +308,50 @@ function buildFullBlock(rec) {
   return consoleCommands(rec).commands.join("; ");
 }
 
+/* ---------------- sensitivity converter (eDPI match) ---------------- */
+
+const DPI_KEY = "cs2pros:your-dpi";
+
+function getUserDpi() {
+  const v = parseInt(localStorage.getItem(DPI_KEY) || "", 10);
+  return Number.isFinite(v) && v >= 50 ? v : null;
+}
+
+/* cm per 360° for an eDPI in CS2: 2.54*360 / (0.022 * eDPI) = 41563.6 / eDPI */
+function cmPer360(edpi) {
+  return 41563.6 / edpi;
+}
+
+/* the pro's effective sensitivity data (or null if not on their page) */
+function proEdpi(rec) {
+  const dpiPro = parseInt(String((rec.tables && rec.tables["Mouse"] && rec.tables["Mouse"]["DPI"]) || "").replace(/[^\d]/g, ""), 10);
+  const sensPro = parseFloat(rec.convars && rec.convars.sensitivity);
+  if (!Number.isFinite(dpiPro) || dpiPro <= 0 || !Number.isFinite(sensPro) || sensPro <= 0) return null;
+  const edpi = dpiPro * sensPro;
+  return { dpiPro, sensPro, edpi, cm: cmPer360(edpi) };
+}
+
+function sensForDpi(rec, yourDpi) {
+  const base = proEdpi(rec);
+  if (!base) return null;
+  if (!Number.isFinite(yourDpi) || yourDpi < 50) return null;
+  return {
+    edpi: base.edpi,
+    cm: base.cm,
+    sens: parseFloat((base.edpi / yourDpi).toFixed(4)),
+  };
+}
+
+/* full command line with the sensitivity command rewritten for your DPI */
+function consoleCommandsWithSens(rec, yourDpi) {
+  const m = sensForDpi(rec, yourDpi);
+  if (!m) return null;
+  return consoleCommands(rec)
+    .commands
+    .map((c) => (c.startsWith("sensitivity ") ? `sensitivity ${m.sens}` : c))
+    .join("; ");
+}
+
 /* ---------------- crosshair preview ---------------- */
 
 const XHAIR_COLORS = {
@@ -634,6 +678,25 @@ async function runPlayer() {
     btn.dataset.copy = fullBlock;
     btn.textContent = "Copy all";
     $(".section-head", sec).appendChild(btn);
+    const btnMy = document.createElement("button");
+    btnMy.id = "btn-copy-mydpi";
+    btnMy.className = "btn ghost small";
+    btnMy.style.display = "none";
+    btnMy.title = "Same config, but the sensitivity line is rewritten so the speed (eDPI) matches this pro on YOUR mouse DPI";
+    $(".section-head", sec).appendChild(btnMy);
+    const refreshAdjusted = () => {
+      const dpi = getUserDpi();
+      const val = dpi ? consoleCommandsWithSens(rec, dpi) : null;
+      if (val) {
+        btnMy.dataset.copy = val;
+        btnMy.textContent = `Copy all at my DPI (${dpi})`;
+        btnMy.style.display = "";
+      } else {
+        btnMy.style.display = "none";
+      }
+    };
+    refreshAdjusted();
+    window._refreshAdjusted = refreshAdjusted;
     sec.appendChild(cmdBlock(fullBlock));
     sec.insertAdjacentHTML("beforeend", `<p class="note">One single line, <code>;</code>-separated so the console runs every command: press <b>~</b> in CS2, paste, hit Enter — done. (The CS2 console is single-line input, so multi-line pastes are unreliable — this is why everything is joined into one line.) The crosshair part is converted to the convars added by the Sept 22, 2026 patch; convars that were removed, renamed, cheat-protected or nonexistent in CS2 are filtered out. If a very long paste ever gets cut off, use the shorter per-section commands below instead.</p>`);
     main.appendChild(sec);
@@ -670,6 +733,46 @@ async function runPlayer() {
       if (mouse["Polling rate"]) bits.push(`polling ${esc(mouse["Polling rate"])}`);
       if (bits.length) {
         sec.insertAdjacentHTML("beforeend", `<p class="note">DPI & polling rate are set in your <b>mouse software</b>, not in-game. Recommended: ${bits.join(" · ")}</p>`);
+      }
+
+      /* sensitivity converter: your DPI -> matching in-game sens */
+      const m = proEdpi(rec);
+      if (m) {
+        const box = document.createElement("div");
+        box.className = "dpi-match";
+        box.innerHTML = `
+          <div class="dpi-line">
+            <label class="dpi-label">Your mouse DPI
+              <input type="number" min="50" step="50" inputmode="numeric" class="dpi-input" placeholder="e.g. 1600">
+            </label>
+            <span class="dpi-result"></span>
+            <button class="btn ghost small" data-copy-sens style="display:none"></button>
+          </div>
+          <p class="note">Matching keeps the same <b>eDPI</b> (${Math.round(m.edpi)}) — that's <b>${m.cm.toFixed(1)} cm</b> per 360° turn at any DPI. Enter your DPI and use this sensitivity instead of theirs (or use <b>Copy all at my DPI</b> in the Full config above, which rewrites the <code>sensitivity</code> line for you).</p>`;
+        const input = $(".dpi-input", box);
+        const result = $(".dpi-result", box);
+        const btnSens = $("[data-copy-sens]", box);
+        const saved = getUserDpi();
+        if (saved) input.value = saved;
+        const update = () => {
+          const dpi = parseInt(input.value, 10);
+          const r = sensForDpi(rec, dpi);
+          if (r) {
+            localStorage.setItem(DPI_KEY, String(dpi));
+            result.innerHTML = `→ in-game <b>sensitivity ${r.sens}</b>`;
+            btnSens.dataset.copy = `sensitivity ${r.sens}`;
+            btnSens.textContent = `Copy sensitivity ${r.sens}`;
+            btnSens.style.display = "";
+          } else {
+            result.textContent = "";
+            btnSens.style.display = "none";
+          }
+          if (window._refreshAdjusted) window._refreshAdjusted();
+        };
+        input.addEventListener("input", update);
+        box._update = update;
+        sec.appendChild(box);
+        if (saved) update();
       }
     }
     if (key === "misc") {
