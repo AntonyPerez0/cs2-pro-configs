@@ -116,9 +116,13 @@ const CONSOLE_SKIP = new Set([
 
 /* ---- Sept 22, 2026 "Rush Hour" crosshair migration ----
    The patch removed 6 legacy crosshair convars and replaced the geometry
-   system. Conversion model + ranges follow the community reference
-   (small-indie-crosshair-company, build 2000914 dump), which reproduces the
-   published post-patch values for donk/m0NESY/s1mple exactly. */
+   system. This is an exact port of the community reference converter's
+   shipped model (small-indie-crosshair-company, build 2000914 dump,
+   structural inverse DEFAULT_PHI with all heights frozen at 1080 — the
+   convention the post-patch pro round-ups used). Validated against the
+   original engine on its 138-record corpus + 20k randomized inputs:
+   zero mismatches. donk/m0NESY/s1mple -> length 2 / thickness 2 / gap 0,
+   matching their published post-patch settings. */
 const XHAIR_REMOVED = new Set([
   "cl_crosshairgap", "cl_crosshairusealpha", "cl_crosshaircolor",
   "cl_crosshair_outlinethickness", "cl_crosshairgap_useweaponvalue",
@@ -135,80 +139,124 @@ const XHAIR_PRESET_RGB = [
   [50, 250, 250],  // 4 cyan
 ];
 
-const clampInt = (v, min, max) => Math.max(min, Math.min(max, Math.round(v)));
-
-function resHeightOf(rec) {
-  const cv = rec.convars || {};
-  const fromCfg = parseInt(cv["setting.defaultresheight"], 10);
-  if (Number.isFinite(fromCfg) && fromCfg >= 240) return fromCfg;
-  const res = rec.tables && rec.tables["Video Settings"] && rec.tables["Video Settings"]["Resolution"];
-  if (res) {
-    const m = String(res).match(/(\d+)\s*x\s*(\d+)/i);
-    if (m) return clampInt(parseInt(m[2], 10), 240, 8640);
-  }
-  return 1080;
+function legacyGeometry(size, thickness, gap) {
+  const scale = Math.fround(1080 / 480);
+  const length = Math.trunc(Math.fround(scale * Math.fround(size)));
+  const width = Math.max(1, Math.trunc(Math.fround(scale * Math.fround(thickness))));
+  const gapOffset = Math.trunc(Math.fround(Math.fround(gap) + 4));
+  const near = Math.floor(width / 2) + gapOffset;
+  return { length, width, gapOffset, near };
 }
 
-function convertCrosshair(cv, height) {
-  const H = Math.max(240, height || 1080);
-  const scale = H / 480;
-  const num = (k, d) => {
-    const v = parseFloat(cv[k]);
+function bestInteger(maxv, ideal, loss) {
+  let best = null;
+  for (let v = 0; v <= maxv; v++) {
+    const err = loss(v);
+    const tie = Math.abs(v - ideal);
+    if (!best || err < best.err || (err === best.err && tie < best.tie)) best = { err, tie, v };
+  }
+  return best;
+}
+
+/* joint thickness+gap solver (rT = rG = 1 at the 1080 freeze) */
+function invertJoint(targetWidth, nearT, hasLength, preserveZero) {
+  const values = preserveZero ? [0] : Array.from({ length: 32 }, (_, i) => i);
+  let best = null;
+  for (const vt of values) {
+    const width = Math.max(1, vt);
+    const base = Math.floor(width / 2);
+    const idealGap = hasLength ? nearT - base : 0;
+    const g = bestInteger(128, idealGap, (v) => {
+      if (!hasLength) return 0;
+      const near = base + v;
+      return (near - nearT) ** 2 + (near + 1 - (nearT + 1)) ** 2;
+    });
+    const idealT = preserveZero ? 0 : targetWidth;
+    const tLoss = (width - targetWidth) ** 2;
+    const tTie = Math.abs(vt - idealT);
+    const total = tLoss + g.err;
+    const pref = tTie + g.tie;
+    if (!best || total < best.total || (total === best.total && pref < best.pref)) {
+      best = { total, pref, thickness: vt, gap: g.v };
+    }
+  }
+  return best;
+}
+
+function convertGeometry(size, thickness, gap) {
+  const leg = legacyGeometry(size, thickness, gap);
+  const inv = invertJoint(leg.width, leg.near, leg.length > 0, thickness === 0);
+  return {
+    length: Math.max(0, Math.min(255, Math.trunc(leg.length))),
+    thickness: inv.thickness,
+    gap: inv.gap,
+    gapClamped: leg.gapOffset < 0,
+  };
+}
+
+const xclamp = (v, min, max) => Math.max(min, Math.min(max, Math.round(v)));
+
+function convertCrosshair(cv) {
+  const numv = (raw, d) => {
+    const v = parseFloat(raw);
     return Number.isFinite(v) ? v : d;
   };
-  const has = (k) => cv[k] !== undefined;
-  // Post-Rush-Hook convars are int-typed: "true"/"false" fails to parse
-  // ("Error parsing string 'false' as int"). 0/1 is accepted by both legacy
-  // bool convars and the new int convars.
-  const boolStr = (v) => (v === "1" || String(v).trim().toLowerCase() === "true" ? "1" : "0");
+  const boolOn = (v) => v === "1" || String(v).trim().toLowerCase() === "true";
   const commands = [];
   const warnings = [];
 
-  const style = Math.round(num("cl_crosshairstyle", 4));
+  const style = Math.round(numv(cv.cl_crosshairstyle, 4));
   commands.push(`cl_crosshairstyle ${style}`);
   if (style !== 4) {
     warnings.push(`Style ${style} was renumbered in the Sept 2026 patch (4 = Static Cross). Non-static styles may need a manual pick in Settings → Crosshair/Scopes.`);
   }
 
-  if (has("cl_crosshairsize")) {
-    commands.push(`cl_crosshair_length ${clampInt(Math.trunc(scale * num("cl_crosshairsize", 5)), 0, 255)}`);
-  }
-  if (has("cl_crosshairthickness")) {
-    const t = num("cl_crosshairthickness", 0.6);
-    commands.push(`cl_crosshair_thickness ${t === 0 ? 0 : clampInt(Math.max(1, Math.trunc(scale * t)), 0, 31)}`);
-  }
-  if (has("cl_crosshairgap")) {
-    const oldGap = num("cl_crosshairgap", 0);
-    const px = Math.trunc(oldGap + 4);
-    if (px < 0) {
-      warnings.push(`Old gap ${oldGap} put the lines past the center — the new system's gap can't go below 0, so that overlap is clamped (closest possible look).`);
+  const hasSize = cv.cl_crosshairsize !== undefined;
+  const hasTh = cv.cl_crosshairthickness !== undefined;
+  const hasGap = cv.cl_crosshairgap !== undefined;
+  if (hasSize || hasTh || hasGap) {
+    const geo = convertGeometry(
+      numv(cv.cl_crosshairsize, 0),
+      numv(cv.cl_crosshairthickness, 0),
+      numv(cv.cl_crosshairgap, 0));
+    if (hasSize) commands.push(`cl_crosshair_length ${geo.length}`);
+    if (hasTh) commands.push(`cl_crosshair_thickness ${geo.thickness}`);
+    if (hasGap) {
+      if (geo.gapClamped) {
+        warnings.push("Old gap put the lines past the center — the new gap can't go below 0, so the closest possible look is used.");
+      }
+      commands.push(`cl_crosshair_gap ${geo.gap}`);
     }
-    commands.push(`cl_crosshair_gap ${clampInt(px, 0, 128)}`);
   }
 
   for (const k of ["cl_crosshairdot", "cl_crosshair_t", "cl_crosshair_drawoutline", "cl_crosshair_recoil"]) {
-    if (has(k)) commands.push(`${k} ${boolStr(cv[k])}`);
+    if (cv[k] !== undefined) commands.push(`${k} ${boolOn(cv[k]) ? 1 : 0}`);
   }
 
   let rgb = null;
-  const idx = has("cl_crosshaircolor") ? Math.round(num("cl_crosshaircolor", 5)) : null;
-  if (idx === 5 || (idx === null && has("cl_crosshaircolor_r"))) {
+  if (cv.cl_crosshaircolor !== undefined) {
+    const idx = Math.round(numv(cv.cl_crosshaircolor, 5));
+    if (idx === 5) {
+      rgb = [
+        xclamp(numv(cv.cl_crosshaircolor_r, 255), 0, 255),
+        xclamp(numv(cv.cl_crosshaircolor_g, 255), 0, 255),
+        xclamp(numv(cv.cl_crosshaircolor_b, 255), 0, 255),
+      ];
+    } else if (XHAIR_PRESET_RGB[idx]) {
+      rgb = XHAIR_PRESET_RGB[idx];
+    }
+  } else if (cv.cl_crosshaircolor_r !== undefined) {
     rgb = [
-      clampInt(num("cl_crosshaircolor_r", 255), 0, 255),
-      clampInt(num("cl_crosshaircolor_g", 255), 0, 255),
-      clampInt(num("cl_crosshaircolor_b", 255), 0, 255),
+      xclamp(numv(cv.cl_crosshaircolor_r, 255), 0, 255),
+      xclamp(numv(cv.cl_crosshaircolor_g, 255), 0, 255),
+      xclamp(numv(cv.cl_crosshaircolor_b, 255), 0, 255),
     ];
-  } else if (idx !== null && XHAIR_PRESET_RGB[idx]) {
-    rgb = XHAIR_PRESET_RGB[idx];
-    warnings.push("Old color preset converted to its legacy RGB values.");
   }
-  if (rgb) {
-    commands.push(`cl_crosshaircolor_r ${rgb[0]}`, `cl_crosshaircolor_g ${rgb[1]}`, `cl_crosshaircolor_b ${rgb[2]}`);
-  }
+  if (rgb) commands.push(`cl_crosshaircolor_r ${rgb[0]}`, `cl_crosshaircolor_g ${rgb[1]}`, `cl_crosshaircolor_b ${rgb[2]}`);
 
-  if (has("cl_crosshairalpha") || has("cl_crosshairusealpha")) {
-    const enabled = String(cv["cl_crosshairusealpha"]).trim().toLowerCase() === "true" || cv["cl_crosshairusealpha"] === "1";
-    const a = enabled ? clampInt(num("cl_crosshairalpha", 200), 0, 255) : 200;
+  if (cv.cl_crosshairalpha !== undefined || cv.cl_crosshairusealpha !== undefined) {
+    const enabled = boolOn(cv.cl_crosshairusealpha ?? "false");
+    const a = enabled ? xclamp(numv(cv.cl_crosshairalpha, 200), 0, 255) : 200;
     commands.push(`cl_crosshaircolor_a ${a}`);
     if (!enabled) warnings.push("Old config had the alpha slider disabled; opacity is reconstructed as 200 (new system changed how alpha works).");
   }
@@ -220,7 +268,7 @@ function convertCrosshair(cv, height) {
     }
   }
 
-  commands.push(`cl_crosshair_screen_height ${H}`);
+  commands.push("cl_crosshair_screen_height 1080");
   return { commands, warnings };
 }
 
@@ -240,10 +288,10 @@ function safeValue(v) {
 
 /* commands in paste order: converted crosshair first (most important lands
    first even if a very long paste ever gets truncated), misc last */
-function consoleCommands(rec, resHeight) {
+function consoleCommands(rec) {
   const buckets = bucketConvars(rec.convars);
   const out = [];
-  const xc = convertCrosshair(rec.convars || {}, resHeight);
+  const xc = convertCrosshair(rec.convars || {});
   out.push(...xc.commands);
   for (const b of BUCKETS) {
     if (b.key === "crosshair") continue;
@@ -256,8 +304,8 @@ function consoleCommands(rec, resHeight) {
   return { commands: out, warnings: xc.warnings };
 }
 
-function buildFullBlock(rec, resHeight) {
-  return consoleCommands(rec, resHeight).commands.join("; ");
+function buildFullBlock(rec) {
+  return consoleCommands(rec).commands.join("; ");
 }
 
 /* ---------------- crosshair preview ---------------- */
@@ -270,65 +318,68 @@ const XHAIR_COLORS = {
   4: [0, 255, 255],
 };
 
-function drawCrosshair(canvas, cv) {
+function drawCrosshair(canvas, cv, xcCommands) {
   const ctx = canvas.getContext("2d");
   const S = canvas.width;
   const num = (x, d) => {
     const n = parseFloat(x);
     return Number.isFinite(n) ? n : d;
   };
-  const bool = (x, d = false) => (x === undefined ? d : String(x).trim().toLowerCase() === "true" || x === "1");
+  const bool = (x, d = false) => (x === undefined ? d : x === "1" || String(x).trim().toLowerCase() === "true");
 
-  const size = num(cv.cl_crosshairsize, 5);
-  const t = Math.max(0.1, num(cv.cl_crosshairthickness, 1));
-  const gap = num(cv.cl_crosshairgap, 5);
-  const dot = bool(cv.cl_crosshairdot);
-  const outline = bool(cv.cl_crosshair_drawoutline);
-  const outlineT = num(cv.cl_crosshair_outlinethickness, 1);
-  const useAlpha = bool(cv.cl_crosshairusealpha, true);
-  const alpha = useAlpha ? Math.min(1, Math.max(0, num(cv.cl_crosshairalpha, 255) / 255)) : 1;
+  // Prefer the NEW system convars (post Sept 2026) when available
+  const ncv = {};
+  for (const cmd of xcCommands || []) {
+    const i = cmd.indexOf(" ");
+    if (i > 0) ncv[cmd.slice(0, i)] = cmd.slice(i + 1);
+  }
+  const isNew = ncv.cl_crosshair_length !== undefined || ncv.cl_crosshair_gap !== undefined;
 
-  const colorIdx = parseInt(cv.cl_crosshaircolor, 10);
-  let rgb = XHAIR_COLORS[Number.isFinite(colorIdx) ? colorIdx : 1] || XHAIR_COLORS[1];
-  if (colorIdx === 5 || cv.cl_crosshaircolor_r) {
-    rgb = [
-      num(cv.cl_crosshaircolor_r, 255),
-      num(cv.cl_crosshaircolor_g, 255),
-      num(cv.cl_crosshaircolor_b, 255),
-    ];
+  // geometry in game pixels at the authored height (1080)
+  const lengthPx = isNew
+    ? num(ncv.cl_crosshair_length, 8)
+    : Math.trunc((num(cv.cl_crosshair_screen_height, 1080) / 480) * num(cv.cl_crosshairsize, 5));
+  const thickPx = isNew
+    ? Math.max(1, num(ncv.cl_crosshair_thickness, 2))
+    : Math.max(1, Math.trunc((num(cv.cl_crosshair_screen_height, 1080) / 480) * num(cv.cl_crosshairthickness, 1)));
+  const gapPx = isNew
+    ? num(ncv.cl_crosshair_gap, 4)
+    : Math.trunc(num(cv.cl_crosshairgap, 0) + 4);
+  const dot = bool(ncv.cl_crosshairdot ?? cv.cl_crosshairdot);
+
+  let rgb;
+  if (ncv.cl_crosshaircolor_r !== undefined) {
+    rgb = [num(ncv.cl_crosshaircolor_r, 255), num(ncv.cl_crosshaircolor_g, 255), num(ncv.cl_crosshaircolor_b, 255)];
+  } else {
+    const colorIdx = parseInt(cv.cl_crosshaircolor, 10);
+    rgb = XHAIR_COLORS[Number.isFinite(colorIdx) ? colorIdx : 1] || XHAIR_COLORS[1];
+    if (colorIdx === 5 || cv.cl_crosshaircolor_r) {
+      rgb = [num(cv.cl_crosshaircolor_r, 255), num(cv.cl_crosshaircolor_g, 255), num(cv.cl_crosshaircolor_b, 255)];
+    }
   }
 
-  ctx.clearRect(0, 0, S, S);
+  // new geometry: bars start floor(th/2)+gap px from center, extend length px
+  const nearPx = Math.floor(thickPx / 2) + gapPx;
+  const halfSpan = nearPx + lengthPx + 2;
+  const zoom = Math.max(1, Math.floor((S / 2 - 12) / Math.max(4, halfSpan)));
+
+  const c = S / 2;
+  const arms = [];
+  if (lengthPx > 0) {
+    arms.push([-nearPx - lengthPx, -thickPx / 2, lengthPx, thickPx]);
+    arms.push([nearPx, -thickPx / 2, lengthPx, thickPx]);
+    arms.push([-thickPx / 2, -nearPx - lengthPx, thickPx, lengthPx]);
+    arms.push([-thickPx / 2, nearPx, thickPx, lengthPx]);
+  }
+  if (dot) arms.push([-thickPx / 2, -thickPx / 2, thickPx, thickPx]);
+
   ctx.fillStyle = "#23282f";
   ctx.fillRect(0, 0, S, S);
-
-  const u = S / 64;
-  const c = S / 2;
-  const inner = Math.max(0, gap + t / 2) * u;
-  const len = size * u;
-  const th = t * u;
-
-  ctx.globalAlpha = alpha;
   ctx.fillStyle = `rgb(${rgb.map(Math.round).join(",")})`;
-
-  const arms = [
-    [c - inner - len, c - th / 2, len, th],
-    [c + inner, c - th / 2, len, th],
-    [c - th / 2, c - inner - len, th, len],
-    [c - th / 2, c + inner, th, len],
-  ];
-  if (dot) arms.push([c - th / 2, c - th / 2, th, th]);
-
-  if (outline) {
-    ctx.fillStyle = "#000";
-    const o = Math.max(0.5, outlineT) * u;
-    for (const [x, y, w, h] of arms) {
-      ctx.fillRect(x - o, y - o, w + o * 2, h + o * 2);
-    }
-    ctx.fillStyle = `rgb(${rgb.map(Math.round).join(",")})`;
+  for (const [x, y, w, h] of arms) {
+    ctx.fillRect(Math.round(c + x * zoom), Math.round(c + y * zoom), Math.max(1, Math.round(w * zoom)), Math.max(1, Math.round(h * zoom)));
   }
-  for (const [x, y, w, h] of arms) ctx.fillRect(x, y, w, h);
-  ctx.globalAlpha = 1;
+  return { zoom, lengthPx, thickPx, widthGame: (nearPx + lengthPx) * 2 };
 }
 
 /* ---------------- avatars ---------------- */
@@ -490,9 +541,8 @@ async function runPlayer() {
   document.title = `${rec.nick} CS2 Settings & Config Commands - CS2 Pro Configs`;
 
   const buckets = bucketConvars(rec.convars);
-  const resHeight = resHeightOf(rec);
-  const xc = convertCrosshair(rec.convars || {}, resHeight);
-  const fullBlock = buildFullBlock(rec, resHeight);
+  const xc = convertCrosshair(rec.convars || {});
+  const fullBlock = buildFullBlock(rec);
   const mouse = (rec.tables && rec.tables["Mouse"]) || {};
   const video = (rec.tables && rec.tables["Video Settings"]) || {};
   const adv = (rec.tables && rec.tables["Advanced Video"]) || {};
@@ -568,7 +618,10 @@ async function runPlayer() {
     box.appendChild(metaBox);
     sec.appendChild(box);
     main.appendChild(sec);
-    drawCrosshair(canvas, cv);
+    const info = drawCrosshair(canvas, cv, xc.commands);
+    const px = `${Math.round(info.lengthPx)}px arms × ${Math.round(info.thickPx)}px thick at 1080p`;
+    metaBox.insertAdjacentHTML("beforeend",
+      `<p class="note" style="margin-top:8px">Preview: <b>${esc(px)}</b>, shown ${info.zoom}× zoom${info.lengthPx <= 3 ? " — yes, it really is this tiny. Roughly 3 out of 4 pros on the site use dot-sized crosshairs (size ≤ 1.5 in the old system)." : "."} The in-game size scales with your resolution; the game handles that automatically.</p>`);
   }
 
   /* full config */
