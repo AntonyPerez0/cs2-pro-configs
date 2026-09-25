@@ -329,7 +329,7 @@ select:focus { outline: 1px solid var(--accent); }
 .xhair-canvases {
   display: flex; flex-direction: column; gap: 6px; flex: none;
 }
-#xhair, #xhair-zoom {
+#xhair {
   width: 150px; height: 150px; border-radius: 10px;
   border: 1px solid var(--line); background: #20242f; flex: none;
 }

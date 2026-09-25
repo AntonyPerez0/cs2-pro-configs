@@ -464,35 +464,18 @@ function xhairPaint(ctx, geo, pxPerGamePx, S) {
 }
 
 /* Two-view preview: true in-game scale on the user's screen + pixel zoom. */
-function drawCrosshair(trueCanvas, zoomCanvas, cv, xcCommands) {
+function drawCrosshair(canvas, cv, xcCommands) {
   const geo = xhairGeometry(cv, xcCommands);
   const dpr = window.devicePixelRatio || 1;
   const CSS = 150;
   const screenH = (window.screen && window.screen.height) || 1080;
 
   // true scale: the game rescales the authored-1080px size to your resolution
-  trueCanvas.width = CSS * dpr;
-  trueCanvas.height = CSS * dpr;
-  xhairPaint(trueCanvas.getContext("2d"), geo, (screenH / 1080) * dpr, CSS * dpr);
+  canvas.width = CSS * dpr;
+  canvas.height = CSS * dpr;
+  xhairPaint(canvas.getContext("2d"), geo, (screenH / 1080) * dpr, CSS * dpr);
 
-  // pixel zoom inspector with a game-pixel grid
-  const zoom = Math.max(2, Math.min(40, Math.floor((CSS / 2 - 10) / Math.max(3, geo.span + 2))));
-  zoomCanvas.width = CSS * dpr;
-  zoomCanvas.height = CSS * dpr;
-  const zctx = zoomCanvas.getContext("2d");
-  zctx.fillStyle = "#20242b";
-  zctx.fillRect(0, 0, CSS * dpr, CSS * dpr);
-  if (zoom * dpr >= 6) {
-    zctx.fillStyle = "rgba(255,255,255,0.05)";
-    for (let i = -40; i <= 40; i++) {
-      const off = Math.round((CSS * dpr) / 2 + i * zoom * dpr);
-      zctx.fillRect(off, 0, 1, CSS * dpr);
-      zctx.fillRect(0, off, CSS * dpr, 1);
-    }
-  }
-  xhairPaint(zctx, geo, zoom * dpr, CSS * dpr);
-
-  return { zoom, lengthPx: geo.lengthPx, thickPx: geo.thickPx, screenH };
+  return { lengthPx: geo.lengthPx, thickPx: geo.thickPx, screenH };
 }
 
 /* ---------------- index page: DOM filter over prerendered cards ---------------- */
@@ -587,10 +570,9 @@ function runPlayerStatic() {
   };
 
   const trueCanvas = $("#xhair");
-  const zoomCanvas = $("#xhair-zoom");
-  if (trueCanvas && zoomCanvas) {
+  if (trueCanvas) {
     try {
-      drawCrosshair(trueCanvas, zoomCanvas, data.convars, data.xhairCmds);
+      drawCrosshair(trueCanvas, data.convars, data.xhairCmds);
     } catch (_) { /* preview is optional */ }
   }
 
