@@ -1,5 +1,5 @@
 /* cs2-pro-configs - renders index grid + player profiles, builds copy-paste
-   console command blocks, and draws crosshair previews from convars. */
+   console command blocks. */
 
 "use strict";
 
@@ -373,111 +373,6 @@ function consoleCommandsWithSens(rec, yourDpi) {
     .join("; ");
 }
 
-/* ---------------- crosshair preview ---------------- */
-
-const XHAIR_COLORS = {
-  0: [255, 0, 0],
-  1: [0, 255, 0],
-  2: [255, 255, 0],
-  3: [0, 191, 255],
-  4: [0, 255, 255],
-};
-
-function xhairGeometry(cv, xcCommands) {
-  const num = (x, d) => {
-    const n = parseFloat(x);
-    return Number.isFinite(n) ? n : d;
-  };
-  const bool = (x, d = false) => (x === undefined ? d : x === "1" || String(x).trim().toLowerCase() === "true");
-
-  // prefer the NEW system convars (post Sept 2026) when available
-  const ncv = {};
-  for (const cmd of xcCommands || []) {
-    const i = cmd.indexOf(" ");
-    if (i > 0) ncv[cmd.slice(0, i)] = cmd.slice(i + 1);
-  }
-  const isNew = ncv.cl_crosshair_length !== undefined || ncv.cl_crosshair_gap !== undefined;
-
-  // geometry in game pixels at the authored height (1080)
-  const lengthPx = isNew
-    ? num(ncv.cl_crosshair_length, 8)
-    : Math.trunc((num(cv.cl_crosshair_screen_height, 1080) / 480) * num(cv.cl_crosshairsize, 5));
-  const thickPx = isNew
-    ? Math.max(1, num(ncv.cl_crosshair_thickness, 2))
-    : Math.max(1, Math.trunc((num(cv.cl_crosshair_screen_height, 1080) / 480) * num(cv.cl_crosshairthickness, 1)));
-  const gapPx = isNew
-    ? num(ncv.cl_crosshair_gap, 4)
-    : Math.trunc(num(cv.cl_crosshairgap, 0) + 4);
-  const dot = bool(ncv.cl_crosshairdot ?? cv.cl_crosshairdot);
-  const tShape = bool(ncv.cl_crosshair_t ?? cv.cl_crosshair_t);
-  const outline = bool(ncv.cl_crosshair_drawoutline ?? cv.cl_crosshair_drawoutline);
-
-  let rgb;
-  if (ncv.cl_crosshaircolor_r !== undefined) {
-    rgb = [num(ncv.cl_crosshaircolor_r, 255), num(ncv.cl_crosshaircolor_g, 255), num(ncv.cl_crosshaircolor_b, 255)];
-  } else {
-    const colorIdx = parseInt(cv.cl_crosshaircolor, 10);
-    rgb = XHAIR_COLORS[Number.isFinite(colorIdx) ? colorIdx : 1] || XHAIR_COLORS[1];
-    if (colorIdx === 5 || cv.cl_crosshaircolor_r) {
-      rgb = [num(cv.cl_crosshaircolor_r, 255), num(cv.cl_crosshaircolor_g, 255), num(cv.cl_crosshaircolor_b, 255)];
-    }
-  }
-  const alpha = (ncv.cl_crosshaircolor_a !== undefined
-    ? num(ncv.cl_crosshaircolor_a, 255)
-    : (bool(cv.cl_crosshairusealpha, true) ? num(cv.cl_crosshairalpha, 255) : 255)) / 255;
-
-  // bars start floor(th/2)+gap px from center, extend length px outward
-  const nearPx = Math.floor(thickPx / 2) + gapPx;
-  const arms = [];
-  if (lengthPx > 0) {
-    arms.push([-(nearPx + lengthPx), -thickPx / 2, lengthPx, thickPx]); // left
-    arms.push([nearPx, -thickPx / 2, lengthPx, thickPx]);               // right
-    if (!tShape) arms.push([-thickPx / 2, -(nearPx + lengthPx), thickPx, lengthPx]); // top (T omits it)
-    arms.push([-thickPx / 2, nearPx, thickPx, lengthPx]);               // bottom
-  }
-  if (dot) arms.push([-thickPx / 2, -thickPx / 2, thickPx, thickPx]);
-
-  return { arms, rgb: rgb.map(Math.round), alpha, outline, lengthPx, thickPx, span: nearPx + lengthPx };
-}
-
-function xhairPaint(ctx, geo, pxPerGamePx, S) {
-  ctx.fillStyle = "#20242b";
-  ctx.fillRect(0, 0, S, S);
-  const c = S / 2;
-  const rects = geo.arms.map(([x, y, w, h]) => [
-    Math.round(c + x * pxPerGamePx),
-    Math.round(c + y * pxPerGamePx),
-    Math.max(1, Math.round(w * pxPerGamePx)),
-    Math.max(1, Math.round(h * pxPerGamePx)),
-  ]);
-  if (geo.outline) {
-    // 1 game-px dark edge under the colored bars (outline width convar was
-    // removed by the patch; the game's outline is a thin dark edge)
-    ctx.fillStyle = "rgba(0,0,0,0.9)";
-    for (const [dx, dy, dw, dh] of rects) {
-      const o = Math.max(1, Math.round(pxPerGamePx));
-      ctx.fillRect(dx - o, dy - o, dw + o * 2, dh + o * 2);
-    }
-  }
-  ctx.fillStyle = `rgba(${geo.rgb.join(",")},${geo.alpha})`;
-  for (const [dx, dy, dw, dh] of rects) ctx.fillRect(dx, dy, dw, dh);
-}
-
-/* Two-view preview: true in-game scale on the user's screen + pixel zoom. */
-function drawCrosshair(canvas, cv, xcCommands) {
-  const geo = xhairGeometry(cv, xcCommands);
-  const dpr = window.devicePixelRatio || 1;
-  const CSS = 150;
-  const screenH = (window.screen && window.screen.height) || 1080;
-
-  // true scale: the game rescales the authored-1080px size to your resolution
-  canvas.width = CSS * dpr;
-  canvas.height = CSS * dpr;
-  xhairPaint(canvas.getContext("2d"), geo, (screenH / 1080) * dpr, CSS * dpr);
-
-  return { lengthPx: geo.lengthPx, thickPx: geo.thickPx, screenH };
-}
-
 /* ---------------- index page: DOM filter over prerendered cards ---------------- */
 
 function runIndex() {
@@ -568,13 +463,6 @@ function runPlayerStatic() {
     convars: data.convars,
     tables: { Mouse: { DPI: data.dpi } },
   };
-
-  const trueCanvas = $("#xhair");
-  if (trueCanvas) {
-    try {
-      drawCrosshair(trueCanvas, data.convars, data.xhairCmds);
-    } catch (_) { /* preview is optional */ }
-  }
 
   /* DPI matcher widget -> #dpi-slot */
   const dpiSlot = $("#dpi-slot");

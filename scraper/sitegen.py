@@ -193,6 +193,66 @@ def xh_aria(cv) -> str:
         return "crosshair preview"
 
 
+def xhair_svg(cv, aria: str) -> str:
+    """Prerendered inline-SVG crosshair at true scale (1 game px = 1 CSS px).
+    Ships in the HTML itself, so it renders without JavaScript and can't
+    come out blank the way a JS-drawn canvas could."""
+    cmds, _ = convert_crosshair(cv)
+    d = {k: v for k, v in cmds}
+    iv = lambda k, dflt: int(float(d.get(k, dflt)))
+    length = max(0, iv("cl_crosshair_length", 8))
+    th = max(1, iv("cl_crosshair_thickness", 2))
+    gap = max(0, iv("cl_crosshair_gap", 4))
+    on = lambda k: str(d.get(k, 0)).strip().lower() in ("1", "true")
+    dot = on("cl_crosshairdot")
+    t_shape = on("cl_crosshair_t")
+    outline = on("cl_crosshair_drawoutline")
+    r = iv("cl_crosshaircolor_r", 255)
+    g = iv("cl_crosshaircolor_g", 255)
+    b = iv("cl_crosshaircolor_b", 255)
+    a = max(0, min(255, iv("cl_crosshaircolor_a", 255))) / 255
+
+    near = th // 2 + gap
+    span = near + length
+    half = span + 4
+    size = half * 2
+    disp = max(64, min(160, size))
+
+    arms = []
+    if length > 0:
+        arms.append([-(near + length), -th / 2, length, th])   # left
+        arms.append([near, -th / 2, length, th])               # right
+        if not t_shape:
+            arms.append([-th / 2, -(near + length), th, length])  # top
+        arms.append([-th / 2, near, th, length])               # bottom
+    if dot:
+        arms.append([-th / 2, -th / 2, th, th])
+
+    rects = "".join(
+        f'<rect x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}"/>'
+        for x, y, w, h in arms)
+    outline_rects = "".join(
+        f'<rect x="{x - 1:g}" y="{y - 1:g}" width="{w + 2:g}" height="{h + 2:g}"/>'
+        for x, y, w, h in arms)
+
+    scale = min(1.0, (disp - 8) / size) if size > disp else 1.0
+    scale_attr = ""
+    if scale != 1:
+        scale_attr = f' transform="scale({scale:.4g}) translate({-size / 2:g} {-size / 2:g})"'
+
+    parts = [
+        f'<svg class="xhair-svg" width="{disp}" height="{disp}" '
+        f'viewBox="{-half} {-half} {size} {size}" role="img" '
+        f'aria-label="Crosshair preview at actual in-game size: {esc(aria)}">',
+        f'<rect x="{-half}" y="{-half}" width="{size}" height="{size}" fill="#20242b"/>',
+    ]
+    if outline and arms:
+        parts.append('<g fill="rgba(0,0,0,0.9)">' + outline_rects + "</g>")
+    parts.append(f'<g{scale_attr} fill="rgba({r},{g},{b},{a:.3f})">{rects}</g>')
+    parts.append("</svg>")
+    return "".join(parts)
+
+
 def player_page(rec: dict, generated: str, top10_rank=None) -> str:
     slug = rec["slug"]
     nick = rec.get("nick") or slug
@@ -348,7 +408,7 @@ def player_page(rec: dict, generated: str, top10_rank=None) -> str:
       <div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2></div>
       <div class="xhair-box">
         <div class="xhair-canvases">
-          <canvas id="xhair" width="300" height="300" role="img" aria-label="Crosshair preview at actual in-game size: {esc(aria)}"></canvas>
+          {xhair_svg(cv, aria)}
           <div class="xhair-label">actual size in game</div>
         </div>
         <div class="xhair-meta">

@@ -329,9 +329,10 @@ select:focus { outline: 1px solid var(--accent); }
 .xhair-canvases {
   display: flex; flex-direction: column; gap: 6px; flex: none;
 }
-#xhair {
-  width: 150px; height: 150px; border-radius: 10px;
-  border: 1px solid var(--line); background: #20242f; flex: none;
+/* crosshair preview (prerendered inline SVG) */
+.xhair-svg {
+  display: block; border-radius: 10px;
+  border: 1px solid var(--line); background: #20242b;
 }
 .xhair-label {
   font-size: 11px; color: var(--faint); text-align: center;
