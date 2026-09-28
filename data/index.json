@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-09-23T00:56:32Z",
+    "generated": "2026-09-28T13:56:42Z",
     "source": "https://settings.gg/players",
     "count": 620
   },
@@ -17,17 +17,6 @@
       "avatar": "data/avatars/donk.png"
     },
     {
-      "slug": "zywoo",
-      "nick": "ZywOo",
-      "real_name": "Mathieu Herbaut",
-      "crosshair_code": "CSGO-KDOkV-jUpoE-GdhAh-YzbZL-MYXTB",
-      "dpi": "400",
-      "sens": "2",
-      "edpi": 800,
-      "res": "1280x960",
-      "avatar": "data/avatars/zywoo.png"
-    },
-    {
       "slug": "luchov",
       "nick": "luchov",
       "real_name": "Luciano Herrera",
@@ -39,15 +28,15 @@
       "avatar": "data/avatars/luchov.png"
     },
     {
-      "slug": "latto",
-      "nick": "latto",
-      "real_name": "Bruno Rebelatto",
-      "crosshair_code": "CSGO-NwZEA-aMV6B-ibEud-dGwCU-zqLDR",
+      "slug": "zywoo",
+      "nick": "ZywOo",
+      "real_name": "Mathieu Herbaut",
+      "crosshair_code": "CSGO-KDOkV-jUpoE-GdhAh-YzbZL-MYXTB",
       "dpi": "400",
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/latto.png"
+      "avatar": "data/avatars/zywoo.png"
     },
     {
       "slug": "m0nesy",
@@ -59,6 +48,17 @@
       "edpi": 919,
       "res": "1280x960",
       "avatar": "data/avatars/m0nesy.png"
+    },
+    {
+      "slug": "latto",
+      "nick": "latto",
+      "real_name": "Bruno Rebelatto",
+      "crosshair_code": "CSGO-NwZEA-aMV6B-ibEud-dGwCU-zqLDR",
+      "dpi": "400",
+      "sens": "2",
+      "edpi": 800,
+      "res": "1280x960",
+      "avatar": "data/avatars/latto.png"
     },
     {
       "slug": "heavygod",
@@ -1304,17 +1304,6 @@
       "avatar": "data/avatars/siuhy.png"
     },
     {
-      "slug": "nitr0",
-      "nick": "nitr0",
-      "real_name": "Nick Cannella",
-      "crosshair_code": "CSGO-MEKJQ-GQOci-fEMUn-4aXrt-zNUnB",
-      "dpi": "800",
-      "sens": "0.9",
-      "edpi": 720,
-      "res": "1680x1050",
-      "avatar": "data/avatars/nitr0.png"
-    },
-    {
       "slug": "nqz",
       "nick": "nqz",
       "real_name": "Lucas Soares",
@@ -1324,6 +1313,17 @@
       "edpi": 760,
       "res": "1024x768",
       "avatar": "data/avatars/nqz.png"
+    },
+    {
+      "slug": "nitr0",
+      "nick": "nitr0",
+      "real_name": "Nick Cannella",
+      "crosshair_code": "CSGO-MEKJQ-GQOci-fEMUn-4aXrt-zNUnB",
+      "dpi": "800",
+      "sens": "0.9",
+      "edpi": 720,
+      "res": "1680x1050",
+      "avatar": "data/avatars/nitr0.png"
     },
     {
       "slug": "bodyy",
@@ -2382,17 +2382,6 @@
       "avatar": "data/avatars/dycha.png"
     },
     {
-      "slug": "prosus",
-      "nick": "prosus",
-      "real_name": "David Hesse",
-      "crosshair_code": "CSGO-9ySyU-o9kQi-UY2iv-WkE2u-EmbcP",
-      "dpi": "400",
-      "sens": "2.1",
-      "edpi": 840,
-      "res": "1280x960",
-      "avatar": "data/avatars/prosus.png"
-    },
-    {
       "slug": "blamef",
       "nick": "blameF",
       "real_name": "Benjamin Bremer",
@@ -2402,6 +2391,17 @@
       "edpi": 604,
       "res": "1280x960",
       "avatar": "data/avatars/blamef.png"
+    },
+    {
+      "slug": "prosus",
+      "nick": "prosus",
+      "real_name": "David Hesse",
+      "crosshair_code": "CSGO-9ySyU-o9kQi-UY2iv-WkE2u-EmbcP",
+      "dpi": "400",
+      "sens": "2.1",
+      "edpi": 840,
+      "res": "1280x960",
+      "avatar": "data/avatars/prosus.png"
     },
     {
       "slug": "zevy",
@@ -3075,17 +3075,6 @@
       "avatar": null
     },
     {
-      "slug": "peeping",
-      "nick": "Peeping",
-      "real_name": "Jaxon Cornwell",
-      "crosshair_code": "CSGO-NwZEA-aMV6B-ibEud-dGwCU-zqLDR",
-      "dpi": "1600",
-      "sens": "0.86",
-      "edpi": 1376,
-      "res": "1600x1024",
-      "avatar": "data/avatars/peeping.png"
-    },
-    {
       "slug": "shane",
       "nick": "shane",
       "real_name": "Shane Dressler",
@@ -3095,6 +3084,17 @@
       "edpi": 680,
       "res": "1440x1080",
       "avatar": "data/avatars/shane.png"
+    },
+    {
+      "slug": "peeping",
+      "nick": "Peeping",
+      "real_name": "Jaxon Cornwell",
+      "crosshair_code": "CSGO-NwZEA-aMV6B-ibEud-dGwCU-zqLDR",
+      "dpi": "1600",
+      "sens": "0.86",
+      "edpi": 1376,
+      "res": "1600x1024",
+      "avatar": "data/avatars/peeping.png"
     },
     {
       "slug": "juanflatroo",
@@ -3790,17 +3790,6 @@
       "avatar": "data/avatars/slight.png"
     },
     {
-      "slug": "nemanha",
-      "nick": "nEMANHA",
-      "real_name": "Nemanja ÄukiÄ",
-      "crosshair_code": "CSGO-GKF62-DiSft-nm4Ky-spG5o-aK6FP",
-      "dpi": "400",
-      "sens": "1.95",
-      "edpi": 780,
-      "res": "1280x960",
-      "avatar": "data/avatars/nemanha.png"
-    },
-    {
       "slug": "avn",
       "nick": "aVN",
       "real_name": "Filip Belojica",
@@ -3810,6 +3799,17 @@
       "edpi": 800,
       "res": null,
       "avatar": "data/avatars/avn.png"
+    },
+    {
+      "slug": "nemanha",
+      "nick": "nEMANHA",
+      "real_name": "Nemanja ÄukiÄ",
+      "crosshair_code": "CSGO-GKF62-DiSft-nm4Ky-spG5o-aK6FP",
+      "dpi": "400",
+      "sens": "1.95",
+      "edpi": 780,
+      "res": "1280x960",
+      "avatar": "data/avatars/nemanha.png"
     },
     {
       "slug": "simke",
