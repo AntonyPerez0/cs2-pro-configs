@@ -127,6 +127,9 @@ def get_player_list():
 CROSSHAIR_RE = re.compile(r"(CSGO-[A-Za-z0-9]{5}(?:-[A-Za-z0-9]{5}){4})")
 STEAMID_RE = re.compile(r"procrosshairs\.com/player/(\d+)/")
 CONVAR_LINE_RE = re.compile(r'^"([^"]+)"\s*"([^"]*)"\s*$')
+# convar keys only: "say hi;bind mouse1 quit" "1" parses but is not a convar -
+# such keys join the ";"-joined paste block and would run as commands
+KEY_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_.]*$")
 
 
 def parse_profile(html: str, slug: str) -> dict:
@@ -193,7 +196,7 @@ def parse_config_zip(content: bytes) -> dict:
     for line in text.splitlines():
         line = line.strip()
         m = CONVAR_LINE_RE.match(line)
-        if m:
+        if m and KEY_RE.match(m.group(1)):
             convars[m.group(1)] = m.group(2)
     return convars, text
 

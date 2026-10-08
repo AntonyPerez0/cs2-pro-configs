@@ -52,6 +52,11 @@ FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox
            "font-weight='bold' fill='%231a0e02'%3ECS%3C/text%3E%3C/svg%3E")
 
 
+def json_script(obj) -> str:
+    # </script> inside a JSON string would break out of the script tag
+    return json.dumps(obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+
+
 def esc(s) -> str:
     return (str(s if s is not None else "")
             .replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
@@ -283,12 +288,12 @@ def player_page(rec: dict, generated: str, top10_rank=None) -> str:
     og_desc = (f"Copy {nick}'s full CS2 config in one paste: crosshair, sensitivity"
                + (f" ({edpi} eDPI)" if edpi else "") + ", viewmodel, HUD, radar.")
 
-    embed = json.dumps({
+    embed = json_script({
         "slug": slug, "nick": nick, "dpi": dpi, "sens": sens,
         "convars": cv,
         "xhairCmds": [f"{k} {v}" for k, v in xc_cmds],
         "commands": cmds,
-    }, ensure_ascii=False, separators=(",", ":"))
+    })
 
     raw_cfg = ""
     cfg_path = ROOT / "cfg" / f"{slug}.cfg"
@@ -374,7 +379,7 @@ def player_page(rec: dict, generated: str, top10_rank=None) -> str:
   <link rel="icon" href="{FAVICON}">
   <link rel="stylesheet" href="/assets/style.css">
   <script type="application/ld+json">
-  {json.dumps(person, ensure_ascii=False)}
+  {json_script(person)}
   </script>
 </head>
 <body data-page="player-static">
@@ -546,7 +551,7 @@ def index_page(players, top10_data, generated) -> str:
   <meta name="twitter:image" content="{BASE}/assets/og-default.png">
   <link rel="icon" href="{FAVICON}">
   <link rel="stylesheet" href="/assets/style.css">
-  <script type="application/ld+json">{json.dumps(ld)}</script>
+  <script type="application/ld+json">{json_script(ld)}</script>
 </head>
 <body data-page="index">
   <a class="skip-link" href="#main">Skip to content</a>
