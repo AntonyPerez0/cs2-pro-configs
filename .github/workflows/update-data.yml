@@ -24,7 +24,10 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4 lxml
+        run: pip install -r scraper/requirements.txt
+
+      - name: Test crosshair conversion
+        run: python3 scraper/test_xhair_convert.py
 
       - name: Run scraper
         run: python3 scraper/scrape.py

@@ -13,7 +13,7 @@ On success it keeps the same JSON schema (listName notes the live source).
 
 import calendar
 import json
-from datetime import date, timedelta
+from datetime import date
 from pathlib import Path
 
 import requests
@@ -26,16 +26,6 @@ UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 )
-
-
-def fetch(url: str):
-    try:
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=25)
-    except requests.RequestException:
-        return None
-    if r.status_code != 200 or "Just a moment" in r.text[:2000]:
-        return None
-    return r.content
 
 
 def months_ago(d: date, months: int) -> date:
@@ -93,12 +83,10 @@ def main() -> None:
     try:
         index = json.loads(INDEX.read_text())
         nick_to_slug = {p["nick"].lower(): p["slug"] for p in index["players"]}
-        slug_by_lnick = {p["slug"].lower(): p["slug"] for p in index["players"]}
     except Exception:
-        nick_to_slug, slug_by_lnick = {}, {}
+        nick_to_slug = {}
     for t in players:
-        t["slug"] = nick_to_slug.get(t["nick"].lower()) or (
-            t["nick"].lower() if t["nick"].lower() in slug_by_lnick else None)
+        t["slug"] = nick_to_slug.get(t["nick"].lower())
     today = date.today().isoformat()
     out = {
         "title": "HLTV Top 10 players",

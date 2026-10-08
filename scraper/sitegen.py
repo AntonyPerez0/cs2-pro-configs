@@ -180,22 +180,12 @@ def video_tables_html(rec):
     if video:
         inner += f'<div><table class="set"><caption class="sr-only">Video settings</caption><tbody>{rows(video)}</tbody></table></div>'
     if adv:
-        inner += f'<div><table class="set"><tbody>{rows(adv)}</tbody></table></div>'
+        inner += f'<div><table class="set"><caption class="sr-only">Advanced video</caption><tbody>{rows(adv)}</tbody></table></div>'
     return f'''<section class="section">
   <div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>
   <div class="cols">{inner}</div>
   <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel (or use the resolution launch options below).</p>
 </section>'''
-
-
-def xh_aria(cv) -> str:
-    try:
-        g = convert_geometry(float(cv.get("cl_crosshairsize", 0) or 0),
-                             float(cv.get("cl_crosshairthickness", 0) or 0),
-                             float(cv.get("cl_crosshairgap", 0) or 0))
-        return f"{g['length']} pixel arms, {max(1, g['thickness'])} pixel thick, gap {g['gap']}"
-    except Exception:
-        return "crosshair preview"
 
 
 def xhair_svg(cv, aria: str) -> str:
@@ -241,14 +231,16 @@ def xhair_svg(cv, aria: str) -> str:
         for x, y, w, h in arms)
 
     scale = min(1.0, (disp - 8) / size) if size > disp else 1.0
+    # scale() alone keeps the origin-centered arms centered; a translate would
+    # shove the drawing into a corner (SVG applies transforms right-to-left)
     scale_attr = ""
     if scale != 1:
-        scale_attr = f' transform="scale({scale:.4g}) translate({-size / 2:g} {-size / 2:g})"'
+        scale_attr = f' transform="scale({scale:.4g})"'
 
     parts = [
         f'<svg class="xhair-svg" width="{disp}" height="{disp}" '
         f'viewBox="{-half} {-half} {size} {size}" role="img" '
-        f'aria-label="Crosshair preview at actual in-game size: {esc(aria)}">',
+        f'aria-label="Crosshair preview drawn to scale, enlarged to fit: {esc(aria)}">',
         f'<rect x="{-half}" y="{-half}" width="{size}" height="{size}" fill="#20242b"/>',
     ]
     if outline and arms:
@@ -258,7 +250,7 @@ def xhair_svg(cv, aria: str) -> str:
     return "".join(parts)
 
 
-def player_page(rec: dict, generated: str, top10_rank=None) -> str:
+def player_page(rec: dict, top10_rank=None) -> str:
     slug = rec["slug"]
     nick = rec.get("nick") or slug
     real = rec.get("real_name") or ""
@@ -268,7 +260,7 @@ def player_page(rec: dict, generated: str, top10_rank=None) -> str:
 
     cmds, warnings = full_commands(rec)
     full_block = "; ".join(cmds)
-    xc_cmds, warnings = convert_crosshair(cv)
+    xc_cmds, _ = convert_crosshair(cv)
     xh_text = "; ".join(f"{k} {v}" for k, v in xc_cmds)
 
     dpi = mouse.get("DPI", "")
@@ -302,7 +294,7 @@ def player_page(rec: dict, generated: str, top10_rank=None) -> str:
 
     chips = []
     if top10_rank:
-        chips.append(f'<span class="chip"><b>HLTV #{top10_rank}</b> top 20 of 2025</span>')
+        chips.append(f'<span class="chip"><b>HLTV #{top10_rank}</b></span>')
     if dpi:
         chips.append(f'<span class="chip"><b>{esc(dpi)}</b> DPI</span>')
     if mouse.get("Polling rate"):
@@ -407,14 +399,12 @@ def player_page(rec: dict, generated: str, top10_rank=None) -> str:
       <button type="button" class="btn" data-copy="{esc(full_block)}">Copy full config</button>
       <a class="btn ghost" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download .cfg</a>
     </div>
-    <p class="note">Dataset refreshed {esc(generated)} · source <a href="https://settings.gg/players/{esc(slug)}" target="_blank" rel="noopener">settings.gg</a></p>
-
     <section class="section">
       <div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2></div>
       <div class="xhair-box">
         <div class="xhair-canvases">
           {xhair_svg(cv, aria)}
-          <div class="xhair-label">actual size in game</div>
+          <div class="xhair-label">drawn to scale — enlarged to fit</div>
         </div>
         <div class="xhair-meta">
           <p class="note" style="margin:0 0 6px">CS2's Sept 22, 2026 "Rush Hour" patch replaced the crosshair system, so these commands are converted to the new convars from {esc(nick)}'s original settings — paste them straight into the console.</p>
@@ -465,32 +455,6 @@ def player_page(rec: dict, generated: str, top10_rank=None) -> str:
 
 def index_page(players, top10_data, generated) -> str:
     count = len(players)
-    t10 = ""
-    if top10_data:
-        cards = []
-        for t in top10_data["players"]:
-            slug = t.get("slug") or ""
-            has = (ROOT / "data" / "players" / f"{slug}.json").exists()
-            href = f"/p/{esc(slug)}/" if slug and has else (t.get("hltv") or "#")
-            med = " medal" if t["rank"] <= 3 else ""
-            avatar = (f'<img class="avatar" src="/data/avatars/{esc(slug)}.png" alt="" width="72" height="72" loading="lazy">'
-                      if has and (ROOT / "data" / "avatars" / f"{slug}.png").exists()
-                      else letter_div(t["nick"]))
-            cards.append(f'''<li class="top10-card" data-rank="{t["rank"]}"><a href="{href}" title="{esc(t["nick"])} — open config">
-  <span class="top10-rank{med}">#{t["rank"]}</span>
-  {avatar}
-  <span class="top10-nick">{esc(t["nick"])}</span>
-  <span class="top10-team">{esc(t.get("team") or "")}</span>
-</a></li>''')
-        t10 = f'''<section class="top10" aria-labelledby="top10-title">
-  <div class="top10-head">
-    <h2 id="top10-title">{esc(top10_data["title"])}</h2>
-    <span class="top10-list">{esc(top10_data["listName"])} · as of {esc(top10_data["asOf"])}</span>
-    <a class="top10-src" href="{esc(top10_data["sourceUrl"])}" target="_blank" rel="noopener">source: HLTV ↗</a>
-  </div>
-  <ol class="top10-grid">{''.join(cards)}</ol>
-  <p class="top10-note">{esc(top10_data["note"])}</p>
-</section>'''
 
     cards = []
     for p in players:
@@ -512,10 +476,6 @@ def index_page(players, top10_data, generated) -> str:
   <div class="real">{esc(real)}</div>
   <div class="chips">{''.join(chips)}</div>
 </a>''')
-
-    res_opts = "".join(f'<option value="{esc(r)}">{esc(r)}</option>'
-                       for r in sorted({p["res"] for p in players if p.get("res")},
-                                       key=lambda r: int(r.split("x")[0]) if r.split("x")[0].isdigit() else 0))
 
     ld = {
         "@context": "https://schema.org",
@@ -724,10 +684,9 @@ def main() -> None:
         if not f.exists():
             continue
         rec = json.loads(f.read_text())
-        rec["_generated"] = generated
         d = ROOT / "p" / slug
         d.mkdir(parents=True, exist_ok=True)
-        (d / "index.html").write_text(player_page(rec, generated, top10_rank.get(slug)), encoding="utf-8")
+        (d / "index.html").write_text(player_page(rec, top10_rank.get(slug)), encoding="utf-8")
         n += 1
     print(f"p/ pages: {n}")
 
