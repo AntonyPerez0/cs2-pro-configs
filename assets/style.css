@@ -340,7 +340,8 @@ select:focus { outline: 1px solid var(--accent); }
 }
 /* crosshair preview (prerendered inline SVG) */
 .xhair-svg {
-  display: block; border-radius: 10px;
+  /* content-box: the border sits outside the width, so 1 unit = 1px exactly */
+  display: block; box-sizing: content-box; border-radius: 10px;
   border: 1px solid var(--line); background: #20242b;
 }
 .xhair-label {
