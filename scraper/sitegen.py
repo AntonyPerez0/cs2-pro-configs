@@ -14,11 +14,13 @@ Canonical origin: https://copyprosta.com
 """
 
 import json
+import re
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from xhair_convert import convert_crosshair, convert_geometry  # noqa: E402
+from xhair_convert import convert_crosshair, convert_geometry, safe_value  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = "https://copyprosta.com"
@@ -63,18 +65,6 @@ def esc(s) -> str:
             .replace('"', "&quot;").replace("'", "&#39;"))
 
 
-def safe_value(v):
-    s = str(v).strip()
-    if not s or any(c in s for c in ';"\n\r'):
-        return None
-    low = s.lower()
-    if low == "true":
-        return "1"
-    if low == "false":
-        return "0"
-    return s
-
-
 def bucket_convars(convars):
     out = {key: [] for key, *_ in BUCKETS}
     for k, v in (convars or {}).items():
@@ -92,7 +82,8 @@ def bucket_convars(convars):
 
 
 def full_commands(rec):
-    """Console command list in paste order (crosshair first) — mirrors app.js.
+    """Console command list in paste order: converted crosshair first, so the
+    most important part lands even if a very long paste gets truncated.
     Returns (commands, warnings) with warnings as readable strings."""
     cv = rec.get("convars") or {}
     xc_cmds, warnings = convert_crosshair(cv)
@@ -115,6 +106,26 @@ def letter_hue(nick: str) -> int:
     for ch in nick or "?":
         h = (h * 31 + ord(ch)) & 0xFFFFFFFF
     return h % 360
+
+
+def cmd_pre(cmds) -> str:
+    """<pre> of a "; "-joined command line, one inline-block span per command
+    so wrapping falls between commands, never inside one. The text content
+    is still the exact single line."""
+    cmds = list(cmds)
+    spans = [f"<span>{esc(c)}{';' if i < len(cmds) - 1 else ''}</span>" for i, c in enumerate(cmds)]
+    return "<pre>" + " ".join(spans) + "</pre>"
+
+
+def res_key(r: str):
+    """Sort key for "1280x960"-style labels: width, then height."""
+    w, _, h = r.partition("x")
+    return (int(w) if w.isdigit() else 0, int(h) if h.isdigit() else 0)
+
+
+def avatar_img(path: str, size: int, lazy: bool = False) -> str:
+    return (f'<img class="avatar" src="/{esc(path)}" alt="" width="{size}" height="{size}"'
+            + (' loading="lazy"' if lazy else "") + ">")
 
 
 def letter_div(nick: str) -> str:
@@ -140,11 +151,12 @@ def category_sections_html(rec) -> str:
                 fixed.append((k, sv))
         if not fixed:
             continue
-        text = "; ".join(f"{k} {v}" for k, v in fixed)
+        line = [f"{k} {v}" for k, v in fixed]
+        text = "; ".join(line)
         parts.append(f'''<section class="section">
   <div class="section-head"><h2>{esc(title)} <span class="tag">{esc(tag)}</span></h2>
   <button type="button" class="btn ghost small" data-copy="{esc(text)}">Copy</button></div>
-  <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>{esc(text)}</pre></div>''')
+  <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable">{cmd_pre(line)}</div>''')
         if key == "mouse":
             bits = []
             if mouse.get("DPI"):
@@ -188,10 +200,11 @@ def video_tables_html(rec):
 </section>'''
 
 
-def xhair_svg(cv, aria: str) -> str:
-    """Prerendered inline-SVG crosshair at true scale (1 game px = 1 CSS px).
-    Ships in the HTML itself, so it renders without JavaScript and can't
-    come out blank the way a JS-drawn canvas could."""
+def xhair_svg(cv, aria: str):
+    """Prerendered inline-SVG crosshair, 1 game px = 1 CSS px unless it has
+    to be resized to fit the 64-160px box. Ships in the HTML itself, so it
+    renders without JavaScript and can't come out blank the way a JS-drawn
+    canvas could. Returns (svg, label)."""
     cmds, _ = convert_crosshair(cv)
     d = {k: v for k, v in cmds}
     iv = lambda k, dflt: int(float(d.get(k, dflt)))
@@ -212,6 +225,8 @@ def xhair_svg(cv, aria: str) -> str:
     half = span + 4
     size = half * 2
     disp = max(64, min(160, size))
+    label = ("drawn to scale — enlarged to fit" if size < disp else
+             "drawn to scale — shrunk to fit" if size > disp else "actual size")
 
     arms = []
     if length > 0:
@@ -230,24 +245,19 @@ def xhair_svg(cv, aria: str) -> str:
         f'<rect x="{x - 1:g}" y="{y - 1:g}" width="{w + 2:g}" height="{h + 2:g}"/>'
         for x, y, w, h in arms)
 
-    scale = min(1.0, (disp - 8) / size) if size > disp else 1.0
-    # scale() alone keeps the origin-centered arms centered; a translate would
-    # shove the drawing into a corner (SVG applies transforms right-to-left)
-    scale_attr = ""
-    if scale != 1:
-        scale_attr = f' transform="scale({scale:.4g})"'
-
+    # the viewBox (centered on the origin, 4px margin) does all the fitting:
+    # small crosshairs are enlarged into the 64px box, ones over 160px shrunk
     parts = [
         f'<svg class="xhair-svg" width="{disp}" height="{disp}" '
         f'viewBox="{-half} {-half} {size} {size}" role="img" '
-        f'aria-label="Crosshair preview drawn to scale, enlarged to fit: {esc(aria)}">',
+        f'aria-label="Crosshair preview, {label}: {esc(aria)}">',
         f'<rect x="{-half}" y="{-half}" width="{size}" height="{size}" fill="#20242b"/>',
     ]
     if outline and arms:
         parts.append('<g fill="rgba(0,0,0,0.9)">' + outline_rects + "</g>")
-    parts.append(f'<g{scale_attr} fill="rgba({r},{g},{b},{a:.3f})">{rects}</g>')
+    parts.append(f'<g fill="rgba({r},{g},{b},{a:.3f})">{rects}</g>')
     parts.append("</svg>")
-    return "".join(parts)
+    return "".join(parts), label
 
 
 def player_page(rec: dict, top10_rank=None) -> str:
@@ -261,7 +271,8 @@ def player_page(rec: dict, top10_rank=None) -> str:
     cmds, warnings = full_commands(rec)
     full_block = "; ".join(cmds)
     xc_cmds, _ = convert_crosshair(cv)
-    xh_text = "; ".join(f"{k} {v}" for k, v in xc_cmds)
+    xh_line = [f"{k} {v}" for k, v in xc_cmds]
+    xh_text = "; ".join(xh_line)
 
     dpi = mouse.get("DPI", "")
     sens = cv.get("sensitivity", "")
@@ -276,16 +287,12 @@ def player_page(rec: dict, top10_rank=None) -> str:
             + (f", {res}" + (f" {video['Scaling Mode']}" if video.get("Scaling Mode") else "") if res else "")
             + ", viewmodel, HUD, radar and launch options - ready for the CS2 console.")
 
-    avatar_url = f"{BASE}/data/avatars/{slug}.png" if rec.get("avatar") else f"{BASE}/assets/og-default.png"
+    avatar_url = f"{BASE}/{rec['avatar']}" if rec.get("avatar") else f"{BASE}/assets/og-default.png"
     og_desc = (f"Copy {nick}'s full CS2 config in one paste: crosshair, sensitivity"
                + (f" ({edpi} eDPI)" if edpi else "") + ", viewmodel, HUD, radar.")
 
-    embed = json_script({
-        "slug": slug, "nick": nick, "dpi": dpi, "sens": sens,
-        "convars": cv,
-        "xhairCmds": [f"{k} {v}" for k, v in xc_cmds],
-        "commands": cmds,
-    })
+    # only what app.js's DPI matcher reads
+    embed = json_script({"dpi": dpi, "sens": sens, "commands": cmds})
 
     raw_cfg = ""
     cfg_path = ROOT / "cfg" / f"{slug}.cfg"
@@ -310,13 +317,24 @@ def player_page(rec: dict, top10_rank=None) -> str:
     if rec.get("steamid64"):
         links.append(f'<a href="https://procrosshairs.com/player/{esc(rec["steamid64"])}/{esc(slug)}" target="_blank" rel="noopener">crosshair history</a>')
 
-    avatar_html = (f'<img class="avatar" src="/data/avatars/{esc(slug)}.png" alt="" width="92" height="92">'
-                   if rec.get("avatar") else
-                   f'<div class="avatar-letter" role="img" aria-label="{esc(nick)}">{esc(nick[:1].upper())}</div>')
+    avatar_html = avatar_img(rec["avatar"], 92) if rec.get("avatar") else letter_div(nick)
 
     warnings_html = ""
     if warnings:
-        warnings_html = '<p class="note" style="margin-top:8px">' + "<br>".join("⚠ " + esc(w) for w in warnings) + "</p>"
+        warnings_html = '<p class="note warn">' + "<br>".join("⚠ " + esc(w) for w in warnings) + "</p>"
+
+    raw_html = ""
+    if raw_cfg:
+        raw_html = f'''<section class="section">
+      <div class="section-head"><h2>Raw autoexec.cfg <span class="tag">file</span></h2>
+        <button type="button" class="btn ghost small" data-copy="{esc(raw_cfg)}">Copy raw</button>
+        <a class="btn ghost small" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download</a>
+      </div>
+      <details class="raw"><summary>Show raw config file</summary><div class="cmd" tabindex="0" role="group" aria-label="Config file, scrollable"><pre>{esc(raw_cfg)}</pre></div></details>
+      <p class="note">The exact autoexec.cfg from the source site — in the <b>original pre-patch format</b> (some crosshair convars in it were removed by the Sept 22, 2026 update). For applying settings use the copy blocks above.</p>
+    </section>'''
+    download_html = (f'<a class="btn ghost" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download .cfg</a>'
+                     if raw_cfg else "")
 
     launch = rec.get("launch_options")
     launch_html = ""
@@ -336,18 +354,20 @@ def player_page(rec: dict, top10_rank=None) -> str:
     except Exception:
         aria = "crosshair preview"
 
+    entity = {
+        "@type": "Person",
+        "name": nick,
+        "alternateName": real,
+        "jobTitle": "CS2 professional player",
+        "identifier": rec.get("steamid64"),
+        "url": f"{BASE}/p/{slug}/",
+    }
     person = {
         "@context": "https://schema.org",
         "@type": "ProfilePage",
-        "mainEntity": {
-            "@type": "Person",
-            "name": nick,
-            "alternateName": real or None,
-            "jobTitle": "CS2 professional player",
-            "identifier": rec.get("steamid64") or None,
-            "url": f"{BASE}/p/{slug}/",
-        },
+        "mainEntity": {k: v for k, v in entity.items() if v},  # no nulls in structured data
     }
+    xh_svg, xh_label = xhair_svg(cv, aria)
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -360,7 +380,7 @@ def player_page(rec: dict, top10_rank=None) -> str:
   <meta name="theme-color" content="#0d1014">
   <meta property="og:site_name" content="CS2 Pro Configs">
   <meta property="og:title" content="{esc(nick)} — CS2 Settings &amp; Config Commands">
-  <meta property="og:description" content="{esc(og_desc := (f"Copy {nick}'s full CS2 config in one paste: crosshair, sensitivity" + (f" ({edpi} eDPI)" if edpi else "") + ", viewmodel, HUD, radar."))}">
+  <meta property="og:description" content="{esc(og_desc)}">
   <meta property="og:type" content="profile">
   <meta property="og:url" content="{BASE}/p/{esc(slug)}/">
   <meta property="og:image" content="{avatar_url}">
@@ -394,24 +414,23 @@ def player_page(rec: dict, top10_rank=None) -> str:
         <div class="links">{''.join(links)}</div>
       </div>
     </div>
-    <div class="chips" style="margin-top:14px">{''.join(chips)}</div>
+    <div class="chips profile-chips">{''.join(chips)}</div>
     <div class="head-actions">
       <button type="button" class="btn" data-copy="{esc(full_block)}">Copy full config</button>
-      <a class="btn ghost" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download .cfg</a>
+      {download_html}
     </div>
     <section class="section">
-      <div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2></div>
+      <div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2>
+        <button type="button" class="btn small" data-copy="{esc(xh_text)}">Copy crosshair</button></div>
       <div class="xhair-box">
-        <div class="xhair-canvases">
-          {xhair_svg(cv, aria)}
-          <div class="xhair-label">drawn to scale — enlarged to fit</div>
+        <div class="xhair-preview">
+          {xh_svg}
+          <div class="xhair-label">{xh_label}</div>
         </div>
         <div class="xhair-meta">
-          <p class="note" style="margin:0 0 6px">CS2's Sept 22, 2026 "Rush Hour" patch replaced the crosshair system, so these commands are converted to the new convars from {esc(nick)}'s original settings — paste them straight into the console.</p>
-          <button type="button" class="btn small" data-copy="{esc(xh_text)}">Copy crosshair commands</button>
+          <div class="cmd" tabindex="0" role="group" aria-label="Crosshair commands, scrollable">{cmd_pre(xh_line)}</div>
           {warnings_html}
-          <p class="note" style="margin-top:8px">Conversion reference: <a href="https://github.com/sebastianspicker/small-indie-crosshair-company" target="_blank" rel="noopener">community crosshair migration study</a> (build 2000914). The converted crosshair commands are included at the start of the <b>Full config</b> below.</p>
-          <noscript><div class="cmd" style="margin-top:8px"><pre>{esc(xh_text)}</pre></div></noscript>
+          <p class="note">CS2's Sept 22, 2026 "Rush Hour" patch replaced the crosshair system, so these commands are converted to the new convars from {esc(nick)}'s original settings (reference: <a href="https://github.com/sebastianspicker/small-indie-crosshair-company" target="_blank" rel="noopener">community crosshair migration study</a>, build 2000914). They're also included at the start of the <b>Full config</b> below.</p>
         </div>
       </div>
     </section>
@@ -420,23 +439,14 @@ def player_page(rec: dict, top10_rank=None) -> str:
       <div class="section-head"><h2>Full config <span class="tag">paste in console</span></h2>
         <button type="button" class="btn small" data-copy="{esc(full_block)}">Copy all</button>
         <span id="btn-mydpi-slot"></span></div>
-      <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>{esc(full_block)}</pre></div>
+      <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable">{cmd_pre(cmds)}</div>
       <p class="note">One single line, <code>;</code>-separated so the console runs every command: press <b>~</b> in CS2, paste, hit Enter — done. (The CS2 console is single-line input, so multi-line pastes are unreliable.) The crosshair part is converted to the convars added by the Sept 22, 2026 patch; convars that were removed, renamed, cheat-protected or nonexistent in CS2 are filtered out. If a very long paste ever gets cut off, use the shorter per-section commands below instead.</p>
-      <noscript><div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>{esc(full_block)}</pre></div></noscript>
     </section>
 
     {category_sections_html(rec)}
     {launch_html}
     {video_tables_html(rec)}
-
-    <section class="section">
-      <div class="section-head"><h2>Raw autoexec.cfg <span class="tag">file</span></h2>
-        <button type="button" class="btn ghost small" data-copy="{esc(raw_cfg)}">Copy raw</button>
-        <a class="btn ghost small" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download</a>
-      </div>
-      <details class="raw"><summary>Show raw config file</summary><div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>{esc(raw_cfg)}</pre></div></details>
-      <p class="note">The exact autoexec.cfg from the source site — in the <b>original pre-patch format</b> (some crosshair convars in it were removed by the Sept 22, 2026 update). For applying settings use the copy blocks above.</p>
-    </section>
+    {raw_html}
   </main>
 
   <footer>
@@ -461,8 +471,7 @@ def index_page(players, top10_data, generated) -> str:
         slug = p["slug"]
         nick = p.get("nick") or slug
         real = p.get("real_name") or ""
-        avatar = (f'<img class="avatar" src="/data/avatars/{esc(slug)}.png" alt="" width="72" height="72" loading="lazy">'
-                  if p.get("avatar") else letter_div(nick))
+        avatar = avatar_img(p["avatar"], 72, lazy=True) if p.get("avatar") else letter_div(nick)
         chips = []
         if p.get("edpi") is not None:
             chips.append(f'<span class="chip"><b>{p["edpi"]}</b> eDPI</span>')
@@ -470,7 +479,7 @@ def index_page(players, top10_data, generated) -> str:
             chips.append(f'<span class="chip">sens {esc(p["sens"])}</span>')
         if p.get("res"):
             chips.append(f'<span class="chip">{esc(p["res"])}</span>')
-        cards.append(f'''<a class="card" href="/p/{esc(slug)}/" data-nick="{esc(nick.lower())}" data-real="{esc(real.lower())}" data-slug="{esc(slug)}" data-edpi="{p.get("edpi") if p.get("edpi") is not None else ""}" data-sens="{p.get("sens") or ""}" data-res="{esc(p.get("res") or "")}">
+        cards.append(f'''<a class="card" href="/p/{esc(slug)}/" data-nick="{esc(nick.lower())}" data-real="{esc(real.lower())}" data-slug="{esc(slug)}" data-edpi="{p.get("edpi") if p.get("edpi") is not None else ""}" data-sens="{esc(p.get("sens") or "")}" data-res="{esc(p.get("res") or "")}">
   {avatar}
   <div class="nick">{esc(nick)}</div>
   <div class="real">{esc(real)}</div>
@@ -539,7 +548,7 @@ def index_page(players, top10_data, generated) -> str:
       </div>
     </div>
 
-    {top10_section_html(top10_data)}
+    {top10_section_html(top10_data, players)}
 
     <div class="controls">
       <label for="sort">Sort</label>
@@ -552,7 +561,7 @@ def index_page(players, top10_data, generated) -> str:
         <option value="name">Name A → Z</option>
       </select>
       <label for="res">Resolution</label>
-      <select id="res"><option value="">Any</option>{''.join(f'<option value="{esc(r)}">{esc(r)}</option>' for r in sorted({p["res"] for p in players if p.get("res")}, key=lambda r: int(r.split("x")[0]) if r.split("x")[0].isdigit() else 0))}</select>
+      <select id="res"><option value="">Any</option>{''.join(f'<option value="{esc(r)}">{esc(r)}</option>' for r in sorted({p["res"] for p in players if p.get("res")}, key=res_key))}</select>
       <span class="result-count" id="result-count" aria-live="polite"></span>
     </div>
 
@@ -574,18 +583,17 @@ def index_page(players, top10_data, generated) -> str:
 '''
 
 
-def top10_section_html(top10_data) -> str:
+def top10_section_html(top10_data, players) -> str:
     if not top10_data:
         return ""
+    by_slug = {p["slug"]: p for p in players}
     cards = []
     for t in top10_data["players"]:
         slug = t.get("slug") or ""
-        has_player = (ROOT / "data" / "players" / f"{slug}.json").exists()
-        has_avatar = has_player and (ROOT / "data" / "avatars" / f"{slug}.png").exists()
-        href = f"/p/{esc(slug)}/" if has_player else (t.get("hltv") or "#")
+        p = by_slug.get(slug)
+        href = f"/p/{esc(slug)}/" if p else (t.get("hltv") or "#")
         med = " medal" if t["rank"] <= 3 else ""
-        avatar = (f'<img class="avatar" src="/data/avatars/{esc(slug)}.png" alt="" width="72" height="72" loading="lazy">'
-                  if has_avatar else letter_div(t["nick"]))
+        avatar = avatar_img(p["avatar"], 72) if p and p.get("avatar") else letter_div(t["nick"])
         cards.append(f'<li class="top10-card" data-rank="{t["rank"]}"><a href="{href}" title="{esc(t["nick"])} — open config">'
                      f'<span class="top10-rank{med}">#{t["rank"]}</span>{avatar}'
                      f'<span class="top10-nick">{esc(t["nick"])}</span>'
@@ -631,6 +639,7 @@ def redirect_stub() -> str:
 <head>
   <meta charset="UTF-8">
   <title>Redirecting… — CS2 Pro Configs</title>
+  <meta name="robots" content="noindex">
   <meta http-equiv="refresh" content="0;url=/">
   <link rel="canonical" href="/">
 </head>
@@ -645,13 +654,31 @@ def redirect_stub() -> str:
 '''
 
 
-def sitemap_xml(players, lastmod: str) -> str:
-    urls = [f"<url><loc>{BASE}/</loc><lastmod>{lastmod}</lastmod><priority>1.0</priority></url>"]
-    for p in players:
-        urls.append(f"<url><loc>{BASE}/p/{esc(p['slug'])}/</loc><lastmod>{lastmod}</lastmod><priority>0.8</priority></url>")
+def sitemap_xml(entries) -> str:
+    """entries: (url, lastmod, priority) tuples."""
+    urls = [f"<url><loc>{esc(u)}</loc><lastmod>{m}</lastmod><priority>{pr}</priority></url>"
+            for u, m, pr in entries]
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
             + "\n".join(urls) + "\n</urlset>\n")
+
+
+def previous_lastmods() -> dict:
+    try:
+        text = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    except FileNotFoundError:
+        return {}
+    return dict(re.findall(r"<loc>([^<]+)</loc><lastmod>([^<]+)</lastmod>", text))
+
+
+def write_if_changed(path: Path, text: str) -> bool:
+    try:
+        if path.read_text(encoding="utf-8") == text:
+            return False
+    except FileNotFoundError:
+        pass
+    path.write_text(text, encoding="utf-8")
+    return True
 
 
 def robots_txt() -> str:
@@ -662,7 +689,6 @@ def main() -> None:
     index = json.loads((ROOT / "data" / "index.json").read_text())
     players = index["players"]
     generated = index["meta"]["generated"]
-    lastmod = generated[:10]
 
     try:
         top10_data = json.loads((ROOT / "data" / "top10.json").read_text())
@@ -672,11 +698,19 @@ def main() -> None:
     if top10_data:
         top10_rank = {t["slug"]: t["rank"] for t in top10_data.get("players", []) if t.get("slug")}
 
-    # index
-    (ROOT / "index.html").write_text(index_page(players, top10_data, generated), encoding="utf-8")
+    # sitemap lastmod moves only when a page's HTML actually changes, so
+    # crawlers aren't told all 600+ pages changed on every weekly refresh
+    today = datetime.now(timezone.utc).date().isoformat()
+    prev = previous_lastmods()
+    entries = []
+
+    def emit(path: Path, html: str, url: str, priority: str) -> None:
+        changed = write_if_changed(path, html)
+        entries.append((url, today if changed or url not in prev else prev[url], priority))
+
+    emit(ROOT / "index.html", index_page(players, top10_data, generated), f"{BASE}/", "1.0")
     print("index.html")
 
-    # player pages
     n = 0
     for p in players:
         slug = p["slug"]
@@ -686,14 +720,14 @@ def main() -> None:
         rec = json.loads(f.read_text())
         d = ROOT / "p" / slug
         d.mkdir(parents=True, exist_ok=True)
-        (d / "index.html").write_text(player_page(rec, top10_rank.get(slug)), encoding="utf-8")
+        emit(d / "index.html", player_page(rec, top10_rank.get(slug)), f"{BASE}/p/{slug}/", "0.8")
         n += 1
     print(f"p/ pages: {n}")
 
-    (ROOT / "player.html").write_text(redirect_stub(), encoding="utf-8")
-    (ROOT / "404.html").write_text(not_found_page(), encoding="utf-8")
-    (ROOT / "sitemap.xml").write_text(sitemap_xml(players, lastmod), encoding="utf-8")
-    (ROOT / "robots.txt").write_text(robots_txt(), encoding="utf-8")
+    write_if_changed(ROOT / "player.html", redirect_stub())
+    write_if_changed(ROOT / "404.html", not_found_page())
+    write_if_changed(ROOT / "sitemap.xml", sitemap_xml(entries))
+    write_if_changed(ROOT / "robots.txt", robots_txt())
     print("sitemap.xml robots.txt 404.html player.html")
 
 

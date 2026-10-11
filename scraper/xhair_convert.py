@@ -109,6 +109,22 @@ def _b(v):
     return str(v).strip().lower() in ("1", "true")
 
 
+def safe_value(v):
+    """Value as it goes into the ;-joined console line, or None to drop it.
+    Anything containing ; quotes or newlines would inject extra commands.
+    Booleans become 1/0: post-patch convars are int-typed and reject
+    "true"/"false", while 1/0 is accepted everywhere."""
+    s = str(v).strip()
+    if not s or any(c in s for c in ';"\n\r'):
+        return None
+    low = s.lower()
+    if low == "true":
+        return "1"
+    if low == "false":
+        return "0"
+    return s
+
+
 def convert_crosshair(cv):
     """cv: dict of old convar name -> string value.
 
@@ -194,7 +210,9 @@ def convert_crosshair(cv):
 
     for k, v in cv.items():
         if k.startswith("cl_crosshair_dynamic_") or k == "cl_crosshair_sniper_width":
-            commands.append((k, v))
+            sv = safe_value(v)
+            if sv is not None:
+                commands.append((k, sv))
 
     commands.append(("cl_crosshair_screen_height", 1080))
     return commands, warnings

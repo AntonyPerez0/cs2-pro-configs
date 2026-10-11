@@ -6,7 +6,7 @@ for the cs2-pro-configs website.
 Outputs (repo root):
   data/index.json            - player list for the grid/search
   data/players/<slug>.json   - full record per player
-  data/avatars/<slug>.png    - player avatar
+  data/avatars/<slug>.<ext>  - player avatar (extension from the image bytes)
   cfg/<slug>.cfg             - full autoexec.cfg (verbatim from settings.gg)
 
 Usage:
@@ -224,20 +224,54 @@ def scrape_player(entry: dict) -> dict:
     rec["convars"] = convars
     rec["raw_cfg"] = raw_cfg
 
-    # avatar
-    avatar_path = ROOT / "data" / "avatars" / f"{slug}.png"
-    if entry.get("avatar_url") and not avatar_path.exists():
+    # avatar (downloaded once; kept on later runs)
+    existing = avatar_file(slug)
+    if existing:
+        rec["avatar"] = existing.relative_to(ROOT).as_posix()
+    elif entry.get("avatar_url"):
         try:
             ar = fetch(entry["avatar_url"])
-            if ar.status_code == 200:
-                avatar_path.write_bytes(ar.content)
-                rec["avatar"] = f"data/avatars/{slug}.png"
+            ext = image_ext(ar.content) if ar.status_code == 200 else None
+            if ext:
+                path = ROOT / "data" / "avatars" / f"{slug}.{ext}"
+                path.write_bytes(ar.content)
+                rec["avatar"] = path.relative_to(ROOT).as_posix()
         except Exception:
             pass
-    elif avatar_path.exists():
-        rec["avatar"] = f"data/avatars/{slug}.png"
 
     return rec
+
+
+AVATAR_EXTS = ("webp", "png", "jpg")
+
+
+def image_ext(b: bytes):
+    """File extension matching the image bytes (settings.gg serves WebP), so
+    the file is served with the right Content-Type. None if not an image."""
+    if b[:4] == b"RIFF" and b[8:12] == b"WEBP":
+        return "webp"
+    if b[:8] == b"\x89PNG\r\n\x1a\n":
+        return "png"
+    if b[:3] == b"\xff\xd8\xff":
+        return "jpg"
+    return None
+
+
+def avatar_file(slug: str):
+    for ext in AVATAR_EXTS:
+        p = ROOT / "data" / "avatars" / f"{slug}.{ext}"
+        if p.exists():
+            return p
+    return None
+
+
+def previous_record(slug: str):
+    """Last committed record for a player, used when this run's scrape of
+    them fails, so a transient error doesn't drop them from the site."""
+    try:
+        return json.loads((ROOT / "data" / "players" / f"{slug}.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
 
 
 def edpi(rec: dict):
@@ -276,8 +310,18 @@ def main():
     print(f"      {len(players)} players found", flush=True)
     if args.limit:
         players = players[: args.limit]
+    else:
+        # a markup change on settings.gg can silently return a fraction of
+        # the list; refuse to overwrite the dataset with it
+        try:
+            prev_count = json.loads((ROOT / "data" / "index.json").read_text())["meta"]["count"]
+        except (OSError, ValueError, KeyError):
+            prev_count = 0
+        if len(players) < prev_count * 0.8:
+            print(f"      only {len(players)} players vs {prev_count} last run - aborting", flush=True)
+            sys.exit(1)
 
-    results, failures = [], []
+    results, failures = {}, []
     done = 0
     print(f"[2/3] scraping {len(players)} profiles ({args.workers} workers) ...", flush=True)
     with ThreadPoolExecutor(max_workers=args.workers) as ex:
@@ -285,14 +329,19 @@ def main():
         for fut in as_completed(futs):
             slug = futs[fut]
             try:
-                results.append(fut.result())
+                results[slug] = fut.result()
             except Exception as e:
                 failures.append((slug, str(e)))
+                prev = previous_record(slug)
+                if prev:
+                    results[slug] = prev  # its cfg/<slug>.cfg is left as-is
             done += 1
             if done % 25 == 0 or done == len(players):
                 print(f"      {done}/{len(players)} done ({len(failures)} failed)", flush=True)
 
-    # keep source order (settings.gg lists most recently updated first)
+    # source order (settings.gg lists most recently updated first) - this is
+    # the site's "Recently updated" sort; completion order is random
+    results = [results[p["slug"]] for p in players if p["slug"] in results]
 
     (ROOT / "data" / "players").mkdir(parents=True, exist_ok=True)
     (ROOT / "cfg").mkdir(parents=True, exist_ok=True)
@@ -334,7 +383,7 @@ def main():
         print(f"      failures ({len(failures)}):", flush=True)
         for slug, err in failures[:20]:
             print(f"        {slug}: {err}", flush=True)
-        sys.exit(1 if len(failures) > len(results) // 4 else 0)
+        sys.exit(1 if len(failures) > len(players) // 4 else 0)
 
 
 if __name__ == "__main__":

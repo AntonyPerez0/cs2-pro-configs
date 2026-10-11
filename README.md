@@ -2,7 +2,7 @@
 
 Browse CS2 pro players' full settings and copy ready-to-paste console commands to instantly apply any pro's crosshair, sensitivity, viewmodel, HUD/radar.
 
-**Live site:** https://antonyperez0.github.io/cs2-pro-configs/
+**Live site:** https://copyprosta.com
 
 ## How to use
 
@@ -38,31 +38,43 @@ Notes:
 - **HLTV Top 10 section** on the front page (latest official HLTV player ranking, links straight to each pro's config)
 - **Your-DPI sensitivity matcher**: enter your mouse DPI once, get the in-game sensitivity that matches each pro's speed (eDPI match), or copy the whole config with the sensitivity rewritten for your DPI
 - Per-category copy blocks (crosshair, sensitivity, viewmodel, HUD/radar)
-- Live crosshair preview rendered on a canvas
+- Crosshair preview prerendered as inline SVG (works without JavaScript)
 - Launch options for forcing resolution
 - Downloadable per-player `.cfg` file
+- Fully prerendered static pages (one per player at `/p/<slug>/`), sitemap and structured data for search engines
 - Weekly auto-refresh of data via a GitHub Action
 
 ## Repo layout
 
 ```
 .
-├── index.html            # Player list page
-├── player.html           # Per-player detail page
+├── index.html            # Player list page (generated)
+├── p/<slug>/index.html   # One static page per player (generated)
+├── player.html           # Redirect for old ?p=<slug> links (generated)
+├── sitemap.xml, robots.txt, 404.html   # (generated)
 ├── assets/
-│   ├── app.js            # Site logic (fetches data, renders, copy buttons)
-│   └── style.css         # Styles
+│   ├── app.js            # Copy buttons, search/sort/filter, DPI matcher
+│   ├── style.css         # Styles
+│   └── og-default.png    # Social preview image
 ├── data/
 │   ├── index.json        # Catalog of all players
-│   └── players/<slug>.json  # Full per-player settings
-├── avatars/ (data/avatars/)
-│   └── <slug>.png        # Player avatars
+│   ├── meta.json         # Dataset timestamp
+│   ├── top10.json        # HLTV Top 10 list
+│   ├── players/<slug>.json  # Full per-player settings
+│   └── avatars/<slug>.webp  # Player avatars
 ├── cfg/
 │   └── <slug>.cfg        # Downloadable autoexec-style config per player
 └── scraper/
-    ├── scrape.py         # Scraper for settings.gg
+    ├── scrape.py         # Scraper for settings.gg -> data/, cfg/
+    ├── top10.py          # Best-effort HLTV Top 10 refresh
+    ├── xhair_convert.py  # Old -> new (Sept 2026) crosshair convar conversion
+    ├── sitegen.py        # Builds every HTML page, sitemap and robots.txt
+    ├── test_xhair_convert.py  # Regression tests (run in CI before each build)
     └── requirements.txt  # Python dependencies
 ```
+
+The HTML pages are generated: edit `scraper/sitegen.py` (or `assets/`), not
+the `.html` files, then rebuild.
 
 ## Updating the data
 
@@ -71,8 +83,15 @@ Notes:
 - Or run it locally:
 
 ```bash
-pip install -r scraper/requirements.txt && python3 scraper/scrape.py
+pip install -r scraper/requirements.txt
+python3 scraper/test_xhair_convert.py   # conversion + hardening checks
+python3 scraper/scrape.py               # refresh data/ and cfg/ from settings.gg
+python3 scraper/top10.py                # optional, usually blocked by HLTV
+python3 scraper/sitegen.py              # rebuild the HTML pages and sitemap
 ```
+
+To preview the site locally, serve the repo root (the pages use root-relative
+links): `python3 -m http.server` and open http://localhost:8000.
 
 ## Data source & credits
 

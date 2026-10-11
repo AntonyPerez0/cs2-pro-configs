@@ -86,11 +86,37 @@ s = json_script({"v": "a</script>b"})
 check("json escapes </", "</script>" not in s, True)
 check("escaped json parses identical", json.loads(s)["v"], "a</script>b")
 
-from scrape import KEY_RE  # noqa: E402
+from scrape import KEY_RE, image_ext  # noqa: E402
 check("key regex: convar ok, command string rejected",
       (bool(KEY_RE.match("sensitivity")), bool(KEY_RE.match("setting.defaultres")),
        bool(KEY_RE.match("say hi;bind mouse1 quit")), bool(KEY_RE.match(""))),
       (True, True, False, False))
+
+# dynamic crosshair values go through the same guard as every other value
+d = cmds({**base, "cl_crosshair_dynamic_splitdist": "7; quit",
+          "cl_crosshair_dynamic_splitalpha_innermod": "true",
+          "cl_crosshair_dynamic_maxdist_splitratio": "0.3"})
+check("dynamic value with ; dropped", "cl_crosshair_dynamic_splitdist" in d, False)
+check("dynamic bool normalized", d["cl_crosshair_dynamic_splitalpha_innermod"], "1")
+check("dynamic plain value kept", d["cl_crosshair_dynamic_maxdist_splitratio"], "0.3")
+
+check("avatar type sniffing",
+      (image_ext(b"RIFF\x00\x00\x00\x00WEBPVP8 "), image_ext(b"\x89PNG\r\n\x1a\n...."),
+       image_ext(b"\xff\xd8\xff\xe0"), image_ext(b"<html>")),
+      ("webp", "png", "jpg", None))
+
+from sitegen import res_key, xhair_svg  # noqa: E402
+check("resolution options sort by width then height",
+      sorted(["1920x1080", "1280x960", "1280x720", "1280x1024", "800x600"], key=res_key),
+      ["800x600", "1280x720", "1280x960", "1280x1024", "1920x1080"])
+
+# viewBox alone fits the drawing; an extra transform double-shrinks it
+svg, label = xhair_svg({"cl_crosshairsize": "40", "cl_crosshairthickness": "2",
+                        "cl_crosshairgap": "2", "cl_crosshair_drawoutline": "1"}, "big")
+check("large crosshair: no extra transform", "transform=" in svg, False)
+check("large crosshair: label says shrunk", label, "drawn to scale — shrunk to fit")
+check("small crosshair: label says enlarged", xhair_svg(base, "donk")[1],
+      "drawn to scale — enlarged to fit")
 
 if FAILS:
     print(f"{len(FAILS)} failure(s) of {N} checks:")
