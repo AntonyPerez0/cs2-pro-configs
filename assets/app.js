@@ -1,18 +1,16 @@
-/* cs2-pro-configs - renders index grid + player profiles, builds copy-paste
-   console command blocks. */
+/* cs2-pro-configs - progressive enhancement for the prerendered pages:
+   copy buttons, index search/sort/filter, and the player-page DPI matcher.
+   All console commands are built at build time by scraper/sitegen.py. */
 
 "use strict";
 
 const $ = (sel, el = document) => el.querySelector(sel);
-const esc = (s) =>
-  String(s ?? "").replace(/[&<>"']/g, (c) =>
-    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-async function fetchJSON(url) {
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(`${r.status} ${url}`);
-  return r.json();
-}
+/* localStorage throws (not just returns null) when site data is blocked */
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (_) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (_) { /* not persisted */ } },
+};
 
 /* ---------------- clipboard ---------------- */
 
@@ -49,292 +47,31 @@ async function copyText(text) {
 
 /* One delegated listener handles every copy button, including ones created
    or given their data-copy value later (the DPI-adjusted config, the
-   sensitivity line, the raw cfg after its fetch resolves). Reads data-copy
-   at click time, so late-set values work. */
+   sensitivity line). Reads data-copy at click time, so late-set values work. */
 document.addEventListener("click", async (e) => {
   const btn = e.target.closest("[data-copy]");
   if (!btn || !btn.dataset.copy) return;
   const ok = await copyText(btn.dataset.copy);
   if (ok) {
-    const prev = btn.textContent;
+    // remember the real label once, so a second click inside the 1.2s
+    // window can't capture "Copied!" as the label to restore
+    if (!btn.classList.contains("copied")) btn._label = btn.textContent;
     btn.textContent = "Copied!";
     btn.classList.add("copied");
     clearTimeout(btn._t);
     btn._t = setTimeout(() => {
-      btn.textContent = prev;
+      btn.textContent = btn._label;
       btn.classList.remove("copied");
     }, 1200);
   }
 });
-
-/* ---------------- command building ---------------- */
-
-const BUCKETS = [
-  {
-    key: "crosshair", title: "Crosshair", tag: "cl_crosshair_*",
-    test: (n) => n.startsWith("cl_crosshair"),
-  },
-  {
-    key: "mouse", title: "Mouse & Sensitivity", tag: "sensitivity",
-    test: (n) => /^(sensitivity|zoom_sensitivity|m_yaw|m_pitch|m_customaccel)/.test(n),
-  },
-  {
-    key: "viewmodel", title: "Viewmodel", tag: "viewmodel_*",
-    test: (n) => n.startsWith("viewmodel"),
-  },
-  {
-    key: "radar", title: "Radar", tag: "cl_radar_*",
-    test: (n) => n.startsWith("cl_radar_") || n === "cl_hud_radar_scale",
-  },
-  {
-    key: "hud", title: "HUD", tag: "hud_*",
-    test: (n) =>
-      n.startsWith("hud_") || n.startsWith("safezone") || n.startsWith("cl_hud_") ||
-      /^(cl_drawhud|cl_showfps|cl_teammate_colors_show|cl_show_clan_in_death_notice|cl_allow_animated_avatars|cl_teamcounter_playercount_instead_of_avatars)/.test(n),
-  },
-  { key: "misc", title: "Performance & Other", tag: "misc", test: () => true },
-];
-
-function bucketConvars(convars) {
-  const out = {};
-  for (const [k, v] of Object.entries(convars || {})) {
-    const b = BUCKETS.find((b) => b.test(k));
-    (out[b.key] = out[b.key] || []).push([k, v]);
-  }
-  return out;
-}
-
-/* Convars that must NOT go into a console paste:
-   - cl_drawhud is cheat-protected in CS2 (errors without sv_cheats)
-   - cl_radar_size was removed in CS2
-   - setting.defaultres/-height are cs2_video.txt file keys, not console convars */
-const CONSOLE_SKIP = new Set([
-  "cl_drawhud",
-  "cl_radar_size",
-  "setting.defaultres",
-  "setting.defaultresheight",
-]);
-
-/* ---- Sept 22, 2026 "Rush Hour" crosshair migration ----
-   The patch removed 6 legacy crosshair convars and replaced the geometry
-   system. This is an exact port of the community reference converter's
-   shipped model (small-indie-crosshair-company, build 2000914 dump,
-   structural inverse DEFAULT_PHI with all heights frozen at 1080 — the
-   convention the post-patch pro round-ups used). Validated against the
-   original engine on its 138-record corpus + 20k randomized inputs:
-   zero mismatches. donk/m0NESY/s1mple -> length 2 / thickness 2 / gap 0,
-   matching their published post-patch settings. */
-const XHAIR_REMOVED = new Set([
-  "cl_crosshairgap", "cl_crosshairusealpha", "cl_crosshaircolor",
-  "cl_crosshair_outlinethickness", "cl_crosshairgap_useweaponvalue",
-  "cl_fixedcrosshairgap",
-]);
-const XHAIR_HIDDEN_LEGACY = new Set([
-  "cl_crosshairsize", "cl_crosshairthickness", "cl_crosshairalpha",
-]);
-const XHAIR_PRESET_RGB = [
-  [250, 50, 50],   // 0 red
-  [50, 250, 50],   // 1 green
-  [250, 250, 50],  // 2 yellow
-  [50, 50, 250],   // 3 blue
-  [50, 250, 250],  // 4 cyan
-];
-
-function legacyGeometry(size, thickness, gap) {
-  const scale = Math.fround(1080 / 480);
-  const length = Math.trunc(Math.fround(scale * Math.fround(size)));
-  const width = Math.max(1, Math.trunc(Math.fround(scale * Math.fround(thickness))));
-  const gapOffset = Math.trunc(Math.fround(Math.fround(gap) + 4));
-  const near = Math.floor(width / 2) + gapOffset;
-  return { length, width, gapOffset, near };
-}
-
-function bestInteger(maxv, ideal, loss) {
-  let best = null;
-  for (let v = 0; v <= maxv; v++) {
-    const err = loss(v);
-    const tie = Math.abs(v - ideal);
-    if (!best || err < best.err || (err === best.err && tie < best.tie)) best = { err, tie, v };
-  }
-  return best;
-}
-
-/* joint thickness+gap solver (rT = rG = 1 at the 1080 freeze) */
-function invertJoint(targetWidth, nearT, hasLength, preserveZero) {
-  const values = preserveZero ? [0] : Array.from({ length: 32 }, (_, i) => i);
-  let best = null;
-  for (const vt of values) {
-    const width = Math.max(1, vt);
-    const base = Math.floor(width / 2);
-    const idealGap = hasLength ? nearT - base : 0;
-    const g = bestInteger(128, idealGap, (v) => {
-      if (!hasLength) return 0;
-      const near = base + v;
-      return (near - nearT) ** 2 + (near + 1 - (nearT + 1)) ** 2;
-    });
-    const idealT = preserveZero ? 0 : targetWidth;
-    const tLoss = (width - targetWidth) ** 2;
-    const tTie = Math.abs(vt - idealT);
-    const total = tLoss + g.err;
-    const pref = tTie + g.tie;
-    if (!best || total < best.total || (total === best.total && pref < best.pref)) {
-      best = { total, pref, thickness: vt, gap: g.v };
-    }
-  }
-  return best;
-}
-
-function convertGeometry(size, thickness, gap) {
-  const leg = legacyGeometry(size, thickness, gap);
-  const inv = invertJoint(leg.width, leg.near, leg.length > 0, thickness === 0);
-  return {
-    length: Math.max(0, Math.min(255, Math.trunc(leg.length))),
-    thickness: inv.thickness,
-    gap: inv.gap,
-    gapClamped: leg.gapOffset < 0,
-  };
-}
-
-const xclamp = (v, min, max) => Math.max(min, Math.min(max, Math.round(v)));
-
-function convertCrosshair(cv) {
-  const numv = (raw, d) => {
-    const v = parseFloat(raw);
-    return Number.isFinite(v) ? v : d;
-  };
-  const boolOn = (v) => v === "1" || String(v).trim().toLowerCase() === "true";
-  const commands = [];
-  const warnings = [];
-
-  const style = Math.round(numv(cv.cl_crosshairstyle, 4));
-  commands.push(`cl_crosshairstyle ${style}`);
-  if (style !== 4) {
-    warnings.push(`Style ${style} was renumbered in the Sept 2026 patch (4 = Static Cross). Non-static styles may need a manual pick in Settings → Crosshair/Scopes.`);
-  }
-
-  const hasSize = cv.cl_crosshairsize !== undefined;
-  const hasTh = cv.cl_crosshairthickness !== undefined;
-  const hasGap = cv.cl_crosshairgap !== undefined;
-  const legacyDotOn = boolOn(cv.cl_crosshairdot ?? "false");
-  let forcedDot = false;
-  if (hasSize || hasTh || hasGap) {
-    const geo = convertGeometry(
-      numv(cv.cl_crosshairsize, 0),
-      numv(cv.cl_crosshairthickness, 0),
-      numv(cv.cl_crosshairgap, 0));
-    if (hasSize) commands.push(`cl_crosshair_length ${geo.length}`);
-    if (hasTh) {
-      // The new system renders thickness 0 as NOTHING (no bars, and a
-      // zero-width dot if dot-only) - confirmed in-game (woxic, Jame).
-      // The legacy engine rendered thickness 0 as a 1px minimum, so the
-      // faithful conversion of "thickness 0" is 1 (the thinnest visible
-      // setting the new system's UI offers).
-      const tVal = Math.max(1, geo.thickness);
-      commands.push(`cl_crosshair_thickness ${tVal}`);
-    }
-    if (hasGap) {
-      if (geo.gapClamped) {
-        warnings.push("Old gap put the lines past the center — the new gap can't go below 0, so the closest possible look is used.");
-      }
-      commands.push(`cl_crosshair_gap ${geo.gap}`);
-    }
-    if (geo.length === 0 && !legacyDotOn) {
-      // zero-length arms render nothing in the new system: dot designs must
-      // be rebuilt as zero arm length + center dot (reference construction)
-      forcedDot = true;
-      warnings.push("Dot-only crosshair: the arms are zero-length, so the center dot is enabled (a zero-length crosshair without a dot renders nothing in the new system).");
-    }
-  }
-
-  for (const k of ["cl_crosshairdot", "cl_crosshair_t", "cl_crosshair_drawoutline", "cl_crosshair_recoil"]) {
-    if (k === "cl_crosshairdot") {
-      commands.push(`cl_crosshairdot ${(forcedDot || legacyDotOn) ? 1 : 0}`);
-      continue;
-    }
-    if (cv[k] !== undefined) commands.push(`${k} ${boolOn(cv[k]) ? 1 : 0}`);
-  }
-
-  let rgb = null;
-  if (cv.cl_crosshaircolor !== undefined) {
-    const idx = Math.round(numv(cv.cl_crosshaircolor, 5));
-    if (idx === 5) {
-      rgb = [
-        xclamp(numv(cv.cl_crosshaircolor_r, 255), 0, 255),
-        xclamp(numv(cv.cl_crosshaircolor_g, 255), 0, 255),
-        xclamp(numv(cv.cl_crosshaircolor_b, 255), 0, 255),
-      ];
-    } else if (XHAIR_PRESET_RGB[idx]) {
-      rgb = XHAIR_PRESET_RGB[idx];
-    }
-  } else if (cv.cl_crosshaircolor_r !== undefined) {
-    rgb = [
-      xclamp(numv(cv.cl_crosshaircolor_r, 255), 0, 255),
-      xclamp(numv(cv.cl_crosshaircolor_g, 255), 0, 255),
-      xclamp(numv(cv.cl_crosshaircolor_b, 255), 0, 255),
-    ];
-  }
-  if (rgb) commands.push(`cl_crosshaircolor_r ${rgb[0]}`, `cl_crosshaircolor_g ${rgb[1]}`, `cl_crosshaircolor_b ${rgb[2]}`);
-
-  if (cv.cl_crosshairalpha !== undefined || cv.cl_crosshairusealpha !== undefined) {
-    const enabled = boolOn(cv.cl_crosshairusealpha ?? "false");
-    const a = enabled ? xclamp(numv(cv.cl_crosshairalpha, 200), 0, 255) : 200;
-    commands.push(`cl_crosshaircolor_a ${a}`);
-    if (!enabled) warnings.push("Old config had the alpha slider disabled; opacity is reconstructed as 200 (new system changed how alpha works).");
-  }
-
-  for (const [k, v] of Object.entries(cv)) {
-    if (/^cl_crosshair_dynamic_/.test(k) || k === "cl_crosshair_sniper_width") {
-      const sv = safeValue(v);
-      if (sv !== null) commands.push(`${k} ${sv}`);
-    }
-  }
-
-  commands.push("cl_crosshair_screen_height 1080");
-  return { commands, warnings };
-}
-
-/* values are joined straight into a console line, so anything containing
-   ; or quotes or newlines would inject extra commands - drop those (none
-   exist in the current dataset; this guards future scrapes). Booleans are
-   normalized to 1/0: post-Rush-Hour convars are int-typed and reject
-   "true"/"false", while 0/1 is accepted everywhere. */
-function safeValue(v) {
-  const s = String(v).trim();
-  if (!s || /[;"'\n\r]/.test(s)) return null;
-  const low = s.toLowerCase();
-  if (low === "true") return "1";
-  if (low === "false") return "0";
-  return s;
-}
-
-/* commands in paste order: converted crosshair first (most important lands
-   first even if a very long paste ever gets truncated), misc last */
-function consoleCommands(rec) {
-  const buckets = bucketConvars(rec.convars);
-  const out = [];
-  const xc = convertCrosshair(rec.convars || {});
-  out.push(...xc.commands);
-  for (const b of BUCKETS) {
-    if (b.key === "crosshair") continue;
-    for (const [k, v] of buckets[b.key] || []) {
-      if (CONSOLE_SKIP.has(k) || XHAIR_REMOVED.has(k) || XHAIR_HIDDEN_LEGACY.has(k)) continue;
-      const sv = safeValue(v);
-      if (sv !== null) out.push(`${k} ${sv}`);
-    }
-  }
-  return { commands: out, warnings: xc.warnings };
-}
-
-function buildFullBlock(rec) {
-  return consoleCommands(rec).commands.join("; ");
-}
 
 /* ---------------- sensitivity converter (eDPI match) ---------------- */
 
 const DPI_KEY = "cs2pros:your-dpi";
 
 function getUserDpi() {
-  const v = parseInt(localStorage.getItem(DPI_KEY) || "", 10);
+  const v = parseInt(store.get(DPI_KEY) || "", 10);
   return Number.isFinite(v) && v >= 50 ? v : null;
 }
 
@@ -343,34 +80,18 @@ function cmPer360(edpi) {
   return 41563.6 / edpi;
 }
 
-/* the pro's effective sensitivity data (or null if not on their page) */
-function proEdpi(rec) {
-  const dpiPro = parseInt(String((rec.tables && rec.tables["Mouse"] && rec.tables["Mouse"]["DPI"]) || "").replace(/[^\d]/g, ""), 10);
-  const sensPro = parseFloat(rec.convars && rec.convars.sensitivity);
+/* the pro's effective sensitivity (or null if their page lacks DPI/sens) */
+function proEdpi(dpi, sens) {
+  const dpiPro = parseInt(String(dpi || "").replace(/[^\d]/g, ""), 10);
+  const sensPro = parseFloat(sens);
   if (!Number.isFinite(dpiPro) || dpiPro <= 0 || !Number.isFinite(sensPro) || sensPro <= 0) return null;
   const edpi = dpiPro * sensPro;
-  return { dpiPro, sensPro, edpi, cm: cmPer360(edpi) };
+  return { edpi, cm: cmPer360(edpi) };
 }
 
-function sensForDpi(rec, yourDpi) {
-  const base = proEdpi(rec);
-  if (!base) return null;
-  if (!Number.isFinite(yourDpi) || yourDpi < 50) return null;
-  return {
-    edpi: base.edpi,
-    cm: base.cm,
-    sens: parseFloat((base.edpi / yourDpi).toFixed(4)),
-  };
-}
-
-/* full command line with the sensitivity command rewritten for your DPI */
-function consoleCommandsWithSens(rec, yourDpi) {
-  const m = sensForDpi(rec, yourDpi);
-  if (!m) return null;
-  return consoleCommands(rec)
-    .commands
-    .map((c) => (c.startsWith("sensitivity ") ? `sensitivity ${m.sens}` : c))
-    .join("; ");
+function sensForDpi(base, yourDpi) {
+  if (!base || !Number.isFinite(yourDpi) || yourDpi < 50) return null;
+  return parseFloat((base.edpi / yourDpi).toFixed(4));
 }
 
 /* ---------------- index page: DOM filter over prerendered cards ---------------- */
@@ -383,7 +104,7 @@ function runIndex() {
   const resSel = $("#res");
   if (!grid || !grid.querySelector(".card")) return;
 
-  const cards = [...grid.querySelectorAll(".card")];
+  const cards = [...grid.querySelectorAll(".card")];  // prerendered = recently updated order
   const state = { q: "", sort: "recent", res: "" };
 
   let empty = grid.querySelector(".empty");
@@ -393,24 +114,29 @@ function runIndex() {
     grid.appendChild(empty);
   }
 
+  const num = (c, k) => parseFloat(c.dataset[k]) || 0;
+  const SORTS = {
+    "recent": null,
+    "edpi-desc": (a, b) => num(b, "edpi") - num(a, "edpi"),
+    "edpi-asc": (a, b) => num(a, "edpi") - num(b, "edpi"),
+    "sens-desc": (a, b) => num(b, "sens") - num(a, "sens"),
+    "sens-asc": (a, b) => num(a, "sens") - num(b, "sens"),
+    "name": (a, b) => (a.dataset.nick || "").localeCompare(b.dataset.nick || ""),
+  };
+
   function apply() {
     const q = state.q.trim().toLowerCase();
     let visible = 0;
     for (const card of cards) {
-      const hay = ((card.dataset.nick || "") + " " + (card.dataset.real || "") + " " + (card.dataset.slug || "")).toLowerCase();
+      const hay = (card.dataset.nick || "") + " " + (card.dataset.real || "") + " " + (card.dataset.slug || "");
       const show = (!q || hay.includes(q)) && (!state.res || card.dataset.res === state.res);
       card.hidden = !show;
       if (show) visible++;
     }
-    const cmp = {
-      "recent": null,
-      "edpi-desc": (a, b) => (parseFloat(b.dataset.edpi) || 0) - (parseFloat(a.dataset.edpi) || 0),
-      "edpi-asc": (a, b) => (parseFloat(a.dataset.edpi) || 0) - (parseFloat(b.dataset.edpi) || 0),
-      "sens-desc": (a, b) => (parseFloat(b.dataset.sens) || 0) - (parseFloat(a.dataset.sens) || 0),
-      "sens-asc": (a, b) => (parseFloat(a.dataset.sens) || 0) - (parseFloat(b.dataset.sens) || 0),
-      "name": (a, b) => (a.dataset.nick || "").localeCompare(b.dataset.nick || ""),
-    }[state.sort];
-    if (cmp) [...cards].sort(cmp).forEach((c) => grid.appendChild(c));
+    // always re-append from the original order, so going back to "recent"
+    // undoes an earlier sort
+    const cmp = SORTS[state.sort];
+    (cmp ? [...cards].sort(cmp) : cards).forEach((c) => grid.appendChild(c));
     grid.appendChild(empty);
 
     count.textContent = `${visible} player${visible === 1 ? "" : "s"}`;
@@ -437,18 +163,20 @@ function runIndex() {
     }
   });
 
-  // restore from URL (?q= is the SearchAction sitelink target)
+  // restore from URL (?q= is the SearchAction sitelink target); ignore
+  // values the selects don't offer
   const params = new URLSearchParams(location.search);
   if (params.get("q")) { state.q = params.get("q"); input.value = state.q; }
-  if (params.get("res")) { state.res = params.get("res"); resSel.value = state.res; }
-  if (params.get("sort")) { state.sort = params.get("sort"); sortSel.value = state.sort; }
+  const res = params.get("res");
+  if (res && [...resSel.options].some((o) => o.value === res)) { state.res = res; resSel.value = res; }
+  const sort = params.get("sort");
+  if (sort && sort in SORTS) { state.sort = sort; sortSel.value = sort; }
   apply();
 }
 
 /* ---------------- static player pages: enhancement only ----------------
-   Content is prerendered; this wires the interactive bits: crosshair
-   canvases, the DPI sensitivity matcher and the "Copy all at my DPI"
-   button, all driven by the embedded #player-data JSON. */
+   Content is prerendered; this wires the DPI sensitivity matcher and the
+   "Copy all at my DPI" button from the embedded #player-data JSON. */
 
 function runPlayerStatic() {
   let data;
@@ -457,78 +185,72 @@ function runPlayerStatic() {
   } catch (_) {
     return;
   }
-  const rec = {
-    slug: data.slug,
-    nick: data.nick,
-    convars: data.convars,
-    tables: { Mouse: { DPI: data.dpi } },
-  };
-
-  /* DPI matcher widget -> #dpi-slot */
-  const dpiSlot = $("#dpi-slot");
-  const base = proEdpi(rec);
-  if (dpiSlot && base) {
-    const box = document.createElement("div");
-    box.className = "dpi-match";
-    box.innerHTML = `
-      <div class="dpi-line">
-        <label class="dpi-label">Your mouse DPI
-          <input type="number" min="50" step="50" inputmode="numeric" class="dpi-input" placeholder="e.g. 1600">
-        </label>
-        <span class="dpi-result"></span>
-        <button type="button" class="btn ghost small" data-copy-sens style="display:none"></button>
-      </div>
-      <p class="note">Matching keeps the same <b>eDPI</b> (${Math.round(base.edpi)}) — that's <b>${base.cm.toFixed(1)} cm</b> per 360° turn at any DPI. Enter your DPI and use this sensitivity instead of theirs (or use <b>Copy all at my DPI</b> in the Full config above, which rewrites the <code>sensitivity</code> line for you).</p>`;
-    dpiSlot.replaceWith(box);
-    const input = $(".dpi-input", box);
-    const result = $(".dpi-result", box);
-    const btnSens = $("[data-copy-sens]", box);
-    const saved = getUserDpi();
-    if (saved) input.value = saved;
-    const update = () => {
-      const dpi = parseInt(input.value, 10);
-      const r = sensForDpi(rec, dpi);
-      if (r) {
-        localStorage.setItem(DPI_KEY, String(dpi));
-        result.innerHTML = `→ in-game <b>sensitivity ${r.sens}</b>`;
-        btnSens.dataset.copy = `sensitivity ${r.sens}`;
-        btnSens.textContent = `Copy sensitivity ${r.sens}`;
-        btnSens.style.display = "";
-      } else {
-        result.textContent = "";
-        btnSens.style.display = "none";
-      }
-      if (window._refreshAdjusted) window._refreshAdjusted();
-    };
-    input.addEventListener("input", update);
-    if (saved) update();
-  }
+  const base = proEdpi(data.dpi, data.sens);
+  if (!base) return;
 
   /* "Copy all at my DPI" button -> #btn-mydpi-slot */
   const mySlot = $("#btn-mydpi-slot");
+  let refreshAdjusted = () => {};
   if (mySlot && Array.isArray(data.commands)) {
     const btnMy = document.createElement("button");
-    btnMy.id = "btn-copy-mydpi";
+    btnMy.type = "button";
     btnMy.className = "btn ghost small";
-    btnMy.style.display = "none";
+    btnMy.hidden = true;
     btnMy.title = "Same config, but the sensitivity line is rewritten so the speed (eDPI) matches this pro on YOUR mouse DPI";
     mySlot.appendChild(btnMy);
-    const refreshAdjusted = () => {
+    refreshAdjusted = () => {
       const dpi = getUserDpi();
-      const m = sensForDpi(rec, dpi);
-      if (m) {
+      const sens = sensForDpi(base, dpi);
+      if (sens !== null) {
         btnMy.dataset.copy = data.commands
-          .map((c) => (c.startsWith("sensitivity ") ? `sensitivity ${m.sens}` : c))
+          .map((c) => (c.startsWith("sensitivity ") ? `sensitivity ${sens}` : c))
           .join("; ");
         btnMy.textContent = `Copy all at my DPI (${dpi})`;
-        btnMy.style.display = "";
+        btnMy.hidden = false;
       } else {
-        btnMy.style.display = "none";
+        btnMy.hidden = true;
       }
     };
     refreshAdjusted();
-    window._refreshAdjusted = refreshAdjusted;
   }
+
+  /* DPI matcher widget -> #dpi-slot */
+  const dpiSlot = $("#dpi-slot");
+  if (!dpiSlot) return;
+  const box = document.createElement("div");
+  box.className = "dpi-match";
+  box.innerHTML = `
+    <div class="dpi-line">
+      <label class="dpi-label">Your mouse DPI
+        <input type="number" min="50" step="50" inputmode="numeric" class="dpi-input" placeholder="e.g. 1600">
+      </label>
+      <span class="dpi-result" aria-live="polite"></span>
+      <button type="button" class="btn ghost small" hidden></button>
+    </div>
+    <p class="note">Matching keeps the same <b>eDPI</b> (${Math.round(base.edpi)}) — that's <b>${base.cm.toFixed(1)} cm</b> per 360° turn at any DPI. Enter your DPI and use this sensitivity instead of theirs (or use <b>Copy all at my DPI</b> in the Full config above, which rewrites the <code>sensitivity</code> line for you).</p>`;
+  dpiSlot.replaceWith(box);
+  const input = $(".dpi-input", box);
+  const result = $(".dpi-result", box);
+  const btnSens = $("button", box);
+  const saved = getUserDpi();
+  if (saved) input.value = saved;
+  const update = () => {
+    const dpi = parseInt(input.value, 10);
+    const sens = sensForDpi(base, dpi);
+    if (sens !== null) {
+      store.set(DPI_KEY, String(dpi));
+      result.innerHTML = `→ in-game <b>sensitivity ${sens}</b>`;
+      btnSens.dataset.copy = `sensitivity ${sens}`;
+      btnSens.textContent = `Copy sensitivity ${sens}`;
+      btnSens.hidden = false;
+    } else {
+      result.textContent = "";
+      btnSens.hidden = true;
+    }
+    refreshAdjusted();
+  };
+  input.addEventListener("input", update);
+  if (saved) update();
 }
 
 /* ---------------- boot ---------------- */

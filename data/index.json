@@ -14,7 +14,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/donk.png"
+      "avatar": "data/avatars/donk.webp"
     },
     {
       "slug": "zywoo",
@@ -25,7 +25,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/zywoo.png"
+      "avatar": "data/avatars/zywoo.webp"
     },
     {
       "slug": "luchov",
@@ -36,7 +36,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/luchov.png"
+      "avatar": "data/avatars/luchov.webp"
     },
     {
       "slug": "latto",
@@ -47,7 +47,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/latto.png"
+      "avatar": "data/avatars/latto.webp"
     },
     {
       "slug": "m0nesy",
@@ -58,7 +58,7 @@
       "sens": "2.3",
       "edpi": 919,
       "res": "1280x960",
-      "avatar": "data/avatars/m0nesy.png"
+      "avatar": "data/avatars/m0nesy.webp"
     },
     {
       "slug": "heavygod",
@@ -69,7 +69,7 @@
       "sens": "3.1",
       "edpi": 1240,
       "res": "1920x1080",
-      "avatar": "data/avatars/heavygod.png"
+      "avatar": "data/avatars/heavygod.webp"
     },
     {
       "slug": "sh1ro",
@@ -80,7 +80,7 @@
       "sens": "1.04",
       "edpi": 832,
       "res": "1152x864",
-      "avatar": "data/avatars/sh1ro.png"
+      "avatar": "data/avatars/sh1ro.webp"
     },
     {
       "slug": "ropz",
@@ -91,7 +91,7 @@
       "sens": "1.77",
       "edpi": 708,
       "res": "1920x1080",
-      "avatar": "data/avatars/ropz.png"
+      "avatar": "data/avatars/ropz.webp"
     },
     {
       "slug": "kscerato",
@@ -102,7 +102,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/kscerato.png"
+      "avatar": "data/avatars/kscerato.webp"
     },
     {
       "slug": "w0nderful",
@@ -113,7 +113,7 @@
       "sens": "1.27",
       "edpi": 1016,
       "res": "1280x960",
-      "avatar": "data/avatars/w0nderful.png"
+      "avatar": "data/avatars/w0nderful.webp"
     },
     {
       "slug": "xertion",
@@ -124,7 +124,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1920x1080",
-      "avatar": "data/avatars/xertion.png"
+      "avatar": "data/avatars/xertion.webp"
     },
     {
       "slug": "magnojez",
@@ -135,7 +135,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1920x1080",
-      "avatar": "data/avatars/magnojez.png"
+      "avatar": "data/avatars/magnojez.webp"
     },
     {
       "slug": "flamez",
@@ -146,7 +146,7 @@
       "sens": "3",
       "edpi": 1200,
       "res": "1280x960",
-      "avatar": "data/avatars/flamez.png"
+      "avatar": "data/avatars/flamez.webp"
     },
     {
       "slug": "kyousuke",
@@ -157,7 +157,7 @@
       "sens": "1.28",
       "edpi": 1024,
       "res": "1280x960",
-      "avatar": "data/avatars/kyousuke.png"
+      "avatar": "data/avatars/kyousuke.webp"
     },
     {
       "slug": "staehr",
@@ -168,7 +168,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/staehr.png"
+      "avatar": "data/avatars/staehr.webp"
     },
     {
       "slug": "molodoy",
@@ -179,7 +179,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/molodoy.png"
+      "avatar": "data/avatars/molodoy.webp"
     },
     {
       "slug": "b1t",
@@ -190,7 +190,7 @@
       "sens": "0.825",
       "edpi": 660,
       "res": "1280x960",
-      "avatar": "data/avatars/b1t.png"
+      "avatar": "data/avatars/b1t.webp"
     },
     {
       "slug": "dumau",
@@ -201,7 +201,7 @@
       "sens": "1.16",
       "edpi": 927,
       "res": "1280x960",
-      "avatar": "data/avatars/dumau.png"
+      "avatar": "data/avatars/dumau.webp"
     },
     {
       "slug": "rez",
@@ -212,7 +212,7 @@
       "sens": "0.95",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/rez.png"
+      "avatar": "data/avatars/rez.webp"
     },
     {
       "slug": "pr",
@@ -223,7 +223,7 @@
       "sens": "1.45",
       "edpi": 580,
       "res": "1280x960",
-      "avatar": "data/avatars/pr.png"
+      "avatar": "data/avatars/pr.webp"
     },
     {
       "slug": "wicadia",
@@ -234,7 +234,7 @@
       "sens": "1.8",
       "edpi": 1440,
       "res": "1280x960",
-      "avatar": "data/avatars/wicadia.png"
+      "avatar": "data/avatars/wicadia.webp"
     },
     {
       "slug": "makazze",
@@ -245,7 +245,7 @@
       "sens": "0.75",
       "edpi": 600,
       "res": "1280x960",
-      "avatar": "data/avatars/makazze.png"
+      "avatar": "data/avatars/makazze.webp"
     },
     {
       "slug": "mzinho",
@@ -256,7 +256,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/mzinho.png"
+      "avatar": "data/avatars/mzinho.webp"
     },
     {
       "slug": "frozen",
@@ -267,7 +267,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/frozen.png"
+      "avatar": "data/avatars/frozen.webp"
     },
     {
       "slug": "910",
@@ -278,7 +278,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/910.png"
+      "avatar": "data/avatars/910.webp"
     },
     {
       "slug": "dgt",
@@ -289,7 +289,7 @@
       "sens": "0.557",
       "edpi": 222,
       "res": "1280x960",
-      "avatar": "data/avatars/dgt.png"
+      "avatar": "data/avatars/dgt.webp"
     },
     {
       "slug": "yekindar",
@@ -300,7 +300,7 @@
       "sens": "1.2",
       "edpi": 960,
       "res": "1920x1080",
-      "avatar": "data/avatars/yekindar.png"
+      "avatar": "data/avatars/yekindar.webp"
     },
     {
       "slug": "dziugss",
@@ -311,7 +311,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1280x960",
-      "avatar": "data/avatars/dziugss.png"
+      "avatar": "data/avatars/dziugss.webp"
     },
     {
       "slug": "sunpayus",
@@ -322,7 +322,7 @@
       "sens": "1.8",
       "edpi": 720,
       "res": "1280x960",
-      "avatar": "data/avatars/sunpayus.png"
+      "avatar": "data/avatars/sunpayus.webp"
     },
     {
       "slug": "xantares",
@@ -333,7 +333,7 @@
       "sens": "2.3",
       "edpi": 919,
       "res": "1024x768",
-      "avatar": "data/avatars/xantares.png"
+      "avatar": "data/avatars/xantares.webp"
     },
     {
       "slug": "im",
@@ -344,7 +344,7 @@
       "sens": "1.2",
       "edpi": 960,
       "res": "1280x960",
-      "avatar": "data/avatars/im.png"
+      "avatar": "data/avatars/im.webp"
     },
     {
       "slug": "blitz",
@@ -355,7 +355,7 @@
       "sens": "1.45",
       "edpi": 580,
       "res": "1280x1024",
-      "avatar": "data/avatars/blitz.png"
+      "avatar": "data/avatars/blitz.webp"
     },
     {
       "slug": "yuurih",
@@ -366,7 +366,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/yuurih.png"
+      "avatar": "data/avatars/yuurih.webp"
     },
     {
       "slug": "dem0n",
@@ -377,7 +377,7 @@
       "sens": "0.7",
       "edpi": 560,
       "res": "1280x960",
-      "avatar": "data/avatars/dem0n.png"
+      "avatar": "data/avatars/dem0n.webp"
     },
     {
       "slug": "npl",
@@ -388,7 +388,7 @@
       "sens": "1.3",
       "edpi": 1040,
       "res": "1280x1024",
-      "avatar": "data/avatars/npl.png"
+      "avatar": "data/avatars/npl.webp"
     },
     {
       "slug": "teses",
@@ -399,7 +399,7 @@
       "sens": "0.5",
       "edpi": 800,
       "res": "1024x768",
-      "avatar": "data/avatars/teses.png"
+      "avatar": "data/avatars/teses.webp"
     },
     {
       "slug": "tn1r",
@@ -410,7 +410,7 @@
       "sens": "0.775",
       "edpi": 620,
       "res": "1280x960",
-      "avatar": "data/avatars/tn1r.png"
+      "avatar": "data/avatars/tn1r.webp"
     },
     {
       "slug": "huasopeek",
@@ -421,7 +421,7 @@
       "sens": "0.76",
       "edpi": 608,
       "res": "1280x960",
-      "avatar": "data/avatars/huasopeek.png"
+      "avatar": "data/avatars/huasopeek.webp"
     },
     {
       "slug": "jl",
@@ -443,7 +443,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/mezii.png"
+      "avatar": "data/avatars/mezii.webp"
     },
     {
       "slug": "magixx",
@@ -454,7 +454,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/magixx.png"
+      "avatar": "data/avatars/magixx.webp"
     },
     {
       "slug": "torzsi",
@@ -465,7 +465,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/torzsi.png"
+      "avatar": "data/avatars/torzsi.webp"
     },
     {
       "slug": "fl4mus",
@@ -476,7 +476,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x1024",
-      "avatar": "data/avatars/fl4mus.png"
+      "avatar": "data/avatars/fl4mus.webp"
     },
     {
       "slug": "matys",
@@ -487,7 +487,7 @@
       "sens": "0.82",
       "edpi": 656,
       "res": "1920x1080",
-      "avatar": "data/avatars/matys.png"
+      "avatar": "data/avatars/matys.webp"
     },
     {
       "slug": "spinx",
@@ -498,7 +498,7 @@
       "sens": "1.1",
       "edpi": 990,
       "res": "1280x960",
-      "avatar": "data/avatars/spinx.png"
+      "avatar": "data/avatars/spinx.webp"
     },
     {
       "slug": "tauson",
@@ -509,7 +509,7 @@
       "sens": "0.875",
       "edpi": 700,
       "res": "1024x768",
-      "avatar": "data/avatars/tauson.png"
+      "avatar": "data/avatars/tauson.webp"
     },
     {
       "slug": "brollan",
@@ -520,7 +520,7 @@
       "sens": "1.15",
       "edpi": 919,
       "res": "1280x960",
-      "avatar": "data/avatars/brollan.png"
+      "avatar": "data/avatars/brollan.webp"
     },
     {
       "slug": "zorte",
@@ -531,7 +531,7 @@
       "sens": "0.96",
       "edpi": 768,
       "res": "1280x960",
-      "avatar": "data/avatars/zorte.png"
+      "avatar": "data/avatars/zorte.webp"
     },
     {
       "slug": "jame",
@@ -542,7 +542,7 @@
       "sens": "0.3",
       "edpi": 960,
       "res": "1280x960",
-      "avatar": "data/avatars/jame.png"
+      "avatar": "data/avatars/jame.webp"
     },
     {
       "slug": "twistzz",
@@ -553,7 +553,7 @@
       "sens": "2.3",
       "edpi": 919,
       "res": "1280x960",
-      "avatar": "data/avatars/twistzz.png"
+      "avatar": "data/avatars/twistzz.webp"
     },
     {
       "slug": "woxic",
@@ -564,7 +564,7 @@
       "sens": "1",
       "edpi": 1600,
       "res": "1280x960",
-      "avatar": "data/avatars/woxic.png"
+      "avatar": "data/avatars/woxic.webp"
     },
     {
       "slug": "kyxsan",
@@ -575,7 +575,7 @@
       "sens": "1.5",
       "edpi": 1200,
       "res": "1024x768",
-      "avatar": "data/avatars/kyxsan.png"
+      "avatar": "data/avatars/kyxsan.webp"
     },
     {
       "slug": "krabeni",
@@ -586,7 +586,7 @@
       "sens": "0.82",
       "edpi": 656,
       "res": "1152x864",
-      "avatar": "data/avatars/krabeni.png"
+      "avatar": "data/avatars/krabeni.webp"
     },
     {
       "slug": "soulfly",
@@ -597,7 +597,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1024x768",
-      "avatar": "data/avatars/soulfly.png"
+      "avatar": "data/avatars/soulfly.webp"
     },
     {
       "slug": "xelex",
@@ -608,7 +608,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1280x960",
-      "avatar": "data/avatars/xelex.png"
+      "avatar": "data/avatars/xelex.webp"
     },
     {
       "slug": "boombl4",
@@ -619,7 +619,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1280x960",
-      "avatar": "data/avatars/boombl4.png"
+      "avatar": "data/avatars/boombl4.webp"
     },
     {
       "slug": "art",
@@ -630,7 +630,7 @@
       "sens": "1.45",
       "edpi": 1160,
       "res": "1280x960",
-      "avatar": "data/avatars/art.png"
+      "avatar": "data/avatars/art.webp"
     },
     {
       "slug": "apex",
@@ -641,7 +641,7 @@
       "sens": "1.91",
       "edpi": 764,
       "res": "1280x960",
-      "avatar": "data/avatars/apex.png"
+      "avatar": "data/avatars/apex.webp"
     },
     {
       "slug": "saadzin",
@@ -652,7 +652,7 @@
       "sens": "0.9",
       "edpi": 1440,
       "res": "1280x1024",
-      "avatar": "data/avatars/saadzin.png"
+      "avatar": "data/avatars/saadzin.webp"
     },
     {
       "slug": "nertz",
@@ -663,7 +663,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/nertz.png"
+      "avatar": "data/avatars/nertz.webp"
     },
     {
       "slug": "neityu",
@@ -674,7 +674,7 @@
       "sens": "1.15",
       "edpi": 919,
       "res": "1280x1024",
-      "avatar": "data/avatars/neityu.png"
+      "avatar": "data/avatars/neityu.webp"
     },
     {
       "slug": "zont1x",
@@ -685,7 +685,7 @@
       "sens": "0.525",
       "edpi": 840,
       "res": "1024x768",
-      "avatar": "data/avatars/zont1x.png"
+      "avatar": "data/avatars/zont1x.webp"
     },
     {
       "slug": "meyern",
@@ -696,7 +696,7 @@
       "sens": "2.25",
       "edpi": 900,
       "res": "1280x960",
-      "avatar": "data/avatars/meyern.png"
+      "avatar": "data/avatars/meyern.webp"
     },
     {
       "slug": "hunter-",
@@ -707,7 +707,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1350x1080",
-      "avatar": "data/avatars/hunter-.png"
+      "avatar": "data/avatars/hunter-.webp"
     },
     {
       "slug": "xielo",
@@ -718,7 +718,7 @@
       "sens": "2.3",
       "edpi": 919,
       "res": "1280x960",
-      "avatar": "data/avatars/xielo.png"
+      "avatar": "data/avatars/xielo.webp"
     },
     {
       "slug": "fallen",
@@ -729,7 +729,7 @@
       "sens": "1.95",
       "edpi": 780,
       "res": "1280x960",
-      "avatar": "data/avatars/fallen.png"
+      "avatar": "data/avatars/fallen.webp"
     },
     {
       "slug": "zweih",
@@ -740,7 +740,7 @@
       "sens": "1.28",
       "edpi": 1024,
       "res": "1280x960",
-      "avatar": "data/avatars/zweih.png"
+      "avatar": "data/avatars/zweih.webp"
     },
     {
       "slug": "broky",
@@ -751,7 +751,7 @@
       "sens": "1.9",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/broky.png"
+      "avatar": "data/avatars/broky.webp"
     },
     {
       "slug": "cmtry",
@@ -762,7 +762,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1024x768",
-      "avatar": "data/avatars/cmtry.png"
+      "avatar": "data/avatars/cmtry.webp"
     },
     {
       "slug": "nota",
@@ -773,7 +773,7 @@
       "sens": "1.23",
       "edpi": 984,
       "res": "1280x960",
-      "avatar": "data/avatars/nota.png"
+      "avatar": "data/avatars/nota.webp"
     },
     {
       "slug": "maj3r",
@@ -784,7 +784,7 @@
       "sens": "1.45",
       "edpi": 1160,
       "res": "1280x960",
-      "avatar": "data/avatars/maj3r.png"
+      "avatar": "data/avatars/maj3r.webp"
     },
     {
       "slug": "launx",
@@ -795,7 +795,7 @@
       "sens": "1.4",
       "edpi": 1120,
       "res": "1024x768",
-      "avatar": "data/avatars/launx.png"
+      "avatar": "data/avatars/launx.webp"
     },
     {
       "slug": "max",
@@ -806,7 +806,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1920x1080",
-      "avatar": "data/avatars/max.png"
+      "avatar": "data/avatars/max.webp"
     },
     {
       "slug": "aleksib",
@@ -817,7 +817,7 @@
       "sens": "1.06",
       "edpi": 848,
       "res": "1440x1080",
-      "avatar": "data/avatars/aleksib.png"
+      "avatar": "data/avatars/aleksib.webp"
     },
     {
       "slug": "jcobbb",
@@ -828,7 +828,7 @@
       "sens": "1.11",
       "edpi": 888,
       "res": "1280x960",
-      "avatar": "data/avatars/jcobbb.png"
+      "avatar": "data/avatars/jcobbb.webp"
     },
     {
       "slug": "belchonokk",
@@ -839,7 +839,7 @@
       "sens": "1.15",
       "edpi": 919,
       "res": "1280x960",
-      "avatar": "data/avatars/belchonokk.png"
+      "avatar": "data/avatars/belchonokk.webp"
     },
     {
       "slug": "alex666",
@@ -850,7 +850,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1280x960",
-      "avatar": "data/avatars/alex666.png"
+      "avatar": "data/avatars/alex666.webp"
     },
     {
       "slug": "kensizor",
@@ -861,7 +861,7 @@
       "sens": "0.83",
       "edpi": 664,
       "res": "1280x960",
-      "avatar": "data/avatars/kensizor.png"
+      "avatar": "data/avatars/kensizor.webp"
     },
     {
       "slug": "snax",
@@ -872,7 +872,7 @@
       "sens": "1.9",
       "edpi": 760,
       "res": "1280x800",
-      "avatar": "data/avatars/snax.png"
+      "avatar": "data/avatars/snax.webp"
     },
     {
       "slug": "n1ssim",
@@ -883,7 +883,7 @@
       "sens": "1.77",
       "edpi": 708,
       "res": "1920x1080",
-      "avatar": "data/avatars/n1ssim.png"
+      "avatar": "data/avatars/n1ssim.webp"
     },
     {
       "slug": "esenthial",
@@ -894,7 +894,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/esenthial.png"
+      "avatar": "data/avatars/esenthial.webp"
     },
     {
       "slug": "karrigan",
@@ -905,7 +905,7 @@
       "sens": "0.95",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/karrigan.png"
+      "avatar": "data/avatars/karrigan.webp"
     },
     {
       "slug": "rainwaker",
@@ -916,7 +916,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/rainwaker.png"
+      "avatar": "data/avatars/rainwaker.webp"
     },
     {
       "slug": "afro",
@@ -927,7 +927,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1600x900",
-      "avatar": "data/avatars/afro.png"
+      "avatar": "data/avatars/afro.webp"
     },
     {
       "slug": "jabbi",
@@ -938,7 +938,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1280x960",
-      "avatar": "data/avatars/jabbi.png"
+      "avatar": "data/avatars/jabbi.webp"
     },
     {
       "slug": "s1ren",
@@ -949,7 +949,7 @@
       "sens": "1.2",
       "edpi": 960,
       "res": "1024x768",
-      "avatar": "data/avatars/s1ren.png"
+      "avatar": "data/avatars/s1ren.webp"
     },
     {
       "slug": "azuwu",
@@ -960,7 +960,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/azuwu.png"
+      "avatar": "data/avatars/azuwu.webp"
     },
     {
       "slug": "phzy",
@@ -971,7 +971,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/phzy.png"
+      "avatar": "data/avatars/phzy.webp"
     },
     {
       "slug": "gizmy",
@@ -982,7 +982,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/gizmy.png"
+      "avatar": "data/avatars/gizmy.webp"
     },
     {
       "slug": "ryu",
@@ -993,7 +993,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/ryu.png"
+      "avatar": "data/avatars/ryu.webp"
     },
     {
       "slug": "hooxi",
@@ -1004,7 +1004,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1280x768",
-      "avatar": "data/avatars/hooxi.png"
+      "avatar": "data/avatars/hooxi.webp"
     },
     {
       "slug": "bymas",
@@ -1015,7 +1015,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/bymas.png"
+      "avatar": "data/avatars/bymas.webp"
     },
     {
       "slug": "jimpphat",
@@ -1026,7 +1026,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1280x960",
-      "avatar": "data/avatars/jimpphat.png"
+      "avatar": "data/avatars/jimpphat.webp"
     },
     {
       "slug": "misutaaa",
@@ -1037,7 +1037,7 @@
       "sens": "1.42",
       "edpi": 568,
       "res": "1280x960",
-      "avatar": "data/avatars/misutaaa.png"
+      "avatar": "data/avatars/misutaaa.webp"
     },
     {
       "slug": "maka",
@@ -1048,7 +1048,7 @@
       "sens": "1.323",
       "edpi": 1058,
       "res": "1280x960",
-      "avatar": "data/avatars/maka.png"
+      "avatar": "data/avatars/maka.webp"
     },
     {
       "slug": "graviti",
@@ -1059,7 +1059,7 @@
       "sens": "1.36",
       "edpi": 1088,
       "res": "1280x960",
-      "avatar": "data/avatars/graviti.png"
+      "avatar": "data/avatars/graviti.webp"
     },
     {
       "slug": "ex3rcice",
@@ -1070,7 +1070,7 @@
       "sens": "1",
       "edpi": 400,
       "res": "1280x960",
-      "avatar": "data/avatars/ex3rcice.png"
+      "avatar": "data/avatars/ex3rcice.webp"
     },
     {
       "slug": "nilo",
@@ -1081,7 +1081,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1280x960",
-      "avatar": "data/avatars/nilo.png"
+      "avatar": "data/avatars/nilo.webp"
     },
     {
       "slug": "xfl0ud",
@@ -1092,7 +1092,7 @@
       "sens": "1.39",
       "edpi": 1112,
       "res": "1280x960",
-      "avatar": "data/avatars/xfl0ud.png"
+      "avatar": "data/avatars/xfl0ud.webp"
     },
     {
       "slug": "chr1zn",
@@ -1103,7 +1103,7 @@
       "sens": "0.79",
       "edpi": 1264,
       "res": "1920x1080",
-      "avatar": "data/avatars/chr1zn.png"
+      "avatar": "data/avatars/chr1zn.webp"
     },
     {
       "slug": "susp",
@@ -1114,7 +1114,7 @@
       "sens": "0.65",
       "edpi": 520,
       "res": "1280x960",
-      "avatar": "data/avatars/susp.png"
+      "avatar": "data/avatars/susp.webp"
     },
     {
       "slug": "yxngstxr",
@@ -1125,7 +1125,7 @@
       "sens": "1.02",
       "edpi": 816,
       "res": "1280x960",
-      "avatar": "data/avatars/yxngstxr.png"
+      "avatar": "data/avatars/yxngstxr.webp"
     },
     {
       "slug": "piriajr",
@@ -1136,7 +1136,7 @@
       "sens": "2",
       "edpi": 1600,
       "res": "1280x960",
-      "avatar": "data/avatars/piriajr.png"
+      "avatar": "data/avatars/piriajr.webp"
     },
     {
       "slug": "snow",
@@ -1147,7 +1147,7 @@
       "sens": "0.8",
       "edpi": 640,
       "res": "1280x960",
-      "avatar": "data/avatars/snow.png"
+      "avatar": "data/avatars/snow.webp"
     },
     {
       "slug": "biguzera",
@@ -1158,7 +1158,7 @@
       "sens": "1.75",
       "edpi": 700,
       "res": "1280x960",
-      "avatar": "data/avatars/biguzera.png"
+      "avatar": "data/avatars/biguzera.webp"
     },
     {
       "slug": "vsm",
@@ -1169,7 +1169,7 @@
       "sens": "1.2",
       "edpi": 960,
       "res": "1280x960",
-      "avatar": "data/avatars/vsm.png"
+      "avatar": "data/avatars/vsm.webp"
     },
     {
       "slug": "elige",
@@ -1180,7 +1180,7 @@
       "sens": "0.74",
       "edpi": 1184,
       "res": "1680x1050",
-      "avatar": "data/avatars/elige.png"
+      "avatar": "data/avatars/elige.webp"
     },
     {
       "slug": "jamyoung",
@@ -1191,7 +1191,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/jamyoung.png"
+      "avatar": "data/avatars/jamyoung.webp"
     },
     {
       "slug": "grim",
@@ -1202,7 +1202,7 @@
       "sens": "0.72",
       "edpi": 576,
       "res": "1920x1080",
-      "avatar": "data/avatars/grim.png"
+      "avatar": "data/avatars/grim.webp"
     },
     {
       "slug": "br0",
@@ -1213,7 +1213,7 @@
       "sens": "1.3",
       "edpi": 1040,
       "res": "1280x960",
-      "avatar": "data/avatars/br0.png"
+      "avatar": "data/avatars/br0.webp"
     },
     {
       "slug": "ultimate",
@@ -1224,7 +1224,7 @@
       "sens": "0.95",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/ultimate.png"
+      "avatar": "data/avatars/ultimate.webp"
     },
     {
       "slug": "moseyuh",
@@ -1235,7 +1235,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/moseyuh.png"
+      "avatar": "data/avatars/moseyuh.webp"
     },
     {
       "slug": "osee",
@@ -1246,7 +1246,7 @@
       "sens": "0.25",
       "edpi": 400,
       "res": "1920x1080",
-      "avatar": "data/avatars/osee.png"
+      "avatar": "data/avatars/osee.webp"
     },
     {
       "slug": "malbsmd",
@@ -1257,7 +1257,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/malbsmd.png"
+      "avatar": "data/avatars/malbsmd.webp"
     },
     {
       "slug": "naf",
@@ -1268,7 +1268,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1280x960",
-      "avatar": "data/avatars/naf.png"
+      "avatar": "data/avatars/naf.webp"
     },
     {
       "slug": "jee",
@@ -1279,7 +1279,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/jee.png"
+      "avatar": "data/avatars/jee.webp"
     },
     {
       "slug": "tak",
@@ -1290,7 +1290,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/tak.png"
+      "avatar": "data/avatars/tak.webp"
     },
     {
       "slug": "siuhy",
@@ -1301,7 +1301,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1920x1080",
-      "avatar": "data/avatars/siuhy.png"
+      "avatar": "data/avatars/siuhy.webp"
     },
     {
       "slug": "nitr0",
@@ -1312,7 +1312,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1680x1050",
-      "avatar": "data/avatars/nitr0.png"
+      "avatar": "data/avatars/nitr0.webp"
     },
     {
       "slug": "nqz",
@@ -1323,7 +1323,7 @@
       "sens": "0.95",
       "edpi": 760,
       "res": "1024x768",
-      "avatar": "data/avatars/nqz.png"
+      "avatar": "data/avatars/nqz.webp"
     },
     {
       "slug": "bodyy",
@@ -1334,7 +1334,7 @@
       "sens": "2.7",
       "edpi": 1080,
       "res": "1280x1024",
-      "avatar": "data/avatars/bodyy.png"
+      "avatar": "data/avatars/bodyy.webp"
     },
     {
       "slug": "kvem",
@@ -1345,7 +1345,7 @@
       "sens": "3",
       "edpi": 1200,
       "res": "1280x960",
-      "avatar": "data/avatars/kvem.png"
+      "avatar": "data/avatars/kvem.webp"
     },
     {
       "slug": "jt",
@@ -1356,7 +1356,7 @@
       "sens": "2.8",
       "edpi": 1120,
       "res": "1280x960",
-      "avatar": "data/avatars/jt.png"
+      "avatar": "data/avatars/jt.webp"
     },
     {
       "slug": "nicx",
@@ -1367,7 +1367,7 @@
       "sens": "1.4",
       "edpi": 1400,
       "res": "1680x1050",
-      "avatar": "data/avatars/nicx.png"
+      "avatar": "data/avatars/nicx.webp"
     },
     {
       "slug": "jeorge",
@@ -1378,7 +1378,7 @@
       "sens": "0.95",
       "edpi": 760,
       "res": "1920x1080",
-      "avatar": "data/avatars/jeorge.png"
+      "avatar": "data/avatars/jeorge.webp"
     },
     {
       "slug": "controlez",
@@ -1389,7 +1389,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1024x768",
-      "avatar": "data/avatars/controlez.png"
+      "avatar": "data/avatars/controlez.webp"
     },
     {
       "slug": "hallzerk",
@@ -1400,7 +1400,7 @@
       "sens": "1.8",
       "edpi": 720,
       "res": "1152x864",
-      "avatar": "data/avatars/hallzerk.png"
+      "avatar": "data/avatars/hallzerk.webp"
     },
     {
       "slug": "headtr1ck",
@@ -1411,7 +1411,7 @@
       "sens": "2.3",
       "edpi": 919,
       "res": "1280x960",
-      "avatar": "data/avatars/headtr1ck.png"
+      "avatar": "data/avatars/headtr1ck.webp"
     },
     {
       "slug": "chopper",
@@ -1422,7 +1422,7 @@
       "sens": "1.9",
       "edpi": 760,
       "res": "1024x768",
-      "avatar": "data/avatars/chopper.png"
+      "avatar": "data/avatars/chopper.webp"
     },
     {
       "slug": "attacker",
@@ -1433,7 +1433,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1280x960",
-      "avatar": "data/avatars/attacker.png"
+      "avatar": "data/avatars/attacker.webp"
     },
     {
       "slug": "magisk",
@@ -1444,7 +1444,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/magisk.png"
+      "avatar": "data/avatars/magisk.webp"
     },
     {
       "slug": "device",
@@ -1455,7 +1455,7 @@
       "sens": "1.2",
       "edpi": 960,
       "res": "1280x960",
-      "avatar": "data/avatars/device.png"
+      "avatar": "data/avatars/device.webp"
     },
     {
       "slug": "fame",
@@ -1466,7 +1466,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/fame.png"
+      "avatar": "data/avatars/fame.webp"
     },
     {
       "slug": "fl1t",
@@ -1477,7 +1477,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/fl1t.png"
+      "avatar": "data/avatars/fl1t.webp"
     },
     {
       "slug": "perfecto",
@@ -1488,7 +1488,7 @@
       "sens": "1.11",
       "edpi": 888,
       "res": "1280x960",
-      "avatar": "data/avatars/perfecto.png"
+      "avatar": "data/avatars/perfecto.webp"
     },
     {
       "slug": "lnz",
@@ -1499,7 +1499,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1024x768",
-      "avatar": "data/avatars/lnz.png"
+      "avatar": "data/avatars/lnz.webp"
     },
     {
       "slug": "jottaaa",
@@ -1510,7 +1510,7 @@
       "sens": "3.4",
       "edpi": 1360,
       "res": "1280x960",
-      "avatar": "data/avatars/jottaaa.png"
+      "avatar": "data/avatars/jottaaa.webp"
     },
     {
       "slug": "lux",
@@ -1521,7 +1521,7 @@
       "sens": "0.99",
       "edpi": 396,
       "res": "1280x960",
-      "avatar": "data/avatars/lux.png"
+      "avatar": "data/avatars/lux.webp"
     },
     {
       "slug": "aragornn",
@@ -1532,7 +1532,7 @@
       "sens": "0.85",
       "edpi": 680,
       "res": "1280x960",
-      "avatar": "data/avatars/aragornn.png"
+      "avatar": "data/avatars/aragornn.webp"
     },
     {
       "slug": "ag1l",
@@ -1543,7 +1543,7 @@
       "sens": "1.46",
       "edpi": 584,
       "res": "1280x960",
-      "avatar": "data/avatars/ag1l.png"
+      "avatar": "data/avatars/ag1l.webp"
     },
     {
       "slug": "story",
@@ -1554,7 +1554,7 @@
       "sens": "1.35",
       "edpi": 1080,
       "res": "1280x960",
-      "avatar": "data/avatars/story.png"
+      "avatar": "data/avatars/story.webp"
     },
     {
       "slug": "mutiris",
@@ -1565,7 +1565,7 @@
       "sens": "2.82",
       "edpi": 1128,
       "res": "1280x960",
-      "avatar": "data/avatars/mutiris.png"
+      "avatar": "data/avatars/mutiris.webp"
     },
     {
       "slug": "ztr",
@@ -1576,7 +1576,7 @@
       "sens": "1.55",
       "edpi": 620,
       "res": "1024x768",
-      "avatar": "data/avatars/ztr.png"
+      "avatar": "data/avatars/ztr.webp"
     },
     {
       "slug": "krazy",
@@ -1587,7 +1587,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/krazy.png"
+      "avatar": "data/avatars/krazy.webp"
     },
     {
       "slug": "rain",
@@ -1598,7 +1598,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1280x960",
-      "avatar": "data/avatars/rain.png"
+      "avatar": "data/avatars/rain.webp"
     },
     {
       "slug": "senzu",
@@ -1609,7 +1609,7 @@
       "sens": "3",
       "edpi": 1200,
       "res": "1280x960",
-      "avatar": "data/avatars/senzu.png"
+      "avatar": "data/avatars/senzu.webp"
     },
     {
       "slug": "n0rb3r7",
@@ -1620,7 +1620,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x800",
-      "avatar": "data/avatars/n0rb3r7.png"
+      "avatar": "data/avatars/n0rb3r7.webp"
     },
     {
       "slug": "dav1g",
@@ -1631,7 +1631,7 @@
       "sens": "1.8",
       "edpi": 720,
       "res": "1920x1080",
-      "avatar": "data/avatars/dav1g.png"
+      "avatar": "data/avatars/dav1g.webp"
     },
     {
       "slug": "martinezsa",
@@ -1642,7 +1642,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/martinezsa.png"
+      "avatar": "data/avatars/martinezsa.webp"
     },
     {
       "slug": "sausol",
@@ -1653,7 +1653,7 @@
       "sens": "1.13",
       "edpi": 903,
       "res": "1280x960",
-      "avatar": "data/avatars/sausol.png"
+      "avatar": "data/avatars/sausol.webp"
     },
     {
       "slug": "mopoz",
@@ -1664,7 +1664,7 @@
       "sens": "1.4",
       "edpi": 560,
       "res": "1440x900",
-      "avatar": "data/avatars/mopoz.png"
+      "avatar": "data/avatars/mopoz.webp"
     },
     {
       "slug": "alex",
@@ -1675,7 +1675,7 @@
       "sens": "1",
       "edpi": 400,
       "res": "1024x768",
-      "avatar": "data/avatars/alex.png"
+      "avatar": "data/avatars/alex.webp"
     },
     {
       "slug": "kursy",
@@ -1686,7 +1686,7 @@
       "sens": "2",
       "edpi": 800,
       "res": null,
-      "avatar": "data/avatars/kursy.png"
+      "avatar": "data/avatars/kursy.webp"
     },
     {
       "slug": "icy",
@@ -1697,7 +1697,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/icy.png"
+      "avatar": "data/avatars/icy.webp"
     },
     {
       "slug": "stavn",
@@ -1708,7 +1708,7 @@
       "sens": "2.5",
       "edpi": 1000,
       "res": "800x600",
-      "avatar": "data/avatars/stavn.png"
+      "avatar": "data/avatars/stavn.webp"
     },
     {
       "slug": "jdc",
@@ -1719,7 +1719,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/jdc.png"
+      "avatar": "data/avatars/jdc.webp"
     },
     {
       "slug": "degster",
@@ -1741,7 +1741,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1440x1080",
-      "avatar": "data/avatars/skullz.png"
+      "avatar": "data/avatars/skullz.webp"
     },
     {
       "slug": "jks",
@@ -1752,7 +1752,7 @@
       "sens": "1.85",
       "edpi": 740,
       "res": "1920x1080",
-      "avatar": "data/avatars/jks.png"
+      "avatar": "data/avatars/jks.webp"
     },
     {
       "slug": "insani",
@@ -1763,7 +1763,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x1024",
-      "avatar": "data/avatars/insani.png"
+      "avatar": "data/avatars/insani.webp"
     },
     {
       "slug": "krimbo",
@@ -1774,7 +1774,7 @@
       "sens": "2.1",
       "edpi": 840,
       "res": "1280x960",
-      "avatar": "data/avatars/krimbo.png"
+      "avatar": "data/avatars/krimbo.webp"
     },
     {
       "slug": "chelo",
@@ -1785,7 +1785,7 @@
       "sens": "3.3",
       "edpi": 1320,
       "res": "1280x960",
-      "avatar": "data/avatars/chelo.png"
+      "avatar": "data/avatars/chelo.webp"
     },
     {
       "slug": "sl3nd",
@@ -1796,7 +1796,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1280x1024",
-      "avatar": "data/avatars/sl3nd.png"
+      "avatar": "data/avatars/sl3nd.webp"
     },
     {
       "slug": "hyped",
@@ -1807,7 +1807,7 @@
       "sens": "0.95",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/hyped.png"
+      "avatar": "data/avatars/hyped.webp"
     },
     {
       "slug": "saffee",
@@ -1818,7 +1818,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/saffee.png"
+      "avatar": "data/avatars/saffee.webp"
     },
     {
       "slug": "exit",
@@ -1829,7 +1829,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/exit.png"
+      "avatar": "data/avatars/exit.webp"
     },
     {
       "slug": "tabsen",
@@ -1840,7 +1840,7 @@
       "sens": "1.45",
       "edpi": 1160,
       "res": "1280x960",
-      "avatar": "data/avatars/tabsen.png"
+      "avatar": "data/avatars/tabsen.webp"
     },
     {
       "slug": "kyuubii",
@@ -1851,7 +1851,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/kyuubii.png"
+      "avatar": "data/avatars/kyuubii.webp"
     },
     {
       "slug": "cadian",
@@ -1862,7 +1862,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/cadian.png"
+      "avatar": "data/avatars/cadian.webp"
     },
     {
       "slug": "kauez",
@@ -1873,7 +1873,7 @@
       "sens": "2.5",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/kauez.png"
+      "avatar": "data/avatars/kauez.webp"
     },
     {
       "slug": "electronic",
@@ -1884,7 +1884,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1280x1024",
-      "avatar": "data/avatars/electronic.png"
+      "avatar": "data/avatars/electronic.webp"
     },
     {
       "slug": "lucaozy",
@@ -1895,7 +1895,7 @@
       "sens": "1",
       "edpi": 400,
       "res": "1280x960",
-      "avatar": "data/avatars/lucaozy.png"
+      "avatar": "data/avatars/lucaozy.webp"
     },
     {
       "slug": "shr",
@@ -1917,7 +1917,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1280x960",
-      "avatar": "data/avatars/jba.png"
+      "avatar": "data/avatars/jba.webp"
     },
     {
       "slug": "djoko",
@@ -1928,7 +1928,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x1024",
-      "avatar": "data/avatars/djoko.png"
+      "avatar": "data/avatars/djoko.webp"
     },
     {
       "slug": "stanislaw",
@@ -1939,7 +1939,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1680x1050",
-      "avatar": "data/avatars/stanislaw.png"
+      "avatar": "data/avatars/stanislaw.webp"
     },
     {
       "slug": "drop",
@@ -1950,7 +1950,7 @@
       "sens": "2.3",
       "edpi": 919,
       "res": "1280x960",
-      "avatar": "data/avatars/drop.png"
+      "avatar": "data/avatars/drop.webp"
     },
     {
       "slug": "sjuush",
@@ -1961,7 +1961,7 @@
       "sens": "1.11",
       "edpi": 888,
       "res": "1440x1080",
-      "avatar": "data/avatars/sjuush.png"
+      "avatar": "data/avatars/sjuush.webp"
     },
     {
       "slug": "volt",
@@ -1972,7 +1972,7 @@
       "sens": "1.6",
       "edpi": 2560,
       "res": "1280x960",
-      "avatar": "data/avatars/volt.png"
+      "avatar": "data/avatars/volt.webp"
     },
     {
       "slug": "syrson",
@@ -1994,7 +1994,7 @@
       "sens": "1.62",
       "edpi": 648,
       "res": "1024x768",
-      "avatar": "data/avatars/jackz.png"
+      "avatar": "data/avatars/jackz.webp"
     },
     {
       "slug": "rigon",
@@ -2005,7 +2005,7 @@
       "sens": "0.8",
       "edpi": 320,
       "res": "1440x1080",
-      "avatar": "data/avatars/rigon.png"
+      "avatar": "data/avatars/rigon.webp"
     },
     {
       "slug": "cptkurtka023",
@@ -2016,7 +2016,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/cptkurtka023.png"
+      "avatar": "data/avatars/cptkurtka023.webp"
     },
     {
       "slug": "ewjerkz",
@@ -2027,7 +2027,7 @@
       "sens": "1.65",
       "edpi": 660,
       "res": "1280x960",
-      "avatar": "data/avatars/ewjerkz.png"
+      "avatar": "data/avatars/ewjerkz.webp"
     },
     {
       "slug": "floppy",
@@ -2049,7 +2049,7 @@
       "sens": "2.5",
       "edpi": 2000,
       "res": "1280x960",
-      "avatar": "data/avatars/calyx.png"
+      "avatar": "data/avatars/calyx.webp"
     },
     {
       "slug": "try",
@@ -2060,7 +2060,7 @@
       "sens": "2.909",
       "edpi": 1163,
       "res": "1280x960",
-      "avatar": "data/avatars/try.png"
+      "avatar": "data/avatars/try.webp"
     },
     {
       "slug": "decenty",
@@ -2071,7 +2071,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/decenty.png"
+      "avatar": "data/avatars/decenty.webp"
     },
     {
       "slug": "vini",
@@ -2082,7 +2082,7 @@
       "sens": "1.2",
       "edpi": 960,
       "res": "1920x1080",
-      "avatar": "data/avatars/vini.png"
+      "avatar": "data/avatars/vini.webp"
     },
     {
       "slug": "felps",
@@ -2093,7 +2093,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1024x768",
-      "avatar": "data/avatars/felps.png"
+      "avatar": "data/avatars/felps.webp"
     },
     {
       "slug": "noway",
@@ -2104,7 +2104,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/noway.png"
+      "avatar": "data/avatars/noway.webp"
     },
     {
       "slug": "maden",
@@ -2115,7 +2115,7 @@
       "sens": "1.7",
       "edpi": 1360,
       "res": "1280x960",
-      "avatar": "data/avatars/maden.png"
+      "avatar": "data/avatars/maden.webp"
     },
     {
       "slug": "dupreeh",
@@ -2137,7 +2137,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/snappi.png"
+      "avatar": "data/avatars/snappi.webp"
     },
     {
       "slug": "brnz4n",
@@ -2148,7 +2148,7 @@
       "sens": "1",
       "edpi": 400,
       "res": "1280x960",
-      "avatar": "data/avatars/brnz4n.png"
+      "avatar": "data/avatars/brnz4n.webp"
     },
     {
       "slug": "samey",
@@ -2159,7 +2159,7 @@
       "sens": "2.3",
       "edpi": 919,
       "res": null,
-      "avatar": "data/avatars/samey.png"
+      "avatar": "data/avatars/samey.webp"
     },
     {
       "slug": "arrozdoce",
@@ -2170,7 +2170,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x800",
-      "avatar": "data/avatars/arrozdoce.png"
+      "avatar": "data/avatars/arrozdoce.webp"
     },
     {
       "slug": "buda",
@@ -2181,7 +2181,7 @@
       "sens": "1.1",
       "edpi": 440,
       "res": "1280x960",
-      "avatar": "data/avatars/buda.png"
+      "avatar": "data/avatars/buda.webp"
     },
     {
       "slug": "nexa",
@@ -2192,7 +2192,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1024x768",
-      "avatar": "data/avatars/nexa.png"
+      "avatar": "data/avatars/nexa.webp"
     },
     {
       "slug": "kair0n-",
@@ -2203,7 +2203,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1440x1080",
-      "avatar": "data/avatars/kair0n-.png"
+      "avatar": "data/avatars/kair0n-.webp"
     },
     {
       "slug": "nafany",
@@ -2214,7 +2214,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/nafany.png"
+      "avatar": "data/avatars/nafany.webp"
     },
     {
       "slug": "hen1",
@@ -2225,7 +2225,7 @@
       "sens": "2.7",
       "edpi": 1080,
       "res": "1152x864",
-      "avatar": "data/avatars/hen1.png"
+      "avatar": "data/avatars/hen1.webp"
     },
     {
       "slug": "nicoodoz",
@@ -2236,7 +2236,7 @@
       "sens": "0.625",
       "edpi": 500,
       "res": "1280x960",
-      "avatar": "data/avatars/nicoodoz.png"
+      "avatar": "data/avatars/nicoodoz.webp"
     },
     {
       "slug": "nyezin",
@@ -2247,7 +2247,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/nyezin.png"
+      "avatar": "data/avatars/nyezin.webp"
     },
     {
       "slug": "ax1le",
@@ -2258,7 +2258,7 @@
       "sens": "1.5",
       "edpi": 1200,
       "res": "1280x960",
-      "avatar": "data/avatars/ax1le.png"
+      "avatar": "data/avatars/ax1le.webp"
     },
     {
       "slug": "hobbit",
@@ -2269,7 +2269,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/hobbit.png"
+      "avatar": "data/avatars/hobbit.webp"
     },
     {
       "slug": "isak",
@@ -2280,7 +2280,7 @@
       "sens": "1.82",
       "edpi": 1456,
       "res": "1920x1080",
-      "avatar": "data/avatars/isak.png"
+      "avatar": "data/avatars/isak.webp"
     },
     {
       "slug": "mir",
@@ -2291,7 +2291,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1024x768",
-      "avatar": "data/avatars/mir.png"
+      "avatar": "data/avatars/mir.webp"
     },
     {
       "slug": "acor",
@@ -2302,7 +2302,7 @@
       "sens": "1",
       "edpi": 400,
       "res": "1280x960",
-      "avatar": "data/avatars/acor.png"
+      "avatar": "data/avatars/acor.webp"
     },
     {
       "slug": "keoz",
@@ -2313,7 +2313,7 @@
       "sens": "1.77",
       "edpi": 708,
       "res": "1280x960",
-      "avatar": "data/avatars/keoz.png"
+      "avatar": "data/avatars/keoz.webp"
     },
     {
       "slug": "boros",
@@ -2324,7 +2324,7 @@
       "sens": "2.3",
       "edpi": 919,
       "res": "1280x960",
-      "avatar": "data/avatars/boros.png"
+      "avatar": "data/avatars/boros.webp"
     },
     {
       "slug": "hades",
@@ -2335,7 +2335,7 @@
       "sens": "2.4",
       "edpi": 960,
       "res": "1280x960",
-      "avatar": "data/avatars/hades.png"
+      "avatar": "data/avatars/hades.webp"
     },
     {
       "slug": "kylar",
@@ -2346,7 +2346,7 @@
       "sens": "1.84",
       "edpi": 736,
       "res": "1920x1080",
-      "avatar": "data/avatars/kylar.png"
+      "avatar": "data/avatars/kylar.webp"
     },
     {
       "slug": "goofy",
@@ -2379,7 +2379,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1280x960",
-      "avatar": "data/avatars/dycha.png"
+      "avatar": "data/avatars/dycha.webp"
     },
     {
       "slug": "prosus",
@@ -2390,7 +2390,7 @@
       "sens": "2.1",
       "edpi": 840,
       "res": "1280x960",
-      "avatar": "data/avatars/prosus.png"
+      "avatar": "data/avatars/prosus.webp"
     },
     {
       "slug": "blamef",
@@ -2401,7 +2401,7 @@
       "sens": "1.51",
       "edpi": 604,
       "res": "1280x960",
-      "avatar": "data/avatars/blamef.png"
+      "avatar": "data/avatars/blamef.webp"
     },
     {
       "slug": "zevy",
@@ -2412,7 +2412,7 @@
       "sens": "1.6",
       "edpi": 1280,
       "res": "1280x960",
-      "avatar": "data/avatars/zevy.png"
+      "avatar": "data/avatars/zevy.webp"
     },
     {
       "slug": "pkl",
@@ -2423,7 +2423,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1152x864",
-      "avatar": "data/avatars/pkl.png"
+      "avatar": "data/avatars/pkl.webp"
     },
     {
       "slug": "jackinho",
@@ -2434,7 +2434,7 @@
       "sens": "2.1",
       "edpi": 840,
       "res": "1280x960",
-      "avatar": "data/avatars/jackinho.png"
+      "avatar": "data/avatars/jackinho.webp"
     },
     {
       "slug": "adamb",
@@ -2445,7 +2445,7 @@
       "sens": "0.42",
       "edpi": 336,
       "res": "1920x1080",
-      "avatar": "data/avatars/adamb.png"
+      "avatar": "data/avatars/adamb.webp"
     },
     {
       "slug": "r1nkle",
@@ -2456,7 +2456,7 @@
       "sens": "2.77",
       "edpi": 1108,
       "res": "1280x960",
-      "avatar": "data/avatars/r1nkle.png"
+      "avatar": "data/avatars/r1nkle.webp"
     },
     {
       "slug": "owner",
@@ -2467,7 +2467,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/owner.png"
+      "avatar": "data/avatars/owner.webp"
     },
     {
       "slug": "jkaem",
@@ -2500,7 +2500,7 @@
       "sens": "1",
       "edpi": 400,
       "res": "1280x1024",
-      "avatar": "data/avatars/cacanito.png"
+      "avatar": "data/avatars/cacanito.webp"
     },
     {
       "slug": "nawwk",
@@ -2511,7 +2511,7 @@
       "sens": "2.3",
       "edpi": 919,
       "res": "1280x960",
-      "avatar": "data/avatars/nawwk.png"
+      "avatar": "data/avatars/nawwk.webp"
     },
     {
       "slug": "styko",
@@ -2533,7 +2533,7 @@
       "sens": "1.79",
       "edpi": 716,
       "res": "1280x960",
-      "avatar": "data/avatars/danistzz.png"
+      "avatar": "data/avatars/danistzz.webp"
     },
     {
       "slug": "s1mple",
@@ -2544,7 +2544,7 @@
       "sens": "3.09",
       "edpi": 1236,
       "res": "1280x960",
-      "avatar": "data/avatars/s1mple.png"
+      "avatar": "data/avatars/s1mple.webp"
     },
     {
       "slug": "nexius",
@@ -2555,7 +2555,7 @@
       "sens": "1.1",
       "edpi": 440,
       "res": "1280x960",
-      "avatar": "data/avatars/nexius.png"
+      "avatar": "data/avatars/nexius.webp"
     },
     {
       "slug": "regali",
@@ -2566,7 +2566,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1280x960",
-      "avatar": "data/avatars/regali.png"
+      "avatar": "data/avatars/regali.webp"
     },
     {
       "slug": "k1to",
@@ -2577,7 +2577,7 @@
       "sens": "1",
       "edpi": 400,
       "res": "1280x960",
-      "avatar": "data/avatars/k1to.png"
+      "avatar": "data/avatars/k1to.webp"
     },
     {
       "slug": "f1ku",
@@ -2588,7 +2588,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/f1ku.png"
+      "avatar": "data/avatars/f1ku.webp"
     },
     {
       "slug": "woro2k",
@@ -2599,7 +2599,7 @@
       "sens": "1.03",
       "edpi": 412,
       "res": "1280x960",
-      "avatar": "data/avatars/woro2k.png"
+      "avatar": "data/avatars/woro2k.webp"
     },
     {
       "slug": "krasnal",
@@ -2621,7 +2621,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1920x1080",
-      "avatar": "data/avatars/sdy.png"
+      "avatar": "data/avatars/sdy.webp"
     },
     {
       "slug": "demqq",
@@ -2632,7 +2632,7 @@
       "sens": "1.75",
       "edpi": 1400,
       "res": "1280x960",
-      "avatar": "data/avatars/demqq.png"
+      "avatar": "data/avatars/demqq.webp"
     },
     {
       "slug": "leen",
@@ -2643,7 +2643,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/leen.png"
+      "avatar": "data/avatars/leen.webp"
     },
     {
       "slug": "s0und",
@@ -2654,7 +2654,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1280x1024",
-      "avatar": "data/avatars/s0und.png"
+      "avatar": "data/avatars/s0und.webp"
     },
     {
       "slug": "clax",
@@ -2665,7 +2665,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1920x1080",
-      "avatar": "data/avatars/clax.png"
+      "avatar": "data/avatars/clax.webp"
     },
     {
       "slug": "glowiing",
@@ -2676,7 +2676,7 @@
       "sens": "0.7",
       "edpi": 560,
       "res": "1920x1080",
-      "avatar": "data/avatars/glowiing.png"
+      "avatar": "data/avatars/glowiing.webp"
     },
     {
       "slug": "d1ledez",
@@ -2687,7 +2687,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1280x960",
-      "avatar": "data/avatars/d1ledez.png"
+      "avatar": "data/avatars/d1ledez.webp"
     },
     {
       "slug": "seized",
@@ -2709,7 +2709,7 @@
       "sens": "1.36",
       "edpi": 1088,
       "res": "1152x864",
-      "avatar": "data/avatars/idisbalance.png"
+      "avatar": "data/avatars/idisbalance.webp"
     },
     {
       "slug": "stadodo",
@@ -2720,7 +2720,7 @@
       "sens": "2.6",
       "edpi": 1040,
       "res": "1280x960",
-      "avatar": "data/avatars/stadodo.png"
+      "avatar": "data/avatars/stadodo.webp"
     },
     {
       "slug": "just",
@@ -2742,7 +2742,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1024x768",
-      "avatar": "data/avatars/cypher.png"
+      "avatar": "data/avatars/cypher.webp"
     },
     {
       "slug": "cerq",
@@ -2753,7 +2753,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/cerq.png"
+      "avatar": "data/avatars/cerq.webp"
     },
     {
       "slug": "vldn",
@@ -2764,7 +2764,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x1024",
-      "avatar": "data/avatars/vldn.png"
+      "avatar": "data/avatars/vldn.webp"
     },
     {
       "slug": "faven",
@@ -2775,7 +2775,7 @@
       "sens": "2.1",
       "edpi": 840,
       "res": "1280x960",
-      "avatar": "data/avatars/faven.png"
+      "avatar": "data/avatars/faven.webp"
     },
     {
       "slug": "hampus",
@@ -2786,7 +2786,7 @@
       "sens": "1.6",
       "edpi": 640,
       "res": "1280x800",
-      "avatar": "data/avatars/hampus.png"
+      "avatar": "data/avatars/hampus.webp"
     },
     {
       "slug": "westmelon",
@@ -2797,7 +2797,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/westmelon.png"
+      "avatar": "data/avatars/westmelon.webp"
     },
     {
       "slug": "emiliaqaq",
@@ -2808,7 +2808,7 @@
       "sens": "0.8",
       "edpi": 640,
       "res": "1280x960",
-      "avatar": "data/avatars/emiliaqaq.png"
+      "avatar": "data/avatars/emiliaqaq.webp"
     },
     {
       "slug": "z4kr",
@@ -2819,7 +2819,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/z4kr.png"
+      "avatar": "data/avatars/z4kr.webp"
     },
     {
       "slug": "starry",
@@ -2830,7 +2830,7 @@
       "sens": "1.37",
       "edpi": 548,
       "res": "1280x960",
-      "avatar": "data/avatars/starry.png"
+      "avatar": "data/avatars/starry.webp"
     },
     {
       "slug": "krad",
@@ -2841,7 +2841,7 @@
       "sens": "1.4",
       "edpi": 1120,
       "res": "1280x960",
-      "avatar": "data/avatars/krad.png"
+      "avatar": "data/avatars/krad.webp"
     },
     {
       "slug": "travis",
@@ -2852,7 +2852,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/travis.png"
+      "avatar": "data/avatars/travis.webp"
     },
     {
       "slug": "forester",
@@ -2863,7 +2863,7 @@
       "sens": "0.6",
       "edpi": 480,
       "res": "1280x1024",
-      "avatar": "data/avatars/forester.png"
+      "avatar": "data/avatars/forester.webp"
     },
     {
       "slug": "r3salt",
@@ -2874,7 +2874,7 @@
       "sens": "1.25",
       "edpi": 500,
       "res": "1280x960",
-      "avatar": "data/avatars/r3salt.png"
+      "avatar": "data/avatars/r3salt.webp"
     },
     {
       "slug": "shalfey",
@@ -2896,7 +2896,7 @@
       "sens": "1.45",
       "edpi": 580,
       "res": "1280x1024",
-      "avatar": "data/avatars/sellter.png"
+      "avatar": "data/avatars/sellter.webp"
     },
     {
       "slug": "gokushima",
@@ -2918,7 +2918,7 @@
       "sens": "2.35",
       "edpi": 940,
       "res": "1280x960",
-      "avatar": "data/avatars/salazar.png"
+      "avatar": "data/avatars/salazar.webp"
     },
     {
       "slug": "queenix",
@@ -2929,7 +2929,7 @@
       "sens": "1.15",
       "edpi": 459,
       "res": "1280x960",
-      "avatar": "data/avatars/queenix.png"
+      "avatar": "data/avatars/queenix.webp"
     },
     {
       "slug": "nodios",
@@ -2940,7 +2940,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1152x864",
-      "avatar": "data/avatars/nodios.png"
+      "avatar": "data/avatars/nodios.webp"
     },
     {
       "slug": "patti",
@@ -2951,7 +2951,7 @@
       "sens": "1.6",
       "edpi": 640,
       "res": "1280x960",
-      "avatar": "data/avatars/patti.png"
+      "avatar": "data/avatars/patti.webp"
     },
     {
       "slug": "kraghen",
@@ -2962,7 +2962,7 @@
       "sens": "1.01",
       "edpi": 808,
       "res": "1280x960",
-      "avatar": "data/avatars/kraghen.png"
+      "avatar": "data/avatars/kraghen.webp"
     },
     {
       "slug": "python",
@@ -2973,7 +2973,7 @@
       "sens": "1.15",
       "edpi": 459,
       "res": "1440x1080",
-      "avatar": "data/avatars/python.png"
+      "avatar": "data/avatars/python.webp"
     },
     {
       "slug": "dgl",
@@ -2984,7 +2984,7 @@
       "sens": "2.5",
       "edpi": 1000,
       "res": "1024x768",
-      "avatar": "data/avatars/dgl.png"
+      "avatar": "data/avatars/dgl.webp"
     },
     {
       "slug": "aaron",
@@ -3039,7 +3039,7 @@
       "sens": "1.35",
       "edpi": 1080,
       "res": "1280x960",
-      "avatar": "data/avatars/amster.png"
+      "avatar": "data/avatars/amster.webp"
     },
     {
       "slug": "doc",
@@ -3050,7 +3050,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/doc.png"
+      "avatar": "data/avatars/doc.webp"
     },
     {
       "slug": "togs",
@@ -3083,7 +3083,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1440x1080",
-      "avatar": "data/avatars/shane.png"
+      "avatar": "data/avatars/shane.webp"
     },
     {
       "slug": "peeping",
@@ -3094,7 +3094,7 @@
       "sens": "0.86",
       "edpi": 1376,
       "res": "1600x1024",
-      "avatar": "data/avatars/peeping.png"
+      "avatar": "data/avatars/peeping.webp"
     },
     {
       "slug": "juanflatroo",
@@ -3105,7 +3105,7 @@
       "sens": "2.3",
       "edpi": 919,
       "res": "1280x960",
-      "avatar": "data/avatars/juanflatroo.png"
+      "avatar": "data/avatars/juanflatroo.webp"
     },
     {
       "slug": "gxx-",
@@ -3116,7 +3116,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1024x768",
-      "avatar": "data/avatars/gxx-.png"
+      "avatar": "data/avatars/gxx-.webp"
     },
     {
       "slug": "sinnopsyy",
@@ -3127,7 +3127,7 @@
       "sens": "1.6665",
       "edpi": 666,
       "res": "1280x960",
-      "avatar": "data/avatars/sinnopsyy.png"
+      "avatar": "data/avatars/sinnopsyy.webp"
     },
     {
       "slug": "sener1",
@@ -3138,7 +3138,7 @@
       "sens": "1.6",
       "edpi": 640,
       "res": "1280x960",
-      "avatar": "data/avatars/sener1.png"
+      "avatar": "data/avatars/sener1.webp"
     },
     {
       "slug": "toao",
@@ -3149,7 +3149,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1920x1440",
-      "avatar": "data/avatars/toao.png"
+      "avatar": "data/avatars/toao.webp"
     },
     {
       "slug": "fr3nd",
@@ -3160,7 +3160,7 @@
       "sens": "1.2",
       "edpi": 480,
       "res": "1280x960",
-      "avatar": "data/avatars/fr3nd.png"
+      "avatar": "data/avatars/fr3nd.webp"
     },
     {
       "slug": "bajmi",
@@ -3171,7 +3171,7 @@
       "sens": "0.4",
       "edpi": 640,
       "res": "1280x960",
-      "avatar": "data/avatars/bajmi.png"
+      "avatar": "data/avatars/bajmi.webp"
     },
     {
       "slug": "krimz",
@@ -3182,7 +3182,7 @@
       "sens": "1.45",
       "edpi": 580,
       "res": "1280x960",
-      "avatar": "data/avatars/krimz.png"
+      "avatar": "data/avatars/krimz.webp"
     },
     {
       "slug": "flayy",
@@ -3193,7 +3193,7 @@
       "sens": "1.6",
       "edpi": 640,
       "res": "1280x960",
-      "avatar": "data/avatars/flayy.png"
+      "avatar": "data/avatars/flayy.webp"
     },
     {
       "slug": "olimp",
@@ -3204,7 +3204,7 @@
       "sens": "0.69",
       "edpi": 276,
       "res": "1440x1080",
-      "avatar": "data/avatars/olimp.png"
+      "avatar": "data/avatars/olimp.webp"
     },
     {
       "slug": "kisserek",
@@ -3215,7 +3215,7 @@
       "sens": "1.42",
       "edpi": 568,
       "res": "1152x864",
-      "avatar": "data/avatars/kisserek.png"
+      "avatar": "data/avatars/kisserek.webp"
     },
     {
       "slug": "snx",
@@ -3248,7 +3248,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1680x1050",
-      "avatar": "data/avatars/summer.png"
+      "avatar": "data/avatars/summer.webp"
     },
     {
       "slug": "kory",
@@ -3292,7 +3292,7 @@
       "sens": "0.9",
       "edpi": 360,
       "res": "1280x960",
-      "avatar": "data/avatars/altekz.png"
+      "avatar": "data/avatars/altekz.webp"
     },
     {
       "slug": "refrezh",
@@ -3314,7 +3314,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1280x960",
-      "avatar": "data/avatars/tmb.png"
+      "avatar": "data/avatars/tmb.webp"
     },
     {
       "slug": "maxster",
@@ -3325,7 +3325,7 @@
       "sens": "0.68",
       "edpi": 544,
       "res": "1280x960",
-      "avatar": "data/avatars/maxster.png"
+      "avatar": "data/avatars/maxster.webp"
     },
     {
       "slug": "mistem",
@@ -3336,7 +3336,7 @@
       "sens": "1.33",
       "edpi": 532,
       "res": "1280x960",
-      "avatar": "data/avatars/mistem.png"
+      "avatar": "data/avatars/mistem.webp"
     },
     {
       "slug": "jocab",
@@ -3347,7 +3347,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1280x960",
-      "avatar": "data/avatars/jocab.png"
+      "avatar": "data/avatars/jocab.webp"
     },
     {
       "slug": "freshie",
@@ -3358,7 +3358,7 @@
       "sens": "0.7",
       "edpi": 560,
       "res": "1920x1080",
-      "avatar": "data/avatars/freshie.png"
+      "avatar": "data/avatars/freshie.webp"
     },
     {
       "slug": "cryptic",
@@ -3369,7 +3369,7 @@
       "sens": "0.4425",
       "edpi": 708,
       "res": "1680x1050",
-      "avatar": "data/avatars/cryptic.png"
+      "avatar": "data/avatars/cryptic.webp"
     },
     {
       "slug": "d4rty",
@@ -3380,7 +3380,7 @@
       "sens": "0.8",
       "edpi": 640,
       "res": "1920x1080",
-      "avatar": "data/avatars/d4rty.png"
+      "avatar": "data/avatars/d4rty.webp"
     },
     {
       "slug": "jerry",
@@ -3402,7 +3402,7 @@
       "sens": "2.1",
       "edpi": 840,
       "res": "1280x960",
-      "avatar": "data/avatars/qikert.png"
+      "avatar": "data/avatars/qikert.webp"
     },
     {
       "slug": "artfr0st",
@@ -3413,7 +3413,7 @@
       "sens": "1.49",
       "edpi": 1192,
       "res": "1280x960",
-      "avatar": "data/avatars/artfr0st.png"
+      "avatar": "data/avatars/artfr0st.webp"
     },
     {
       "slug": "patsi",
@@ -3424,7 +3424,7 @@
       "sens": "2.1",
       "edpi": 840,
       "res": "1152x864",
-      "avatar": "data/avatars/patsi.png"
+      "avatar": "data/avatars/patsi.webp"
     },
     {
       "slug": "x5g7v",
@@ -3435,7 +3435,7 @@
       "sens": "1.14",
       "edpi": 911,
       "res": "1280x960",
-      "avatar": "data/avatars/x5g7v.png"
+      "avatar": "data/avatars/x5g7v.webp"
     },
     {
       "slug": "junior",
@@ -3446,7 +3446,7 @@
       "sens": "3.1",
       "edpi": 1240,
       "res": "1024x768",
-      "avatar": "data/avatars/junior.png"
+      "avatar": "data/avatars/junior.webp"
     },
     {
       "slug": "nosrac",
@@ -3457,7 +3457,7 @@
       "sens": "1",
       "edpi": 400,
       "res": "1920x1080",
-      "avatar": "data/avatars/nosrac.png"
+      "avatar": "data/avatars/nosrac.webp"
     },
     {
       "slug": "hadji",
@@ -3468,7 +3468,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/hadji.png"
+      "avatar": "data/avatars/hadji.webp"
     },
     {
       "slug": "kinqie",
@@ -3479,7 +3479,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1920x1080",
-      "avatar": "data/avatars/kinqie.png"
+      "avatar": "data/avatars/kinqie.webp"
     },
     {
       "slug": "xellow",
@@ -3490,7 +3490,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/xellow.png"
+      "avatar": "data/avatars/xellow.webp"
     },
     {
       "slug": "mantuu",
@@ -3512,7 +3512,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1440x1080",
-      "avatar": "data/avatars/s1n.png"
+      "avatar": "data/avatars/s1n.webp"
     },
     {
       "slug": "deko",
@@ -3523,7 +3523,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/deko.png"
+      "avatar": "data/avatars/deko.webp"
     },
     {
       "slug": "norwi",
@@ -3534,7 +3534,7 @@
       "sens": "1.9",
       "edpi": 760,
       "res": "1024x768",
-      "avatar": "data/avatars/norwi.png"
+      "avatar": "data/avatars/norwi.webp"
     },
     {
       "slug": "kensi",
@@ -3545,7 +3545,7 @@
       "sens": "0.775",
       "edpi": 620,
       "res": "1280x960",
-      "avatar": "data/avatars/kensi.png"
+      "avatar": "data/avatars/kensi.webp"
     },
     {
       "slug": "lack1",
@@ -3556,7 +3556,7 @@
       "sens": "1.37",
       "edpi": 548,
       "res": "1280x960",
-      "avatar": "data/avatars/lack1.png"
+      "avatar": "data/avatars/lack1.webp"
     },
     {
       "slug": "alpha",
@@ -3567,7 +3567,7 @@
       "sens": "1.69",
       "edpi": 676,
       "res": "1280x960",
-      "avatar": "data/avatars/alpha.png"
+      "avatar": "data/avatars/alpha.webp"
     },
     {
       "slug": "cej0t",
@@ -3578,7 +3578,7 @@
       "sens": "0.475",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/cej0t.png"
+      "avatar": "data/avatars/cej0t.webp"
     },
     {
       "slug": "sl1m3",
@@ -3589,7 +3589,7 @@
       "sens": "0.75",
       "edpi": 600,
       "res": "1280x960",
-      "avatar": "data/avatars/sl1m3.png"
+      "avatar": "data/avatars/sl1m3.webp"
     },
     {
       "slug": "raalz",
@@ -3600,7 +3600,7 @@
       "sens": "1.6",
       "edpi": 640,
       "res": "1024x768",
-      "avatar": "data/avatars/raalz.png"
+      "avatar": "data/avatars/raalz.webp"
     },
     {
       "slug": "liazz",
@@ -3611,7 +3611,7 @@
       "sens": "0.95",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/liazz.png"
+      "avatar": "data/avatars/liazz.webp"
     },
     {
       "slug": "alistair",
@@ -3622,7 +3622,7 @@
       "sens": "1.9",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/alistair.png"
+      "avatar": "data/avatars/alistair.webp"
     },
     {
       "slug": "dexter",
@@ -3633,7 +3633,7 @@
       "sens": "0.65",
       "edpi": 1040,
       "res": "1280x960",
-      "avatar": "data/avatars/dexter.png"
+      "avatar": "data/avatars/dexter.webp"
     },
     {
       "slug": "ins",
@@ -3644,7 +3644,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1024x768",
-      "avatar": "data/avatars/ins.png"
+      "avatar": "data/avatars/ins.webp"
     },
     {
       "slug": "vexite",
@@ -3655,7 +3655,7 @@
       "sens": "1.15",
       "edpi": 919,
       "res": "1440x1080",
-      "avatar": "data/avatars/vexite.png"
+      "avatar": "data/avatars/vexite.webp"
     },
     {
       "slug": "naz",
@@ -3666,7 +3666,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/naz.png"
+      "avatar": "data/avatars/naz.webp"
     },
     {
       "slug": "coldzera",
@@ -3677,7 +3677,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/coldzera.png"
+      "avatar": "data/avatars/coldzera.webp"
     },
     {
       "slug": "nekiz",
@@ -3688,7 +3688,7 @@
       "sens": "1.35",
       "edpi": 540,
       "res": "1280x960",
-      "avatar": "data/avatars/nekiz.png"
+      "avatar": "data/avatars/nekiz.webp"
     },
     {
       "slug": "b4rtin",
@@ -3699,7 +3699,7 @@
       "sens": "2.3",
       "edpi": 919,
       "res": "1280x960",
-      "avatar": "data/avatars/b4rtin.png"
+      "avatar": "data/avatars/b4rtin.webp"
     },
     {
       "slug": "brehze",
@@ -3732,7 +3732,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/hext.png"
+      "avatar": "data/avatars/hext.webp"
     },
     {
       "slug": "tomaszin",
@@ -3743,7 +3743,7 @@
       "sens": "1.2",
       "edpi": 960,
       "res": "1024x768",
-      "avatar": "data/avatars/tomaszin.png"
+      "avatar": "data/avatars/tomaszin.webp"
     },
     {
       "slug": "noktse",
@@ -3754,7 +3754,7 @@
       "sens": "1.19",
       "edpi": 952,
       "res": "1280x960",
-      "avatar": "data/avatars/noktse.png"
+      "avatar": "data/avatars/noktse.webp"
     },
     {
       "slug": "deco",
@@ -3765,7 +3765,7 @@
       "sens": "0.75",
       "edpi": 600,
       "res": "1920x1080",
-      "avatar": "data/avatars/deco.png"
+      "avatar": "data/avatars/deco.webp"
     },
     {
       "slug": "infinite",
@@ -3776,7 +3776,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1024x768",
-      "avatar": "data/avatars/infinite.png"
+      "avatar": "data/avatars/infinite.webp"
     },
     {
       "slug": "slight",
@@ -3787,7 +3787,7 @@
       "sens": "2",
       "edpi": 1600,
       "res": "1280x960",
-      "avatar": "data/avatars/slight.png"
+      "avatar": "data/avatars/slight.webp"
     },
     {
       "slug": "nemanha",
@@ -3798,7 +3798,7 @@
       "sens": "1.95",
       "edpi": 780,
       "res": "1280x960",
-      "avatar": "data/avatars/nemanha.png"
+      "avatar": "data/avatars/nemanha.webp"
     },
     {
       "slug": "avn",
@@ -3809,7 +3809,7 @@
       "sens": "2",
       "edpi": 800,
       "res": null,
-      "avatar": "data/avatars/avn.png"
+      "avatar": "data/avatars/avn.webp"
     },
     {
       "slug": "simke",
@@ -3831,7 +3831,7 @@
       "sens": "1.52",
       "edpi": 608,
       "res": "1280x960",
-      "avatar": "data/avatars/cjoffo.png"
+      "avatar": "data/avatars/cjoffo.webp"
     },
     {
       "slug": "1eer",
@@ -3842,7 +3842,7 @@
       "sens": "2.1",
       "edpi": 840,
       "res": "1280x1024",
-      "avatar": "data/avatars/1eer.png"
+      "avatar": "data/avatars/1eer.webp"
     },
     {
       "slug": "riskyb0b",
@@ -3853,7 +3853,7 @@
       "sens": "1.15",
       "edpi": 919,
       "res": "1280x960",
-      "avatar": "data/avatars/riskyb0b.png"
+      "avatar": "data/avatars/riskyb0b.webp"
     },
     {
       "slug": "khan",
@@ -3864,7 +3864,7 @@
       "sens": "1.9",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/khan.png"
+      "avatar": "data/avatars/khan.webp"
     },
     {
       "slug": "xant3r",
@@ -3875,7 +3875,7 @@
       "sens": "2",
       "edpi": 1600,
       "res": "1024x768",
-      "avatar": "data/avatars/xant3r.png"
+      "avatar": "data/avatars/xant3r.webp"
     },
     {
       "slug": "sdaim",
@@ -3886,7 +3886,7 @@
       "sens": "0.8",
       "edpi": 640,
       "res": "1280x1024",
-      "avatar": "data/avatars/sdaim.png"
+      "avatar": "data/avatars/sdaim.webp"
     },
     {
       "slug": "choiv7",
@@ -3897,7 +3897,7 @@
       "sens": "2.4",
       "edpi": 960,
       "res": "1024x768",
-      "avatar": "data/avatars/choiv7.png"
+      "avatar": "data/avatars/choiv7.webp"
     },
     {
       "slug": "spellan",
@@ -3908,7 +3908,7 @@
       "sens": "2",
       "edpi": 1600,
       "res": "1024x768",
-      "avatar": "data/avatars/spellan.png"
+      "avatar": "data/avatars/spellan.webp"
     },
     {
       "slug": "oskar",
@@ -3930,7 +3930,7 @@
       "sens": "1.55",
       "edpi": 620,
       "res": "1280x960",
-      "avatar": "data/avatars/shock.png"
+      "avatar": "data/avatars/shock.webp"
     },
     {
       "slug": "beastik",
@@ -3941,7 +3941,7 @@
       "sens": "1",
       "edpi": 400,
       "res": "1024x768",
-      "avatar": "data/avatars/beastik.png"
+      "avatar": "data/avatars/beastik.webp"
     },
     {
       "slug": "neofrag",
@@ -3952,7 +3952,7 @@
       "sens": "1.35",
       "edpi": 540,
       "res": "1280x960",
-      "avatar": "data/avatars/neofrag.png"
+      "avatar": "data/avatars/neofrag.webp"
     },
     {
       "slug": "ajtt",
@@ -3974,7 +3974,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1920x1080",
-      "avatar": "data/avatars/heap.png"
+      "avatar": "data/avatars/heap.webp"
     },
     {
       "slug": "sapec",
@@ -3985,7 +3985,7 @@
       "sens": "1.13",
       "edpi": 903,
       "res": "1280x960",
-      "avatar": "data/avatars/sapec.png"
+      "avatar": "data/avatars/sapec.webp"
     },
     {
       "slug": "shine",
@@ -3996,7 +3996,7 @@
       "sens": "0.79",
       "edpi": 632,
       "res": "1152x864",
-      "avatar": "data/avatars/shine.png"
+      "avatar": "data/avatars/shine.webp"
     },
     {
       "slug": "jw",
@@ -4007,7 +4007,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/jw.png"
+      "avatar": "data/avatars/jw.webp"
     },
     {
       "slug": "peppzor",
@@ -4040,7 +4040,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/kind0.png"
+      "avatar": "data/avatars/kind0.webp"
     },
     {
       "slug": "innocent",
@@ -4051,7 +4051,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1440x1080",
-      "avatar": "data/avatars/innocent.png"
+      "avatar": "data/avatars/innocent.webp"
     },
     {
       "slug": "maze",
@@ -4062,7 +4062,7 @@
       "sens": "2.1",
       "edpi": 840,
       "res": "1280x960",
-      "avatar": "data/avatars/maze.png"
+      "avatar": "data/avatars/maze.webp"
     },
     {
       "slug": "dytor",
@@ -4073,7 +4073,7 @@
       "sens": "1.45",
       "edpi": 580,
       "res": "1280x960",
-      "avatar": "data/avatars/dytor.png"
+      "avatar": "data/avatars/dytor.webp"
     },
     {
       "slug": "blytz",
@@ -4084,7 +4084,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/blytz.png"
+      "avatar": "data/avatars/blytz.webp"
     },
     {
       "slug": "forsyy",
@@ -4095,7 +4095,7 @@
       "sens": "2.5",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/forsyy.png"
+      "avatar": "data/avatars/forsyy.webp"
     },
     {
       "slug": "kreaz",
@@ -4106,7 +4106,7 @@
       "sens": "1.4",
       "edpi": 560,
       "res": "1280x960",
-      "avatar": "data/avatars/kreaz.png"
+      "avatar": "data/avatars/kreaz.webp"
     },
     {
       "slug": "swicher",
@@ -4161,7 +4161,7 @@
       "sens": "1.65",
       "edpi": 660,
       "res": "1280x960",
-      "avatar": "data/avatars/uli.png"
+      "avatar": "data/avatars/uli.webp"
     },
     {
       "slug": "banjo",
@@ -4172,7 +4172,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/banjo.png"
+      "avatar": "data/avatars/banjo.webp"
     },
     {
       "slug": "spooke",
@@ -4183,7 +4183,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1280x960",
-      "avatar": "data/avatars/spooke.png"
+      "avatar": "data/avatars/spooke.webp"
     },
     {
       "slug": "swisher",
@@ -4194,7 +4194,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1280x1024",
-      "avatar": "data/avatars/swisher.png"
+      "avatar": "data/avatars/swisher.webp"
     },
     {
       "slug": "reck",
@@ -4205,7 +4205,7 @@
       "sens": "3.5",
       "edpi": 1400,
       "res": "1920x1080",
-      "avatar": "data/avatars/reck.png"
+      "avatar": "data/avatars/reck.webp"
     },
     {
       "slug": "slaxz-",
@@ -4216,7 +4216,7 @@
       "sens": "0.87",
       "edpi": 696,
       "res": "1024x768",
-      "avatar": "data/avatars/slaxz-.png"
+      "avatar": "data/avatars/slaxz-.webp"
     },
     {
       "slug": "matios",
@@ -4227,7 +4227,7 @@
       "sens": "1.58",
       "edpi": 632,
       "res": "1280x960",
-      "avatar": "data/avatars/matios.png"
+      "avatar": "data/avatars/matios.webp"
     },
     {
       "slug": "ponter",
@@ -4238,7 +4238,7 @@
       "sens": "1.35",
       "edpi": 540,
       "res": "1920x1080",
-      "avatar": "data/avatars/ponter.png"
+      "avatar": "data/avatars/ponter.webp"
     },
     {
       "slug": "naitte",
@@ -4249,7 +4249,7 @@
       "sens": "1.7",
       "edpi": 1360,
       "res": "1280x960",
-      "avatar": "data/avatars/naitte.png"
+      "avatar": "data/avatars/naitte.webp"
     },
     {
       "slug": "wood7",
@@ -4260,7 +4260,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/wood7.png"
+      "avatar": "data/avatars/wood7.webp"
     },
     {
       "slug": "bondik",
@@ -4271,7 +4271,7 @@
       "sens": "0.703125",
       "edpi": 1265,
       "res": "1024x768",
-      "avatar": "data/avatars/bondik.png"
+      "avatar": "data/avatars/bondik.webp"
     },
     {
       "slug": "yepz",
@@ -4293,7 +4293,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/ricioli.png"
+      "avatar": "data/avatars/ricioli.webp"
     },
     {
       "slug": "urban0",
@@ -4304,7 +4304,7 @@
       "sens": "1.55",
       "edpi": 775,
       "res": "1280x960",
-      "avatar": "data/avatars/urban0.png"
+      "avatar": "data/avatars/urban0.webp"
     },
     {
       "slug": "golden",
@@ -4326,7 +4326,7 @@
       "sens": "1.3",
       "edpi": 1040,
       "res": "1280x960",
-      "avatar": "data/avatars/lollipop21k.png"
+      "avatar": "data/avatars/lollipop21k.webp"
     },
     {
       "slug": "tried",
@@ -4348,7 +4348,7 @@
       "sens": "1.9",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/lov1kus.png"
+      "avatar": "data/avatars/lov1kus.webp"
     },
     {
       "slug": "finigan",
@@ -4370,7 +4370,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1920x1080",
-      "avatar": "data/avatars/supra.png"
+      "avatar": "data/avatars/supra.webp"
     },
     {
       "slug": "andu",
@@ -4381,7 +4381,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1920x1080",
-      "avatar": "data/avatars/andu.png"
+      "avatar": "data/avatars/andu.webp"
     },
     {
       "slug": "polo",
@@ -4392,7 +4392,7 @@
       "sens": "0.8",
       "edpi": 640,
       "res": "1280x960",
-      "avatar": "data/avatars/polo.png"
+      "avatar": "data/avatars/polo.webp"
     },
     {
       "slug": "qlocuu",
@@ -4403,7 +4403,7 @@
       "sens": "0.8",
       "edpi": 640,
       "res": "1280x960",
-      "avatar": "data/avatars/qlocuu.png"
+      "avatar": "data/avatars/qlocuu.webp"
     },
     {
       "slug": "virtuoso",
@@ -4414,7 +4414,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/virtuoso.png"
+      "avatar": "data/avatars/virtuoso.webp"
     },
     {
       "slug": "bobeksde",
@@ -4425,7 +4425,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/bobeksde.png"
+      "avatar": "data/avatars/bobeksde.webp"
     },
     {
       "slug": "eraa",
@@ -4436,7 +4436,7 @@
       "sens": "1.8",
       "edpi": 720,
       "res": "1152x864",
-      "avatar": "data/avatars/eraa.png"
+      "avatar": "data/avatars/eraa.webp"
     },
     {
       "slug": "rusty",
@@ -4458,7 +4458,7 @@
       "sens": "1.65",
       "edpi": 660,
       "res": "1920x1080",
-      "avatar": "data/avatars/valde.png"
+      "avatar": "data/avatars/valde.webp"
     },
     {
       "slug": "kwertzz",
@@ -4469,7 +4469,7 @@
       "sens": "1.9",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/kwertzz.png"
+      "avatar": "data/avatars/kwertzz.webp"
     },
     {
       "slug": "joel",
@@ -4502,7 +4502,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/zyphon.png"
+      "avatar": "data/avatars/zyphon.webp"
     },
     {
       "slug": "dobu",
@@ -4524,7 +4524,7 @@
       "sens": "1.48",
       "edpi": 592,
       "res": "1280x960",
-      "avatar": "data/avatars/annihilation.png"
+      "avatar": "data/avatars/annihilation.webp"
     },
     {
       "slug": "kabal",
@@ -4546,7 +4546,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": null,
-      "avatar": "data/avatars/zesta.png"
+      "avatar": "data/avatars/zesta.webp"
     },
     {
       "slug": "tomiko",
@@ -4557,7 +4557,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/tomiko.png"
+      "avatar": "data/avatars/tomiko.webp"
     },
     {
       "slug": "bibu",
@@ -4568,7 +4568,7 @@
       "sens": "2.47",
       "edpi": 988,
       "res": "1280x960",
-      "avatar": "data/avatars/bibu.png"
+      "avatar": "data/avatars/bibu.webp"
     },
     {
       "slug": "b0denmaster",
@@ -4579,7 +4579,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1280x1024",
-      "avatar": "data/avatars/b0denmaster.png"
+      "avatar": "data/avatars/b0denmaster.webp"
     },
     {
       "slug": "twist",
@@ -4590,7 +4590,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/twist.png"
+      "avatar": "data/avatars/twist.webp"
     },
     {
       "slug": "robiin",
@@ -4601,7 +4601,7 @@
       "sens": "2.1",
       "edpi": 840,
       "res": "1152x864",
-      "avatar": "data/avatars/robiin.png"
+      "avatar": "data/avatars/robiin.webp"
     },
     {
       "slug": "avid",
@@ -4612,7 +4612,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": null,
-      "avatar": "data/avatars/avid.png"
+      "avatar": "data/avatars/avid.webp"
     },
     {
       "slug": "shushan",
@@ -4645,7 +4645,7 @@
       "sens": "1.77",
       "edpi": 1416,
       "res": "1280x960",
-      "avatar": "data/avatars/bl1x1.png"
+      "avatar": "data/avatars/bl1x1.webp"
     },
     {
       "slug": "easy",
@@ -4667,7 +4667,7 @@
       "sens": "3",
       "edpi": 1200,
       "res": "1280x960",
-      "avatar": "data/avatars/allu.png"
+      "avatar": "data/avatars/allu.webp"
     },
     {
       "slug": "juho",
@@ -4678,7 +4678,7 @@
       "sens": "1.4",
       "edpi": 560,
       "res": "1024x768",
-      "avatar": "data/avatars/juho.png"
+      "avatar": "data/avatars/juho.webp"
     },
     {
       "slug": "kadziu",
@@ -4711,7 +4711,7 @@
       "sens": "0.7",
       "edpi": 560,
       "res": "1280x960",
-      "avatar": "data/avatars/mail09.png"
+      "avatar": "data/avatars/mail09.webp"
     },
     {
       "slug": "hardzao",
@@ -4722,7 +4722,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/hardzao.png"
+      "avatar": "data/avatars/hardzao.webp"
     },
     {
       "slug": "venomzera",
@@ -4733,7 +4733,7 @@
       "sens": "1.2",
       "edpi": 960,
       "res": "1280x1024",
-      "avatar": "data/avatars/venomzera.png"
+      "avatar": "data/avatars/venomzera.webp"
     },
     {
       "slug": "nython",
@@ -4744,7 +4744,7 @@
       "sens": "1.2",
       "edpi": 960,
       "res": "1280x1024",
-      "avatar": "data/avatars/nython.png"
+      "avatar": "data/avatars/nython.webp"
     },
     {
       "slug": "righi",
@@ -4766,7 +4766,7 @@
       "sens": "0.885",
       "edpi": 708,
       "res": "1280x960",
-      "avatar": "data/avatars/kye.png"
+      "avatar": "data/avatars/kye.webp"
     },
     {
       "slug": "chawzyyy",
@@ -4788,7 +4788,7 @@
       "sens": "1.95",
       "edpi": 780,
       "res": "1280x960",
-      "avatar": "data/avatars/draken.png"
+      "avatar": "data/avatars/draken.webp"
     },
     {
       "slug": "shoowtime",
@@ -4810,7 +4810,7 @@
       "sens": "0.9",
       "edpi": 1440,
       "res": "1280x960",
-      "avatar": "data/avatars/lattykk.png"
+      "avatar": "data/avatars/lattykk.webp"
     },
     {
       "slug": "jyo",
@@ -4832,7 +4832,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/nealan.png"
+      "avatar": "data/avatars/nealan.webp"
     },
     {
       "slug": "buster",
@@ -4843,7 +4843,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1920x1080",
-      "avatar": "data/avatars/buster.png"
+      "avatar": "data/avatars/buster.webp"
     },
     {
       "slug": "modo",
@@ -4854,7 +4854,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/modo.png"
+      "avatar": "data/avatars/modo.webp"
     },
     {
       "slug": "sstinix",
@@ -4865,7 +4865,7 @@
       "sens": "2.666",
       "edpi": 1066,
       "res": "1280x1024",
-      "avatar": "data/avatars/sstinix.png"
+      "avatar": "data/avatars/sstinix.webp"
     },
     {
       "slug": "captainmo",
@@ -4898,7 +4898,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/motm.png"
+      "avatar": "data/avatars/motm.webp"
     },
     {
       "slug": "kaze",
@@ -4909,7 +4909,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/kaze.png"
+      "avatar": "data/avatars/kaze.webp"
     },
     {
       "slug": "advent",
@@ -4931,7 +4931,7 @@
       "sens": "1.25",
       "edpi": 500,
       "res": "1280x960",
-      "avatar": "data/avatars/shz.png"
+      "avatar": "data/avatars/shz.webp"
     },
     {
       "slug": "sirah",
@@ -4942,7 +4942,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/sirah.png"
+      "avatar": "data/avatars/sirah.webp"
     },
     {
       "slug": "anlelele",
@@ -4953,7 +4953,7 @@
       "sens": "1.35",
       "edpi": 1080,
       "res": "1280x960",
-      "avatar": "data/avatars/anlelele.png"
+      "avatar": "data/avatars/anlelele.webp"
     },
     {
       "slug": "burmylov",
@@ -4964,7 +4964,7 @@
       "sens": "1.13",
       "edpi": 903,
       "res": "1280x960",
-      "avatar": "data/avatars/burmylov.png"
+      "avatar": "data/avatars/burmylov.webp"
     },
     {
       "slug": "morelz",
@@ -4986,7 +4986,7 @@
       "sens": "1",
       "edpi": 400,
       "res": "1280x960",
-      "avatar": "data/avatars/maaryy.png"
+      "avatar": "data/avatars/maaryy.webp"
     },
     {
       "slug": "masked",
@@ -4997,7 +4997,7 @@
       "sens": "1.61",
       "edpi": 644,
       "res": "1920x1080",
-      "avatar": "data/avatars/masked.png"
+      "avatar": "data/avatars/masked.webp"
     },
     {
       "slug": "vegi",
@@ -5019,7 +5019,7 @@
       "sens": "1.8",
       "edpi": 720,
       "res": "1920x1080",
-      "avatar": "data/avatars/bnox.png"
+      "avatar": "data/avatars/bnox.webp"
     },
     {
       "slug": "zedko",
@@ -5030,7 +5030,7 @@
       "sens": "0.49",
       "edpi": 392,
       "res": "1152x864",
-      "avatar": "data/avatars/zedko.png"
+      "avatar": "data/avatars/zedko.webp"
     },
     {
       "slug": "fino",
@@ -5063,7 +5063,7 @@
       "sens": "0.68",
       "edpi": 544,
       "res": "1680x1050",
-      "avatar": "data/avatars/mistr.png"
+      "avatar": "data/avatars/mistr.webp"
     },
     {
       "slug": "lucky",
@@ -5074,7 +5074,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/lucky.png"
+      "avatar": "data/avatars/lucky.webp"
     },
     {
       "slug": "iceberg",
@@ -5085,7 +5085,7 @@
       "sens": "0.85",
       "edpi": 680,
       "res": "1024x768",
-      "avatar": "data/avatars/iceberg.png"
+      "avatar": "data/avatars/iceberg.webp"
     },
     {
       "slug": "cabbi",
@@ -5096,7 +5096,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/cabbi.png"
+      "avatar": "data/avatars/cabbi.webp"
     },
     {
       "slug": "kwezz",
@@ -5107,7 +5107,7 @@
       "sens": "3.09",
       "edpi": 1236,
       "res": "1680x1050",
-      "avatar": "data/avatars/kwezz.png"
+      "avatar": "data/avatars/kwezz.webp"
     },
     {
       "slug": "sowalio",
@@ -5118,7 +5118,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1280x1024",
-      "avatar": "data/avatars/sowalio.png"
+      "avatar": "data/avatars/sowalio.webp"
     },
     {
       "slug": "childking",
@@ -5129,7 +5129,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/childking.png"
+      "avatar": "data/avatars/childking.webp"
     },
     {
       "slug": "l1hang",
@@ -5140,7 +5140,7 @@
       "sens": "1.3",
       "edpi": 1040,
       "res": "1280x960",
-      "avatar": "data/avatars/l1hang.png"
+      "avatar": "data/avatars/l1hang.webp"
     },
     {
       "slug": "nettik",
@@ -5151,7 +5151,7 @@
       "sens": "1",
       "edpi": 400,
       "res": "1280x960",
-      "avatar": "data/avatars/nettik.png"
+      "avatar": "data/avatars/nettik.webp"
     },
     {
       "slug": "dea",
@@ -5162,7 +5162,7 @@
       "sens": "0.7",
       "edpi": 560,
       "res": "1280x960",
-      "avatar": "data/avatars/dea.png"
+      "avatar": "data/avatars/dea.webp"
     },
     {
       "slug": "plopski",
@@ -5173,7 +5173,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/plopski.png"
+      "avatar": "data/avatars/plopski.webp"
     },
     {
       "slug": "hazr",
@@ -5184,7 +5184,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1680x1050",
-      "avatar": "data/avatars/hazr.png"
+      "avatar": "data/avatars/hazr.webp"
     },
     {
       "slug": "addict",
@@ -5195,7 +5195,7 @@
       "sens": "1.41",
       "edpi": 564,
       "res": "1280x960",
-      "avatar": "data/avatars/addict.png"
+      "avatar": "data/avatars/addict.webp"
     },
     {
       "slug": "emi",
@@ -5206,7 +5206,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1152x864",
-      "avatar": "data/avatars/emi.png"
+      "avatar": "data/avatars/emi.webp"
     },
     {
       "slug": "c0llins",
@@ -5217,7 +5217,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/c0llins.png"
+      "avatar": "data/avatars/c0llins.webp"
     },
     {
       "slug": "aidkit",
@@ -5228,7 +5228,7 @@
       "sens": "0.45",
       "edpi": 720,
       "res": "1280x960",
-      "avatar": "data/avatars/aidkit.png"
+      "avatar": "data/avatars/aidkit.webp"
     },
     {
       "slug": "xicoz",
@@ -5250,7 +5250,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1280x960",
-      "avatar": "data/avatars/dragon.png"
+      "avatar": "data/avatars/dragon.webp"
     },
     {
       "slug": "perx",
@@ -5272,7 +5272,7 @@
       "sens": "0.75",
       "edpi": 600,
       "res": "1024x768",
-      "avatar": "data/avatars/cxzi.png"
+      "avatar": "data/avatars/cxzi.webp"
     },
     {
       "slug": "rush",
@@ -5294,7 +5294,7 @@
       "sens": "1.85",
       "edpi": 740,
       "res": "1280x960",
-      "avatar": "data/avatars/wolfy.png"
+      "avatar": "data/avatars/wolfy.webp"
     },
     {
       "slug": "smooya",
@@ -5305,7 +5305,7 @@
       "sens": "1.8",
       "edpi": 720,
       "res": "1024x768",
-      "avatar": "data/avatars/smooya.png"
+      "avatar": "data/avatars/smooya.webp"
     },
     {
       "slug": "laser",
@@ -5316,7 +5316,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1024x768",
-      "avatar": "data/avatars/laser.png"
+      "avatar": "data/avatars/laser.webp"
     },
     {
       "slug": "reversive",
@@ -5327,7 +5327,7 @@
       "sens": "1.6",
       "edpi": 640,
       "res": "1280x960",
-      "avatar": "data/avatars/reversive.png"
+      "avatar": "data/avatars/reversive.webp"
     },
     {
       "slug": "atarax1a",
@@ -5338,7 +5338,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x1024",
-      "avatar": "data/avatars/atarax1a.png"
+      "avatar": "data/avatars/atarax1a.webp"
     },
     {
       "slug": "pesadelo",
@@ -5360,7 +5360,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/t9rnay.png"
+      "avatar": "data/avatars/t9rnay.webp"
     },
     {
       "slug": "shipz",
@@ -5393,7 +5393,7 @@
       "sens": "1.4",
       "edpi": 560,
       "res": "1680x1050",
-      "avatar": "data/avatars/dennyslaw.png"
+      "avatar": "data/avatars/dennyslaw.webp"
     },
     {
       "slug": "oxygen",
@@ -5415,7 +5415,7 @@
       "sens": "1",
       "edpi": 400,
       "res": "1280x960",
-      "avatar": "data/avatars/b0rup.png"
+      "avatar": "data/avatars/b0rup.webp"
     },
     {
       "slug": "niko-danish",
@@ -5448,7 +5448,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/nicks.png"
+      "avatar": "data/avatars/nicks.webp"
     },
     {
       "slug": "boye",
@@ -5459,7 +5459,7 @@
       "sens": "1.6",
       "edpi": 640,
       "res": "1280x1024",
-      "avatar": "data/avatars/boye.png"
+      "avatar": "data/avatars/boye.webp"
     },
     {
       "slug": "cruc1al",
@@ -5470,7 +5470,7 @@
       "sens": "2.5",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/cruc1al.png"
+      "avatar": "data/avatars/cruc1al.webp"
     },
     {
       "slug": "redstar",
@@ -5481,7 +5481,7 @@
       "sens": "1.25",
       "edpi": 500,
       "res": "1280x960",
-      "avatar": "data/avatars/redstar.png"
+      "avatar": "data/avatars/redstar.webp"
     },
     {
       "slug": "s-chilla",
@@ -5503,7 +5503,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/jambo.png"
+      "avatar": "data/avatars/jambo.webp"
     },
     {
       "slug": "fear",
@@ -5514,7 +5514,7 @@
       "sens": "1.35",
       "edpi": 540,
       "res": "1280x960",
-      "avatar": "data/avatars/fear.png"
+      "avatar": "data/avatars/fear.webp"
     },
     {
       "slug": "jackasmo",
@@ -5525,7 +5525,7 @@
       "sens": "2.5",
       "edpi": 1000,
       "res": "1680x1050",
-      "avatar": "data/avatars/jackasmo.png"
+      "avatar": "data/avatars/jackasmo.webp"
     },
     {
       "slug": "zerrofix",
@@ -5536,7 +5536,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1280x960",
-      "avatar": "data/avatars/zerrofix.png"
+      "avatar": "data/avatars/zerrofix.webp"
     },
     {
       "slug": "xerolte",
@@ -5547,7 +5547,7 @@
       "sens": "2.3",
       "edpi": 919,
       "res": "1024x768",
-      "avatar": "data/avatars/xerolte.png"
+      "avatar": "data/avatars/xerolte.webp"
     },
     {
       "slug": "tatazin",
@@ -5558,7 +5558,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/tatazin.png"
+      "avatar": "data/avatars/tatazin.webp"
     },
     {
       "slug": "land1n",
@@ -5591,7 +5591,7 @@
       "sens": "1.55",
       "edpi": 620,
       "res": "1280x960",
-      "avatar": "data/avatars/walco.png"
+      "avatar": "data/avatars/walco.webp"
     },
     {
       "slug": "trucklover86",
@@ -5624,7 +5624,7 @@
       "sens": "1.55",
       "edpi": 620,
       "res": "1280x960",
-      "avatar": "data/avatars/flying.png"
+      "avatar": "data/avatars/flying.webp"
     },
     {
       "slug": "podi",
@@ -5635,7 +5635,7 @@
       "sens": "1.225",
       "edpi": 980,
       "res": "1280x960",
-      "avatar": "data/avatars/podi.png"
+      "avatar": "data/avatars/podi.webp"
     },
     {
       "slug": "luken",
@@ -5646,7 +5646,7 @@
       "sens": "0.9",
       "edpi": 720,
       "res": "1280x960",
-      "avatar": "data/avatars/luken.png"
+      "avatar": "data/avatars/luken.webp"
     },
     {
       "slug": "pr1metapz",
@@ -5657,7 +5657,7 @@
       "sens": "2.4",
       "edpi": 960,
       "res": "1152x864",
-      "avatar": "data/avatars/pr1metapz.png"
+      "avatar": "data/avatars/pr1metapz.webp"
     },
     {
       "slug": "thomas",
@@ -5668,7 +5668,7 @@
       "sens": "1.45",
       "edpi": 580,
       "res": "1920x1080",
-      "avatar": "data/avatars/thomas.png"
+      "avatar": "data/avatars/thomas.webp"
     },
     {
       "slug": "phr",
@@ -5701,7 +5701,7 @@
       "sens": "1.485",
       "edpi": 594,
       "res": "1280x960",
-      "avatar": "data/avatars/moriisko.png"
+      "avatar": "data/avatars/moriisko.webp"
     },
     {
       "slug": "majky",
@@ -5712,7 +5712,7 @@
       "sens": "0.85",
       "edpi": 680,
       "res": "1280x960",
-      "avatar": "data/avatars/majky.png"
+      "avatar": "data/avatars/majky.webp"
     },
     {
       "slug": "flusha",
@@ -5745,7 +5745,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1920x1080",
-      "avatar": "data/avatars/sobol.png"
+      "avatar": "data/avatars/sobol.webp"
     },
     {
       "slug": "history",
@@ -5756,7 +5756,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/history.png"
+      "avatar": "data/avatars/history.webp"
     },
     {
       "slug": "leo_drk",
@@ -5778,7 +5778,7 @@
       "sens": "1.9",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/zock.png"
+      "avatar": "data/avatars/zock.webp"
     },
     {
       "slug": "bsd",
@@ -5789,7 +5789,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/bsd.png"
+      "avatar": "data/avatars/bsd.webp"
     },
     {
       "slug": "notineki",
@@ -5800,7 +5800,7 @@
       "sens": "1.15",
       "edpi": 919,
       "res": "1024x768",
-      "avatar": "data/avatars/notineki.png"
+      "avatar": "data/avatars/notineki.webp"
     },
     {
       "slug": "destiny",
@@ -5811,7 +5811,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1440x1080",
-      "avatar": "data/avatars/destiny.png"
+      "avatar": "data/avatars/destiny.webp"
     },
     {
       "slug": "lake",
@@ -5822,7 +5822,7 @@
       "sens": "1.25",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/lake.png"
+      "avatar": "data/avatars/lake.webp"
     },
     {
       "slug": "ksloks",
@@ -5833,7 +5833,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1920x1080",
-      "avatar": "data/avatars/ksloks.png"
+      "avatar": "data/avatars/ksloks.webp"
     },
     {
       "slug": "honda",
@@ -5844,7 +5844,7 @@
       "sens": "1.2",
       "edpi": 480,
       "res": "1280x960",
-      "avatar": "data/avatars/honda.png"
+      "avatar": "data/avatars/honda.webp"
     },
     {
       "slug": "0samas",
@@ -5855,7 +5855,7 @@
       "sens": "0.7",
       "edpi": 2240,
       "res": "1280x960",
-      "avatar": "data/avatars/0samas.png"
+      "avatar": "data/avatars/0samas.webp"
     },
     {
       "slug": "issaa",
@@ -5866,7 +5866,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/issaa.png"
+      "avatar": "data/avatars/issaa.webp"
     },
     {
       "slug": "kjaerbye",
@@ -5888,7 +5888,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x1024",
-      "avatar": "data/avatars/ro1f.png"
+      "avatar": "data/avatars/ro1f.webp"
     },
     {
       "slug": "nivera",
@@ -5899,7 +5899,7 @@
       "sens": "0.6",
       "edpi": 480,
       "res": "1024x768",
-      "avatar": "data/avatars/nivera.png"
+      "avatar": "data/avatars/nivera.webp"
     },
     {
       "slug": "nbk-",
@@ -5921,7 +5921,7 @@
       "sens": "1.0977",
       "edpi": 878,
       "res": "1280x960",
-      "avatar": "data/avatars/adex.png"
+      "avatar": "data/avatars/adex.webp"
     },
     {
       "slug": "fostar",
@@ -5932,7 +5932,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1152x864",
-      "avatar": "data/avatars/fostar.png"
+      "avatar": "data/avatars/fostar.webp"
     },
     {
       "slug": "poiii",
@@ -5943,7 +5943,7 @@
       "sens": "0.89",
       "edpi": 712,
       "res": "1280x960",
-      "avatar": "data/avatars/poiii.png"
+      "avatar": "data/avatars/poiii.webp"
     },
     {
       "slug": "interz",
@@ -5954,7 +5954,7 @@
       "sens": "1.4",
       "edpi": 1120,
       "res": "1920x1080",
-      "avatar": "data/avatars/interz.png"
+      "avatar": "data/avatars/interz.webp"
     },
     {
       "slug": "danoco",
@@ -5965,7 +5965,7 @@
       "sens": "2.1",
       "edpi": 840,
       "res": "1280x960",
-      "avatar": "data/avatars/danoco.png"
+      "avatar": "data/avatars/danoco.webp"
     },
     {
       "slug": "el1an",
@@ -5976,7 +5976,7 @@
       "sens": "0.945",
       "edpi": 3024,
       "res": "1440x1080",
-      "avatar": "data/avatars/el1an.png"
+      "avatar": "data/avatars/el1an.webp"
     },
     {
       "slug": "wiz",
@@ -6009,7 +6009,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/synyx.png"
+      "avatar": "data/avatars/synyx.webp"
     },
     {
       "slug": "n1xen",
@@ -6020,7 +6020,7 @@
       "sens": "1.425",
       "edpi": 1140,
       "res": "1280x960",
-      "avatar": "data/avatars/n1xen.png"
+      "avatar": "data/avatars/n1xen.webp"
     },
     {
       "slug": "austin",
@@ -6031,7 +6031,7 @@
       "sens": "1.8",
       "edpi": 720,
       "res": "1440x1080",
-      "avatar": "data/avatars/austin.png"
+      "avatar": "data/avatars/austin.webp"
     },
     {
       "slug": "l00m1",
@@ -6042,7 +6042,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/l00m1.png"
+      "avatar": "data/avatars/l00m1.webp"
     },
     {
       "slug": "svyat",
@@ -6064,7 +6064,7 @@
       "sens": "1.6",
       "edpi": 640,
       "res": "1680x1050",
-      "avatar": "data/avatars/kei.png"
+      "avatar": "data/avatars/kei.webp"
     },
     {
       "slug": "raijin",
@@ -6075,7 +6075,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1920x1080",
-      "avatar": "data/avatars/raijin.png"
+      "avatar": "data/avatars/raijin.webp"
     },
     {
       "slug": "facecrack",
@@ -6086,7 +6086,7 @@
       "sens": "1.725",
       "edpi": 690,
       "res": "1280x960",
-      "avatar": "data/avatars/facecrack.png"
+      "avatar": "data/avatars/facecrack.webp"
     },
     {
       "slug": "gr1ks",
@@ -6097,7 +6097,7 @@
       "sens": "0.8",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/gr1ks.png"
+      "avatar": "data/avatars/gr1ks.webp"
     },
     {
       "slug": "devoduvek",
@@ -6108,7 +6108,7 @@
       "sens": "1.6",
       "edpi": 640,
       "res": "1280x800",
-      "avatar": "data/avatars/devoduvek.png"
+      "avatar": "data/avatars/devoduvek.webp"
     },
     {
       "slug": "tizian",
@@ -6130,7 +6130,7 @@
       "sens": "2.1",
       "edpi": 840,
       "res": "1280x960",
-      "avatar": "data/avatars/yami.png"
+      "avatar": "data/avatars/yami.webp"
     },
     {
       "slug": "scrunk",
@@ -6152,7 +6152,7 @@
       "sens": "1.431",
       "edpi": 1144,
       "res": "1280x960",
-      "avatar": "data/avatars/paz.png"
+      "avatar": "data/avatars/paz.webp"
     },
     {
       "slug": "s3nsey",
@@ -6174,7 +6174,7 @@
       "sens": "0.4",
       "edpi": 640,
       "res": "1440x1080",
-      "avatar": "data/avatars/b1elany.png"
+      "avatar": "data/avatars/b1elany.webp"
     },
     {
       "slug": "upe",
@@ -6185,7 +6185,7 @@
       "sens": "1.4",
       "edpi": 560,
       "res": "1280x960",
-      "avatar": "data/avatars/upe.png"
+      "avatar": "data/avatars/upe.webp"
     },
     {
       "slug": "fruitcupx",
@@ -6196,7 +6196,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/fruitcupx.png"
+      "avatar": "data/avatars/fruitcupx.webp"
     },
     {
       "slug": "marix",
@@ -6207,7 +6207,7 @@
       "sens": "0.625",
       "edpi": 1000,
       "res": "1280x960",
-      "avatar": "data/avatars/marix.png"
+      "avatar": "data/avatars/marix.webp"
     },
     {
       "slug": "robo",
@@ -6218,7 +6218,7 @@
       "sens": "1.4",
       "edpi": 1120,
       "res": "1024x768",
-      "avatar": "data/avatars/robo.png"
+      "avatar": "data/avatars/robo.webp"
     },
     {
       "slug": "mokuj1n",
@@ -6229,7 +6229,7 @@
       "sens": "1.3",
       "edpi": 1040,
       "res": "1280x960",
-      "avatar": "data/avatars/mokuj1n.png"
+      "avatar": "data/avatars/mokuj1n.webp"
     },
     {
       "slug": "syph0",
@@ -6240,7 +6240,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/syph0.png"
+      "avatar": "data/avatars/syph0.webp"
     },
     {
       "slug": "aerial",
@@ -6262,7 +6262,7 @@
       "sens": "3.09",
       "edpi": 1236,
       "res": "1280x960",
-      "avatar": "data/avatars/henu.png"
+      "avatar": "data/avatars/henu.webp"
     },
     {
       "slug": "xseven",
@@ -6295,7 +6295,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/mhl.png"
+      "avatar": "data/avatars/mhl.webp"
     },
     {
       "slug": "azr",
@@ -6317,7 +6317,7 @@
       "sens": "1.1",
       "edpi": 891,
       "res": "1024x768",
-      "avatar": "data/avatars/bntet.png"
+      "avatar": "data/avatars/bntet.webp"
     },
     {
       "slug": "xign",
@@ -6383,7 +6383,7 @@
       "sens": "1.75",
       "edpi": 700,
       "res": "1152x864",
-      "avatar": "data/avatars/pepo.png"
+      "avatar": "data/avatars/pepo.webp"
     },
     {
       "slug": "zaaz",
@@ -6394,7 +6394,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1280x960",
-      "avatar": "data/avatars/zaaz.png"
+      "avatar": "data/avatars/zaaz.webp"
     },
     {
       "slug": "ana",
@@ -6405,7 +6405,7 @@
       "sens": "1.9",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/ana.png"
+      "avatar": "data/avatars/ana.webp"
     },
     {
       "slug": "twenty3",
@@ -6416,7 +6416,7 @@
       "sens": "2.1",
       "edpi": 840,
       "res": "1280x960",
-      "avatar": "data/avatars/twenty3.png"
+      "avatar": "data/avatars/twenty3.webp"
     },
     {
       "slug": "roux",
@@ -6427,7 +6427,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/roux.png"
+      "avatar": "data/avatars/roux.webp"
     },
     {
       "slug": "accuracytg",
@@ -6438,7 +6438,7 @@
       "sens": "2",
       "edpi": 1600,
       "res": null,
-      "avatar": "data/avatars/accuracytg.png"
+      "avatar": "data/avatars/accuracytg.webp"
     },
     {
       "slug": "sk0r",
@@ -6449,7 +6449,7 @@
       "sens": "1.3",
       "edpi": 1040,
       "res": "1280x1024",
-      "avatar": "data/avatars/sk0r.png"
+      "avatar": "data/avatars/sk0r.webp"
     },
     {
       "slug": "nin9",
@@ -6460,7 +6460,7 @@
       "sens": "1.9",
       "edpi": 760,
       "res": "1024x768",
-      "avatar": "data/avatars/nin9.png"
+      "avatar": "data/avatars/nin9.webp"
     },
     {
       "slug": "veccil",
@@ -6471,7 +6471,7 @@
       "sens": "2.4",
       "edpi": 960,
       "res": null,
-      "avatar": "data/avatars/veccil.png"
+      "avatar": "data/avatars/veccil.webp"
     },
     {
       "slug": "bart4k",
@@ -6482,7 +6482,7 @@
       "sens": "1.5",
       "edpi": 600,
       "res": "1280x960",
-      "avatar": "data/avatars/bart4k.png"
+      "avatar": "data/avatars/bart4k.webp"
     },
     {
       "slug": "bubble",
@@ -6515,7 +6515,7 @@
       "sens": "1.7",
       "edpi": 680,
       "res": "1280x960",
-      "avatar": "data/avatars/freq.png"
+      "avatar": "data/avatars/freq.webp"
     },
     {
       "slug": "yel",
@@ -6548,7 +6548,7 @@
       "sens": "1.1",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/myltsi.png"
+      "avatar": "data/avatars/myltsi.webp"
     },
     {
       "slug": "hfah",
@@ -6559,7 +6559,7 @@
       "sens": "0.75",
       "edpi": 300,
       "res": "1280x960",
-      "avatar": "data/avatars/hfah.png"
+      "avatar": "data/avatars/hfah.webp"
     },
     {
       "slug": "tapewaare",
@@ -6570,7 +6570,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/tapewaare.png"
+      "avatar": "data/avatars/tapewaare.webp"
     },
     {
       "slug": "szejn",
@@ -6581,7 +6581,7 @@
       "sens": "3.125",
       "edpi": 1250,
       "res": "1280x960",
-      "avatar": "data/avatars/szejn.png"
+      "avatar": "data/avatars/szejn.webp"
     },
     {
       "slug": "mlhzin",
@@ -6592,7 +6592,7 @@
       "sens": "2.5",
       "edpi": 2000,
       "res": "1440x1080",
-      "avatar": "data/avatars/mlhzin.png"
+      "avatar": "data/avatars/mlhzin.webp"
     },
     {
       "slug": "delle",
@@ -6603,7 +6603,7 @@
       "sens": "0.69",
       "edpi": 552,
       "res": null,
-      "avatar": "data/avatars/delle.png"
+      "avatar": "data/avatars/delle.webp"
     },
     {
       "slug": "rage",
@@ -6614,7 +6614,7 @@
       "sens": "3.8",
       "edpi": 1520,
       "res": "1024x768",
-      "avatar": "data/avatars/rage.png"
+      "avatar": "data/avatars/rage.webp"
     },
     {
       "slug": "zero",
@@ -6636,7 +6636,7 @@
       "sens": "1.64",
       "edpi": 656,
       "res": "1280x960",
-      "avatar": "data/avatars/beccie.png"
+      "avatar": "data/avatars/beccie.webp"
     },
     {
       "slug": "timo",
@@ -6647,7 +6647,7 @@
       "sens": "0.52",
       "edpi": 416,
       "res": "1280x960",
-      "avatar": "data/avatars/timo.png"
+      "avatar": "data/avatars/timo.webp"
     },
     {
       "slug": "pancc",
@@ -6658,7 +6658,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1024x768",
-      "avatar": "data/avatars/pancc.png"
+      "avatar": "data/avatars/pancc.webp"
     },
     {
       "slug": "cool4st",
@@ -6669,7 +6669,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x1024",
-      "avatar": "data/avatars/cool4st.png"
+      "avatar": "data/avatars/cool4st.webp"
     },
     {
       "slug": "c4llm3su3",
@@ -6680,7 +6680,7 @@
       "sens": "0.95",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/c4llm3su3.png"
+      "avatar": "data/avatars/c4llm3su3.webp"
     },
     {
       "slug": "jota",
@@ -6691,7 +6691,7 @@
       "sens": "2.5",
       "edpi": 2000,
       "res": "1280x960",
-      "avatar": "data/avatars/jota.png"
+      "avatar": "data/avatars/jota.webp"
     },
     {
       "slug": "prt",
@@ -6702,7 +6702,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/prt.png"
+      "avatar": "data/avatars/prt.webp"
     },
     {
       "slug": "depreshn",
@@ -6713,7 +6713,7 @@
       "sens": "1.3",
       "edpi": 1040,
       "res": "1280x960",
-      "avatar": "data/avatars/depreshn.png"
+      "avatar": "data/avatars/depreshn.webp"
     },
     {
       "slug": "mds",
@@ -6724,7 +6724,7 @@
       "sens": "2.01",
       "edpi": 803,
       "res": "1280x960",
-      "avatar": "data/avatars/mds.png"
+      "avatar": "data/avatars/mds.webp"
     },
     {
       "slug": "xotic",
@@ -6735,7 +6735,7 @@
       "sens": "2",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/xotic.png"
+      "avatar": "data/avatars/xotic.webp"
     },
     {
       "slug": "svedjehed",
@@ -6746,7 +6746,7 @@
       "sens": "1",
       "edpi": 800,
       "res": "1280x960",
-      "avatar": "data/avatars/svedjehed.png"
+      "avatar": "data/avatars/svedjehed.webp"
     },
     {
       "slug": "hasteka",
@@ -6757,7 +6757,7 @@
       "sens": "1.9",
       "edpi": 760,
       "res": "1280x960",
-      "avatar": "data/avatars/hasteka.png"
+      "avatar": "data/avatars/hasteka.webp"
     },
     {
       "slug": "s0tf1k",
@@ -6779,7 +6779,7 @@
       "sens": "1.3",
       "edpi": 520,
       "res": "1280x960",
-      "avatar": "data/avatars/stesso.png"
+      "avatar": "data/avatars/stesso.webp"
     },
     {
       "slug": "krok",
@@ -6790,7 +6790,7 @@
       "sens": "0.85",
       "edpi": 680,
       "res": "1280x960",
-      "avatar": "data/avatars/krok.png"
+      "avatar": "data/avatars/krok.webp"
     },
     {
       "slug": "leakz",
@@ -6801,7 +6801,7 @@
       "sens": "2.2",
       "edpi": 880,
       "res": "1280x960",
-      "avatar": "data/avatars/leakz.png"
+      "avatar": "data/avatars/leakz.webp"
     },
     {
       "slug": "hs",
@@ -6812,7 +6812,7 @@
       "sens": "2.4",
       "edpi": 960,
       "res": "1600x900",
-      "avatar": "data/avatars/hs.png"
+      "avatar": "data/avatars/hs.webp"
     },
     {
       "slug": "moonwalk",
@@ -6823,7 +6823,7 @@
       "sens": "1.66",
       "edpi": 664,
       "res": "1280x960",
-      "avatar": "data/avatars/moonwalk.png"
+      "avatar": "data/avatars/moonwalk.webp"
     }
   ]
 }
