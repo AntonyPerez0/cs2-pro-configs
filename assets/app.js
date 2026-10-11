@@ -6,10 +6,12 @@
 
 const $ = (sel, el = document) => el.querySelector(sel);
 
-/* localStorage throws (not just returns null) when site data is blocked */
+/* localStorage throws (not just returns null) when site data is blocked;
+   fall back to memory so the page still works, just without persistence */
+const memory = {};
 const store = {
-  get(k) { try { return localStorage.getItem(k); } catch (_) { return null; } },
-  set(k, v) { try { localStorage.setItem(k, v); } catch (_) { /* not persisted */ } },
+  get(k) { try { return localStorage.getItem(k); } catch (_) { return memory[k] ?? null; } },
+  set(k, v) { memory[k] = v; try { localStorage.setItem(k, v); } catch (_) { /* not persisted */ } },
 };
 
 /* ---------------- clipboard ---------------- */
@@ -53,14 +55,14 @@ document.addEventListener("click", async (e) => {
   if (!btn || !btn.dataset.copy) return;
   const ok = await copyText(btn.dataset.copy);
   if (ok) {
-    // remember the real label once, so a second click inside the 1.2s
-    // window can't capture "Copied!" as the label to restore
-    if (!btn.classList.contains("copied")) btn._label = btn.textContent;
+    // never capture "Copied!" as the label (double click), and don't restore
+    // over a label the DPI matcher rewrote meanwhile
+    if (btn.textContent !== "Copied!") btn._label = btn.textContent;
     btn.textContent = "Copied!";
     btn.classList.add("copied");
     clearTimeout(btn._t);
     btn._t = setTimeout(() => {
-      btn.textContent = btn._label;
+      if (btn.textContent === "Copied!") btn.textContent = btn._label;
       btn.classList.remove("copied");
     }, 1200);
   }
@@ -170,7 +172,7 @@ function runIndex() {
   const res = params.get("res");
   if (res && [...resSel.options].some((o) => o.value === res)) { state.res = res; resSel.value = res; }
   const sort = params.get("sort");
-  if (sort && sort in SORTS) { state.sort = sort; sortSel.value = sort; }
+  if (sort && Object.hasOwn(SORTS, sort)) { state.sort = sort; sortSel.value = sort; }
   apply();
 }
 
