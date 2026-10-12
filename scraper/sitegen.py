@@ -212,6 +212,25 @@ def chunk(cmds, limit=LINE_LIMIT) -> list:
     return out
 
 
+# a crosshair's sizes, and the screen height they were authored at (set last: CS2 resets
+# it whenever a size changes)
+XHAIR_SIZE = ("cl_crosshair_length ", "cl_crosshair_thickness ", "cl_crosshair_gap ", "cl_crosshair_screen_height ")
+
+
+def xhair_chunks(cmds, limit=LINE_LIMIT) -> list:
+    """A crosshair paste as console lines. When it needs more than one, the sizes and the
+    screen height share the last line, so no line sets sizes without their height."""
+    if len("; ".join(cmds)) <= limit:
+        return [list(cmds)]
+    size = [c for c in cmds if c.startswith(XHAIR_SIZE)]
+    parts = chunk([c for c in cmds if not c.startswith(XHAIR_SIZE)], limit)
+    if len("; ".join(parts[-1] + size)) <= limit:
+        parts[-1] = parts[-1] + size
+    else:
+        parts.append(size)
+    return parts
+
+
 def console_parts(rec, xp) -> list:
     """The full config as [(label, commands)], every part one console line of at
     most LINE_LIMIT characters."""
@@ -219,7 +238,7 @@ def console_parts(rec, xp) -> list:
     parts = []
     for label, keys in PART_GROUPS:
         cmds = crosshair_commands(xp) if keys == ("crosshair",) else [c for k in keys for c in sections[k]]
-        pieces = chunk(cmds)
+        pieces = xhair_chunks(cmds) if keys == ("crosshair",) else chunk(cmds)
         for i, piece in enumerate(pieces):
             parts.append((label + (f" ({i + 1}/{len(pieces)})" if len(pieces) > 1 else ""), piece))
     return parts
@@ -454,7 +473,7 @@ def crosshair_section_html(rec, xp, reference, source_note=None) -> str:
     about += ('\n          <p class="note">The paste sets every setting that shapes this crosshair, including the '
               "iron-sight dot (CS2's defaults where their config has no value), so nothing from your current crosshair "
               "carries over.</p>")
-    pieces = chunk(cmds)
+    pieces = xhair_chunks(cmds)
     buttons = "".join(
         f'<button type="button" class="btn small" data-copy="{esc("; ".join(piece))}">'
         f'Copy crosshair{f" {i + 1}/{len(pieces)}" if len(pieces) > 1 else ""}</button>'
@@ -573,7 +592,7 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None, classic_e
     }
     if not xh_cmds:
         head_copy = ""
-    elif len(chunk(xh_cmds)) == 1:
+    elif len(xhair_chunks(xh_cmds)) == 1:
         head_copy = f'<button type="button" class="btn" data-copy="{esc("; ".join(xh_cmds))}">Copy crosshair</button>'
     else:
         head_copy = '<a class="btn" href="#crosshair">Crosshair ↓</a>'
@@ -899,7 +918,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     </section>''' if original else "")
     notes_html = f'<p class="note">{esc(c["notes"])}</p>' if c.get("notes") else ""
     head_copy = (f'<button type="button" class="btn" data-copy="{esc("; ".join(xh_cmds))}">Copy crosshair</button>'
-                 if xh_cmds and len(chunk(xh_cmds)) == 1 else
+                 if xh_cmds and len(xhair_chunks(xh_cmds)) == 1 else
                  '<a class="btn" href="#crosshair">Crosshair ↓</a>' if xh_cmds else "")
     cfg_href = f"/cfg/classic/{rec['slug']}.cfg"
     title = (f"{nick} ({standing(year_obj, p)}) {'CS:GO ' if game == 'CS:GO' else ''}Config Converted for CS2" if roster else

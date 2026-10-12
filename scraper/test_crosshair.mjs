@@ -50,7 +50,6 @@ check('no outline -> no outline colour', 'cl_crosshairoutline_a' in donk.cv, fal
 check('old style 5 keeps its family', conv(rec('fino')).cv.cl_crosshairstyle, '5');
 const hades = conv(rec('hades'));
 check('old style 2 keeps its family', hades.cv.cl_crosshairstyle, '2');
-check('style 2 keeps its split-pip cvars', hades.cv.cl_crosshair_dynamic_splitdist !== undefined, true);
 check('split-pip cvars only for style 2', Object.keys(donk.cv).filter((k) => k.startsWith('cl_crosshair_dynamic_')), []);
 check('weapon gap warns', hades.warnings.some((w) => w.code === 'weapon-gap-dropped'), true);
 const nivera = conv(rec('nivera'));
@@ -73,9 +72,14 @@ check('a static style leaves out the split and spread cvars (no effect on it)',
   Object.keys(donkX.cv).filter((k) => k.startsWith('cl_crosshair_dynamic_')), []);
 check('outline colour only with an outline', [donkX.cv.cl_crosshair_drawoutline, donkX.cv.cl_crosshairoutline_r], ['0', undefined]);
 const hadesX = conv(rec('hades'));
-check('a moving style gets its config\'s split values, clamped to CS2, and the spread limit',
-  ['splitdist', 'splitalpha_innermod', 'splitalpha_outermod', 'maxdist_splitratio', 'spread_limit']
-    .map((k) => hadesX.cv[`cl_crosshair_dynamic_${k}`] !== undefined), [true, true, true, true, true]);
+const DYN = ['splitdist', 'splitalpha_innermod', 'splitalpha_outermod', 'maxdist_splitratio', 'spread_limit'];
+check('style 2 gets the split cvars, not the spread limit (CS2 shows it for styles 0, 1 and 7 only)',
+  DYN.map((k) => hadesX.cv[`cl_crosshair_dynamic_${k}`]), ['3', '0', '1', '1', undefined]);
+check('split values come from the config', DYN.map((k) => conv(rec('kscerato', { cl_crosshairstyle: '2' })).cv[`cl_crosshair_dynamic_${k}`]),
+  ['7', '1', '0.5', '0.3', undefined]);
+check('split values are clamped to CS2\'s ranges', DYN.slice(0, 3).map((k) => conv(rec('hades', {
+  cl_crosshair_dynamic_splitalpha_outermod: '0.1', cl_crosshair_dynamic_splitdist: '500' })).cv[`cl_crosshair_dynamic_${k}`]),
+  ['127', '0', '0.3']);
 check('screen height stays last', hadesX.commands.at(-1).startsWith('cl_crosshair_screen_height '), true);
 check('only current cvars', [...new Set(Object.keys(FIX).filter((k) => k !== '_about')
   .flatMap((s) => convertPlayer(rec(s)).commands.map((c) => c.split(' ')[0])))].filter((k) => !CURRENT_CVARS.includes(k)), []);
@@ -88,10 +92,11 @@ check('preview: donk is four 2x2 arms around a 2px hole',
 // ---- a crosshair already in the new format is copied, not converted ----
 const already = conv({ slug: 'x', convars: { cl_crosshairstyle: '4', cl_crosshair_length: '3', cl_crosshair_thickness: '1', cl_crosshair_gap: '2',
   cl_crosshairdot: 'false', cl_crosshair_drawoutline: '1', cl_crosshaircolor_a: '255', cl_crosshair_screen_height: '1440',
-  cl_crosshairgap: '-2', cl_crosshaircolor_r: '0; quit' }, tables: { 'Video Settings': { Resolution: '1280x960' } } });
+  cl_crosshairgap: '-2', cl_crosshaircolor_r: '128; quit' }, tables: { 'Video Settings': { Resolution: '1280x960' } } });
 check('new format copied as-is', geo(already), [3, 1, 2]);
 check('new format keeps its authored height', already.cv.cl_crosshair_screen_height, '1440');
-check('new format drops legacy and unsafe values', ['cl_crosshairgap' in already.cv, 'cl_crosshaircolor_r' in already.cv], [false, false]);
+check('new format drops legacy and unsafe values (an unsafe one falls back to CS2\'s default)',
+  ['cl_crosshairgap' in already.cv, already.cv.cl_crosshaircolor_r], [false, '0']);
 check('new format normalizes booleans', already.cv.cl_crosshairdot, '0');
 
 check('converted entries say so', donk.kind, 'converted');
@@ -100,6 +105,21 @@ check('new-format default style (7, quad) gets no static-cross preview',
   conv({ slug: 'x', convars: { cl_crosshair_length: '3', cl_crosshair_thickness: '1', cl_crosshair_gap: '2' }, tables: {} }).preview, null);
 check('new-format spread limit is kept', conv({ slug: 'x', convars: { cl_crosshairstyle: '7', cl_crosshair_length: '3',
   cl_crosshair_dynamic_spread_limit: '128' }, tables: {} }).cv.cl_crosshair_dynamic_spread_limit, '128');
+// a new-format listing (it has a new-only cvar such as cl_crosshair_length)
+const copied = (convars) => conv({ slug: 'x', convars: { cl_crosshair_length: '3', ...convars }, tables: {} }).cv;
+check('new-format style 7 gets the spread limit (default) and no split values',
+  [copied({ cl_crosshairstyle: '7' }).cl_crosshair_dynamic_spread_limit, copied({ cl_crosshairstyle: '7' }).cl_crosshair_dynamic_splitdist],
+  ['255', undefined]);
+check('new-format style 9 gets its quadrant size', copied({ cl_crosshairstyle: '9', cl_crosshair_dynamic_maxdist_splitratio: '0.4' })
+  .cl_crosshair_dynamic_maxdist_splitratio, '0.4');
+const sparse = copied({});
+check('a listing that leaves out core settings gets CS2\'s defaults', ['cl_crosshairstyle', 'cl_crosshair_length', 'cl_crosshair_thickness',
+  'cl_crosshair_gap', 'cl_crosshair_drawoutline', 'cl_crosshaircolor_g', 'cl_crosshairoutline_a', 'cl_crosshair_recoil'].map((k) => sparse[k]),
+  ['7', '3', '2', '4', '1', '255', '255', '1']);
+check('a listed outline colour is kept when the listing leaves out the outline switch (on by default)',
+  copied({ cl_crosshairstyle: '4', cl_crosshairoutline_r: '255' }).cl_crosshairoutline_r, '255');
+check('...and dropped when the outline is listed as off',
+  copied({ cl_crosshairstyle: '4', cl_crosshair_drawoutline: '0', cl_crosshairoutline_r: '255' }).cl_crosshairoutline_r, undefined);
 check('a legacy config with spread_limit still converts', geo(conv(rec('donk', { cl_crosshair_dynamic_spread_limit: '255' }))), [2, 2, 1]);
 const empty = convertPlayer({ slug: 'x', convars: { sensitivity: '1' }, tables: {} });
 check('no crosshair settings -> blocked, not a crash', [empty.kind, empty.blockers?.length], ['blocked', 1]);
