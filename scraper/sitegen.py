@@ -33,7 +33,9 @@ LINE_LIMIT = 500
 # or never a CS2 convar (cl_drawhud, cl_radar_size, cl_mouselook, setting.defaultres,
 # m_rawinput, ...) - is left out of every paste. The cl_crosshair* convars are
 # replaced as a whole by the converted crosshair commands.
-CS2_CONVARS = json.loads((Path(__file__).resolve().parent / "cs2_convars.json").read_text())["convars"]
+_CS2 = json.loads((Path(__file__).resolve().parent / "cs2_convars.json").read_text())
+CS2_CONVARS = _CS2["convars"]
+CS2_CHEAT = set(_CS2.get("cheat", []))
 # CS:GO names CS2 renamed (old configs)
 RENAMED = {"zoom_sensitivity_ratio_mouse": "zoom_sensitivity_ratio",
            # 1 = show the alive count instead of avatars, in both games
@@ -124,6 +126,10 @@ def cs2_command(k, v):
         name, sv = INVERTED[k], "1" if sv == "0" else "0"
         note = f"{k} {v} is {name} {sv} in CS2 (the value is inverted)"
     if name not in CS2_CONVARS:
+        if name in CS2_CHEAT:
+            return None, f"{k} is cheat-protected in CS2, left out"
+        if k.startswith("setting."):  # CS2's own video settings, saved by the game, not set by a config
+            return None, f"{k} is a video setting, set in Settings → Video (see Video settings), left out"
         return None, f"{k} doesn't exist in CS2, left out"
     lo, hi = CS2_CONVARS[name]
     try:
@@ -769,7 +775,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     sources_html = (f'''<section class="section" id="sources">
       <div class="section-head"><h2>Where these settings come from</h2></div>
       <ul class="provenance">{prov_items}</ul>
-      <p class="note">DPI is only paired with a sensitivity from the same source, so the eDPI never mixes eras. The other parts can come from configs of different dates, as listed.</p>
+      <p class="note">DPI is only taken from a source that lists the same sensitivity, so the eDPI matches the sensitivity shown. The other parts can come from configs of different dates, as listed.</p>
     </section>''' if prov_items else "")
     confidence = c.get("confidence") or "medium"
     original = "\n".join(f"{k} {v}" for k, v in (c.get("convars") or {}).items())
@@ -788,9 +794,12 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     has = ([f"crosshair converted to the new crosshair system"] if xh_cmds else []) + (
         [f"{dpi} DPI x {sens} sens ({edpi} eDPI)"] if edpi else [f"sensitivity {sens}"] if sens else []) + (
         ["viewmodel"] if section_commands(rec).get("viewmodel") else [])
+    # "and more" only when the config has commands beyond the ones named
+    named = len(xh_cmds) + (1 if sens else 0) + len(section_commands(rec).get("viewmodel") or [])
+    more = len(full_commands(rec, xp)) > named
     desc = (f"{nick}'s CS:GO settings from {c.get('date')} (#{p['rank']} {year_obj['short']}"
             + (f", {p['team']}" if p.get("team") else "") + ") converted for CS2"
-            + (": " + ", ".join(has) + " and more as console commands." if has else "."))
+            + (": " + ", ".join(has) + (" and more as console commands." if more else ".") if has else "."))
     avatar_html = avatar_img(rec["avatar"], 92) if rec.get("avatar") else letter_div(nick)
     image = f"{BASE}/{rec['avatar']}" if rec.get("avatar") else f"{BASE}/assets/og-default.png"
     return f'''<!DOCTYPE html>
