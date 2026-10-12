@@ -7,7 +7,8 @@ Outputs (repo root):
   data/index.json            - player list for the grid/search
   data/players/<slug>.json   - full record per player
   data/avatars/<slug>.<ext>  - player avatar (extension from the image bytes)
-  cfg/<slug>.cfg             - full autoexec.cfg (verbatim from settings.gg)
+  cfg/raw/<slug>.cfg         - full autoexec.cfg (verbatim from settings.gg, pre-patch format;
+                               sitegen.py writes the converted cfg/<slug>.cfg)
 
 Usage:
   python3 scrape.py [--limit N] [--workers 6] [--delay 0.12]
@@ -334,7 +335,7 @@ def main():
                 failures.append((slug, str(e)))
                 prev = previous_record(slug)
                 if prev:
-                    results[slug] = prev  # its cfg/<slug>.cfg is left as-is
+                    results[slug] = prev  # its cfg/raw/<slug>.cfg is left as-is
             done += 1
             if done % 25 == 0 or done == len(players):
                 print(f"      {done}/{len(players)} done ({len(failures)} failed)", flush=True)
@@ -344,7 +345,7 @@ def main():
     results = [results[p["slug"]] for p in players if p["slug"] in results]
 
     (ROOT / "data" / "players").mkdir(parents=True, exist_ok=True)
-    (ROOT / "cfg").mkdir(parents=True, exist_ok=True)
+    (ROOT / "cfg" / "raw").mkdir(parents=True, exist_ok=True)
 
     index = []
     for rec in results:
@@ -368,7 +369,7 @@ def main():
             json.dumps(slim, ensure_ascii=False, indent=2), encoding="utf-8"
         )
         if rec.get("raw_cfg"):
-            (ROOT / "cfg" / f"{slug}.cfg").write_text(rec["raw_cfg"], encoding="utf-8")
+            (ROOT / "cfg" / "raw" / f"{slug}.cfg").write_text(rec["raw_cfg"], encoding="utf-8")
 
     stamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     meta = {"generated": stamp, "source": "https://settings.gg/players", "count": len(results)}
@@ -378,7 +379,7 @@ def main():
         encoding="utf-8",
     )
 
-    print(f"[3/3] wrote {len(results)} players -> data/, cfg/", flush=True)
+    print(f"[3/3] wrote {len(results)} players -> data/, cfg/raw/", flush=True)
     if failures:
         print(f"      failures ({len(failures)}):", flush=True)
         for slug, err in failures[:20]:

@@ -26,11 +26,16 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Set up Node (crosshair converter)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
       - name: Install dependencies
         run: pip install -r scraper/requirements.txt
 
       - name: Test crosshair conversion
-        run: python3 scraper/test_xhair_convert.py
+        run: node scraper/test_crosshair.mjs
 
       - name: Run scraper
         run: python3 scraper/scrape.py
@@ -38,8 +43,14 @@ jobs:
       - name: Try refresh HLTV top 10 (kept as-is when HLTV is blocked)
         run: python3 scraper/top10.py
 
-      - name: Rebuild static pages (prerendered player pages, sitemap)
+      - name: Convert crosshairs to the current CS2 crosshair system
+        run: node scraper/crosshair.mjs
+
+      - name: Rebuild static pages (prerendered player pages, cfg files, sitemap)
         run: python3 scraper/sitegen.py
+
+      - name: Check the generated site
+        run: python3 scraper/test_site.py
 
       - name: Commit and push data changes
         run: |
