@@ -2,7 +2,7 @@
   "slug": "isak",
   "nick": "isak",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9fcHB0MFhsbC1kdUZJSks0d1BUdy1ILnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.0B2srcMYdl5TBo55ijcK0SCTJlw7GYdWicFa2OScl7k",
-  "real_name": "Isak FahlÃ©n",
+  "real_name": "Isak Fahlén",
   "crosshair_code": "CSGO-U4zSG-6mGF7-V8pyQ-CL3Pj-KPBUM",
   "steamid64": "76561198071910365",
   "launch_options": "-novid -refresh 240 +mat_queue_mode 2 -d3d9ex -tickrate 128 +exec isak.cfg",

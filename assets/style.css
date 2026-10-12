@@ -65,6 +65,10 @@ a:hover { text-decoration: underline; }
   letter-spacing: 1.5px; text-transform: uppercase;
 }
 .topbar .spacer { flex: 1; }
+@media (max-width: 420px) {
+  /* two nav buttons (classic pages) don't fit beside the full logo on a phone */
+  .topbar-inner:has(.btn ~ .btn) .logo small { display: none; }
+}
 
 /* ---------- HLTV Top 10 ---------- */
 .top10 { margin: 26px 0 4px; }
@@ -430,3 +434,7 @@ footer a { color: var(--muted); }
 .classic-teaser p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
 .classic-teaser .chip { color: var(--text); }
 .classic-teaser .chip:hover { border-color: var(--accent); text-decoration: none; }
+.provenance { margin: 0; padding-left: 18px; font-size: 13px; color: var(--muted); }
+.provenance li { margin: 6px 0; }
+.provenance b { color: var(--text); }
+.provenance details summary { cursor: pointer; font-size: 12px; color: var(--faint); }
