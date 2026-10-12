@@ -81,7 +81,7 @@ Notes:
 
 - Search and sort across 620 pro players
 - **HLTV Top 10 section** on the front page (latest official HLTV player ranking, links straight to each pro's config)
-- **Classic configs** (`/classic/`): the top 10 players of each year from 2011 to 2015 with their dated CS:GO settings converted for CS2 (see below)
+- **Classic configs** (`/classic/`): the top 10 players of each year from 2011 to 2015, plus Cloud9 and iBUYPOWER as they were in January 2015, with their dated CS:GO settings converted for CS2 and period photos (see below)
 - **Your-DPI sensitivity matcher**: enter your mouse DPI once, get the in-game sensitivity that matches each pro's speed (eDPI match), or copy the config part with the sensitivity rewritten for your DPI
 - Crosshair converted to the current CS2 crosshair system, with a pixel preview (inline SVG, works without JavaScript)
 - Per-category copy blocks (crosshair, sensitivity, viewmodel, radar, HUD, other)
@@ -160,6 +160,11 @@ links): `python3 -m http.server` and open http://localhost:8000.
   [Esports Earnings](https://www.esportsearnings.com/history/2012/games/245-counter-strike-global-offensive),
   which ranks by money, not skill. Its 9th and 10th places couldn't be verified, so
   2012 has 8 players.
+- **Lineups.** Cloud9 (n0thing, seang@res, shroud, Semphis, ShahZaM) and iBUYPOWER
+  (AZK, DaZeD, Hiko, Skadoodle, swag) in January 2015, at `/classic/c9-ibp-2015/`,
+  with steel listed alongside iBUYPOWER (he had left in November 2014). A lineup group
+  has `"kind": "roster"`, its own `key`, `when` and `target` month; players have a
+  `team` instead of a rank, and a player who had left by then has a `standing`.
 - **Configs.** 2011 was a CS 1.6 ranking, so those players get their CS:GO settings.
   Each entry uses the player's config closest to the ranking year that can be
   converted, mostly game-written `config.cfg` files from setup.gg's public archive,
@@ -172,7 +177,8 @@ links): `python3 -m http.server` and open http://localhost:8000.
   which part is from when. DPI is only paired with a sensitivity from a config with
   the same sensitivity, so the eDPI never mixes eras. A crosshair is converted at the
   resolution its own source gives. Two players (trace 2011, Gux 2011) have no
-  documented CS:GO config and are listed without one.
+  documented CS:GO config and are listed without one. swag only ever used crosshair
+  style 1, which can't be converted, so his page says so.
 - **Conversion.** The same converter as the current players. Crosshair settings
   CS:GO added later are set to what the player had then, not CS2's defaults:
   `cl_crosshair_drawoutline` (added 22 May 2013), `cl_crosshairgap_useweaponvalue`
@@ -183,6 +189,12 @@ links): `python3 -m http.server` and open http://localhost:8000.
   style 2, which the page also notes. Configs with a crosshair style the converter
   can't read (style 6) are passed over for the closest one it can, and the page
   says so.
+
+- **Photos.** Each player's card and page show a freely licensed photo from Wikimedia
+  Commons (CC BY, CC BY-SA, CC0 or public domain) taken as close as possible to the
+  entry's time, cropped to `data/avatars/classic/<id>-<key>.webp` and credited on the
+  page and in /classic/'s photo credits (a player's `photo` in `data/classic.json`).
+  Players with no free photo keep the letter circle.
 
 Optional config fields: `window` (first and last day the file can be from) narrows
 the era rules above, and `crosshair_resolution` is the resolution the crosshair is
