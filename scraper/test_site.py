@@ -204,6 +204,13 @@ if classic_path.exists():
     pastes = [c for k, x in XC.items() for c in x.get("commands", [])]
     check("classic: only current crosshair cvars", sorted({c.split(" ")[0] for c in pastes} - CURRENT_XHAIR), [])
 
+# ---- sitemap: every URL is a real page, and every page is listed ----
+locs = re.findall(r"<loc>https://[^/]+(/[^<]*)</loc>", (ROOT / "sitemap.xml").read_text(encoding="utf-8"))
+check("sitemap URLs resolve to pages", [u for u in locs if not (ROOT / u.lstrip("/") / "index.html").is_file()
+                                        and not (ROOT / u.lstrip("/")).is_file()][:5], [])
+pages = {"/" + str(f.parent.relative_to(ROOT)) + "/" for f in list((ROOT / "classic").glob("*/*/index.html")) + list((ROOT / "p").glob("*/index.html"))}
+check("every player and classic page is in the sitemap", sorted(pages - set(locs))[:5], [])
+
 # ---- hardening helpers ----
 s = json_script({"v": "a</script>b"})
 check("json escapes </", "</script>" not in s, True)

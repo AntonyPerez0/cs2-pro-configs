@@ -194,7 +194,9 @@ links): `python3 -m http.server` and open http://localhost:8000.
   Commons (CC BY, CC BY-SA, CC0 or public domain) taken as close as possible to the
   entry's time, cropped to `data/avatars/classic/<id>-<key>.webp` and credited on the
   page and in /classic/'s photo credits (a player's `photo` in `data/classic.json`).
-  Players with no free photo keep the letter circle.
+  Players with no free photo keep the letter circle. These crops are not covered by
+  this repository's licence: each stays under its own Commons file's licence, as
+  credited.
 
 Optional config fields: `window` (first and last day the file can be from) narrows
 the era rules above, and `crosshair_resolution` is the resolution the crosshair is
