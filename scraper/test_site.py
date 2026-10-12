@@ -181,6 +181,26 @@ if classic_path.exists():
         u for y in classic["years"] for p in y["players"] if p.get("config")
         for u in p["config"]["sources"] + [v for pv in p["config"].get("provenance", []) for v in pv["sources"]]]
     check("classic: sources are bare URLs", [u for u in urls if not re.fullmatch(r"https?://[^\s()<>\"]+", u)][:3], [])
+    # photos: freely licensed (Commons), credited, and present as files
+    FREE = re.compile(r"^(CC0|Public domain|CC BY(-SA)? [1-4]\.0( [A-Za-z-]+)?)$")
+    bad_photo = []
+    for y in classic["years"]:
+        for p in y["players"]:
+            ph = p.get("photo")
+            if not ph:
+                continue
+            tag = classic_key(y, p)
+            if not (ROOT / ph.get("src", "")).is_file():
+                bad_photo.append(f"{tag}: no file {ph.get('src')}")
+            if not str(ph.get("page", "")).startswith("https://commons.wikimedia.org/wiki/File:"):
+                bad_photo.append(f"{tag}: page")
+            if not FREE.match(str(ph.get("license", ""))):
+                bad_photo.append(f"{tag}: licence {ph.get('license')}")
+            if ph.get("license", "").startswith("CC") and not str(ph.get("license_url", "")).startswith("https://creativecommons.org/"):
+                bad_photo.append(f"{tag}: licence link")
+            if not ph.get("author") or not re.match(r"^\d{4}", str(ph.get("date", ""))):
+                bad_photo.append(f"{tag}: author/date")
+    check("classic: photos are free, credited and present", bad_photo[:5], [])
     pastes = [c for k, x in XC.items() for c in x.get("commands", [])]
     check("classic: only current crosshair cvars", sorted({c.split(" ")[0] for c in pastes} - CURRENT_XHAIR), [])
 

@@ -441,3 +441,5 @@ footer a { color: var(--muted); }
 .provenance li { margin: 6px 0; }
 .provenance b { color: var(--text); }
 .provenance details summary { cursor: pointer; font-size: 12px; color: var(--faint); }
+.classic-credits > details > summary { cursor: pointer; font-weight: 700; font-size: 15px; }
+.classic-credits .provenance { margin-top: 10px; }
