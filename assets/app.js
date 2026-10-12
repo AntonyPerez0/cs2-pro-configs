@@ -248,6 +248,10 @@ function runPlayerStatic() {
   const btnSens = $("button", box);
   const note = $(".dpi-note", box);
   const renderNote = () => {
+    if (!base) {
+      note.textContent = "Enter their DPI (50 or more) to match their sensitivity.";
+      return;
+    }
     note.innerHTML = `Matching keeps the same <b>eDPI</b> (${Math.round(base.edpi)}) — that's <b>${base.cm.toFixed(1)} cm</b> per 360° turn at any DPI. Enter your DPI and use this sensitivity instead of theirs${sensPart >= 0 ? ` (or use <b>Copy part ${sensPart + 1} at my DPI</b> in the Full config above, which rewrites the <code>sensitivity</code> command for you)` : ""}.`;
   };
   const saved = getUserDpi();
@@ -270,9 +274,10 @@ function runPlayerStatic() {
   input.addEventListener("input", update);
   if (theirs) {
     theirs.addEventListener("input", () => {
-      const next = proEdpi(theirs.value, data.sens);
-      if (!next) return;  // keep the last valid value while typing
-      base = next;
+      // a partial or invalid value ("8", "1.5", empty) turns matching off
+      // rather than computing from it
+      const v = theirs.valueAsNumber;
+      base = Number.isFinite(v) && v >= 50 ? proEdpi(String(Math.round(v)), data.sens) : null;
       renderNote();
       update();
     });
