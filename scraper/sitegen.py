@@ -676,8 +676,16 @@ def glabel(y) -> str:
 
 
 def standing(y, p) -> str:
-    """Where the player stood: "#3 HLTV Top 20 of 2013" or "Cloud9, January 2015"."""
-    return f"{p.get('team')}, {y.get('when')}" if is_roster(y) else f"#{p['rank']} {y['short']}"
+    """Where the player stood: "#3 HLTV Top 20 of 2013", "Cloud9, January 2015", or a
+    player's own "standing" in a lineup they had left ("iBUYPOWER until November 2014")."""
+    if is_roster(y):
+        return p.get("standing") or f"{p.get('team')}, {y.get('when')}"
+    return f"#{p['rank']} {y['short']}"
+
+
+def in_lineup(y, p) -> bool:
+    """A lineup group can also list a player who had left by then (own "standing")."""
+    return is_roster(y) and not p.get("standing")
 
 
 def classic_key(y, p) -> str:
@@ -778,8 +786,8 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     embed = json_script({"dpi": dpi, "sens": sens, "parts": [cmds for _, cmds in parts]})
     current = players_by_slug.get(p.get("current_slug") or "")
 
-    chips = ([f'<span class="chip"><b>{esc(p.get("team"))}</b> {esc(year_obj.get("when"))}</span>'] if roster else
-             [f'<span class="chip"><b>#{p["rank"]}</b> {esc(year_obj["short"])}</span>'])
+    chips = ([f'<span class="chip"><b>{esc(p.get("team"))}</b> {esc(standing(year_obj, p).removeprefix(p.get("team") or "").lstrip(", "))}</span>']
+             if roster else [f'<span class="chip"><b>#{p["rank"]}</b> {esc(year_obj["short"])}</span>'])
     if p.get("prize"):
         chips.append(f'<span class="chip">{esc(p["prize"])} in 2012</span>')
     if p.get("team") and not roster:
@@ -798,8 +806,11 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     era = (f"{esc(nick)} played CS 1.6 in {year}, so these are their CS:GO settings "
            if p.get("game") == "CS 1.6" else f"These are {esc(nick)}'s CS:GO settings ")
     when = classic_date_note(year_obj, c)
-    if roster:
-        mates = [q["nick"] for q in year_obj["players"] if q.get("team") == p.get("team") and q["id"] != p["id"]]
+    if roster and not in_lineup(year_obj, p):
+        intro = f"{esc(p['standing'])}." + (f" {esc(p['lineup_note'])}" if p.get("lineup_note") else "")
+    elif roster:
+        mates = [q["nick"] for q in year_obj["players"]
+                 if q.get("team") == p.get("team") and q["id"] != p["id"] and in_lineup(year_obj, q)]
         intro = (f"{esc(p.get('team'))} in {esc(year_obj.get('when'))}"
                  + (f", with {esc(', '.join(mates[:-1]))} and {esc(mates[-1])}" if len(mates) > 1 else "") + ".")
     else:
@@ -827,7 +838,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
                  if xh_cmds and len(chunk(xh_cmds)) == 1 else
                  '<a class="btn" href="#crosshair">Crosshair ↓</a>' if xh_cmds else "")
     cfg_href = f"/cfg/classic/{rec['slug']}.cfg"
-    title = (f"{nick} ({p.get('team')}, {year_obj.get('when')}) CS:GO Config Converted for CS2" if roster else
+    title = (f"{nick} ({standing(year_obj, p)}) CS:GO Config Converted for CS2" if roster else
              f"{nick} {year} CS:GO Config Converted for CS2 — #{p['rank']} {year_obj['short']}")
     has = ([f"crosshair converted to the new crosshair system"] if xh_cmds else []) + (
         [f"{dpi} DPI x {sens} sens ({edpi} eDPI)"] if edpi else [f"sensitivity {sens}"] if sens else []) + (
@@ -930,7 +941,7 @@ def classic_index_page(classic, players_by_slug) -> str:
             badge = (f'<span class="top10-rank">{esc(short_team)}</span>' if is_roster(y) else
                      f'<span class="top10-rank{" medal" if p["rank"] <= 3 else ""}">#{p["rank"]}</span>')
             inner = (f'{badge}{avatar}<span class="top10-nick">{esc(p["nick"])}</span>'
-                     f'<span class="top10-team">{esc(p.get("team") or "")}</span>{sub}')
+                     f'<span class="top10-team">{esc(p.get("standing") or p.get("team") or "")}</span>{sub}')
             cards.append(f'<li class="top10-card"><a href="{href}">{inner}</a></li>' if href
                          else f'<li class="top10-card"><div class="card-static">{inner}</div></li>')
         sections.append(f'''<section class="top10 classic-year" id="y{gkey(y)}" aria-labelledby="y{gkey(y)}-title">
