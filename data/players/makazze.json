@@ -5,7 +5,7 @@
   "real_name": "Drin Shaqiri",
   "crosshair_code": "CSGO-yUhdM-CYnoW-exCwk-wZfpk-yrmHB",
   "steamid64": "76561199076189612",
-  "launch_options": "-novid -tickrate 128 cl_updaterate 128 -refresh 240 -console â high -cl_interp_ratio 2 +cl_forcepreload 1",
+  "launch_options": "-novid -tickrate 128 cl_updaterate 128 -refresh 240 -console – high -cl_interp_ratio 2 +cl_forcepreload 1",
   "tables": {
     "Mouse": {
       "DPI": "800",
