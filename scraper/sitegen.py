@@ -425,7 +425,7 @@ def crosshair_section_html(rec, xp, reference, source_note=None) -> str:
     </section>'''
 
 
-def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None) -> str:
+def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None, classic_entries=()) -> str:
     slug = rec["slug"]
     nick = rec.get("nick") or slug
     real = rec.get("real_name") or ""
@@ -481,6 +481,8 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None) -> str:
     links.append(f'<a href="https://settings.gg/players/{esc(slug)}" target="_blank" rel="noopener">settings.gg</a>')
     if rec.get("steamid64"):
         links.append(f'<a href="https://procrosshairs.com/player/{esc(rec["steamid64"])}/{esc(slug)}" target="_blank" rel="noopener">crosshair history</a>')
+    for year, cid, rank in classic_entries:
+        links.append(f'<a href="/classic/{year}/{esc(cid)}/">#{rank} in {year} (classic)</a>')
 
     avatar_html = avatar_img(rec["avatar"], 92) if rec.get("avatar") else letter_div(nick)
     download = f'<a class="btn ghost" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download .cfg</a>'
@@ -652,11 +654,16 @@ def classic_cfg(rec, xp, year, p) -> str:
 
 
 def source_links(urls) -> str:
-    out = []
-    for i, u in enumerate(urls or []):
-        host = re.sub(r"^https?://(www\.)?", "", u).split("/")[0] or u
-        out.append(f'<a href="{esc(u)}" target="_blank" rel="noopener nofollow">{esc(host)}</a>')
-    return ", ".join(out)
+    """Links grouped by site: one link per site, or "hltv.org 1, 2, 3" when a
+    site has several, rather than repeating the host name."""
+    hosts = {}
+    for u in urls or []:
+        hosts.setdefault(re.sub(r"^https?://(www\.)?", "", u).split("/")[0] or u, []).append(u)
+    link = lambda u, text: f'<a href="{esc(u)}" target="_blank" rel="noopener nofollow">{esc(text)}</a>'
+    return ", ".join(
+        link(us[0], host) if len(us) == 1
+        else f"{esc(host)} " + ", ".join(link(u, str(i)) for i, u in enumerate(us, 1))
+        for host, us in hosts.items())
 
 
 def classic_date_note(year, c) -> str:
@@ -665,8 +672,22 @@ def classic_date_note(year, c) -> str:
     if cy == year:
         return f"from {esc(date)}, the year of the ranking"
     if cy is not None:
-        return f"from {esc(date)}, the closest documented to {year}"
+        has_xh = any(k.startswith("cl_crosshair") for k in c.get("convars") or {})
+        return f"from {esc(date)}, the closest to {year} we found" + (" that can be converted" if has_xh else "")
     return "undated"
+
+
+def classic_other_dates(c) -> str:
+    """", with the sensitivity from 2014-07 and the DPI and resolution from 2016-12"
+    for the parts that come from a config with another date than the main one."""
+    by_date = {}
+    for pv in c.get("provenance") or []:
+        if pv.get("date") and pv["date"] != c.get("date"):
+            name = pv["what"].split(",")[0].split(" (")[0]
+            by_date.setdefault(pv["date"], []).append(name if name.isupper() else name.lower())
+    if not by_date:
+        return ""
+    return ", with " + " and ".join(f"the {' and '.join(names)} from {esc(d)}" for d, names in by_date.items())
 
 
 def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
@@ -689,6 +710,8 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     current = players_by_slug.get(p.get("current_slug") or "")
 
     chips = [f'<span class="chip"><b>#{p["rank"]}</b> {esc(year_obj["short"])}</span>']
+    if p.get("prize"):
+        chips.append(f'<span class="chip">{esc(p["prize"])} in 2012</span>')
     if p.get("team"):
         chips.append(f'<span class="chip">{esc(p["team"])}</span>')
     chips.append(f'<span class="chip">config {esc(c.get("date") or "undated")}</span>')
@@ -705,8 +728,16 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     era = (f"{esc(nick)} played CS 1.6 in {year}, so these are their CS:GO settings "
            if p.get("game") == "CS 1.6" else f"These are {esc(nick)}'s CS:GO settings ")
     when = classic_date_note(year, c)
-    source_note = (f"{era}{when} ({esc(c.get('date_basis') or 'date basis not given')}; "
-                   f"source: {source_links(c.get('sources'))}).")
+    source_note = f'{era}{when} (see <a href="#sources">where these settings come from</a>).'
+    prov_items = "".join(
+        f'''<li><b>{esc(pv["what"])}</b> · {esc(pv["date"])} · confidence {esc(pv["confidence"])} · {source_links(pv.get("sources"))}
+          <details><summary>How the date is known</summary><p class="note">{esc(pv["date_basis"])}</p></details></li>'''
+        for pv in c.get("provenance") or [])
+    sources_html = (f'''<section class="section" id="sources">
+      <div class="section-head"><h2>Where these settings come from</h2></div>
+      <ul class="provenance">{prov_items}</ul>
+      <p class="note">Settings from different sources are only combined when they agree (DPI is only paired with a sensitivity from the same source), so the eDPI never mixes eras.</p>
+    </section>''' if prov_items else "")
     confidence = c.get("confidence") or "medium"
     adapted = adaptation_notes(rec)
     adapted_html = ""
@@ -772,7 +803,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
       </div>
     </div>
     <div class="chips profile-chips">{"".join(chips)}</div>
-    <p class="note classic-note">#{p["rank"]} in {esc(year_obj["ranking"])}{f" ({esc(p['team'])})" if p.get("team") else ""}. {era}{when}. Source confidence: <b>{esc(confidence)}</b>.</p>
+    <p class="note classic-note">#{p["rank"]} in {esc(year_obj["ranking"])}{f" ({esc(p['team'])})" if p.get("team") else ""}. {era}{when}{classic_other_dates(c)}. Source confidence: <b>{esc(confidence)}</b>.</p>
     {notes_html}
     <div class="head-actions">
       {head_copy}
@@ -784,6 +815,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     {category_sections_html(rec)}
     {adapted_html}
     {video_tables_html(rec)}
+    {sources_html}
     {original_html}
   </main>
 
@@ -867,7 +899,7 @@ def classic_index_page(classic, players_by_slug) -> str:
       <h1>Classic configs<span class="dot">.</span> {span}</h1>
       <p>The top 10 players of each year from {span}, with their CS:GO settings converted for CS2: the crosshair converted to the
          new crosshair system, sensitivity, viewmodel and the rest as console commands. Each config is dated and sourced; when
-         nothing from the exact year is documented, the closest documented config is used and labelled.</p>
+         nothing from the exact year is documented (or it can't be converted), the closest one is used and its date shown.</p>
       <div class="chips classic-jump">{jump}</div>
       <p class="note">{esc(classic.get("about") or "")}</p>
     </div>
@@ -1121,12 +1153,12 @@ def robots_txt() -> str:
 
 
 def main() -> None:
-    index = json.loads((ROOT / "data" / "index.json").read_text())
+    index = json.loads((ROOT / "data" / "index.json").read_text(encoding="utf-8"))
     players = index["players"]
     generated = index["meta"]["generated"]
 
     try:
-        top10_data = json.loads((ROOT / "data" / "top10.json").read_text())
+        top10_data = json.loads((ROOT / "data" / "top10.json").read_text(encoding="utf-8"))
     except Exception:
         top10_data = None
     top10_rank = {}
@@ -1155,6 +1187,13 @@ def main() -> None:
     except FileNotFoundError:
         classic = None
 
+    # current player -> their classic entries, for links from /p/<slug>/
+    classic_of = {}
+    for y in (classic or {}).get("years", []):
+        for p in y["players"]:
+            if p.get("config") and p.get("current_slug"):
+                classic_of.setdefault(p["current_slug"], []).append((y["year"], p["id"], p["rank"]))
+
     emit(ROOT / "index.html", index_page(players, top10_data, generated, classic), f"{BASE}/", "1.0")
     print("index.html")
 
@@ -1164,11 +1203,11 @@ def main() -> None:
         f = ROOT / "data" / "players" / f"{slug}.json"
         if not f.exists():
             continue
-        rec = json.loads(f.read_text())
+        rec = json.loads(f.read_text(encoding="utf-8"))
         xp = crosshair["players"][slug]
         d = ROOT / "p" / slug
         d.mkdir(parents=True, exist_ok=True)
-        emit(d / "index.html", player_page(rec, xp, crosshair["reference"], top10_rank.get(slug)),
+        emit(d / "index.html", player_page(rec, xp, crosshair["reference"], top10_rank.get(slug), classic_of.get(slug, ())),
              f"{BASE}/p/{slug}/", "0.8")
         write_if_changed(ROOT / "cfg" / f"{slug}.cfg", player_cfg(rec, xp))
         n += 1

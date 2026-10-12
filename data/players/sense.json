@@ -2,7 +2,7 @@
   "slug": "sense",
   "nick": "sense",
   "avatar_url": null,
-  "real_name": "Ãdne Fredriksen",
+  "real_name": "Ådne Fredriksen",
   "crosshair_code": "CSGO-xsowT-6vU9r-eLAoy-faqUG-CrrBE",
   "steamid64": "76561198192927541",
   "launch_options": "-console -tickrate 128 -freq 240 -novid +rate 786432 cl_updaterate 128 cl_cmdrate 128 -allow_third_party_software -nojoy -high",

@@ -19,7 +19,7 @@ ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
 from sitegen import (LINE_LIMIT, chunk, console_parts, crosshair_section_html, full_commands,  # noqa: E402
                      json_script, player_cfg, res_key, safe_value)
-from scrape import KEY_RE, image_ext  # noqa: E402
+from scrape import KEY_RE, demojibake, image_ext  # noqa: E402
 
 FAILS = []
 N = 0
@@ -116,6 +116,10 @@ check("long crosshair split into copy pieces that fit",
       (len(copies) > 1, all(len(c) <= LINE_LIMIT for c in copies), "; ".join(copies) == "; ".join(long_xp["commands"])),
       (True, True, True))
 
+check("names are not mis-decoded UTF-8 (\"NovÃ½\")",
+      [p["slug"] for p in index["players"] for k in ("nick", "real_name") if p.get(k) and demojibake(p[k]) != p[k]][:5], [])
+check("demojibake keeps real Latin-1 text", [demojibake("Tim Ångström"), demojibake("NovÃ½")], ["Tim Ångström", "Nový"])
+
 # ---- classic section (top 10 of 2011-2015), when present ----
 classic_path = ROOT / "data" / "classic.json"
 if classic_path.exists():
@@ -125,7 +129,9 @@ if classic_path.exists():
     XC = xh.get("classic", {})
     missing, bad_copy, bad_cfg, bad_link = [], [], [], []
     for y in classic["years"]:
-        check(f"classic {y['year']}: 10 ranked players", sorted(p["rank"] for p in y["players"]), list(range(1, 11)))
+        ranks = sorted(p["rank"] for p in y["players"])
+        check(f"classic {y['year']}: ranks 1..n" + (" with n = 10 for HLTV lists" if y["ranking"].startswith("HLTV") else ""),
+              ranks, list(range(1, (10 if y["ranking"].startswith("HLTV") else len(ranks)) + 1)))
         for p in y["players"]:
             if p.get("current_slug") and p["current_slug"] not in by_slug:
                 bad_link.append(p["id"])
@@ -153,6 +159,10 @@ if classic_path.exists():
     check("classic: copy buttons fit one console line", sorted(set(bad_copy))[:5], [])
     check("classic: .cfg files are current", bad_cfg[:5], [])
     check("classic: links to current players resolve", bad_link[:5], [])
+    urls = [u for y in classic["years"] for u in y["sources"]] + [
+        u for y in classic["years"] for p in y["players"] if p.get("config")
+        for u in p["config"]["sources"] + [v for pv in p["config"].get("provenance", []) for v in pv["sources"]]]
+    check("classic: sources are bare URLs", [u for u in urls if not re.fullmatch(r"https?://[^\s()<>\"]+", u)][:3], [])
     pastes = [c for k, x in XC.items() for c in x.get("commands", [])]
     check("classic: only current crosshair cvars", sorted({c.split(" ")[0] for c in pastes} - CURRENT_XHAIR), [])
 

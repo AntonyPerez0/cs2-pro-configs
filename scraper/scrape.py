@@ -80,6 +80,10 @@ def fetch(url: str, tries: int = 4) -> requests.Response:
             time.sleep(2 * attempt)
             continue
         if r.status_code == 200:
+            # requests falls back to Latin-1 for text/html without a charset,
+            # which turned "Nový" into "NovÃ½"; the site serves UTF-8
+            if "charset" not in r.headers.get("content-type", "").lower():
+                r.encoding = "utf-8"
             return r
         if r.status_code in (429, 502, 503):
             time.sleep(4 * attempt + random.random() * 2)
@@ -114,7 +118,7 @@ def get_player_list():
         players.append(
             {
                 "slug": slug,
-                "nick": nick.get_text(strip=True) if nick else slug,
+                "nick": demojibake(nick.get_text(strip=True)) if nick else slug,
                 "avatar_url": img["src"] if img and img.has_attr("src") else None,
             }
         )
@@ -124,6 +128,18 @@ def get_player_list():
 # --------------------------------------------------------------------------
 # profile page parsing
 # --------------------------------------------------------------------------
+
+def demojibake(s):
+    """UTF-8 text that was decoded as Latin-1 ("NovÃ½") back to what it was
+    ("Nový"). Anything else, real Latin-1 text like "é" included, is returned
+    unchanged: it isn't valid UTF-8 once encoded back."""
+    if not s:
+        return s
+    try:
+        return s.encode("latin-1").decode("utf-8")
+    except (UnicodeEncodeError, UnicodeDecodeError):
+        return s
+
 
 CROSSHAIR_RE = re.compile(r"(CSGO-[A-Za-z0-9]{5}(?:-[A-Za-z0-9]{5}){4})")
 STEAMID_RE = re.compile(r"procrosshairs\.com/player/(\d+)/")
@@ -138,14 +154,14 @@ def parse_profile(html: str, slug: str) -> dict:
 
     rec = {"slug": slug}
     h1 = soup.find("h1")
-    rec["nick"] = h1.get_text(strip=True) if h1 else slug
+    rec["nick"] = demojibake(h1.get_text(strip=True)) if h1 else slug
 
     rec["real_name"] = None
     hdr = h1.find_parent("div") if h1 else None
     if hdr:
         d = hdr.find("div", class_=re.compile(r"text-zinc-500"))
         if d:
-            rec["real_name"] = d.get_text(strip=True)
+            rec["real_name"] = demojibake(d.get_text(strip=True))
 
     m = CROSSHAIR_RE.search(html)
     rec["crosshair_code"] = m.group(1) if m else None

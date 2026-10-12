@@ -11,7 +11,7 @@
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { convertPlayer, CURRENT_CVARS } from './crosshair.mjs';
+import { classicRecord, convertPlayer, CURRENT_CVARS } from './crosshair.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const FIX = JSON.parse(readFileSync(join(HERE, 'test_crosshair_fixtures.json'), 'utf8'));
@@ -88,6 +88,21 @@ check('new-format spread limit is kept', conv({ slug: 'x', convars: { cl_crossha
 check('a legacy config with spread_limit still converts', geo(conv(rec('donk', { cl_crosshair_dynamic_spread_limit: '255' }))), [2, 2, 1]);
 const empty = convertPlayer({ slug: 'x', convars: { sensitivity: '1' }, tables: {} });
 check('no crosshair settings -> blocked, not a crash', [empty.kind, empty.blockers?.length], ['blocked', 1]);
+
+// ---- classic configs: settings CS:GO gained later are off, with the right reason ----
+const classic = (date, convars = {}) => classicRecord(2013, { id: 'x', config: { date,
+  convars: { cl_crosshairsize: '2', cl_crosshairgap: '-1', cl_crosshairstyle: '4', ...convars } } });
+const codes = (r) => r.notes.map((x) => x.code);
+const c2012 = classic('2012-12-13');
+check('2012: outline, weapon gap, T and recoil off', ['cl_crosshair_drawoutline', 'cl_crosshairgap_useweaponvalue', 'cl_crosshair_t',
+  'cl_crosshair_recoil'].map((k) => c2012.convars[k]), ['0', '0', '0', '0']);
+check('2012: all four did not exist yet', codes(c2012), ['era-features-off']);
+check('2013 (unknown day): outline existed by May, so off by default', codes(classic('2013')), ['era-features-off', 'era-default-off']);
+check('2022: off by default, recoil cheat-protected', codes(classic('2022-04-30', { cl_crosshair_drawoutline: '1' })),
+  ['era-default-off', 'era-recoil-cheat']);
+check('a set value is kept', classic('2022-04-30', { cl_crosshair_drawoutline: '1' }).convars.cl_crosshair_drawoutline, '1');
+check('a CS2 config keeps the parser default for recoil', classic('2024-01-01').convars.cl_crosshair_recoil, undefined);
+check('alpha outside 0-255 is clamped', classic('2014', { cl_crosshairalpha: '99999' }).convars.cl_crosshairalpha, '255');
 
 if (fails.length) {
   console.log(`${fails.length} failure(s) of ${n} checks:`);

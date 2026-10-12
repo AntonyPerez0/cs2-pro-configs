@@ -80,6 +80,13 @@ export function playerHeight(rec) {
 
 const cells = (r) => [r.x, r.y, r.w, r.h];
 
+// the converter's texts address someone pasting into its app; reword them for a page
+const pageText = (t) => String(t)
+  .replace(/ Add cl_crosshairstyle 4 to the paste[^.]*\./, '')
+  .replace('Not in the paste, game defaults used: ', 'Not in this config, so the pre-update game defaults are used: ')
+  .replace("Added from the old game's defaults because your paste did not set them: ",
+    'Not in this config, so the pre-update game defaults are used: ');
+
 function previewOf(native, height, flags, outlineMode, value) {
   try {
     const geometry = forward({ ...native, authoredHeight: height }, height, COMMUNITY_MODEL);
@@ -137,7 +144,7 @@ export function convertPlayer(rec) {
   const parsed = parseLegacyTextWithNotes(legacy.map(([k, v]) => `${k} ${v}`).join('\n'));
   const options = { oldHeight: height, currentHeight: height, authoredHeight: height, styleTarget: 'family' };
   const report = infer({ settings: parsed.config, options, selectedModelId: COMMUNITY_MODEL.id });
-  if (report.blockers.length) return { kind: 'blocked', height, heightSource: source, blockers: report.blockers };
+  if (report.blockers.length) return { kind: 'blocked', height, heightSource: source, blockers: report.blockers.map(pageText) };
 
   const overrides = mergedExportOverrides(report);
   const commands = exportQuantCFG(report, defaultExportGroups(parsed.assigned, report.settings, overrides)).split(';');
@@ -165,7 +172,7 @@ export function convertPlayer(rec) {
     native: { length: native.length, thickness: native.thickness, gap: native.gap },
     shape: report.shapeCheck?.status ?? null,
     warnings: [...(filled ? [filled] : []), ...report.warnings]
-      .filter((w) => !GENERIC.has(w.code)).map((w) => ({ code: w.code, text: w.text ?? w.message })),
+      .filter((w) => !GENERIC.has(w.code)).map((w) => ({ code: w.code, text: pageText(w.text ?? w.message) })),
     preview: {
       fill: rectangles(geometry, flags).map(cells),
       outline: outlineOn ? outlineRectangles(geometry, flags, nativeOutlineExtent(settings, overrides.outlineMode)).map(cells) : [],
@@ -175,12 +182,54 @@ export function convertPlayer(rec) {
   };
 }
 
-/** A classic entry's dated config as the record shape convertPlayer reads. */
-export const classicRecord = (year, p) => ({
-  slug: `${year}/${p.id}`,
-  convars: p.config.convars ?? {},
-  tables: { 'Video Settings': p.config.video ?? {} },
-});
+// Crosshair settings CS:GO gained later, with the update that added each (official
+// release notes). A classic config without one had it off, not at the pre-update
+// (2026) defaults the parser would fill in: it didn't exist yet, or it was off by
+// default (recoil was cheat-protected until CS2).
+const ERA = [
+  ['cl_crosshair_drawoutline', '2013-05-22'],
+  ['cl_crosshairgap_useweaponvalue', '2014-08-01'],
+  ['cl_crosshair_t', '2017-09-26'],
+  ['cl_crosshair_recoil', '2018-02-28'],
+];
+const CS2_RELEASE = '2023-09-27';
+
+/** First and last day a "2014", "2014-07" or "2014-07-16" date can mean, or null. */
+function dateSpan(d) {
+  const m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?/.exec(String(d ?? ''));
+  return m ? [`${m[1]}-${m[2] ?? '01'}-${m[3] ?? '01'}`, `${m[1]}-${m[2] ?? '12'}-${m[3] ?? '31'}`] : null;
+}
+
+/** A classic entry's dated config as the record shape convertPlayer reads, plus notes on what was assumed. */
+export function classicRecord(year, p) {
+  const convars = { ...(p.config.convars ?? {}) };
+  const notes = [];
+  if (Object.keys(convars).some((k) => k.startsWith('cl_crosshair'))) {
+    const span = dateSpan(p.config.date);
+    const notYet = [], cheat = [], byDefault = [];
+    for (const [k, added] of ERA) {
+      if (convars[k] !== undefined) continue;
+      if (span && span[1] < added) notYet.push(k);
+      else if (k === 'cl_crosshair_recoil') {
+        if (span && span[0] >= CS2_RELEASE) continue;  // a CS2 config: the parser's default applies
+        cheat.push(k);
+      } else byDefault.push(k);
+      convars[k] = '0';
+    }
+    // with the outline off its thickness does nothing; set it so no "default used" note is shown for it
+    if (convars.cl_crosshair_drawoutline === '0' && convars.cl_crosshair_outlinethickness === undefined) convars.cl_crosshair_outlinethickness = '1';
+    if (notYet.length) notes.push({ code: 'era-features-off', text: `Not in this config because the setting didn't exist yet, so off: ${notYet.join(', ')}.` });
+    if (byDefault.length) notes.push({ code: 'era-default-off', text: `Not in this config, so off, as CS:GO had it by default: ${byDefault.join(', ')}.` });
+    if (cheat.length) notes.push({ code: 'era-recoil-cheat', text: 'cl_crosshair_recoil was cheat-protected in CS:GO, so off.' });
+    const alpha = Number(convars.cl_crosshairalpha);
+    if (Number.isFinite(alpha) && (alpha < 0 || alpha > 255)) {
+      const v = alpha < 0 ? 0 : 255;
+      notes.push({ code: 'alpha-clamped', text: `cl_crosshairalpha ${convars.cl_crosshairalpha} is outside 0-255; the old game drew it as ${v}.` });
+      convars.cl_crosshairalpha = String(v);
+    }
+  }
+  return { slug: `${year}/${p.id}`, convars, tables: { 'Video Settings': p.config.video ?? {} }, notes };
+}
 
 function convertSafely(rec) {
   try {
@@ -201,7 +250,11 @@ function buildClassic() {
   const out = {};
   for (const y of classic.years) {
     for (const p of y.players) {
-      if (p.config) out[`${y.year}/${p.id}`] = convertSafely(classicRecord(y.year, p));
+      if (!p.config) continue;
+      const rec = classicRecord(y.year, p);
+      const x = convertSafely(rec);
+      if (x.warnings) x.warnings = [...rec.notes, ...x.warnings];
+      out[`${y.year}/${p.id}`] = x;
     }
   }
   return out;
