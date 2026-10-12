@@ -865,12 +865,17 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
         f'''<li><b>{esc(pv["what"])}</b> · {esc(pv["date"])} · confidence {esc(pv["confidence"])} · {source_links(pv.get("sources"))}
           <details><summary>How the date is known</summary><p class="note">{esc(pv["date_basis"])}</p></details></li>'''
         for pv in c.get("provenance") or [])
+    if hint:
+        prov_items += (f'<li><b>DPI (assumed)</b> · {esc(hint["date"])} · {source_links([hint["source"]])}'
+                       f'<details><summary>Why it is assumed</summary><p class="note">No source lists a DPI with this '
+                       f'sensitivity, so the DPI matcher assumes the {esc(hint["dpi"])} DPI of their setup.gg profile, '
+                       f'which lists sensitivity {esc(hint["sens"])}; change it on the page if you know better.</p></details></li>')
     if p.get("photo"):
         prov_items += f'<li><b>Photo</b> · {photo_credit_html(p["photo"])}</li>'
     sources_html = (f'''<section class="section" id="sources">
       <div class="section-head"><h2>Where these settings come from</h2></div>
       <ul class="provenance">{prov_items}</ul>
-      <p class="note">DPI is only taken from a source that lists the same sensitivity, so the eDPI matches the sensitivity shown. The other parts can come from configs of different dates, as listed.</p>
+      <p class="note">{"No source lists a DPI with this sensitivity, so the DPI matcher's DPI is assumed (see above)." if hint else "DPI is only taken from a source that lists the same sensitivity, so the eDPI matches the sensitivity shown."} The other parts can come from configs of different dates, as listed.</p>
     </section>''' if prov_items else "")
     confidence = c.get("confidence") or "medium"
     original = "\n".join(f"{k} {v}" for k, v in (c.get("convars") or {}).items())
