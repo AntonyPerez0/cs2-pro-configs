@@ -100,6 +100,7 @@ check('2012: outline, T and recoil off', pick(c2012, ['cl_crosshair_drawoutline'
 check('2012: they did not exist yet', codes(c2012), ['era-features-off']);
 check('2012 style 4: the gap still changed per weapon', c2012.convars.cl_crosshairgap_useweaponvalue, '1');
 check('...which the converter reports', convertPlayer(c2012).warnings.some((w) => w.code === 'weapon-gap-dropped'), true);
+check('...in words that fit a config without the setting', c2012.rewrite['weapon-gap-dropped']?.startsWith('Until 5 Jun 2013'), true);
 check('2014 style 4: weapon gap off (not added yet)', classic('2014-04').convars.cl_crosshairgap_useweaponvalue, '0');
 check('2012 style 2 says CS2 style 2 is the accurate one', codes(classic('2012-12-13', { cl_crosshairstyle: '2' })).includes('era-style-2'), true);
 check('2015 style 2 has no such note', codes(classic('2015', { cl_crosshairstyle: '2' })).includes('era-style-2'), false);

@@ -209,6 +209,7 @@ function dateSpan(d) {
 export function classicRecord(year, p) {
   const convars = { ...(p.config.convars ?? {}) };
   const notes = [];
+  const rewrite = {};  // converter warning code -> text for this era
   if (Object.keys(convars).some((k) => k.startsWith('cl_crosshair'))) {
     // a known window ("saved between ...") is narrower than the date label
     const w = p.config.window;
@@ -218,6 +219,8 @@ export function classicRecord(year, p) {
     if (style === '4' && span && span[1] < STYLE4_STATIC_GAP && convars.cl_crosshairgap_useweaponvalue === undefined) {
       // the converter's weapon-gap-dropped warning then says what that means now
       convars.cl_crosshairgap_useweaponvalue = '1';
+      rewrite['weapon-gap-dropped'] = 'Until 5 Jun 2013 the style 4 gap changed per weapon; the current game has one gap, so the ' +
+        'export uses the gap without the weapon value.';
     }
     if (style === '2' && span && span[1] < STYLE2_ACCURATE) {
       notes.push({ code: 'era-style-2', text: 'Style 2 was the original classic crosshair until February 2014: it showed when you fired but not ' +
@@ -248,7 +251,7 @@ export function classicRecord(year, p) {
   // the crosshair is converted at the resolution its own source gives, when that differs from the video settings shown
   const video = { ...(p.config.video ?? {}) };
   if (p.config.crosshair_resolution) video.Resolution = p.config.crosshair_resolution;
-  return { slug: `${year}/${p.id}`, convars, tables: { 'Video Settings': video }, notes };
+  return { slug: `${year}/${p.id}`, convars, tables: { 'Video Settings': video }, notes, rewrite };
 }
 
 function convertSafely(rec) {
@@ -273,7 +276,7 @@ function buildClassic() {
       if (!p.config) continue;
       const rec = classicRecord(y.year, p);
       const x = convertSafely(rec);
-      if (x.warnings) x.warnings = [...rec.notes, ...x.warnings];
+      if (x.warnings) x.warnings = [...rec.notes, ...x.warnings.map((w) => (rec.rewrite[w.code] ? { ...w, text: rec.rewrite[w.code] } : w))];
       if (p.config.crosshair_resolution && x.heightSource === 'resolution') x.heightSource = 'crosshair-source';
       out[`${y.year}/${p.id}`] = x;
     }
