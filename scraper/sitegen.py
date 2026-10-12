@@ -811,6 +811,8 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     if p.get("team") and not roster:
         chips.append(f'<span class="chip">{esc(p["team"])}</span>')
     chips.append(f'<span class="chip">config {esc(c.get("date") or "undated")}</span>')
+    if p.get("photo"):
+        chips.append(f'<a class="chip" href="#sources" title="Where the photo comes from">photo {esc(p["photo"].get("date") or "undated")}</a>')
     if dpi:
         chips.append(f'<span class="chip"><b>{esc(dpi)}</b> DPI</span>')
     for k in ("Resolution", "Aspect Ratio", "Scaling Mode"):

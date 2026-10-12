@@ -124,6 +124,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/neo-2011.webp",
+      "file": "File:CS1.6_Medalists_-_ESC_Gaming_-_WCG_2011_GF_(2).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:CS1.6_Medalists_-_ESC_Gaming_-_WCG_2011_GF_(2).jpg",
+      "date": "2011-12-11",
+      "event": "WCG 2011 Grand Final",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -217,6 +227,16 @@
        }
       ],
       "notes": "His own game-written config from August 2012 (the source of the sensitivity) shows a different crosshair: a red dot (cl_crosshairsize 0, cl_crosshairdot 1, cl_crosshaircolor 0, thickness 1.15, dynamic crosshair off). That file has no crosshair style setting, so it can't be converted reliably; the crosshair shown is a third-party preset from December 2012 and may not be what he used."
+     },
+     "photo": {
+      "src": "data/avatars/classic/get-right-2011.webp",
+      "file": "File:CS1.6_Medalists_-_SK_Gaming_-_WCG_2011_GF_(6).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:CS1.6_Medalists_-_SK_Gaming_-_WCG_2011_GF_(6).jpg",
+      "date": "2011-12-11",
+      "event": "WCG 2011 Grand Final",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -291,6 +311,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/markeloff-2011.webp",
+      "file": "File:IEM_Kyiv_2012_01.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_Kyiv_2012_01.jpg",
+      "date": "2012-01-21",
+      "event": "IEM Season VI Global Challenge Kyiv 2012",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -301,7 +331,17 @@
      "game": "CS 1.6",
      "id": "trace",
      "current_slug": null,
-     "config": null
+     "config": null,
+     "photo": {
+      "src": "data/avatars/classic/trace-2011.webp",
+      "file": "File:WCG_Grand_Finals_2010_27.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:WCG_Grand_Finals_2010_27.jpg",
+      "date": "2010-10-02",
+      "event": "WCG 2010 Grand Final",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+     }
     },
     {
      "rank": 5,
@@ -382,6 +422,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/f0rest-2011.webp",
+      "file": "File:CS1.6_Medalists_-_SK_Gaming_-_WCG_2011_GF_(2).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:CS1.6_Medalists_-_SK_Gaming_-_WCG_2011_GF_(2).jpg",
+      "date": "2011-12-11",
+      "event": "WCG 2011 Grand Final",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -498,6 +548,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/taz-2011.webp",
+      "file": "File:CS1.6_Medalists_-_ESC_Gaming_-_WCG_2011_GF_(4).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:CS1.6_Medalists_-_ESC_Gaming_-_WCG_2011_GF_(4).jpg",
+      "date": "2011-12-11",
+      "event": "WCG 2011 Grand Final",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -683,6 +743,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/karrigan-2011.webp",
+      "file": "File:Fnatic_CS-GO.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Fnatic_CS-GO.jpg",
+      "date": "2012-11-22",
+      "event": "DreamHack Winter 2012",
+      "author": "andytb",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/"
      }
     },
     {
@@ -733,6 +803,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/delpan-2011.webp",
+      "file": "File:CS1.6_Medalists_-_SK_Gaming_-_WCG_2011_GF_(6).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:CS1.6_Medalists_-_SK_Gaming_-_WCG_2011_GF_(6).jpg",
+      "date": "2011-12-11",
+      "event": "WCG 2011 Grand Final",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -743,7 +823,17 @@
      "game": "CS 1.6",
      "id": "gux",
      "current_slug": null,
-     "config": null
+     "config": null,
+     "photo": {
+      "src": "data/avatars/classic/gux-2011.webp",
+      "file": "File:WCG_2009_-_61.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:WCG_2009_-_61.jpg",
+      "date": "2009-11-14",
+      "event": "WCG 2009 Grand Final",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
+     }
     }
    ]
   },
@@ -836,6 +926,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/f0rest-2012.webp",
+      "file": "File:CS1.6_Medalists_-_SK_Gaming_-_WCG_2011_GF_(2).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:CS1.6_Medalists_-_SK_Gaming_-_WCG_2011_GF_(2).jpg",
+      "date": "2011-12-11",
+      "event": "WCG 2011 Grand Final",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -930,6 +1030,16 @@
        }
       ],
       "notes": "His own game-written config from August 2012 (the source of the sensitivity) shows a different crosshair: a red dot (cl_crosshairsize 0, cl_crosshairdot 1, cl_crosshaircolor 0, thickness 1.15, dynamic crosshair off). That file has no crosshair style setting, so it can't be converted reliably; the crosshair shown is a third-party preset from December 2012 and may not be what he used."
+     },
+     "photo": {
+      "src": "data/avatars/classic/get-right-2012.webp",
+      "file": "File:IEM_2012_World_Finals_19.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_2012_World_Finals_19.jpg",
+      "date": "2012-03-06",
+      "event": "IEM Season VI World Championship (CeBIT 2012)",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -1013,6 +1123,16 @@
         ]
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/xizt-2012.webp",
+      "file": "File:WCG_Grand_Finals_2010_48.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:WCG_Grand_Finals_2010_48.jpg",
+      "date": "2010-10-02",
+      "event": "WCG 2010 Grand Final",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -1093,6 +1213,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/friberg-2012.webp",
+      "file": "File:NiP_Friberg_-_DreamHack_Winter_2013_7-7_screenshot.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:NiP_Friberg_-_DreamHack_Winter_2013_7-7_screenshot.jpg",
+      "date": "2013-11",
+      "event": "DreamHack Winter 2013",
+      "author": "FlamingCowTV",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     },
     {
@@ -1279,6 +1409,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/nbk-2012.webp",
+      "file": "File:IEM_Chicago_Final_Edits-9729_(48353576671).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_Chicago_Final_Edits-9729_(48353576671).jpg",
+      "date": "2019-07-20",
+      "event": "IEM Chicago 2019",
+      "author": "Esports Kingdom",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -1465,6 +1605,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/smithzz-2012.webp",
+      "file": "File:SmithZz_in_2018.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:SmithZz_in_2018.jpg",
+      "date": "2018-03-07",
+      "event": "G2 Esports video (YouTube)",
+      "author": "G2 Esports",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     }
    ]
@@ -1571,6 +1721,16 @@
        }
       ],
       "notes": "His own game-written config from August 2012 (the source of the sensitivity) shows a different crosshair: a red dot (cl_crosshairsize 0, cl_crosshairdot 1, cl_crosshaircolor 0, thickness 1.15, dynamic crosshair off). That file has no crosshair style setting, so it can't be converted reliably; the crosshair shown is a third-party preset from December 2012 and may not be what he used."
+     },
+     "photo": {
+      "src": "data/avatars/classic/get-right-2013.webp",
+      "file": "File:IEM_2012_World_Finals_19.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_2012_World_Finals_19.jpg",
+      "date": "2012-03-06",
+      "event": "IEM Season VI World Championship (CeBIT 2012)",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -1653,6 +1813,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/f0rest-2013.webp",
+      "file": "File:CS1.6_Medalists_-_SK_Gaming_-_WCG_2011_GF_(2).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:CS1.6_Medalists_-_SK_Gaming_-_WCG_2011_GF_(2).jpg",
+      "date": "2011-12-11",
+      "event": "WCG 2011 Grand Final",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -1770,6 +1940,16 @@
        }
       ],
       "notes": "There is a config from 2013, but it doesn't record the crosshair style or gap, so the crosshair comes from the closest one that can be converted (July 2014)."
+     },
+     "photo": {
+      "src": "data/avatars/classic/shox-2013.webp",
+      "file": "File:Shox_in_2018.png",
+      "page": "https://commons.wikimedia.org/wiki/File:Shox_in_2018.png",
+      "date": "2018-06-30",
+      "event": "Podcast hosted by ocelote (YouTube)",
+      "author": "Carlos \"ocelote\" Rodríguez Santiago",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     },
     {
@@ -1872,6 +2052,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/dosia-2013.webp",
+      "file": "File:CS1.6_Medalists_-_Moscow_Five_-_WCG_2011_GF_(1).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:CS1.6_Medalists_-_Moscow_Five_-_WCG_2011_GF_%281%29.jpg",
+      "date": "2011-12-11",
+      "event": "World Cyber Games 2011 Grand Final (Moscow Five medal ceremony)",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -1983,6 +2173,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/nbk-2013.webp",
+      "file": "File:IEM_Chicago_Final_Edits-9729_(48353576671).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_Chicago_Final_Edits-9729_(48353576671).jpg",
+      "date": "2019-07-20",
+      "event": "IEM Chicago 2019",
+      "author": "Esports Kingdom",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -2065,6 +2265,16 @@
         ]
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/xizt-2013.webp",
+      "file": "File:WCG_Grand_Finals_2010_48.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:WCG_Grand_Finals_2010_48.jpg",
+      "date": "2010-10-02",
+      "event": "WCG 2010 Grand Final",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -2279,6 +2489,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/jw-2013.webp",
+      "file": "File:Fnatic_at_the_DreamHack_Winter_2014_Quarterfinals.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Fnatic_at_the_DreamHack_Winter_2014_Quarterfinals.jpg",
+      "date": "2014-11",
+      "event": "DreamHack Winter 2014 (quarterfinal vs Team LDLC.com)",
+      "author": "VaKarM.net",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -2380,6 +2600,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/hiko-2013.webp",
+      "file": "File:IEM_2015_San_Jose_Day_1_-_72.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_2015_San_Jose_Day_1_-_72.jpg",
+      "date": "2015-11-21",
+      "event": "IEM San Jose 2015",
+      "author": "Kevin Chang for Team Liquid",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
      }
     },
     {
@@ -2477,6 +2707,16 @@
        }
       ],
       "notes": "His own game-written config from July 2014 is closer to 2013, but its crosshair uses style 6, which has no known conversion, so the crosshair comes from the closest source that can be converted, his Liquipedia settings from 30 Apr 2022."
+     },
+     "photo": {
+      "src": "data/avatars/classic/guardian-2013.webp",
+      "file": "File:DH_Leipzig16_Guardian_edit.JPG",
+      "page": "https://commons.wikimedia.org/wiki/File:DH_Leipzig16_Guardian_edit.JPG",
+      "date": "2016-01-23",
+      "event": "DreamHack Leipzig 2016",
+      "author": "Tmv23",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
      }
     }
    ]
@@ -2583,6 +2823,16 @@
        }
       ],
       "notes": "His own game-written config from August 2012 (the source of the sensitivity) shows a different crosshair: a red dot (cl_crosshairsize 0, cl_crosshairdot 1, cl_crosshaircolor 0, thickness 1.15, dynamic crosshair off). That file has no crosshair style setting, so it can't be converted reliably; the crosshair shown is a third-party preset from December 2012 and may not be what he used."
+     },
+     "photo": {
+      "src": "data/avatars/classic/get-right-2014.webp",
+      "file": "File:Interview_GeT_RiGhT_(ESL_One_Cologne_2016).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Interview_GeT_RiGhT_(ESL_One_Cologne_2016).jpg",
+      "date": "2016-07-05",
+      "event": "ESL One Cologne 2016",
+      "author": "VaKarM - Vidéos CS:GO",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     },
     {
@@ -2685,6 +2935,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/flusha-2014.webp",
+      "file": "File:Réaction_de_Flusha_après_la_victoire_contre_Vexed_(Dreamhack_Cluj_2015).webm",
+      "page": "https://commons.wikimedia.org/wiki/File:R%C3%A9action_de_Flusha_apr%C3%A8s_la_victoire_contre_Vexed_(Dreamhack_Cluj_2015).webm",
+      "date": "2015-10-28",
+      "event": "DreamHack Open Cluj-Napoca 2015",
+      "author": "VaKarM - Vidéos CS:GO",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     },
     {
@@ -2796,6 +3056,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/pashabiceps-2014.webp",
+      "file": "File:IEM_2015_San_Jose_Day_1_-_81.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_2015_San_Jose_Day_1_-_81.jpg",
+      "date": "2015-11-21",
+      "event": "IEM San Jose 2015",
+      "author": "Kevin Chang for Team Liquid",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
      }
     },
     {
@@ -2903,6 +3173,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/snax-2014.webp",
+      "file": "File:Janusz_Pogorzelski_Snax_playing_for_Virtus.pro.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Janusz_Pogorzelski_Snax_playing_for_Virtus.pro.jpg",
+      "date": "2016-03-31",
+      "event": "MLG Columbus 2016",
+      "author": "SteelSeries",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -3024,6 +3304,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/jw-2014.webp",
+      "file": "File:Fnatic_at_the_DreamHack_Winter_2014_Quarterfinals.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Fnatic_at_the_DreamHack_Winter_2014_Quarterfinals.jpg",
+      "date": "2014-11",
+      "event": "DreamHack Winter 2014 (quarterfinal vs Team LDLC.com)",
+      "author": "VaKarM.net",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -3139,6 +3429,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/kennys-2014.webp",
+      "file": "File:KennyS_in_2018.png",
+      "page": "https://commons.wikimedia.org/wiki/File:KennyS_in_2018.png",
+      "date": "2018-06-30",
+      "event": "Podcast hosted by Carlos \"ocelote\" Rodríguez (YouTube)",
+      "author": "Carlos \"ocelote\" Rodríguez Santiago",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     },
     {
@@ -3221,6 +3521,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/f0rest-2014.webp",
+      "file": "File:CS1.6_Medalists_-_SK_Gaming_-_WCG_2011_GF_(2).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:CS1.6_Medalists_-_SK_Gaming_-_WCG_2011_GF_(2).jpg",
+      "date": "2011-12-11",
+      "event": "WCG 2011 Grand Final",
+      "author": "xReDeYe",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -3343,6 +3653,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/shox-2014.webp",
+      "file": "File:Shox_in_2018.png",
+      "page": "https://commons.wikimedia.org/wiki/File:Shox_in_2018.png",
+      "date": "2018-06-30",
+      "event": "Podcast hosted by ocelote (YouTube)",
+      "author": "Carlos \"ocelote\" Rodríguez Santiago",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     },
     {
@@ -3460,6 +3780,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/krimz-2014.webp",
+      "file": "File:Fnatic_win_IEM_X_World_Championship_(4).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Fnatic_win_IEM_X_World_Championship_(4).jpg",
+      "date": "2016-03-06",
+      "event": "IEM Season X World Championship (Katowice 2016)",
+      "author": "VaKarM",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     },
     {
@@ -3564,6 +3894,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/happy-2014.webp",
+      "file": "File:Happy_2017_interview.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Happy_2017_interview.jpg",
+      "date": "2017-05-06",
+      "event": "DreamHack Open Tours 2017",
+      "author": "VaKarM",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     }
    ]
@@ -3707,6 +4047,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/olofmeister-2015.webp",
+      "file": "File:Fnatic_win_IEM_X_World_Championship_(3).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Fnatic_win_IEM_X_World_Championship_(3).jpg",
+      "date": "2016-03-06",
+      "event": "IEM Season X World Championship (Katowice 2016)",
+      "author": "VaKarM",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     },
     {
@@ -3804,6 +4154,16 @@
        }
       ],
       "notes": "His own game-written config from July 2014 is closer to 2015, but its crosshair uses style 6, which has no known conversion, so the crosshair comes from the closest source that can be converted, his Liquipedia settings from 30 Apr 2022."
+     },
+     "photo": {
+      "src": "data/avatars/classic/guardian-2015.webp",
+      "file": "File:DH_Leipzig16_Guardian_edit.JPG",
+      "page": "https://commons.wikimedia.org/wiki/File:DH_Leipzig16_Guardian_edit.JPG",
+      "date": "2016-01-23",
+      "event": "DreamHack Leipzig 2016",
+      "author": "Tmv23",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
      }
     },
     {
@@ -3932,6 +4292,16 @@
        }
       ],
       "notes": "The game wrote this config.cfg in early 2014; it was later edited by hand. cl_hud_color (a setting added on 1 May 2014, here without the six HUD settings added with it) and cl_showfps were inserted, and interp, rate and fps_max lines were appended at the end. The crosshair and sensitivity lines sit in the game-written, alphabetically sorted part."
+     },
+     "photo": {
+      "src": "data/avatars/classic/device-2015.webp",
+      "file": "File:DH_Leipzig16_devve_device.JPG",
+      "page": "https://commons.wikimedia.org/wiki/File:DH_Leipzig16_devve_device.JPG",
+      "date": "2016-01-23",
+      "event": "DreamHack Leipzig 2016",
+      "author": "Tmv23",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
      }
     },
     {
@@ -4020,6 +4390,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/snax-2015.webp",
+      "file": "File:Janusz_Pogorzelski_Snax_playing_for_Virtus.pro.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Janusz_Pogorzelski_Snax_playing_for_Virtus.pro.jpg",
+      "date": "2016-03-31",
+      "event": "MLG Columbus 2016",
+      "author": "SteelSeries",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -4116,6 +4496,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/flusha-2015.webp",
+      "file": "File:Réaction_de_Flusha_après_la_victoire_contre_Vexed_(Dreamhack_Cluj_2015).webm",
+      "page": "https://commons.wikimedia.org/wiki/File:R%C3%A9action_de_Flusha_apr%C3%A8s_la_victoire_contre_Vexed_(Dreamhack_Cluj_2015).webm",
+      "date": "2015-10-28",
+      "event": "DreamHack Open Cluj-Napoca 2015",
+      "author": "VaKarM - Vidéos CS:GO",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     },
     {
@@ -4231,6 +4621,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/kennys-2015.webp",
+      "file": "File:KennyS_in_2018.png",
+      "page": "https://commons.wikimedia.org/wiki/File:KennyS_in_2018.png",
+      "date": "2018-06-30",
+      "event": "Podcast hosted by Carlos \"ocelote\" Rodríguez (YouTube)",
+      "author": "Carlos \"ocelote\" Rodríguez Santiago",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     },
     {
@@ -4348,6 +4748,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/krimz-2015.webp",
+      "file": "File:Fnatic_win_IEM_X_World_Championship_(4).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Fnatic_win_IEM_X_World_Championship_(4).jpg",
+      "date": "2016-03-06",
+      "event": "IEM Season X World Championship (Katowice 2016)",
+      "author": "VaKarM",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     },
     {
@@ -4452,6 +4862,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/happy-2015.webp",
+      "file": "File:Happy_2017_interview.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Happy_2017_interview.jpg",
+      "date": "2017-05-06",
+      "event": "DreamHack Open Tours 2017",
+      "author": "VaKarM",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/"
      }
     },
     {
@@ -4566,6 +4986,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/nbk-2015.webp",
+      "file": "File:IEM_Chicago_Final_Edits-9729_(48353576671).jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_Chicago_Final_Edits-9729_(48353576671).jpg",
+      "date": "2019-07-20",
+      "event": "IEM Chicago 2019",
+      "author": "Esports Kingdom",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     },
     {
@@ -4687,6 +5117,16 @@
         "confidence": "low"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/jw-2015.webp",
+      "file": "File:Fnatic_at_the_DreamHack_Winter_2014_Quarterfinals.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Fnatic_at_the_DreamHack_Winter_2014_Quarterfinals.jpg",
+      "date": "2014-11",
+      "event": "DreamHack Winter 2014 (quarterfinal vs Team LDLC.com)",
+      "author": "VaKarM.net",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/"
      }
     }
    ]
@@ -4819,6 +5259,16 @@
        }
       ],
       "notes": "A third-party alias from September 2015 (in luckolen's autoexec.cfg) is closer in time and similar (style 4, size 5.5, gap 0), but it sets no colour and names no source, so his own config is used."
+     },
+     "photo": {
+      "src": "data/avatars/classic/n0thing-c9-ibp-2015.webp",
+      "file": "File:IEM_2015_San_Jose_Day_1_-_16.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_2015_San_Jose_Day_1_-_16.jpg",
+      "date": "2015-11-21",
+      "event": "IEM San Jose 2015",
+      "author": "Kevin Chang for Team Liquid",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
      }
     },
     {
@@ -4895,6 +5345,16 @@
        }
       ],
       "notes": "No crosshair of his from closer to 2015 is known. Liquipedia's table is marked as updated in April 2019, more than four years after this lineup, so it may differ from what he used on Cloud9."
+     },
+     "photo": {
+      "src": "data/avatars/classic/seangares-c9-ibp-2015.webp",
+      "file": "File:Seangares_cropped.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Seangares_cropped.jpg",
+      "date": "2017-11-05",
+      "event": "Americas Minor, ELEAGUE Major Boston 2018 qualifier (Toronto)",
+      "author": "Patar knight",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
      }
     },
     {
@@ -5016,6 +5476,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/shroud-c9-ibp-2015.webp",
+      "file": "File:IEM_2015_San_Jose_Day_1_-_34.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_2015_San_Jose_Day_1_-_34.jpg",
+      "date": "2015-11-21",
+      "event": "IEM San Jose 2015",
+      "author": "Kevin Chang for Team Liquid",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
      }
     },
     {
@@ -5223,6 +5693,16 @@
        }
       ],
       "notes": "No convertible crosshair of his from closer to this lineup could be found: this one is from ProSettings.net's page for him as last updated in October 2023, almost nine years after this lineup and after he had left Counter-Strike for VALORANT, and may differ from what he used then. It is a third-party listing decoded from a share code, not his own config; the code's outline and split settings are the same in every code in that scrape, so they are left out. The saved copy has only his VALORANT video settings, so the crosshair is converted at the 1024x768 from setup.gg."
+     },
+     "photo": {
+      "src": "data/avatars/classic/shahzam-c9-ibp-2015.webp",
+      "file": "File:Shahzam_Cropped.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Shahzam_Cropped.jpg",
+      "date": "2017-11-05",
+      "event": "Americas Minor, ELEAGUE Major Boston 2018 qualifier (Toronto)",
+      "author": "Patar knight",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
      }
     },
     {
@@ -5625,6 +6105,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/hiko-c9-ibp-2015.webp",
+      "file": "File:IEM_2015_San_Jose_Day_1_-_72.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_2015_San_Jose_Day_1_-_72.jpg",
+      "date": "2015-11-21",
+      "event": "IEM San Jose 2015",
+      "author": "Kevin Chang for Team Liquid",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
      }
     },
     {
@@ -5721,6 +6211,16 @@
        }
       ],
       "notes": "No convertible crosshair of his from closer to this lineup could be found: this one is ProSettings.net's listing of his Counter-Strike 2 settings, last updated in January 2025, ten years after this lineup, and may differ from what he used then. It is a third-party table, not his own config. It gives an alpha value of 1, which would make the crosshair almost invisible, so that value is left out and the default opacity is used. Two fan apps from 2017 list the same sensitivity, 1.4, at 800 DPI instead of 400."
+     },
+     "photo": {
+      "src": "data/avatars/classic/skadoodle-c9-ibp-2015.webp",
+      "file": "File:IEM_2015_San_Jose_Day_2_-_55.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_2015_San_Jose_Day_2_-_55.jpg",
+      "date": "2015-11-22",
+      "event": "IEM San Jose 2015",
+      "author": "Kevin Chang for Team Liquid",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
      }
     },
     {

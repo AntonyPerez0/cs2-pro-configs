@@ -416,7 +416,8 @@ footer a { color: var(--muted); }
 .classic-note { margin: 12px 0 0; max-width: 820px; }
 .classic-jump { justify-content: flex-start; margin-top: 14px; }
 .classic-jump .chip { font-size: 12.5px; padding: 3px 10px; color: var(--text); }
-.classic-jump .chip:hover { border-color: var(--accent); text-decoration: none; }
+.classic-jump .chip:hover, .profile-chips a.chip:hover { border-color: var(--accent); text-decoration: none; }
+.profile-chips a.chip { color: inherit; }
 .classic-year { margin-top: 30px; }
 .classic-date { font-family: var(--mono); font-size: 10.5px; color: var(--accent2); }
 .classic-date.none { color: var(--faint); }
