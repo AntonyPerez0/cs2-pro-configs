@@ -307,6 +307,12 @@ def category_sections_html(rec) -> str:
             if bits:
                 parts[-1] += (f'\n  <p class="note">DPI &amp; polling rate are set in your <b>mouse software</b>, '
                               f'not in-game. Recommended: {" · ".join(bits)}</p>')
+            hint = rec.get("dpi_hint")
+            if hint and not mouse.get("DPI"):
+                parts[-1] += (f'\n  <p class="note">Their DPI isn\'t documented with this sensitivity. The matcher below '
+                              f'assumes <b>{esc(hint["dpi"])} DPI</b>, from <a href="{esc(hint["source"])}" target="_blank" '
+                              f'rel="noopener nofollow">their setup.gg profile</a> ({esc(hint["date"])}, where they used '
+                              f'sensitivity {esc(hint["sens"])}); change it if you know better.</p>')
             parts[-1] += '\n  <div id="dpi-slot"></div>'
         if key == "misc":
             parts[-1] += ('\n  <p class="note">Misc convars (fps caps, gamma, gameplay toggles) '
@@ -707,6 +713,7 @@ def classic_rec(y, p, players_by_slug) -> dict:
     """A classic entry's dated config in the record shape the page helpers read."""
     c = p["config"]
     rec = {"slug": f"{p['id']}-{gkey(y)}", "nick": p["nick"], "real_name": p.get("real_name") or "",
+           "dpi_hint": c.get("dpi_hint"),
            "convars": c.get("convars") or {},
            "tables": {"Mouse": c.get("mouse") or {}, "Video Settings": c.get("video") or {}}}
     current = players_by_slug.get(p.get("current_slug") or "")
@@ -815,7 +822,9 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
         edpi = int(float(dpi) * float(sens))
     except (TypeError, ValueError):
         edpi = None
-    embed = json_script({"dpi": dpi, "sens": sens, "parts": [cmds for _, cmds in parts]})
+    hint = c.get("dpi_hint") if not dpi else None
+    embed = json_script({"dpi": dpi, "sens": sens, "parts": [cmds for _, cmds in parts],
+                         **({"dpi_assumed": hint["dpi"]} if hint else {})})
     current = players_by_slug.get(p.get("current_slug") or "")
 
     chips = ([f'<span class="chip"><b>{esc(p.get("team"))}</b> {esc(standing(year_obj, p).removeprefix(p.get("team") or "").lstrip(", "))}</span>']
