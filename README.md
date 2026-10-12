@@ -53,11 +53,15 @@ through 2000930), vendored under `scraper/vendor/`:
 - **Complete pastes:** like a crosshair share paste (e.g. csstats.gg's), a paste
   sets every setting that shapes that crosshair, so nothing from the visitor's own
   crosshair carries over: colour, opacity, outline (and its colour when on), recoil,
-  the iron-sight dot (`cl_ironsight_*`), the split cvars for style 2 and the spread
-  limit for styles 2 and 5. Values come from the pro's config, clamped to CS2's
-  range, or else CS2's defaults. Settings that can't change that crosshair (split
-  values on a static style) are left out, which keeps most pastes to one console
-  line (the console rejects lines over 510 characters; longer pastes come in parts).
+  the iron-sight dot (`cl_ironsight_*`), and the settings CS2's crosshair menu
+  shows for that style: the split cvars for style 2, the quadrant size
+  (`cl_crosshair_dynamic_maxdist_splitratio`) for styles 2 and 9, and the spread
+  limit for styles 0, 1 and 7. Values come from the pro's config, clamped to
+  CS2's range, or else CS2's defaults (also for any core setting a new-format
+  listing leaves out). Settings the menu hides for a style can't change it and
+  are left out, which keeps most pastes to one console line (the console rejects
+  lines over 510 characters; a longer paste comes in parts, with the size
+  settings and screen height together in the last).
 
 Valve published no conversion formula, so this is a community reconstruction,
 not checked against in-game captures. For some pros, converting their old

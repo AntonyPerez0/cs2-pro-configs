@@ -64,8 +64,9 @@ export const CURRENT_CVARS = [
 ];
 // Crosshair cvars the converter doesn't write, with CS2's default and range (build 2000930 dump). A paste sets
 // every one that shapes its crosshair, so nothing of the visitor's own crosshair carries over, as a crosshair
-// share paste does: the iron-sight dot always, the split cvars for style 2 (the only one that splits, per the
-// 12 Feb 2014 notes that added them) and the spread limit for the styles that move (2 and 5).
+// share paste does. Which style uses which, from the game's crosshair settings menu (settingsmenu_crosshair.js,
+// 2000930): the classic split sliders for style 2, the split ratio also as style 9's quadrant size, the spread
+// limit for the dynamic styles 0, 1 and 7; the iron-sight dot for every style.
 const EXTRA = {
   cl_crosshair_dynamic_splitdist: [3, 0, 127],
   cl_crosshair_dynamic_splitalpha_innermod: [0, 0, 1],
@@ -75,9 +76,20 @@ const EXTRA = {
   cl_ironsight_usecrosshaircolor: [0, 0, 1],
   cl_ironsight_dot_scale: [1, 0.1, 2],
 };
-const MOVING_STYLES = new Set([2, 5]);
-const appliesTo = (name, style) => (name === 'cl_crosshair_dynamic_spread_limit' ? MOVING_STYLES.has(style)
-  : name.startsWith('cl_crosshair_dynamic_') ? style === 2 : true);
+const STYLES_OF = {
+  cl_crosshair_dynamic_splitdist: [2], cl_crosshair_dynamic_splitalpha_innermod: [2],
+  cl_crosshair_dynamic_splitalpha_outermod: [2], cl_crosshair_dynamic_maxdist_splitratio: [2, 9],
+  cl_crosshair_dynamic_spread_limit: [0, 1, 7],
+};
+const appliesTo = (name, style) => !STYLES_OF[name] || STYLES_OF[name].includes(style);
+// CS2's defaults (2000930) for the core cvars a new-format listing may leave out
+const CORE_DEFAULTS = [
+  ['cl_crosshairstyle', 7], ['cl_crosshair_length', 8], ['cl_crosshair_thickness', 2], ['cl_crosshair_gap', 4],
+  ['cl_crosshairdot', 0], ['cl_crosshair_t', 0], ['cl_crosshair_drawoutline', 1],
+  ['cl_crosshairoutline_r', 0], ['cl_crosshairoutline_g', 0], ['cl_crosshairoutline_b', 0], ['cl_crosshairoutline_a', 255],
+  ['cl_crosshair_recoil', 1], ['cl_crosshaircolor_r', 0], ['cl_crosshaircolor_g', 255], ['cl_crosshaircolor_b', 0],
+  ['cl_crosshaircolor_a', 255],
+];
 // present only in configs saved after the Sept 22, 2026 update
 const NEW_ONLY = ['cl_crosshair_length', 'cl_crosshair_thickness', 'cl_crosshair_gap', 'cl_crosshair_screen_height',
   'cl_crosshaircolor_a', 'cl_crosshairoutline_r', 'cl_crosshairoutline_g', 'cl_crosshairoutline_b', 'cl_crosshairoutline_a'];
@@ -124,7 +136,9 @@ function previewOf(native, height, flags, outlineMode, value) {
 function complete(commands, cv) {
   const value = (name) => commands.find((c) => c.startsWith(`${name} `))?.split(' ')[1];
   const style = Number(value('cl_crosshairstyle'));
-  const out = Number(value('cl_crosshair_drawoutline')) > 0 ? commands
+  // outline colour only matters with an outline (CS2's default outline is on)
+  const outline = value('cl_crosshair_drawoutline');
+  const out = outline === undefined || Number(outline) > 0 ? commands
     : commands.filter((c) => !c.startsWith('cl_crosshairoutline_'));
   const have = new Set(out.map((c) => c.split(' ')[0]));
   const add = [];
@@ -146,6 +160,11 @@ function passThrough(rec, height, source) {
     const v = cv[name] === undefined ? null : numeric(cv[name]);
     if (v !== null) commands.push(`${name} ${v}`);
   }
+  // a listing may leave out core cvars: CS2's defaults, so the paste still defines everything
+  const listed = new Set(commands.map((c) => c.split(' ')[0]));
+  const missing = CORE_DEFAULTS.filter(([name]) => !listed.has(name)).map(([name, d]) => `${name} ${d}`);
+  commands.splice(0, 0, ...missing.filter((c) => c.startsWith('cl_crosshairstyle ')));
+  commands.push(...missing.filter((c) => !c.startsWith('cl_crosshairstyle ')));
   const authored = numeric(cv.cl_crosshair_screen_height ?? '');
   const h = authored !== null && Number(authored) >= 240 ? Math.round(Number(authored)) : height;
   commands.push(`cl_crosshair_screen_height ${h}`);
