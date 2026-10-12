@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SmithZz 2012 CS:GO Config Converted for CS2 — #8 2012 CS:GO prize money</title>
-  <meta name="description" content="SmithZz&#39;s CS:GO settings from 2013 (#8 of 2012, VeryGames) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 1.88 sens (752 eDPI), viewmodel and more as console commands.">
+  <meta name="description" content="SmithZz&#39;s CS:GO settings from 2013 (#8 2012 CS:GO prize money, VeryGames) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 1.88 sens (752 eDPI), viewmodel and more as console commands.">
   <link rel="canonical" href="https://copyprosta.com/classic/2012/smithzz/">
   <meta name="theme-color" content="#0d1014">
   <meta property="og:site_name" content="CS2 Pro Configs">
   <meta property="og:title" content="SmithZz 2012 — classic CS:GO config for CS2">
-  <meta property="og:description" content="SmithZz&#39;s CS:GO settings from 2013 (#8 of 2012, VeryGames) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 1.88 sens (752 eDPI), viewmodel and more as console commands.">
+  <meta property="og:description" content="SmithZz&#39;s CS:GO settings from 2013 (#8 2012 CS:GO prize money, VeryGames) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 1.88 sens (752 eDPI), viewmodel and more as console commands.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://copyprosta.com/classic/2012/smithzz/">
   <meta property="og:image" content="https://copyprosta.com/assets/og-default.png">
@@ -84,7 +84,7 @@
           <span class="mydpi-slot" data-part="2"></span></div>
         <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>hud_scaling 0.9;</span> <span>hud_showtargetid 0.75</span></pre></div>
       </div>
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+      <p class="note">Convars CS2 renamed are renamed, values outside CS2's range are set to the nearest one it accepts, and convars CS2 doesn't have or that are cheat-protected are left out (see Adapted for CS2 below).</p>
     </section>
     <section class="section">
   <div class="section-head"><h2>Mouse &amp; Sensitivity <span class="tag">sensitivity</span></h2>
@@ -107,7 +107,7 @@
     <section class="section">
   <div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>
   <div class="cols"><div><table class="set"><caption class="sr-only">Video settings</caption><tbody><tr><th scope="row">Resolution</th><td>1024x768</td></tr><tr><th scope="row">Aspect Ratio</th><td>4:3</td></tr></tbody></table></div></div>
-  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel (or use the resolution launch options below).</p>
+  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel.</p>
 </section>
     <section class="section" id="sources">
       <div class="section-head"><h2>Where these settings come from</h2></div>
@@ -116,7 +116,7 @@
           <details><summary>How the date is known</summary><p class="note">The file&#39;s first line reads &#39;// VERYGAMES SmithZz - 04/01/2013&#39;. I re-read it in setupgg/csgo commit e03e8c3 (2016-04-29, the file&#39;s first public appearance) and in setupgg/data HEAD. The day and month are ambiguous: it is 4 Jan 2013 if the date is DD/MM (the French convention, so the likelier reading) and 1 Apr 2013 if it is MM/DD. The other VeryGames files in the same repo cannot settle the format, because their dates are just as ambiguous (ex6tenz &#39;09/08/2012&#39;, shox and lucas1 &#39;08/12/2013&#39;). Only the year is supported, so the date is now &#39;2013&#39;. Valve&#39;s CS:GO patch notes (ckreisl/cs-updates-as-json, crawled from Steam news) fit either reading. cl_crosshairgap was added on 22 Aug 2012, and de_dust2_se was added on 16 Mar 2012. cl_crosshairstyle 4 (&#39;Classic Static&#39;) is named in the 5 Jun 2013 notes. The file does not contain cl_crosshair_drawoutline or cl_crosshair_outlinethickness, which were added on 22 May 2013. It aliases the community map de_mirage_csgo, not the official de_mirage, which Valve added on 12 Jun 2013. Nothing in the file postdates 2013. Where the file came from before 2016 is not recorded.</p></details></li><li><b>DPI (same sensitivity)</b> · 2016 · confidence low · github.com <a href="https://github.com/setupgg/data/blob/master/player/smithzz/data.yml" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/Colxinn/optiplay/blob/main/cache/prosettings/aHR0cHM6Ly9wcm9zZXR0aW5ncy5uZXQvcGxheWVycy9zbWl0aHp6Lw==.html" target="_blank" rel="noopener nofollow">3</a>
           <details><summary>How the date is known</summary><p class="note">player/smithzz/data.yml has no date in the file. It was first added in setupgg/data commit afdec47 (&#39;Initial&#39;, 2016-12-13 17:37 +0200). Only two commits touch player/smithzz, and the second (ef8c0a8, 2016-12-14) added only the autoexec, so data.yml is unchanged since then. No data.yml existed anywhere in setupgg/csgo&#39;s history (2016-04-29 to 2016-12-14). The settings were therefore compiled at an unknown time on or before 2016-12-13, when the file listed his team as &#39;g2&#39;. The date changed from &#39;2016-12-13&#39; to &#39;2016&#39;, because the commit date is only an upper bound, not the date he used them.</p></details></li><li><b>Resolution</b> · 2016 · confidence low · github.com <a href="https://github.com/setupgg/data/blob/master/player/smithzz/data.yml" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/Colxinn/optiplay/blob/main/cache/prosettings/aHR0cHM6Ly9wcm9zZXR0aW5ncy5uZXQvcGxheWVycy9zbWl0aHp6Lw==.html" target="_blank" rel="noopener nofollow">3</a>
           <details><summary>How the date is known</summary><p class="note">player/smithzz/data.yml has no date in the file. It was first added in setupgg/data commit afdec47 (&#39;Initial&#39;, 2016-12-13 17:37 +0200). Only two commits touch player/smithzz, and the second (ef8c0a8, 2016-12-14) added only the autoexec, so data.yml is unchanged since then. No data.yml existed anywhere in setupgg/csgo&#39;s history (2016-04-29 to 2016-12-14). The settings were therefore compiled at an unknown time on or before 2016-12-13, when the file listed his team as &#39;g2&#39;. The date changed from &#39;2016-12-13&#39; to &#39;2016&#39;, because the commit date is only an upper bound, not the date he used them.</p></details></li></ul>
-      <p class="note">Settings from different sources are only combined when they agree (DPI is only paired with a sensitivity from the same source), so the eDPI never mixes eras.</p>
+      <p class="note">DPI is only paired with a sensitivity from the same source, so the eDPI never mixes eras. The other parts can come from configs of different dates, as listed.</p>
     </section>
     <section class="section">
       <div class="section-head"><h2>Original config <span class="tag">CS:GO</span></h2></div>
@@ -141,7 +141,7 @@ hud_showtargetid 0.75
 sensitivity 1.88
 zoom_sensitivity_ratio_mouse 0.9
 m_rawinput 0</pre></div></details>
-      <p class="note">The settings as documented (github.com <a href="https://github.com/setupgg/data/blob/master/player/smithzz/config/autoexec.cfg" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/setupgg/csgo/commit/7a5f2c8dc77d2e078a4346df3997995c1de4a13d" target="_blank" rel="noopener nofollow">3</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
+      <p class="note">The settings as documented (github.com <a href="https://github.com/setupgg/data/blob/master/player/smithzz/config/autoexec.cfg" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/setupgg/csgo/commit/7a5f2c8dc77d2e078a4346df3997995c1de4a13d" target="_blank" rel="noopener nofollow">3</a>, <a href="https://github.com/setupgg/data/blob/master/player/smithzz/data.yml" target="_blank" rel="noopener nofollow">4</a>, <a href="https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2" target="_blank" rel="noopener nofollow">5</a>, <a href="https://github.com/Colxinn/optiplay/blob/main/cache/prosettings/aHR0cHM6Ly9wcm9zZXR0aW5ncy5uZXQvcGxheWVycy9zbWl0aHp6Lw==.html" target="_blank" rel="noopener nofollow">6</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
     </section>
   </main>
 

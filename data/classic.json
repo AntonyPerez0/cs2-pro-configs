@@ -484,11 +484,10 @@
      "current_slug": null,
      "config": {
       "date": "2016",
-      "date_basis": "Latest possible date only. setupgg/data commit afdec47f ('Initial', 2016-12-13) is a bulk import of 492 files from the existing setup.gg database, so 2016-12-13 is the last date these values could be from, not the date he used them. The same import tagged him 'team: sk', and commit cc7127f9 later that day removed that tag as 'old sk/lg team data'. The SK-branded Mionix Sargas 450 pad also appears on the import's other 'sk' players (acilion, cadian, magiskb0y). Together these point to his SK Gaming period, which the Liquipedia cache (Lindeneg/csgo-pro-settings scraper-cache.zip, players/friis.html) dates 2015-05-30 to 2016-06-30. The earliest setup.gg GitHub activity is setupgg/csgo, 2016-04-29. Year 2016 is the only year all of this supports. No source gives the exact capture date, and a 2015 capture cannot be ruled out.",
+      "date_basis": "setup.gg's record for him, first published in the archive's initial import on 13 Dec 2016, so the settings date from then at the latest. The import listed him on SK Gaming, where he played from May 2015 to June 2016, so they most likely date from that time.",
       "sources": [
        "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/friis/data.yml",
-       "https://github.com/setupgg/data/commit/cc7127f99424d1fa597ee67f9f705ec5e565d243",
-       "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip"
+       "https://github.com/setupgg/data/commit/cc7127f99424d1fa597ee67f9f705ec5e565d243"
       ],
       "confidence": "low",
       "convars": {
@@ -508,25 +507,35 @@
        {
         "what": "Sensitivity",
         "date": "2016",
-        "date_basis": "Latest possible date only. setupgg/data commit afdec47f ('Initial', 2016-12-13) is a bulk import of 492 files from the existing setup.gg database, so 2016-12-13 is the last date these values could be from, not the date he used them. The same import tagged him 'team: sk', and commit cc7127f9 later that day removed that tag as 'old sk/lg team data'. The SK-branded Mionix Sargas 450 pad also appears on the import's other 'sk' players (acilion, cadian, magiskb0y). Together these point to his SK Gaming period, which the Liquipedia cache (Lindeneg/csgo-pro-settings scraper-cache.zip, players/friis.html) dates 2015-05-30 to 2016-06-30. The earliest setup.gg GitHub activity is setupgg/csgo, 2016-04-29. Year 2016 is the only year all of this supports. No source gives the exact capture date, and a 2015 capture cannot be ruled out.",
+        "date_basis": "setup.gg's record for him, first published in the archive's initial import on 13 Dec 2016, so the settings date from then at the latest. The import listed him on SK Gaming, where he played from May 2015 to June 2016, so they most likely date from that time.",
         "sources": [
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/friis/data.yml",
-         "https://github.com/setupgg/data/commit/cc7127f99424d1fa597ee67f9f705ec5e565d243",
-         "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip"
+         "https://github.com/setupgg/data/commit/cc7127f99424d1fa597ee67f9f705ec5e565d243"
         ],
-        "confidence": "low"
+        "confidence": "low",
+        "window": [
+         "2015-05-30",
+         "2016-12-13"
+        ]
        },
        {
         "what": "Resolution",
         "date": "2016",
-        "date_basis": "Latest possible date only. setupgg/data commit afdec47f ('Initial', 2016-12-13) is a bulk import of 492 files from the existing setup.gg database, so 2016-12-13 is the last date these values could be from, not the date he used them. The same import tagged him 'team: sk', and commit cc7127f9 later that day removed that tag as 'old sk/lg team data'. The SK-branded Mionix Sargas 450 pad also appears on the import's other 'sk' players (acilion, cadian, magiskb0y). Together these point to his SK Gaming period, which the Liquipedia cache (Lindeneg/csgo-pro-settings scraper-cache.zip, players/friis.html) dates 2015-05-30 to 2016-06-30. The earliest setup.gg GitHub activity is setupgg/csgo, 2016-04-29. Year 2016 is the only year all of this supports. No source gives the exact capture date, and a 2015 capture cannot be ruled out.",
+        "date_basis": "setup.gg's record for him, first published in the archive's initial import on 13 Dec 2016, so the settings date from then at the latest. The import listed him on SK Gaming, where he played from May 2015 to June 2016, so they most likely date from that time.",
         "sources": [
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/friis/data.yml",
-         "https://github.com/setupgg/data/commit/cc7127f99424d1fa597ee67f9f705ec5e565d243",
-         "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip"
+         "https://github.com/setupgg/data/commit/cc7127f99424d1fa597ee67f9f705ec5e565d243"
         ],
-        "confidence": "low"
+        "confidence": "low",
+        "window": [
+         "2015-05-30",
+         "2016-12-13"
+        ]
        }
+      ],
+      "window": [
+       "2015-05-30",
+       "2016-12-13"
       ]
      }
     },
@@ -651,11 +660,9 @@
      "current_slug": null,
      "config": {
       "date": "2016-12",
-      "date_basis": "No usage date is given. This is the date the record was committed, not a date the settings were known to be used. The record is setupgg/data player/delpan/data.yml. Re-checked in the non-shallow local clone: it was added in commit afdec47 'Initial' (2016-12-13 17:37 +0200) and is byte-identical at HEAD 5ba7974 (2017-08-14). git log on the path shows only afdec47. So 2016-12-13 is the latest possible date for these settings. The source does not say when they were in use. His cached Liquipedia page lists CS:GO teams from 2013-05-16 (Lemondogs) to 2014-12-10 (Team Property) and no team after that. Use in 2013-2014 is plausible, but no source states it, so the date was not moved there.",
+      "date_basis": "setup.gg's record for him, first published in the archive's initial import on 13 Dec 2016 and unchanged since. That is the latest date the settings can be from; the source doesn't say when he used them.",
       "sources": [
-       "https://github.com/setupgg/data/blob/master/player/delpan/data.yml",
-       "https://github.com/setupgg/data/tree/master/preference",
-       "https://liquipedia.net/counterstrike/Delpan"
+       "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/delpan/data.yml"
       ],
       "confidence": "low",
       "convars": {
@@ -675,22 +682,18 @@
        {
         "what": "Sensitivity",
         "date": "2016-12",
-        "date_basis": "No usage date is given. This is the date the record was committed, not a date the settings were known to be used. The record is setupgg/data player/delpan/data.yml. Re-checked in the non-shallow local clone: it was added in commit afdec47 'Initial' (2016-12-13 17:37 +0200) and is byte-identical at HEAD 5ba7974 (2017-08-14). git log on the path shows only afdec47. So 2016-12-13 is the latest possible date for these settings. The source does not say when they were in use. His cached Liquipedia page lists CS:GO teams from 2013-05-16 (Lemondogs) to 2014-12-10 (Team Property) and no team after that. Use in 2013-2014 is plausible, but no source states it, so the date was not moved there.",
+        "date_basis": "setup.gg's record for him, first published in the archive's initial import on 13 Dec 2016 and unchanged since. That is the latest date the settings can be from; the source doesn't say when he used them.",
         "sources": [
-         "https://github.com/setupgg/data/blob/master/player/delpan/data.yml",
-         "https://github.com/setupgg/data/tree/master/preference",
-         "https://liquipedia.net/counterstrike/Delpan"
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/delpan/data.yml"
         ],
         "confidence": "low"
        },
        {
         "what": "Resolution",
         "date": "2016-12",
-        "date_basis": "No usage date is given. This is the date the record was committed, not a date the settings were known to be used. The record is setupgg/data player/delpan/data.yml. Re-checked in the non-shallow local clone: it was added in commit afdec47 'Initial' (2016-12-13 17:37 +0200) and is byte-identical at HEAD 5ba7974 (2017-08-14). git log on the path shows only afdec47. So 2016-12-13 is the latest possible date for these settings. The source does not say when they were in use. His cached Liquipedia page lists CS:GO teams from 2013-05-16 (Lemondogs) to 2014-12-10 (Team Property) and no team after that. Use in 2013-2014 is plausible, but no source states it, so the date was not moved there.",
+        "date_basis": "setup.gg's record for him, first published in the archive's initial import on 13 Dec 2016 and unchanged since. That is the latest date the settings can be from; the source doesn't say when he used them.",
         "sources": [
-         "https://github.com/setupgg/data/blob/master/player/delpan/data.yml",
-         "https://github.com/setupgg/data/tree/master/preference",
-         "https://liquipedia.net/counterstrike/Delpan"
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/delpan/data.yml"
         ],
         "confidence": "low"
        }

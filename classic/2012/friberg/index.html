@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>friberg 2012 CS:GO Config Converted for CS2 — #4 2012 CS:GO prize money</title>
-  <meta name="description" content="friberg&#39;s CS:GO settings from 2012-12-13 (#4 of 2012, Ninjas in Pyjamas) converted for CS2: crosshair converted to the new crosshair system, viewmodel and more as console commands.">
+  <meta name="description" content="friberg&#39;s CS:GO settings from 2012-12-13 (#4 2012 CS:GO prize money, Ninjas in Pyjamas) converted for CS2: crosshair converted to the new crosshair system, sensitivity 1.4 and more as console commands.">
   <link rel="canonical" href="https://copyprosta.com/classic/2012/friberg/">
   <meta name="theme-color" content="#0d1014">
   <meta property="og:site_name" content="CS2 Pro Configs">
   <meta property="og:title" content="friberg 2012 — classic CS:GO config for CS2">
-  <meta property="og:description" content="friberg&#39;s CS:GO settings from 2012-12-13 (#4 of 2012, Ninjas in Pyjamas) converted for CS2: crosshair converted to the new crosshair system, viewmodel and more as console commands.">
+  <meta property="og:description" content="friberg&#39;s CS:GO settings from 2012-12-13 (#4 2012 CS:GO prize money, Ninjas in Pyjamas) converted for CS2: crosshair converted to the new crosshair system, sensitivity 1.4 and more as console commands.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://copyprosta.com/classic/2012/friberg/">
   <meta property="og:image" content="https://copyprosta.com/assets/og-default.png">
@@ -56,7 +56,7 @@
         </div>
         <div class="xhair-meta">
           <div class="cmd" tabindex="0" role="group" aria-label="Crosshair commands, scrollable"><pre><span>cl_crosshairstyle 2;</span> <span>cl_crosshair_length 4;</span> <span>cl_crosshair_thickness 1;</span> <span>cl_crosshair_gap 5;</span> <span>cl_crosshairdot 0;</span> <span>cl_crosshair_t 0;</span> <span>cl_crosshair_drawoutline 0;</span> <span>cl_crosshair_recoil 0;</span> <span>cl_crosshaircolor_r 50;</span> <span>cl_crosshaircolor_g 250;</span> <span>cl_crosshaircolor_b 250;</span> <span>cl_crosshaircolor_a 255;</span> <span>cl_crosshair_screen_height 1024</span></pre></div>
-          <ul class="xh-notes" aria-label="Conversion notes"><li>Not in this config because the setting didn&#39;t exist yet, so off: cl_crosshair_drawoutline, cl_crosshairgap_useweaponvalue, cl_crosshair_t, cl_crosshair_recoil.</li><li>Odd-width bars sit on a different centre pixel in the new game, so the crosshair may appear 1 px off.</li><li>Exported style 2 keeps the old style family. Its at-rest shape is assumed to match Static Cross, but it moves with inaccuracy and shots, which is neither modelled nor checked in game.</li></ul>
+          <ul class="xh-notes" aria-label="Conversion notes"><li>Style 2 was the original classic crosshair until February 2014: it showed when you fired but not weapon accuracy (style 5 later recreated it). In CS2, style 2 is the later, accurate version, so it spreads more with movement and inaccuracy than this crosshair did.</li><li>Not in this config because the setting didn&#39;t exist yet, so off: cl_crosshair_drawoutline, cl_crosshairgap_useweaponvalue, cl_crosshair_t, cl_crosshair_recoil.</li><li>Odd-width bars sit on a different centre pixel in the new game, so the crosshair may appear 1 px off.</li><li>Exported style 2 keeps the old style family. Its at-rest shape is assumed to match Static Cross, but it moves with inaccuracy and shots, which is neither modelled nor checked in game.</li></ul>
           <p class="note">These are friberg's CS:GO settings from 2012-12-13, the year of the ranking (see <a href="#sources">where these settings come from</a>). Converted to CS2's crosshair system since the Sept 22, 2026 update, authored at 1024p, friberg's resolution; CS2 rescales it to your resolution.</p>
           <p class="note">Valve published no conversion formula. This uses a community reconstruction (<a href="https://github.com/sebastianspicker/small-indie-crosshair-company" target="_blank" rel="noopener">small-indie-crosshair-company</a> v0.19.1, model community-static-v11, CS2 build 2000922) that hasn't been checked against in-game captures.</p>
         </div>
@@ -78,7 +78,7 @@
           <span class="mydpi-slot" data-part="1"></span></div>
         <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>sensitivity 1.4;</span> <span>zoom_sensitivity_ratio 1;</span> <span>m_pitch 0.022;</span> <span>m_yaw 0.022</span></pre></div>
       </div>
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+      <p class="note">Convars CS2 renamed are renamed, values outside CS2's range are set to the nearest one it accepts, and convars CS2 doesn't have or that are cheat-protected are left out (see Adapted for CS2 below).</p>
     </section>
     <section class="section">
   <div class="section-head"><h2>Mouse &amp; Sensitivity <span class="tag">sensitivity</span></h2>
@@ -86,11 +86,11 @@
   <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>sensitivity 1.4;</span> <span>zoom_sensitivity_ratio 1;</span> <span>m_pitch 0.022;</span> <span>m_yaw 0.022</span></pre></div>
   <div id="dpi-slot"></div>
 </section>
-    <section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">9</span></h2></div><ul class="xh-notes plain"><li>zoom_sensitivity_ratio_mouse is called zoom_sensitivity_ratio in CS2</li><li>m_rawinput doesn&#39;t exist in CS2, left out</li><li>m_customaccel doesn&#39;t exist in CS2, left out</li><li>m_customaccel_exponent doesn&#39;t exist in CS2, left out</li><li>m_customaccel_scale doesn&#39;t exist in CS2, left out</li><li>m_customaccel_max doesn&#39;t exist in CS2, left out</li><li>m_mousespeed doesn&#39;t exist in CS2, left out</li><li>m_mouseaccel1 doesn&#39;t exist in CS2, left out</li><li>m_mouseaccel2 doesn&#39;t exist in CS2, left out</li></ul></section>
+    <section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">9</span></h2></div><details class="raw"><summary>Show what changed</summary><ul class="xh-notes plain"><li>zoom_sensitivity_ratio_mouse is called zoom_sensitivity_ratio in CS2</li><li>m_rawinput doesn&#39;t exist in CS2, left out</li><li>m_customaccel doesn&#39;t exist in CS2, left out</li><li>m_customaccel_exponent doesn&#39;t exist in CS2, left out</li><li>m_customaccel_scale doesn&#39;t exist in CS2, left out</li><li>m_customaccel_max doesn&#39;t exist in CS2, left out</li><li>m_mousespeed doesn&#39;t exist in CS2, left out</li><li>m_mouseaccel1 doesn&#39;t exist in CS2, left out</li><li>m_mouseaccel2 doesn&#39;t exist in CS2, left out</li></ul></details></section>
     <section class="section">
   <div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>
   <div class="cols"><div><table class="set"><caption class="sr-only">Video settings</caption><tbody><tr><th scope="row">Resolution</th><td>1280x1024</td></tr><tr><th scope="row">Aspect Ratio</th><td>5:4</td></tr></tbody></table></div></div>
-  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel (or use the resolution launch options below).</p>
+  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel.</p>
 </section>
     <section class="section" id="sources">
       <div class="section-head"><h2>Where these settings come from</h2></div>
@@ -98,7 +98,7 @@
           <details><summary>How the date is known</summary><p class="note">Upper bound only. The &#39;nip_friberg&#39; preset is already in the first commit (e569127, 2012-12-13 16:12 +0100) of Skarbo/CSGOCrosshair, so it was written on or before that day. When friberg actually used it is unknown.</p></details></li><li><b>Sensitivity</b> · 2012-08-11 · confidence medium · github.com <a href="https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/Friberg/config.cfg" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/Friberg/autoexec.cfg" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/Lindeneg/csgo-pro-settings/blob/ddf05eba5a050fcd11fc3039cf3089074488a51f/scraper-cache.zip" target="_blank" rel="noopener nofollow">3</a>
           <details><summary>How the date is known</summary><p class="note">The date is self-reported, and only the autoexec carries it. autoexec.cfg ends with `echo &quot;NiP-friberg- CS:GO config loaded&quot;` and `echo &quot;Updated: 2012-08-11&quot;`. config.cfg has no date of its own. Both files were first committed to setupgg/csgo in a7612a6 on 2016-04-29, with no source given. config.cfg can only be placed in a range. Its name tag is &quot;NiP-friberg-&quot;, and the cached Liquipedia history dates his NiP tenure from 2012-08-10. It has cl_dynamiccrosshair and no cl_crosshairstyle or cl_crosshairgap, while Skarbo&#39;s generator already lists those two cvars on 2012-12-13. That fits roughly Aug–Dec 2012, but it cannot pin config.cfg to 2012-08-11. The two files are also not one snapshot. config.cfg does not reflect several of the autoexec&#39;s settings: cl_autohelp 1 vs 0, cl_detail_max_sway 5 vs 0, cl_detail_avoid_force 0.4 vs 0, func_break_max_pieces 15 vs 0, bind KP_INS volume 0.5 vs 0.75, and cl_crosshairsize 2 vs the autoexec&#39;s final 1500.</p></details></li><li><b>Resolution</b> · 2016-12-13 · confidence medium · <a href="https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/friberg/data.yml" target="_blank" rel="noopener nofollow">github.com</a>
           <details><summary>How the date is known</summary><p class="note">Upper bound only. This is the date of the initial commit (afdec47, 2016-12-13 17:37 +0200) of setupgg/data, which added player/friberg/data.yml. The file is unchanged since. setupgg gives no source or collection date. The file&#39;s &#39;team: nip&#39; fits the cached Liquipedia NiP tenure (2012-08-10 – 2017-07-31).</p></details></li></ul>
-      <p class="note">Settings from different sources are only combined when they agree (DPI is only paired with a sensitivity from the same source), so the eDPI never mixes eras.</p>
+      <p class="note">DPI is only paired with a sensitivity from the same source, so the eDPI never mixes eras. The other parts can come from configs of different dates, as listed.</p>
     </section>
     <section class="section">
       <div class="section-head"><h2>Original config <span class="tag">CS:GO</span></h2></div>
@@ -125,7 +125,7 @@ m_mouseaccel1 0
 m_mouseaccel2 0
 m_pitch 0.022
 m_yaw 0.022</pre></div></details>
-      <p class="note">The settings as documented (github.com <a href="https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php" target="_blank" rel="noopener nofollow">2</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
+      <p class="note">The settings as documented (github.com <a href="https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/Friberg/config.cfg" target="_blank" rel="noopener nofollow">3</a>, <a href="https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/Friberg/autoexec.cfg" target="_blank" rel="noopener nofollow">4</a>, <a href="https://github.com/Lindeneg/csgo-pro-settings/blob/ddf05eba5a050fcd11fc3039cf3089074488a51f/scraper-cache.zip" target="_blank" rel="noopener nofollow">5</a>, <a href="https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/friberg/data.yml" target="_blank" rel="noopener nofollow">6</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
     </section>
   </main>
 

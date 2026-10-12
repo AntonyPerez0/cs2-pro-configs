@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>flusha 2015 CS:GO Config Converted for CS2 — #5 HLTV Top 20 of 2015</title>
-  <meta name="description" content="flusha&#39;s CS:GO settings from 2013 (#5 of 2015, fnatic) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 1.7 sens (680 eDPI), viewmodel and more as console commands.">
+  <meta name="description" content="flusha&#39;s CS:GO settings from 2013 (#5 HLTV Top 20 of 2015, fnatic) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 1.7 sens (680 eDPI), viewmodel and more as console commands.">
   <link rel="canonical" href="https://copyprosta.com/classic/2015/flusha/">
   <meta name="theme-color" content="#0d1014">
   <meta property="og:site_name" content="CS2 Pro Configs">
   <meta property="og:title" content="flusha 2015 — classic CS:GO config for CS2">
-  <meta property="og:description" content="flusha&#39;s CS:GO settings from 2013 (#5 of 2015, fnatic) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 1.7 sens (680 eDPI), viewmodel and more as console commands.">
+  <meta property="og:description" content="flusha&#39;s CS:GO settings from 2013 (#5 HLTV Top 20 of 2015, fnatic) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 1.7 sens (680 eDPI), viewmodel and more as console commands.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://copyprosta.com/classic/2015/flusha/">
   <meta property="og:image" content="https://copyprosta.com/assets/og-default.png">
@@ -84,7 +84,7 @@
           <span class="mydpi-slot" data-part="2"></span></div>
         <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>hud_scaling 0.95;</span> <span>safezonex 1;</span> <span>safezoney 1;</span> <span>cl_prefer_lefthanded 0</span></pre></div>
       </div>
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+      <p class="note">Convars CS2 renamed are renamed, values outside CS2's range are set to the nearest one it accepts, and convars CS2 doesn't have or that are cheat-protected are left out (see Adapted for CS2 below).</p>
     </section>
     <section class="section">
   <div class="section-head"><h2>Mouse &amp; Sensitivity <span class="tag">sensitivity</span></h2>
@@ -114,11 +114,11 @@
   <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>cl_prefer_lefthanded 0</span></pre></div>
   <p class="note">Misc convars (fps caps, gamma, gameplay toggles) captured from this player's config.</p>
 </section>
-    <section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">3</span></h2></div><ul class="xh-notes plain"><li>cl_righthand is called cl_prefer_lefthanded in CS2</li><li>m_rawinput doesn&#39;t exist in CS2, left out</li><li>m_customaccel doesn&#39;t exist in CS2, left out</li></ul></section>
+    <section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">3</span></h2></div><ul class="xh-notes plain"><li>cl_righthand 1 is cl_prefer_lefthanded 0 in CS2 (the value is inverted)</li><li>m_rawinput doesn&#39;t exist in CS2, left out</li><li>m_customaccel doesn&#39;t exist in CS2, left out</li></ul></section>
     <section class="section">
   <div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>
   <div class="cols"><div><table class="set"><caption class="sr-only">Video settings</caption><tbody><tr><th scope="row">Resolution</th><td>1280x1024</td></tr><tr><th scope="row">Aspect Ratio</th><td>5:4</td></tr></tbody></table></div></div>
-  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel (or use the resolution launch options below).</p>
+  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel.</p>
 </section>
     <section class="section" id="sources">
       <div class="section-head"><h2>Where these settings come from</h2></div>
@@ -126,7 +126,7 @@
           <details><summary>How the date is known</summary><p class="note">Inferred from what the config.cfg dump contains. It is not dated by any source. The file was first published in setupgg/csgo commit a7612a6 on 2016-04-29 (re-checked) and is byte-identical to setupgg/data player/flusha/config/config.cfg at 5ba7974 (re-checked). Lower bounds: player_medalstats_most_recent_time 1365450194 decodes to 2013-04-08 19:43 UTC. cl_crosshair_drawoutline and cl_crosshair_outlinethickness are present, and the 22 May 2013 notes say &#39;Added two new convars, cl_crosshair_drawoutline and cl_crosshair_outlinethickness&#39;. mg_de_mirage is in player_competitive_maplist2, and the 12 Jun 2013 notes say &#39;Added de_mirage&#39;. Upper bound: the file lacks cl_crosshair_dynamic_splitdist (added 12 Feb 2014) and cl_teammate_colors_show (named in the 20 Feb 2014 notes). Of the 75 config.cfg dumps in setupgg/data, 54 contain both cvars. All 21 that lack them, flusha&#39;s included, show only 2012-2013 markers. So the window is 2013-06-12 to about 2014-02-12. Most of that window falls in 2013, but January to mid-February 2014 cannot be excluded.</p></details></li><li><b>Sensitivity</b> · 2016-12 · confidence low · github.com <a href="https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/flusha/data.yml" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/data/commit/afdec47" target="_blank" rel="noopener nofollow">2</a>
           <details><summary>How the date is known</summary><p class="note">Upper bound only. player/flusha/data.yml was added in setupgg/data commit afdec47 on 2016-12-13 and has not been modified since (git log re-checked). The repo&#39;s root commit, 9c18bda from the same day, holds only an empty README. No source says when setup.gg collected these values.</p></details></li><li><b>Resolution</b> · 2016-12 · confidence low · github.com <a href="https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/flusha/data.yml" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/data/commit/afdec47" target="_blank" rel="noopener nofollow">2</a>
           <details><summary>How the date is known</summary><p class="note">Upper bound only. player/flusha/data.yml was added in setupgg/data commit afdec47 on 2016-12-13 and has not been modified since (git log re-checked). The repo&#39;s root commit, 9c18bda from the same day, holds only an empty README. No source says when setup.gg collected these values.</p></details></li></ul>
-      <p class="note">Settings from different sources are only combined when they agree (DPI is only paired with a sensitivity from the same source), so the eDPI never mixes eras.</p>
+      <p class="note">DPI is only paired with a sensitivity from the same source, so the eDPI never mixes eras. The other parts can come from configs of different dates, as listed.</p>
     </section>
     <section class="section">
       <div class="section-head"><h2>Original config <span class="tag">CS:GO</span></h2></div>
@@ -160,7 +160,7 @@ safezoney 1
 sensitivity 1.7
 m_rawinput 1
 m_customaccel 0</pre></div></details>
-      <p class="note">The settings as documented (github.com <a href="https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/flusha/config/config.cfg" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/csgo/commit/a7612a6101f6a0c188df8867e8f991578cbfe63b" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/ckreisl/cs-updates-as-json" target="_blank" rel="noopener nofollow">3</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
+      <p class="note">The settings as documented (github.com <a href="https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/flusha/config/config.cfg" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/csgo/commit/a7612a6101f6a0c188df8867e8f991578cbfe63b" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/ckreisl/cs-updates-as-json" target="_blank" rel="noopener nofollow">3</a>, <a href="https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/flusha/data.yml" target="_blank" rel="noopener nofollow">4</a>, <a href="https://github.com/setupgg/data/commit/afdec47" target="_blank" rel="noopener nofollow">5</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
     </section>
   </main>
 

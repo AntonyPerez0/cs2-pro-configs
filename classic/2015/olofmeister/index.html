@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>olofmeister 2015 CS:GO Config Converted for CS2 — #1 HLTV Top 20 of 2015</title>
-  <meta name="description" content="olofmeister&#39;s CS:GO settings from 2015-09-21 (#1 of 2015, fnatic) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 1.7 sens (680 eDPI), viewmodel and more as console commands.">
+  <meta name="description" content="olofmeister&#39;s CS:GO settings from 2015-09-21 (#1 HLTV Top 20 of 2015, fnatic) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 1.7 sens (680 eDPI) and more as console commands.">
   <link rel="canonical" href="https://copyprosta.com/classic/2015/olofmeister/">
   <meta name="theme-color" content="#0d1014">
   <meta property="og:site_name" content="CS2 Pro Configs">
   <meta property="og:title" content="olofmeister 2015 — classic CS:GO config for CS2">
-  <meta property="og:description" content="olofmeister&#39;s CS:GO settings from 2015-09-21 (#1 of 2015, fnatic) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 1.7 sens (680 eDPI), viewmodel and more as console commands.">
+  <meta property="og:description" content="olofmeister&#39;s CS:GO settings from 2015-09-21 (#1 HLTV Top 20 of 2015, fnatic) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 1.7 sens (680 eDPI) and more as console commands.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://copyprosta.com/classic/2015/olofmeister/">
   <meta property="og:image" content="https://copyprosta.com/assets/og-default.png">
@@ -78,7 +78,7 @@
           <span class="mydpi-slot" data-part="1"></span></div>
         <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>sensitivity 1.7;</span> <span>zoom_sensitivity_ratio 1.2;</span> <span>m_pitch 0.022;</span> <span>m_yaw 0.022</span></pre></div>
       </div>
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+      <p class="note">Convars CS2 renamed are renamed, values outside CS2's range are set to the nearest one it accepts, and convars CS2 doesn't have or that are cheat-protected are left out (see Adapted for CS2 below).</p>
     </section>
     <section class="section">
   <div class="section-head"><h2>Mouse &amp; Sensitivity <span class="tag">sensitivity</span></h2>
@@ -91,7 +91,7 @@
     <section class="section">
   <div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>
   <div class="cols"><div><table class="set"><caption class="sr-only">Video settings</caption><tbody><tr><th scope="row">Resolution</th><td>1024x768</td></tr><tr><th scope="row">Aspect Ratio</th><td>4:3</td></tr></tbody></table></div></div>
-  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel (or use the resolution launch options below).</p>
+  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel.</p>
 </section>
     <section class="section" id="sources">
       <div class="section-head"><h2>Where these settings come from</h2></div>
@@ -100,7 +100,7 @@
           <details><summary>How the date is known</summary><p class="note">Git commit date of setupgg/csgo commit 0e34664 (2016-04-29 07:50:02 +0200, author Nic Malan), which added olofmeister/config.cfg (422 lines). Later the same day, a7612a6 added one bind and 7a5f2c8 changed only key-name case in binds. The file was moved unchanged to players/ on 2016-07-17 (1c84d4d), and on 2016-12-14 (ef8c0a8) to setupgg/data at player/olofmeister/config/config.cfg; a diff shows that copy is identical. 2016-04-29 is the date the file was published in the collection. The repo does not say when olofmeister made it.</p></details></li><li><b>DPI (same sensitivity)</b> · 2016-12-13 · confidence high · github.com <a href="https://github.com/setupgg/data/blob/master/player/olofmeister/data.yml" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2" target="_blank" rel="noopener nofollow">2</a>
           <details><summary>How the date is known</summary><p class="note">Git commit date of setupgg/data commit afdec47 &#39;Initial&#39; (2016-12-13 17:37:03 +0200), which added player/olofmeister/data.yml. The file has not changed since. This is the latest possible date: an initial import that may contain older data.</p></details></li><li><b>Resolution</b> · 2016-12-13 · confidence high · github.com <a href="https://github.com/setupgg/data/blob/master/player/olofmeister/data.yml" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2" target="_blank" rel="noopener nofollow">2</a>
           <details><summary>How the date is known</summary><p class="note">Git commit date of setupgg/data commit afdec47 &#39;Initial&#39; (2016-12-13 17:37:03 +0200), which added player/olofmeister/data.yml. The file has not changed since. This is the latest possible date: an initial import that may contain older data.</p></details></li></ul>
-      <p class="note">Settings from different sources are only combined when they agree (DPI is only paired with a sensitivity from the same source), so the eDPI never mixes eras.</p>
+      <p class="note">DPI is only paired with a sensitivity from the same source, so the eDPI never mixes eras. The other parts can come from configs of different dates, as listed.</p>
     </section>
     <section class="section">
       <div class="section-head"><h2>Original config <span class="tag">CS:GO</span></h2></div>
@@ -119,7 +119,7 @@ m_mouseaccel2 0
 m_mousespeed 0
 m_pitch 0.022
 m_yaw 0.022</pre></div></details>
-      <p class="note">The settings as documented (github.com <a href="https://github.com/luckolen/Config-files/commit/2c3f8f267a04572dbac3e4eaae2641911377c303" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/luckolen/Config-files/blob/2c3f8f267a04572dbac3e4eaae2641911377c303/autoexec.cfg" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/luckolen/Config-files/commit/352dc48c3f4e87bc96c5e5fb1e6b19537cd26dcf" target="_blank" rel="noopener nofollow">3</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
+      <p class="note">The settings as documented (github.com <a href="https://github.com/luckolen/Config-files/commit/2c3f8f267a04572dbac3e4eaae2641911377c303" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/luckolen/Config-files/blob/2c3f8f267a04572dbac3e4eaae2641911377c303/autoexec.cfg" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/luckolen/Config-files/commit/352dc48c3f4e87bc96c5e5fb1e6b19537cd26dcf" target="_blank" rel="noopener nofollow">3</a>, <a href="https://github.com/setupgg/csgo/commit/0e34664a6913293fa10aed09cbe7b457b94ce1eb" target="_blank" rel="noopener nofollow">4</a>, <a href="https://github.com/setupgg/csgo/commit/7a5f2c8dc77d2e078a4346df3997995c1de4a13d" target="_blank" rel="noopener nofollow">5</a>, <a href="https://github.com/setupgg/data/blob/master/player/olofmeister/config/config.cfg" target="_blank" rel="noopener nofollow">6</a>, <a href="https://github.com/setupgg/data/blob/master/player/olofmeister/data.yml" target="_blank" rel="noopener nofollow">7</a>, <a href="https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2" target="_blank" rel="noopener nofollow">8</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
     </section>
   </main>
 

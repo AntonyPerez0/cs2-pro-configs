@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>kennyS 2014 CS:GO Config Converted for CS2 — #6 HLTV Top 20 of 2014</title>
-  <meta name="description" content="kennyS&#39;s CS:GO settings from 2014-04 (#6 of 2014, Titan) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 2.2 sens (880 eDPI), viewmodel and more as console commands.">
+  <meta name="description" content="kennyS&#39;s CS:GO settings from 2014-04 (#6 HLTV Top 20 of 2014, Titan) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 2.2 sens (880 eDPI), viewmodel and more as console commands.">
   <link rel="canonical" href="https://copyprosta.com/classic/2014/kennys/">
   <meta name="theme-color" content="#0d1014">
   <meta property="og:site_name" content="CS2 Pro Configs">
   <meta property="og:title" content="kennyS 2014 — classic CS:GO config for CS2">
-  <meta property="og:description" content="kennyS&#39;s CS:GO settings from 2014-04 (#6 of 2014, Titan) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 2.2 sens (880 eDPI), viewmodel and more as console commands.">
+  <meta property="og:description" content="kennyS&#39;s CS:GO settings from 2014-04 (#6 HLTV Top 20 of 2014, Titan) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 2.2 sens (880 eDPI), viewmodel and more as console commands.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://copyprosta.com/classic/2014/kennys/">
   <meta property="og:image" content="https://copyprosta.com/assets/og-default.png">
@@ -84,7 +84,7 @@
           <span class="mydpi-slot" data-part="2"></span></div>
         <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>hud_scaling 0.9;</span> <span>hud_showtargetid 1;</span> <span>cl_teammate_colors_show 1;</span> <span>cl_prefer_lefthanded 1</span></pre></div>
       </div>
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+      <p class="note">Convars CS2 renamed are renamed, values outside CS2's range are set to the nearest one it accepts, and convars CS2 doesn't have or that are cheat-protected are left out (see Adapted for CS2 below).</p>
     </section>
     <section class="section">
   <div class="section-head"><h2>Mouse &amp; Sensitivity <span class="tag">sensitivity</span></h2>
@@ -114,11 +114,11 @@
   <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>cl_prefer_lefthanded 1</span></pre></div>
   <p class="note">Misc convars (fps caps, gamma, gameplay toggles) captured from this player's config.</p>
 </section>
-    <section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">5</span></h2></div><ul class="xh-notes plain"><li>cl_righthand is called cl_prefer_lefthanded in CS2</li><li>hud_scaling 0.8 is outside CS2&#39;s range, set to 0.9</li><li>zoom_sensitivity_ratio_mouse is called zoom_sensitivity_ratio in CS2</li><li>m_rawinput doesn&#39;t exist in CS2, left out</li><li>m_customaccel doesn&#39;t exist in CS2, left out</li></ul></section>
+    <section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">5</span></h2></div><ul class="xh-notes plain"><li>cl_righthand 0 is cl_prefer_lefthanded 1 in CS2 (the value is inverted)</li><li>hud_scaling 0.8 is outside CS2&#39;s range, set to 0.9</li><li>zoom_sensitivity_ratio_mouse is called zoom_sensitivity_ratio in CS2</li><li>m_rawinput doesn&#39;t exist in CS2, left out</li><li>m_customaccel doesn&#39;t exist in CS2, left out</li></ul></section>
     <section class="section">
   <div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>
   <div class="cols"><div><table class="set"><caption class="sr-only">Video settings</caption><tbody><tr><th scope="row">Resolution</th><td>1024x768</td></tr><tr><th scope="row">Aspect Ratio</th><td>4:3</td></tr></tbody></table></div></div>
-  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel (or use the resolution launch options below).</p>
+  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel.</p>
 </section>
     <section class="section" id="sources">
       <div class="section-head"><h2>Where these settings come from</h2></div>
@@ -127,7 +127,7 @@
           <details><summary>How the date is known</summary><p class="note">Dated from the file&#39;s contents, with a hard upper bound from the commit date. Re-checked against the official release notes in ckreisl/cs-updates-as-json. The file contains cvars added on 2014-02-12 (cl_crosshair_dynamic_*), 2014-02-20 (cl_color, cl_teammate_colors_show), 2014-02-27 (spec_usenumberkeys_nobinds) and 2014-04-23 (cl_scoreboard_mouse_enable_binding; that release also &#39;Added saving of inventory sort and filter dropdowns&#39;, which matches the cl_inventory_saved_* lines). It lacks all seven cl_hud_* cvars added on 2014-05-01, plus cl_hideserverip (2014-05-21), cl_radar_square_with_scoreboard (2014-07-23), cl_crosshairgap_useweaponvalue (2014-08-01) and cl_crosshair_sniper_width (2016-01-20). That puts the save between 2014-04-23 and 2014-05-01. In the same setupgg collection, 31 other players&#39; game-written config.cfg files do contain cl_hud_color, so a save after 2014-05-01 would be expected to include it. The hard upper bound is setupgg/csgo commit e03e8c3 on 2016-04-29. The lower bound player_medalstats_most_recent_time 1358067276 decodes to 2013-01-13 UTC.</p></details></li><li><b>DPI (same sensitivity)</b> · 2016-12-13 · confidence medium · <a href="https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/kennys/data.yml" target="_blank" rel="noopener nofollow">github.com</a>
           <details><summary>How the date is known</summary><p class="note">Date of setupgg/data commit afdec47 &#39;Initial&#39; (2016-12-13 17:37 +0200), which added player/kennys/data.yml. Re-checked: git log shows no later change to the file. It lists team: envyus. Per the cached Liquipedia page, kennyS was in Team EnVyUs from 2015-07-20 to 2017-02-03, which fits.</p></details></li><li><b>Resolution</b> · 2016-12-13 · confidence medium · <a href="https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/kennys/data.yml" target="_blank" rel="noopener nofollow">github.com</a>
           <details><summary>How the date is known</summary><p class="note">Date of setupgg/data commit afdec47 &#39;Initial&#39; (2016-12-13 17:37 +0200), which added player/kennys/data.yml. Re-checked: git log shows no later change to the file. It lists team: envyus. Per the cached Liquipedia page, kennyS was in Team EnVyUs from 2015-07-20 to 2017-02-03, which fits.</p></details></li></ul>
-      <p class="note">Settings from different sources are only combined when they agree (DPI is only paired with a sensitivity from the same source), so the eDPI never mixes eras.</p>
+      <p class="note">DPI is only paired with a sensitivity from the same source, so the eDPI never mixes eras. The other parts can come from configs of different dates, as listed.</p>
     </section>
     <section class="section">
       <div class="section-head"><h2>Original config <span class="tag">CS:GO</span></h2></div>
@@ -166,7 +166,7 @@ sensitivity 2.2
 zoom_sensitivity_ratio_mouse 1
 m_rawinput 1
 m_customaccel 0</pre></div></details>
-      <p class="note">The settings as documented (github.com <a href="https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/kennyS/config.cfg" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/csgo/commit/7a5f2c8dc77d2e078a4346df3997995c1de4a13d" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/kennys/config/config.cfg" target="_blank" rel="noopener nofollow">3</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
+      <p class="note">The settings as documented (github.com <a href="https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/kennyS/config.cfg" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/csgo/commit/7a5f2c8dc77d2e078a4346df3997995c1de4a13d" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/kennys/config/config.cfg" target="_blank" rel="noopener nofollow">3</a>, <a href="https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/kennys/data.yml" target="_blank" rel="noopener nofollow">4</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
     </section>
   </main>
 

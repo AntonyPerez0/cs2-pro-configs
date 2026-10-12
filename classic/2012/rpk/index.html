@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RpK 2012 CS:GO Config Converted for CS2 — #7 2012 CS:GO prize money</title>
-  <meta name="description" content="RpK&#39;s CS:GO settings from 2021-01-05 (#7 of 2012, VeryGames) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 2 sens (800 eDPI), viewmodel and more as console commands.">
+  <meta name="description" content="RpK&#39;s CS:GO settings from 2021-01-05 (#7 2012 CS:GO prize money, VeryGames) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 2 sens (800 eDPI) and more as console commands.">
   <link rel="canonical" href="https://copyprosta.com/classic/2012/rpk/">
   <meta name="theme-color" content="#0d1014">
   <meta property="og:site_name" content="CS2 Pro Configs">
   <meta property="og:title" content="RpK 2012 — classic CS:GO config for CS2">
-  <meta property="og:description" content="RpK&#39;s CS:GO settings from 2021-01-05 (#7 of 2012, VeryGames) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 2 sens (800 eDPI), viewmodel and more as console commands.">
+  <meta property="og:description" content="RpK&#39;s CS:GO settings from 2021-01-05 (#7 2012 CS:GO prize money, VeryGames) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 2 sens (800 eDPI) and more as console commands.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://copyprosta.com/classic/2012/rpk/">
   <meta property="og:image" content="https://copyprosta.com/assets/og-default.png">
@@ -78,7 +78,7 @@
           <span class="mydpi-slot" data-part="1"></span></div>
         <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>sensitivity 2</span></pre></div>
       </div>
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+      <p class="note">Convars CS2 renamed are renamed, values outside CS2's range are set to the nearest one it accepts, and convars CS2 doesn't have or that are cheat-protected are left out (see Adapted for CS2 below).</p>
     </section>
     <section class="section">
   <div class="section-head"><h2>Mouse &amp; Sensitivity <span class="tag">sensitivity</span></h2>
@@ -91,7 +91,7 @@
     <section class="section">
   <div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>
   <div class="cols"><div><table class="set"><caption class="sr-only">Video settings</caption><tbody><tr><th scope="row">Resolution</th><td>1024x768</td></tr><tr><th scope="row">Aspect Ratio</th><td>4:3</td></tr></tbody></table></div></div>
-  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel (or use the resolution launch options below).</p>
+  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel.</p>
 </section>
     <section class="section" id="sources">
       <div class="section-head"><h2>Where these settings come from</h2></div>
@@ -99,7 +99,7 @@
           <details><summary>How the date is known</summary><p class="note">The Liquipedia RpK page says &#39;Updated as of 2021-01-05&#39; on its mouse, hardware and crosshair tables, all citing params.gg/players/rpk (ref [2]). I read it from a cached copy, scraper-cache/players/rpk.html (zip entry dated 2023-10-22 19:30). The cache is inside scraper-cache.zip in github.com/Lindeneg/csgo-pro-settings (commit ddf05eb, 2023-10-26). The page shows &#39;(1020 days ago)&#39;, and 2023-10-22 minus 1020 days is 2021-01-05, which checks out.</p></details></li><li><b>Sensitivity</b> · 2016-12-13 · confidence low · github.com <a href="https://github.com/setupgg/data/blob/master/player/rpk/data.yml" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2" target="_blank" rel="noopener nofollow">2</a>
           <details><summary>How the date is known</summary><p class="note">Git commit afdec47 (&#39;Initial&#39;, 2016-12-13 17:37 +0200) in github.com/setupgg/data first added player/rpk/data.yml, and it is the file&#39;s only commit. It is a recording date: the file gives no date for when the settings were collected. The predecessor repo setupgg/csgo (23 commits, 2016-04-29 to 2016-12-14) has no RpK file. I checked every commit with git grep.</p></details></li><li><b>Resolution</b> · 2016-12-13 · confidence low · github.com <a href="https://github.com/setupgg/data/blob/master/player/rpk/data.yml" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2" target="_blank" rel="noopener nofollow">2</a>
           <details><summary>How the date is known</summary><p class="note">Git commit afdec47 (&#39;Initial&#39;, 2016-12-13 17:37 +0200) in github.com/setupgg/data first added player/rpk/data.yml, and it is the file&#39;s only commit. It is a recording date: the file gives no date for when the settings were collected. The predecessor repo setupgg/csgo (23 commits, 2016-04-29 to 2016-12-14) has no RpK file. I checked every commit with git grep.</p></details></li></ul>
-      <p class="note">Settings from different sources are only combined when they agree (DPI is only paired with a sensitivity from the same source), so the eDPI never mixes eras.</p>
+      <p class="note">DPI is only paired with a sensitivity from the same source, so the eDPI never mixes eras. The other parts can come from configs of different dates, as listed.</p>
     </section>
     <section class="section">
       <div class="section-head"><h2>Original config <span class="tag">CS:GO</span></h2></div>
@@ -117,7 +117,7 @@ cl_crosshair_sniper_width 1
 sensitivity 2
 m_customaccel 0
 m_rawinput 1</pre></div></details>
-      <p class="note">The settings as documented (<a href="https://github.com/Lindeneg/csgo-pro-settings/blob/master/scraper-cache.zip" target="_blank" rel="noopener nofollow">github.com</a>, <a href="https://liquipedia.net/counterstrike/RpK" target="_blank" rel="noopener nofollow">liquipedia.net</a>, <a href="https://www.params.gg/players/rpk" target="_blank" rel="noopener nofollow">params.gg</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
+      <p class="note">The settings as documented (github.com <a href="https://github.com/Lindeneg/csgo-pro-settings/blob/master/scraper-cache.zip" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/data/blob/master/player/rpk/data.yml" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2" target="_blank" rel="noopener nofollow">3</a>, <a href="https://liquipedia.net/counterstrike/RpK" target="_blank" rel="noopener nofollow">liquipedia.net</a>, <a href="https://www.params.gg/players/rpk" target="_blank" rel="noopener nofollow">params.gg</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
     </section>
   </main>
 

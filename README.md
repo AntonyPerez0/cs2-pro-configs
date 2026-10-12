@@ -162,20 +162,29 @@ links): `python3 -m http.server` and open http://localhost:8000.
   2012 has 8 players.
 - **Configs.** 2011 was a CS 1.6 ranking, so those players get their CS:GO settings.
   Each entry uses the player's config closest to the ranking year that can be
-  converted, mostly game-written `config.cfg` files from setup.gg's public archive,
-  dated from timestamps inside them. Every page shows the date and its source, and
+  converted, mostly game-written `config.cfg` files from setup.gg's public archive. A
+  file is dated from the settings it contains, checked against Valve's release notes
+  (a setting added on a known date bounds when the file was saved), or else from the
+  archive's commit date as an upper bound. Every page shows the date, its source and
   how the date is known. When the crosshair, sensitivity and resolution come from
-  different configs, the page says which part is from when. DPI is only paired with
-  a sensitivity from a config with the same sensitivity, so the eDPI never mixes
-  eras. Two players (trace 2011, Gux 2011) have no documented CS:GO config and are
-  listed without one.
+  different configs, the page says which part is from when. DPI is only paired with a
+  sensitivity from a config with the same sensitivity, so the eDPI never mixes eras. A
+  crosshair is converted at the resolution its own source gives. Two players (trace
+  2011, Gux 2011) have no documented CS:GO config and are listed without one.
 - **Conversion.** The same converter as the current players. Crosshair settings
   CS:GO added later are set to what the player had then, not CS2's defaults:
   `cl_crosshair_drawoutline` (added 22 May 2013), `cl_crosshairgap_useweaponvalue`
   (1 Aug 2014, off by default), `cl_crosshair_t` (26 Sep 2017) are off when the config
   predates them or doesn't set them, and `cl_crosshair_recoil` is off (cheat-protected
-  in CS:GO). Configs with a crosshair style the converter can't read (style 6) are
-  passed over for the closest one it can, and the page says so.
+  in CS:GO). Before 5 Jun 2013 the style 4 gap changed per weapon, which the page
+  notes, and before 12 Feb 2014 style 2 didn't show weapon accuracy, unlike CS2's
+  style 2, which the page also notes. Configs with a crosshair style the converter
+  can't read (style 6) are passed over for the closest one it can, and the page
+  says so.
+
+Optional config fields: `window` (first and last day the file can be from) narrows
+the era rules above, and `crosshair_resolution` is the resolution the crosshair is
+converted at when its source differs from the video settings shown.
 
 To change an entry, edit `data/classic.json`, then run `node scraper/crosshair.mjs`,
 `python3 scraper/sitegen.py` and `python3 scraper/test_site.py`.

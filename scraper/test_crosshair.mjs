@@ -90,19 +90,29 @@ const empty = convertPlayer({ slug: 'x', convars: { sensitivity: '1' }, tables: 
 check('no crosshair settings -> blocked, not a crash', [empty.kind, empty.blockers?.length], ['blocked', 1]);
 
 // ---- classic configs: settings CS:GO gained later are off, with the right reason ----
-const classic = (date, convars = {}) => classicRecord(2013, { id: 'x', config: { date,
+const classicP = (date, convars = {}, extra = {}) => ({ id: 'x', config: { date, ...extra,
   convars: { cl_crosshairsize: '2', cl_crosshairgap: '-1', cl_crosshairstyle: '4', ...convars } } });
+const classic = (...a) => classicRecord(2013, classicP(...a));
 const codes = (r) => r.notes.map((x) => x.code);
+const pick = (r, ks) => ks.map((k) => r.convars[k]);
 const c2012 = classic('2012-12-13');
-check('2012: outline, weapon gap, T and recoil off', ['cl_crosshair_drawoutline', 'cl_crosshairgap_useweaponvalue', 'cl_crosshair_t',
-  'cl_crosshair_recoil'].map((k) => c2012.convars[k]), ['0', '0', '0', '0']);
-check('2012: all four did not exist yet', codes(c2012), ['era-features-off']);
+check('2012: outline, T and recoil off', pick(c2012, ['cl_crosshair_drawoutline', 'cl_crosshair_t', 'cl_crosshair_recoil']), ['0', '0', '0']);
+check('2012: they did not exist yet', codes(c2012), ['era-features-off']);
+check('2012 style 4: the gap still changed per weapon', c2012.convars.cl_crosshairgap_useweaponvalue, '1');
+check('...which the converter reports', convertPlayer(c2012).warnings.some((w) => w.code === 'weapon-gap-dropped'), true);
+check('2014 style 4: weapon gap off (not added yet)', classic('2014-04').convars.cl_crosshairgap_useweaponvalue, '0');
+check('2012 style 2 says CS2 style 2 is the accurate one', codes(classic('2012-12-13', { cl_crosshairstyle: '2' })).includes('era-style-2'), true);
+check('2015 style 2 has no such note', codes(classic('2015', { cl_crosshairstyle: '2' })).includes('era-style-2'), false);
 check('2013 (unknown day): outline existed by May, so off by default', codes(classic('2013')), ['era-features-off', 'era-default-off']);
+const windowed = classic('2013', {}, { window: ['2013-01-13', '2013-04-25'] });
+check('a known window narrows the era', [windowed.convars.cl_crosshairgap_useweaponvalue, codes(windowed)], ['1', ['era-features-off']]);
 check('2022: off by default, recoil cheat-protected', codes(classic('2022-04-30', { cl_crosshair_drawoutline: '1' })),
   ['era-default-off', 'era-recoil-cheat']);
 check('a set value is kept', classic('2022-04-30', { cl_crosshair_drawoutline: '1' }).convars.cl_crosshair_drawoutline, '1');
 check('a CS2 config keeps the parser default for recoil', classic('2024-01-01').convars.cl_crosshair_recoil, undefined);
 check('alpha outside 0-255 is clamped', classic('2014', { cl_crosshairalpha: '99999' }).convars.cl_crosshairalpha, '255');
+check('the crosshair converts at its own source\'s resolution', classic('2014', {}, { video: { Resolution: '1024x768' },
+  crosshair_resolution: '1280x1024' }).tables['Video Settings'].Resolution, '1280x1024');
 
 if (fails.length) {
   console.log(`${fails.length} failure(s) of ${n} checks:`);

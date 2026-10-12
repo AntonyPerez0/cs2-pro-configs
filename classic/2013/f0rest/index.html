@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>f0rest 2013 CS:GO Config Converted for CS2 — #2 HLTV Top 20 of 2013</title>
-  <meta name="description" content="f0rest&#39;s CS:GO settings from 2013-12-06 (#2 of 2013, Ninjas in Pyjamas) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 3.5 sens (1400 eDPI), viewmodel and more as console commands.">
+  <meta name="description" content="f0rest&#39;s CS:GO settings from 2013-12-06 (#2 HLTV Top 20 of 2013, Ninjas in Pyjamas) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 3.5 sens (1400 eDPI) and more as console commands.">
   <link rel="canonical" href="https://copyprosta.com/classic/2013/f0rest/">
   <meta name="theme-color" content="#0d1014">
   <meta property="og:site_name" content="CS2 Pro Configs">
   <meta property="og:title" content="f0rest 2013 — classic CS:GO config for CS2">
-  <meta property="og:description" content="f0rest&#39;s CS:GO settings from 2013-12-06 (#2 of 2013, Ninjas in Pyjamas) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 3.5 sens (1400 eDPI), viewmodel and more as console commands.">
+  <meta property="og:description" content="f0rest&#39;s CS:GO settings from 2013-12-06 (#2 HLTV Top 20 of 2013, Ninjas in Pyjamas) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 3.5 sens (1400 eDPI) and more as console commands.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://copyprosta.com/classic/2013/f0rest/">
   <meta property="og:image" content="https://copyprosta.com/assets/og-default.png">
@@ -78,7 +78,7 @@
           <span class="mydpi-slot" data-part="1"></span></div>
         <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>sensitivity 3.5</span></pre></div>
       </div>
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+      <p class="note">Convars CS2 renamed are renamed, values outside CS2's range are set to the nearest one it accepts, and convars CS2 doesn't have or that are cheat-protected are left out (see Adapted for CS2 below).</p>
     </section>
     <section class="section">
   <div class="section-head"><h2>Mouse &amp; Sensitivity <span class="tag">sensitivity</span></h2>
@@ -91,7 +91,7 @@
     <section class="section">
   <div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>
   <div class="cols"><div><table class="set"><caption class="sr-only">Video settings</caption><tbody><tr><th scope="row">Resolution</th><td>1600x900</td></tr><tr><th scope="row">Aspect Ratio</th><td>16:9</td></tr></tbody></table></div></div>
-  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel (or use the resolution launch options below).</p>
+  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel.</p>
 </section>
     <section class="section" id="sources">
       <div class="section-head"><h2>Where these settings come from</h2></div>
@@ -99,7 +99,7 @@
           <details><summary>How the date is known</summary><p class="note">Gist revision date, corrected. The &#39;//// NiP f0rest ////&#39; block first appears in revision 0cbd932ee6cf85603d6267de262cf7cd9e07af28 (2013-12-06 09:22:25 -0800) of StumblinGrumblin&#39;s autoexec.cfg gist, not in a674d39 as first stated. In 0cbd932 it sits under &#39;//// ACTIVE CROSSHAIR ////&#39; and is not commented out. In a674d39 (2013-12-06 14:30:40 -0800) it was commented out and reordered. I cloned the gist and checked every revision; none before 0cbd932 contains &#39;f0rest&#39;.</p></details></li><li><b>Sensitivity</b> · 2016-12-13 · confidence medium · <a href="https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/f0rest/data.yml" target="_blank" rel="noopener nofollow">github.com</a>
           <details><summary>How the date is known</summary><p class="note">Re-checked. This is the date of setupgg/data&#39;s &#39;Initial&#39; commit afdec47f9b60db5430e503dce557a106792534b2 (2016-12-13 17:37:03 +0200), which created player/f0rest/data.yml. git log on the file shows that commit only, so the file was never changed.</p></details></li><li><b>Resolution</b> · 2016-12-13 · confidence medium · <a href="https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/f0rest/data.yml" target="_blank" rel="noopener nofollow">github.com</a>
           <details><summary>How the date is known</summary><p class="note">Re-checked. This is the date of setupgg/data&#39;s &#39;Initial&#39; commit afdec47f9b60db5430e503dce557a106792534b2 (2016-12-13 17:37:03 +0200), which created player/f0rest/data.yml. git log on the file shows that commit only, so the file was never changed.</p></details></li></ul>
-      <p class="note">Settings from different sources are only combined when they agree (DPI is only paired with a sensitivity from the same source), so the eDPI never mixes eras.</p>
+      <p class="note">DPI is only paired with a sensitivity from the same source, so the eDPI never mixes eras. The other parts can come from configs of different dates, as listed.</p>
     </section>
     <section class="section">
       <div class="section-head"><h2>Original config <span class="tag">CS:GO</span></h2></div>
@@ -118,7 +118,7 @@ cl_crosshairscale 0
 sensitivity 3.5
 m_customaccel 0
 m_rawinput 1</pre></div></details>
-      <p class="note">The settings as documented (gist.github.com <a href="https://gist.github.com/StumblinGrumblin/7743218/0cbd932ee6cf85603d6267de262cf7cd9e07af28" target="_blank" rel="noopener nofollow">1</a>, <a href="https://gist.github.com/StumblinGrumblin/7743218/a674d39f8bb06a8a99c32be8dba44169104c163f" target="_blank" rel="noopener nofollow">2</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
+      <p class="note">The settings as documented (gist.github.com <a href="https://gist.github.com/StumblinGrumblin/7743218/0cbd932ee6cf85603d6267de262cf7cd9e07af28" target="_blank" rel="noopener nofollow">1</a>, <a href="https://gist.github.com/StumblinGrumblin/7743218/a674d39f8bb06a8a99c32be8dba44169104c163f" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/f0rest/data.yml" target="_blank" rel="noopener nofollow">github.com</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
     </section>
   </main>
 

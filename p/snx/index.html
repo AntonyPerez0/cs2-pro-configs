@@ -78,9 +78,9 @@
       </div>
 <div class="part">
         <div class="part-head"><span class="part-label">Part 2 · Mouse, viewmodel &amp; radar</span>
-          <button type="button" class="btn small" data-copy="sensitivity 1.78; zoom_sensitivity_ratio 1; viewmodel_fov null; viewmodel_offset_x null; viewmodel_offset_y null; viewmodel_offset_z null">Copy part 2</button>
+          <button type="button" class="btn small" data-copy="sensitivity 1.78; zoom_sensitivity_ratio 1">Copy part 2</button>
           <span class="mydpi-slot" data-part="1"></span></div>
-        <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>sensitivity 1.78;</span> <span>zoom_sensitivity_ratio 1;</span> <span>viewmodel_fov null;</span> <span>viewmodel_offset_x null;</span> <span>viewmodel_offset_y null;</span> <span>viewmodel_offset_z null</span></pre></div>
+        <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>sensitivity 1.78;</span> <span>zoom_sensitivity_ratio 1</span></pre></div>
       </div>
 <div class="part">
         <div class="part-head"><span class="part-label">Part 3 · HUD &amp; other</span>
@@ -88,7 +88,7 @@
           <span class="mydpi-slot" data-part="2"></span></div>
         <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>r_fullscreen_gamma 1.1</span></pre></div>
       </div>
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+      <p class="note">Convars CS2 renamed are renamed, values outside CS2's range are set to the nearest one it accepts, and convars CS2 doesn't have or that are cheat-protected are left out (see Adapted for CS2 below).</p>
     </section>
 
     <section class="section">
@@ -99,16 +99,12 @@
   <div id="dpi-slot"></div>
 </section>
 <section class="section">
-  <div class="section-head"><h2>Viewmodel <span class="tag">viewmodel_*</span></h2>
-  <button type="button" class="btn ghost small" data-copy="viewmodel_fov null; viewmodel_offset_x null; viewmodel_offset_y null; viewmodel_offset_z null">Copy</button></div>
-  <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>viewmodel_fov null;</span> <span>viewmodel_offset_x null;</span> <span>viewmodel_offset_y null;</span> <span>viewmodel_offset_z null</span></pre></div>
-</section>
-<section class="section">
   <div class="section-head"><h2>Performance &amp; Other <span class="tag">misc</span></h2>
   <button type="button" class="btn ghost small" data-copy="r_fullscreen_gamma 1.1">Copy</button></div>
   <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>r_fullscreen_gamma 1.1</span></pre></div>
   <p class="note">Misc convars (fps caps, gamma, gameplay toggles) captured from this player's config.</p>
 </section>
+    <section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">6</span></h2></div><ul class="xh-notes plain"><li>viewmodel_fov null isn&#39;t a valid value, left out</li><li>setting.defaultres doesn&#39;t exist in CS2, left out</li><li>viewmodel_offset_x null isn&#39;t a valid value, left out</li><li>viewmodel_offset_y null isn&#39;t a valid value, left out</li><li>viewmodel_offset_z null isn&#39;t a valid value, left out</li><li>setting.defaultresheight doesn&#39;t exist in CS2, left out</li></ul></section>
     
     <section class="section">
   <div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>
@@ -161,7 +157,7 @@
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script type="application/json" id="player-data">{"dpi":"400","sens":"1.78","parts":[["cl_crosshairstyle 4","cl_crosshair_length 3","cl_crosshair_thickness 1","cl_crosshair_gap 2","cl_crosshairdot 0","cl_crosshair_t 0","cl_crosshair_drawoutline 0","cl_crosshair_recoil 0","cl_crosshaircolor_r 50","cl_crosshaircolor_g 250","cl_crosshaircolor_b 50","cl_crosshaircolor_a 255","cl_crosshair_screen_height 960"],["sensitivity 1.78","zoom_sensitivity_ratio 1","viewmodel_fov null","viewmodel_offset_x null","viewmodel_offset_y null","viewmodel_offset_z null"],["r_fullscreen_gamma 1.1"]]}</script>
+  <script type="application/json" id="player-data">{"dpi":"400","sens":"1.78","parts":[["cl_crosshairstyle 4","cl_crosshair_length 3","cl_crosshair_thickness 1","cl_crosshair_gap 2","cl_crosshairdot 0","cl_crosshair_t 0","cl_crosshair_drawoutline 0","cl_crosshair_recoil 0","cl_crosshaircolor_r 50","cl_crosshaircolor_g 250","cl_crosshaircolor_b 50","cl_crosshaircolor_a 255","cl_crosshair_screen_height 960"],["sensitivity 1.78","zoom_sensitivity_ratio 1"],["r_fullscreen_gamma 1.1"]]}</script>
   <script src="/assets/app.js"></script>
 </body>
 </html>
