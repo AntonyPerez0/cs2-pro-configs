@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>shox 2014 CS:GO Config Converted for CS2 — #8 HLTV Top 20 of 2014</title>
-  <meta name="description" content="shox&#39;s CS:GO settings from 2014 (#8 of 2014, LDLC) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 3 sens (1200 eDPI), viewmodel and more as console commands.">
+  <meta name="description" content="shox&#39;s CS:GO settings from 2014 (#8 HLTV Top 20 of 2014, LDLC) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 3 sens (1200 eDPI), viewmodel and more as console commands.">
   <link rel="canonical" href="https://copyprosta.com/classic/2014/shox/">
   <meta name="theme-color" content="#0d1014">
   <meta property="og:site_name" content="CS2 Pro Configs">
   <meta property="og:title" content="shox 2014 — classic CS:GO config for CS2">
-  <meta property="og:description" content="shox&#39;s CS:GO settings from 2014 (#8 of 2014, LDLC) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 3 sens (1200 eDPI), viewmodel and more as console commands.">
+  <meta property="og:description" content="shox&#39;s CS:GO settings from 2014 (#8 HLTV Top 20 of 2014, LDLC) converted for CS2: crosshair converted to the new crosshair system, 400 DPI x 3 sens (1200 eDPI), viewmodel and more as console commands.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://copyprosta.com/classic/2014/shox/">
   <meta property="og:image" content="https://copyprosta.com/assets/og-default.png">
@@ -84,7 +84,7 @@
           <span class="mydpi-slot" data-part="2"></span></div>
         <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>cl_hud_color 8;</span> <span>hud_scaling 0.9;</span> <span>cl_teammate_colors_show 1;</span> <span>cl_prefer_lefthanded 0</span></pre></div>
       </div>
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+      <p class="note">Convars CS2 renamed are renamed, values outside CS2's range are set to the nearest one it accepts, and convars CS2 doesn't have or that are cheat-protected are left out (see Adapted for CS2 below).</p>
     </section>
     <section class="section">
   <div class="section-head"><h2>Mouse &amp; Sensitivity <span class="tag">sensitivity</span></h2>
@@ -114,11 +114,11 @@
   <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>cl_prefer_lefthanded 0</span></pre></div>
   <p class="note">Misc convars (fps caps, gamma, gameplay toggles) captured from this player's config.</p>
 </section>
-    <section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">7</span></h2></div><ul class="xh-notes plain"><li>cl_righthand is called cl_prefer_lefthanded in CS2</li><li>hud_scaling 0.85 is outside CS2&#39;s range, set to 0.9</li><li>cl_hud_healthammo_style doesn&#39;t exist in CS2, left out</li><li>cl_hud_bomb_under_radar doesn&#39;t exist in CS2, left out</li><li>zoom_sensitivity_ratio_mouse is called zoom_sensitivity_ratio in CS2</li><li>m_rawinput doesn&#39;t exist in CS2, left out</li><li>m_customaccel doesn&#39;t exist in CS2, left out</li></ul></section>
+    <section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">7</span></h2></div><details class="raw"><summary>Show what changed</summary><ul class="xh-notes plain"><li>cl_righthand 1 is cl_prefer_lefthanded 0 in CS2 (the value is inverted)</li><li>hud_scaling 0.85 is outside CS2&#39;s range, set to 0.9</li><li>cl_hud_healthammo_style doesn&#39;t exist in CS2, left out</li><li>cl_hud_bomb_under_radar doesn&#39;t exist in CS2, left out</li><li>zoom_sensitivity_ratio_mouse is called zoom_sensitivity_ratio in CS2</li><li>m_rawinput doesn&#39;t exist in CS2, left out</li><li>m_customaccel doesn&#39;t exist in CS2, left out</li></ul></details></section>
     <section class="section">
   <div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>
   <div class="cols"><div><table class="set"><caption class="sr-only">Video settings</caption><tbody><tr><th scope="row">Resolution</th><td>1024x768</td></tr><tr><th scope="row">Aspect Ratio</th><td>4:3</td></tr></tbody></table></div></div>
-  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel (or use the resolution launch options below).</p>
+  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel.</p>
 </section>
     <section class="section" id="sources">
       <div class="section-head"><h2>Where these settings come from</h2></div>
@@ -127,7 +127,7 @@
           <details><summary>How the date is known</summary><p class="note">Dated from the file&#39;s own contents; it carries no date. (1) The in-game name cvar reads &#39;EPSILON shoxieJESUS * Viewsonic&#39;. The shoffing/csgo-demo-scripts demo-parse output records his in-game name as &#39;EPSILON shox * Viewsonic&#39; in ESL One Cologne 2014 demos (Group A, Epsilon vs HellRaisers and Epsilon vs NiP), and the CS:GO blog mirror dates Cologne 2014 to August 2014 (winners post 2014-08-18). The majors dataset lists shox with Titan at Katowice (March 2014), Epsilon eSports at ESL One Cologne 2014, and LDLC at DreamHack Winter 2014; the blog mirror says LDLC won it on 2014-11-30. (2) The file contains cl_operation_premium_reminder_breakout, and player_competitive_maplist5 includes mg_cs_insertion, mg_de_overgrown and mg_de_blackgold. The CS:GO blog names Insertion, Overgrown and BlackGold as Operation Breakout maps; Breakout ran until 2014-10-02. So the file was saved by a game version from Breakout or later, while shox still had his Epsilon name. Both point to 2014. The previous date, 2016-04-29, is only the setupgg/csgo publication date (commit e03e8c3). At that point shox was on G2 (the majors dataset puts him with G2 at MLG Columbus 2016, and setup.gg&#39;s Dec 2016 data.yml says team g2), so this file is not a 2016 snapshot.</p></details></li><li><b>DPI (same sensitivity)</b> · 2016-12-13 · confidence medium · <a href="https://github.com/setupgg/data/blob/master/player/shox/data.yml" target="_blank" rel="noopener nofollow">github.com</a>
           <details><summary>How the date is known</summary><p class="note">Git commit afdec47 (&#39;Initial&#39;, 2016-12-13 17:37:03 +0200) in setupgg/data is the only commit that touches player/shox/data.yml. This is the date setup.gg compiled the sheet, and the sheet lists team g2.</p></details></li><li><b>Resolution</b> · 2016-12-13 · confidence medium · <a href="https://github.com/setupgg/data/blob/master/player/shox/data.yml" target="_blank" rel="noopener nofollow">github.com</a>
           <details><summary>How the date is known</summary><p class="note">Git commit afdec47 (&#39;Initial&#39;, 2016-12-13 17:37:03 +0200) in setupgg/data is the only commit that touches player/shox/data.yml. This is the date setup.gg compiled the sheet, and the sheet lists team g2.</p></details></li></ul>
-      <p class="note">Settings from different sources are only combined when they agree (DPI is only paired with a sensitivity from the same source), so the eDPI never mixes eras.</p>
+      <p class="note">DPI is only paired with a sensitivity from the same source, so the eDPI never mixes eras. The other parts can come from configs of different dates, as listed.</p>
     </section>
     <section class="section">
       <div class="section-head"><h2>Original config <span class="tag">CS:GO</span></h2></div>
@@ -170,7 +170,7 @@ sensitivity 3
 zoom_sensitivity_ratio_mouse 1
 m_rawinput 0
 m_customaccel 0</pre></div></details>
-      <p class="note">The settings as documented (github.com <a href="https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/shox/config.cfg" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/data/blob/master/player/shox/config/config.cfg" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/setupgg/data/blob/master/player/shox/config_snippet/crosshair.cfg" target="_blank" rel="noopener nofollow">3</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
+      <p class="note">The settings as documented (github.com <a href="https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/shox/config.cfg" target="_blank" rel="noopener nofollow">1</a>, <a href="https://github.com/setupgg/data/blob/master/player/shox/config/config.cfg" target="_blank" rel="noopener nofollow">2</a>, <a href="https://github.com/setupgg/data/blob/master/player/shox/config_snippet/crosshair.cfg" target="_blank" rel="noopener nofollow">3</a>, <a href="https://github.com/setupgg/data/blob/master/player/shox/data.yml" target="_blank" rel="noopener nofollow">4</a>), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
     </section>
   </main>
 

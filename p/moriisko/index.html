@@ -78,9 +78,9 @@
       </div>
 <div class="part">
         <div class="part-head"><span class="part-label">Part 2 · Mouse, viewmodel &amp; radar</span>
-          <button type="button" class="btn small" data-copy="sensitivity 1.485; zoom_sensitivity_ratio 1; viewmodel_fov null; viewmodel_offset_x null; viewmodel_offset_y null; viewmodel_offset_z null; cl_radar_scale 0.25; cl_hud_radar_scale 1">Copy part 2</button>
+          <button type="button" class="btn small" data-copy="sensitivity 1.485; zoom_sensitivity_ratio 1; cl_radar_scale 0.25; cl_hud_radar_scale 1">Copy part 2</button>
           <span class="mydpi-slot" data-part="1"></span></div>
-        <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>sensitivity 1.485;</span> <span>zoom_sensitivity_ratio 1;</span> <span>viewmodel_fov null;</span> <span>viewmodel_offset_x null;</span> <span>viewmodel_offset_y null;</span> <span>viewmodel_offset_z null;</span> <span>cl_radar_scale 0.25;</span> <span>cl_hud_radar_scale 1</span></pre></div>
+        <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>sensitivity 1.485;</span> <span>zoom_sensitivity_ratio 1;</span> <span>cl_radar_scale 0.25;</span> <span>cl_hud_radar_scale 1</span></pre></div>
       </div>
 <div class="part">
         <div class="part-head"><span class="part-label">Part 3 · HUD &amp; other</span>
@@ -88,7 +88,7 @@
           <span class="mydpi-slot" data-part="2"></span></div>
         <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>hud_scaling 0.9;</span> <span>cl_hud_color 0;</span> <span>r_fullscreen_gamma 2</span></pre></div>
       </div>
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+      <p class="note">Convars CS2 renamed are renamed, values outside CS2's range are set to the nearest one it accepts, and convars CS2 doesn't have or that are cheat-protected are left out (see Adapted for CS2 below).</p>
     </section>
 
     <section class="section">
@@ -97,11 +97,6 @@
   <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>sensitivity 1.485;</span> <span>zoom_sensitivity_ratio 1</span></pre></div>
   <p class="note">DPI &amp; polling rate are set in your <b>mouse software</b>, not in-game. Recommended: DPI 400 · eDPI 594 · polling 1000 Hz</p>
   <div id="dpi-slot"></div>
-</section>
-<section class="section">
-  <div class="section-head"><h2>Viewmodel <span class="tag">viewmodel_*</span></h2>
-  <button type="button" class="btn ghost small" data-copy="viewmodel_fov null; viewmodel_offset_x null; viewmodel_offset_y null; viewmodel_offset_z null">Copy</button></div>
-  <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>viewmodel_fov null;</span> <span>viewmodel_offset_x null;</span> <span>viewmodel_offset_y null;</span> <span>viewmodel_offset_z null</span></pre></div>
 </section>
 <section class="section">
   <div class="section-head"><h2>Radar <span class="tag">cl_radar_*</span></h2>
@@ -119,6 +114,7 @@
   <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>r_fullscreen_gamma 2</span></pre></div>
   <p class="note">Misc convars (fps caps, gamma, gameplay toggles) captured from this player's config.</p>
 </section>
+    <section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">8</span></h2></div><details class="raw"><summary>Show what changed</summary><ul class="xh-notes plain"><li>hud_scaling 0 is outside CS2&#39;s range, set to 0.9</li><li>viewmodel_fov null isn&#39;t a valid value, left out</li><li>cl_radar_scale 0 is outside CS2&#39;s range, set to 0.25</li><li>setting.defaultres doesn&#39;t exist in CS2, left out</li><li>viewmodel_offset_x null isn&#39;t a valid value, left out</li><li>viewmodel_offset_y null isn&#39;t a valid value, left out</li><li>viewmodel_offset_z null isn&#39;t a valid value, left out</li><li>setting.defaultresheight doesn&#39;t exist in CS2, left out</li></ul></details></section>
     <section class="section">
   <div class="section-head"><h2>Launch Options <span class="tag">Steam</span></h2>
   <button type="button" class="btn ghost small" data-copy="-freq 360 -novid -console -tickrate 128 +fps_max 0">Copy</button></div>
@@ -180,7 +176,7 @@
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script type="application/json" id="player-data">{"dpi":"400","sens":"1.485","parts":[["cl_crosshairstyle 4","cl_crosshair_length 3","cl_crosshair_thickness 1","cl_crosshair_gap 2","cl_crosshairdot 0","cl_crosshair_t 0","cl_crosshair_drawoutline 0","cl_crosshair_recoil 0","cl_crosshaircolor_r 255","cl_crosshaircolor_g 255","cl_crosshaircolor_b 255","cl_crosshaircolor_a 255","cl_crosshair_screen_height 960"],["sensitivity 1.485","zoom_sensitivity_ratio 1","viewmodel_fov null","viewmodel_offset_x null","viewmodel_offset_y null","viewmodel_offset_z null","cl_radar_scale 0.25","cl_hud_radar_scale 1"],["hud_scaling 0.9","cl_hud_color 0","r_fullscreen_gamma 2"]]}</script>
+  <script type="application/json" id="player-data">{"dpi":"400","sens":"1.485","parts":[["cl_crosshairstyle 4","cl_crosshair_length 3","cl_crosshair_thickness 1","cl_crosshair_gap 2","cl_crosshairdot 0","cl_crosshair_t 0","cl_crosshair_drawoutline 0","cl_crosshair_recoil 0","cl_crosshaircolor_r 255","cl_crosshaircolor_g 255","cl_crosshaircolor_b 255","cl_crosshaircolor_a 255","cl_crosshair_screen_height 960"],["sensitivity 1.485","zoom_sensitivity_ratio 1","cl_radar_scale 0.25","cl_hud_radar_scale 1"],["hud_scaling 0.9","cl_hud_color 0","r_fullscreen_gamma 2"]]}</script>
   <script src="/assets/app.js"></script>
 </body>
 </html>

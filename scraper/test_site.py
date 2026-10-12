@@ -134,7 +134,8 @@ if classic_path.exists():
               ranks, list(range(1, (10 if y["ranking"].startswith("HLTV") else len(ranks)) + 1)))
         for p in y["players"]:
             if p.get("current_slug") and p["current_slug"] not in by_slug:
-                bad_link.append(p["id"])
+                # settings.gg dropped the player: the page just loses the link
+                print(f"note: classic {y['year']}/{p['id']}: current player {p['current_slug']} is gone")
             if not p.get("config"):
                 continue
             key = f"{y['year']}/{p['id']}"
@@ -148,17 +149,24 @@ if classic_path.exists():
             if not page.exists():
                 missing.append(f"{key}:page")
                 continue
-            for value in re.findall(r'data-copy="([^"]*)"', page.read_text(encoding="utf-8")):
+            page_html = page.read_text(encoding="utf-8")
+            bad_link += [f"{key}->{s}" for s in re.findall(r'href="/p/([^/"]+)/"', page_html) if s not in by_slug]
+            for value in re.findall(r'data-copy="([^"]*)"', page_html):
                 if len(html.unescape(value)) > LINE_LIMIT:
                     bad_copy.append(key)
             rec = classic_rec(y["year"], p, by_slug)
             cfg = (ROOT / "cfg" / "classic" / f"{rec['slug']}.cfg").read_text(encoding="utf-8")
-            if cfg != classic_cfg(rec, XC[key], y["year"], p):
+            if cfg != classic_cfg(rec, XC[key], y, p):
                 bad_cfg.append(key)
     check("classic: every config converted, dated, sourced and paged", missing[:5], [])
     check("classic: copy buttons fit one console line", sorted(set(bad_copy))[:5], [])
     check("classic: .cfg files are current", bad_cfg[:5], [])
     check("classic: links to current players resolve", bad_link[:5], [])
+    check("classic: convar values are numbers", [f"{y['year']}/{p['id']}:{k}" for y in classic["years"] for p in y["players"]
+          if p.get("config") for k, v in p["config"]["convars"].items() if not re.fullmatch(r"-?\d+(\.\d+)?", str(v))][:5], [])
+    check("classic: crosshair configs set a colour (no 2026 default fills in)",
+          [f"{y['year']}/{p['id']}" for y in classic["years"] for p in y["players"] if p.get("config")
+           and "cl_crosshairsize" in p["config"]["convars"] and "cl_crosshaircolor" not in p["config"]["convars"]], [])
     urls = [u for y in classic["years"] for u in y["sources"]] + [
         u for y in classic["years"] for p in y["players"] if p.get("config")
         for u in p["config"]["sources"] + [v for pv in p["config"].get("provenance", []) for v in pv["sources"]]]

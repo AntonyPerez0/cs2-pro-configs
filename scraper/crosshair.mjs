@@ -193,6 +193,11 @@ const ERA = [
   ['cl_crosshair_recoil', '2018-02-28'],
 ];
 const CS2_RELEASE = '2023-09-27';
+// Style behaviour CS:GO changed (official release notes): until 5 Jun 2013 the
+// style 4 gap changed per weapon, and until 12 Feb 2014 style 2 was the
+// original classic crosshair that didn't show weapon accuracy.
+const STYLE4_STATIC_GAP = '2013-06-05';
+const STYLE2_ACCURATE = '2014-02-12';
 
 /** First and last day a "2014", "2014-07" or "2014-07-16" date can mean, or null. */
 function dateSpan(d) {
@@ -205,8 +210,20 @@ export function classicRecord(year, p) {
   const convars = { ...(p.config.convars ?? {}) };
   const notes = [];
   if (Object.keys(convars).some((k) => k.startsWith('cl_crosshair'))) {
-    const span = dateSpan(p.config.date);
+    // a known window ("saved between ...") is narrower than the date label
+    const w = p.config.window;
+    const span = Array.isArray(w) && w.length === 2 ? w : dateSpan(p.config.date);
+    const style = String(convars.cl_crosshairstyle ?? '').trim();
     const notYet = [], cheat = [], byDefault = [];
+    if (style === '4' && span && span[1] < STYLE4_STATIC_GAP && convars.cl_crosshairgap_useweaponvalue === undefined) {
+      // the converter's weapon-gap-dropped warning then says what that means now
+      convars.cl_crosshairgap_useweaponvalue = '1';
+    }
+    if (style === '2' && span && span[1] < STYLE2_ACCURATE) {
+      notes.push({ code: 'era-style-2', text: 'Style 2 was the original classic crosshair until February 2014: it showed when you fired but not ' +
+        'weapon accuracy (style 5 later recreated it). In CS2, style 2 is the later, accurate version, so it spreads more ' +
+        'with movement and inaccuracy than this crosshair did.' });
+    }
     for (const [k, added] of ERA) {
       if (convars[k] !== undefined) continue;
       if (span && span[1] < added) notYet.push(k);
@@ -228,7 +245,10 @@ export function classicRecord(year, p) {
       convars.cl_crosshairalpha = String(v);
     }
   }
-  return { slug: `${year}/${p.id}`, convars, tables: { 'Video Settings': p.config.video ?? {} }, notes };
+  // the crosshair is converted at the resolution its own source gives, when that differs from the video settings shown
+  const video = { ...(p.config.video ?? {}) };
+  if (p.config.crosshair_resolution) video.Resolution = p.config.crosshair_resolution;
+  return { slug: `${year}/${p.id}`, convars, tables: { 'Video Settings': video }, notes };
 }
 
 function convertSafely(rec) {
@@ -254,6 +274,7 @@ function buildClassic() {
       const rec = classicRecord(y.year, p);
       const x = convertSafely(rec);
       if (x.warnings) x.warnings = [...rec.notes, ...x.warnings];
+      if (p.config.crosshair_resolution && x.heightSource === 'resolution') x.heightSource = 'crosshair-source';
       out[`${y.year}/${p.id}`] = x;
     }
   }

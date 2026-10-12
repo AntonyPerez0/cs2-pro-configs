@@ -69,6 +69,9 @@ a:hover { text-decoration: underline; }
   /* two nav buttons (classic pages) don't fit beside the full logo on a phone */
   .topbar-inner:has(.btn ~ .btn) .logo small { display: none; }
 }
+@media (max-width: 360px) {
+  .topbar-inner:has(.btn ~ .btn) { gap: 6px; padding: 10px; }
+}
 
 /* ---------- HLTV Top 10 ---------- */
 .top10 { margin: 26px 0 4px; }

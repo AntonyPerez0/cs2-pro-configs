@@ -88,7 +88,7 @@
           <span class="mydpi-slot" data-part="2"></span></div>
         <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>hud_scaling 0.9;</span> <span>cl_hud_color 0;</span> <span>fps_max 0;</span> <span>r_fullscreen_gamma 2.2</span></pre></div>
       </div>
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+      <p class="note">Convars CS2 renamed are renamed, values outside CS2's range are set to the nearest one it accepts, and convars CS2 doesn't have or that are cheat-protected are left out (see Adapted for CS2 below).</p>
     </section>
 
     <section class="section">
@@ -119,6 +119,7 @@
   <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>fps_max 0;</span> <span>r_fullscreen_gamma 2.2</span></pre></div>
   <p class="note">Misc convars (fps caps, gamma, gameplay toggles) captured from this player's config.</p>
 </section>
+    <section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">4</span></h2></div><ul class="xh-notes plain"><li>hud_scaling 0.86 is outside CS2&#39;s range, set to 0.9</li><li>cl_radar_size doesn&#39;t exist in CS2, left out</li><li>setting.defaultres doesn&#39;t exist in CS2, left out</li><li>setting.defaultresheight doesn&#39;t exist in CS2, left out</li></ul></section>
     <section class="section">
   <div class="section-head"><h2>Launch Options <span class="tag">Steam</span></h2>
   <button type="button" class="btn ghost small" data-copy="-novid -tickrate 128 -allow_third_party_software">Copy</button></div>

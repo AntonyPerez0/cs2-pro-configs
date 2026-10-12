@@ -35,7 +35,9 @@ LINE_LIMIT = 500
 # replaced as a whole by the converted crosshair commands.
 CS2_CONVARS = json.loads((Path(__file__).resolve().parent / "cs2_convars.json").read_text())["convars"]
 # CS:GO names CS2 renamed (old configs)
-RENAMED = {"zoom_sensitivity_ratio_mouse": "zoom_sensitivity_ratio"}
+RENAMED = {"zoom_sensitivity_ratio_mouse": "zoom_sensitivity_ratio",
+           # 1 = show the alive count instead of avatars, in both games
+           "cl_hud_playercount_showcount": "cl_teamcounter_playercount_instead_of_avatars"}
 # CS:GO cl_righthand 1 (right hand) is CS2 cl_prefer_lefthanded 0
 INVERTED = {"cl_righthand": "cl_prefer_lefthanded"}
 
@@ -117,15 +119,18 @@ def cs2_command(k, v):
     if sv is None:
         return None, None
     name = RENAMED.get(k, k)
+    note = f"{k} is called {name} in CS2" if name != k else None
     if k in INVERTED and sv in ("0", "1"):
         name, sv = INVERTED[k], "1" if sv == "0" else "0"
+        note = f"{k} {v} is {name} {sv} in CS2 (the value is inverted)"
     if name not in CS2_CONVARS:
         return None, f"{k} doesn't exist in CS2, left out"
-    note = f"{k} is called {name} in CS2" if name != k else None
     lo, hi = CS2_CONVARS[name]
     try:
         x = float(sv)
     except ValueError:
+        if lo is not None or hi is not None:  # a numeric convar given e.g. "null"
+            return None, f"{k} {v} isn't a valid value, left out"
         return f"{name} {sv}", note
     clamped = max(lo, x) if lo is not None else x
     clamped = min(hi, clamped) if hi is not None else clamped
@@ -146,17 +151,25 @@ def section_commands(rec) -> dict:
         out[key] = []
         for k, v in buckets[key]:
             cmd, _note = cs2_command(k, v)
-            if cmd is not None:
+            if cmd is not None and not shadowed(k, rec.get("convars")):
                 out[key].append(cmd)
     return out
+
+
+def shadowed(k, convars) -> bool:
+    """An old name whose CS2 name the config also sets: the CS2 one wins."""
+    new = RENAMED.get(k) or INVERTED.get(k)
+    return bool(new) and new in (convars or {})
 
 
 def adaptation_notes(rec) -> list:
     """What cs2_command changed in a config (renamed, clamped, left out)."""
     notes = []
-    for k, v in (rec.get("convars") or {}).items():
-        if not k.startswith("cl_crosshair"):
-            notes.append(cs2_command(k, v)[1])
+    convars = rec.get("convars") or {}
+    for k, v in convars.items():
+        if not k.startswith("cl_crosshair") and k != "cl_fixedcrosshairgap":  # crosshair: the converter's
+            notes.append(f"{k} left out: the config also sets its CS2 name" if shadowed(k, convars)
+                         else cs2_command(k, v)[1])
     return [n for n in notes if n]
 
 
@@ -296,7 +309,7 @@ def category_sections_html(rec) -> str:
     return "\n".join(parts)
 
 
-def video_tables_html(rec):
+def video_tables_html(rec, launch_hint=True):
     tables = rec.get("tables") or {}
     video = tables.get("Video Settings", {})
     adv = tables.get("Advanced Video", {})
@@ -312,8 +325,21 @@ def video_tables_html(rec):
     return f'''<section class="section">
   <div class="section-head"><h2>Video settings <span class="tag">manual</span></h2></div>
   <div class="cols">{inner}</div>
-  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel (or use the resolution launch options below).</p>
+  <p class="note">CS2 doesn't allow these via console commands — set them in Settings → Video. For <b>stretched</b> scaling also configure your GPU driver panel{" (or use the resolution launch options below)" if launch_hint else ""}.</p>
 </section>'''
+
+
+def adapted_section_html(rec) -> str:
+    """What changed to make the config work in CS2, so a value that differs from
+    the original (a clamp, a rename, an inversion) is never silent."""
+    notes = adaptation_notes(rec)
+    if not notes:
+        return ""
+    items = "".join(f"<li>{esc(n)}</li>" for n in notes)
+    body = (f'<ul class="xh-notes plain">{items}</ul>' if len(notes) <= 6 else
+            f'<details class="raw"><summary>Show what changed</summary><ul class="xh-notes plain">{items}</ul></details>')
+    return (f'<section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">{len(notes)}</span>'
+            f'</h2></div>{body}</section>')
 
 
 def _cell(v: float) -> int:
@@ -388,6 +414,7 @@ def crosshair_section_html(rec, xp, reference, source_note=None) -> str:
     authored = {
         "resolution": f"authored at {height}p, {esc(nick)}'s resolution",
         "config": f"authored at {height}p, as their config says",
+        "crosshair-source": f"authored at {height}p, the resolution the crosshair's source lists",
     }.get(xp.get("heightSource"), f"authored at {height}p (their resolution isn't listed)")
     if source_note:
         about = (f'<p class="note">{source_note} Converted to CS2\'s crosshair system since the Sept 22, 2026 update, '
@@ -481,8 +508,8 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None, classic_e
     links.append(f'<a href="https://settings.gg/players/{esc(slug)}" target="_blank" rel="noopener">settings.gg</a>')
     if rec.get("steamid64"):
         links.append(f'<a href="https://procrosshairs.com/player/{esc(rec["steamid64"])}/{esc(slug)}" target="_blank" rel="noopener">crosshair history</a>')
-    for year, cid, rank in classic_entries:
-        links.append(f'<a href="/classic/{year}/{esc(cid)}/">#{rank} in {year} (classic)</a>')
+    for year, cid, rank, short in classic_entries:
+        links.append(f'<a href="/classic/{year}/{esc(cid)}/">#{rank} {esc(short)} (classic)</a>')
 
     avatar_html = avatar_img(rec["avatar"], 92) if rec.get("avatar") else letter_div(nick)
     download = f'<a class="btn ghost" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download .cfg</a>'
@@ -584,6 +611,7 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None, classic_e
     {full_config_html(parts, f"/cfg/{slug}.cfg", slug)}
 
     {category_sections_html(rec)}
+    {adapted_section_html(rec)}
     {launch_html}
     {video_tables_html(rec)}
     {raw_html}
@@ -615,7 +643,7 @@ def full_config_html(parts, cfg_href: str, cfg_name: str) -> str:
         <a class="btn ghost small" href="{esc(cfg_href)}" download="{esc(cfg_name)}.cfg">Download .cfg</a></div>
       <p class="note lead">The CS2 console can reject a pasted line longer than 510 characters, so the full config comes in parts: press <b>~</b> in CS2, paste part 1, press Enter, then do the same with the next part. Or download the .cfg, save it in <code>Counter-Strike Global Offensive/game/csgo/cfg/</code> and run <code>exec {esc(cfg_name)}</code> in the console.</p>
       {part_blocks}
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+      <p class="note">Convars CS2 renamed are renamed, values outside CS2's range are set to the nearest one it accepts, and convars CS2 doesn't have or that are cheat-protected are left out (see Adapted for CS2 below).</p>
     </section>'''
 
 
@@ -641,12 +669,17 @@ def classic_rec(year, p, players_by_slug) -> dict:
     return rec
 
 
-def classic_cfg(rec, xp, year, p) -> str:
+def classic_cfg(rec, xp, year_obj, p) -> str:
+    year = year_obj["year"]
     c = p["config"]
     head = [
-        f"// {p['nick']} - #{p['rank']} of {year}, CS:GO config from {c['date']} - {BASE}/classic/{year}/{p['id']}/",
-        "// Converted for CS2: crosshair converted to the Sept 2026 crosshair system (community",
-        "// reconstruction); convars CS2 renamed are renamed, ones it no longer has are left out.",
+        f"// {p['nick']} - #{p['rank']} {year_obj['short']}, CS:GO config from {c['date']}",
+        f"// {BASE}/classic/{year}/{p['id']}/",
+        *(["// Converted for CS2: crosshair converted to the Sept 2026 crosshair system (community",
+            "// reconstruction); convars CS2 renamed are renamed, ones it no longer has are left out."]
+          if crosshair_commands(xp) else
+          ["// Converted for CS2 (no crosshair in this config): convars CS2 renamed are renamed,",
+           "// ones it no longer has are left out."]),
         f"// Save as Counter-Strike Global Offensive/game/csgo/cfg/{rec['slug']}.cfg, then run: exec {rec['slug']}",
         "",
     ]
@@ -736,20 +769,15 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     sources_html = (f'''<section class="section" id="sources">
       <div class="section-head"><h2>Where these settings come from</h2></div>
       <ul class="provenance">{prov_items}</ul>
-      <p class="note">Settings from different sources are only combined when they agree (DPI is only paired with a sensitivity from the same source), so the eDPI never mixes eras.</p>
+      <p class="note">DPI is only paired with a sensitivity from the same source, so the eDPI never mixes eras. The other parts can come from configs of different dates, as listed.</p>
     </section>''' if prov_items else "")
     confidence = c.get("confidence") or "medium"
-    adapted = adaptation_notes(rec)
-    adapted_html = ""
-    if adapted:
-        adapted_html = ('<section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">'
-                        f'{len(adapted)}</span></h2></div><ul class="xh-notes plain">'
-                        + "".join(f"<li>{esc(n)}</li>" for n in adapted) + "</ul></section>")
     original = "\n".join(f"{k} {v}" for k, v in (c.get("convars") or {}).items())
+    all_sources = list(dict.fromkeys(u for pv in c.get("provenance") or [] for u in pv.get("sources") or [])) or c.get("sources")
     original_html = (f'''<section class="section">
       <div class="section-head"><h2>Original config <span class="tag">CS:GO</span></h2></div>
       <details class="raw"><summary>Show the documented CS:GO settings</summary>{cmd_block_raw(original)}</details>
-      <p class="note">The settings as documented ({source_links(c.get("sources"))}), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
+      <p class="note">The settings as documented ({source_links(all_sources)}), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
     </section>''' if original else "")
     notes_html = f'<p class="note">{esc(c["notes"])}</p>' if c.get("notes") else ""
     head_copy = (f'<button type="button" class="btn" data-copy="{esc("; ".join(xh_cmds))}">Copy crosshair</button>'
@@ -757,9 +785,12 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
                  '<a class="btn" href="#crosshair">Crosshair ↓</a>' if xh_cmds else "")
     cfg_href = f"/cfg/classic/{rec['slug']}.cfg"
     title = f"{nick} {year} CS:GO Config Converted for CS2 — #{p['rank']} {year_obj['short']}"
-    desc = (f"{nick}'s CS:GO settings from {c.get('date')} (#{p['rank']} of {year}, {p.get('team') or ''}) converted for CS2: "
-            "crosshair converted to the new crosshair system"
-            + (f", {dpi} DPI x {sens} sens ({edpi} eDPI)" if edpi else "") + ", viewmodel and more as console commands.")
+    has = ([f"crosshair converted to the new crosshair system"] if xh_cmds else []) + (
+        [f"{dpi} DPI x {sens} sens ({edpi} eDPI)"] if edpi else [f"sensitivity {sens}"] if sens else []) + (
+        ["viewmodel"] if section_commands(rec).get("viewmodel") else [])
+    desc = (f"{nick}'s CS:GO settings from {c.get('date')} (#{p['rank']} {year_obj['short']}"
+            + (f", {p['team']}" if p.get("team") else "") + ") converted for CS2"
+            + (": " + ", ".join(has) + " and more as console commands." if has else "."))
     avatar_html = avatar_img(rec["avatar"], 92) if rec.get("avatar") else letter_div(nick)
     image = f"{BASE}/{rec['avatar']}" if rec.get("avatar") else f"{BASE}/assets/og-default.png"
     return f'''<!DOCTYPE html>
@@ -813,8 +844,8 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     {crosshair_section_html(rec, xp, reference, source_note=source_note)}
     {full_config_html(parts, cfg_href, rec["slug"])}
     {category_sections_html(rec)}
-    {adapted_html}
-    {video_tables_html(rec)}
+    {adapted_section_html(rec)}
+    {video_tables_html(rec, launch_hint=False)}
     {sources_html}
     {original_html}
   </main>
@@ -1192,7 +1223,7 @@ def main() -> None:
     for y in (classic or {}).get("years", []):
         for p in y["players"]:
             if p.get("config") and p.get("current_slug"):
-                classic_of.setdefault(p["current_slug"], []).append((y["year"], p["id"], p["rank"]))
+                classic_of.setdefault(p["current_slug"], []).append((y["year"], p["id"], p["rank"], y["short"]))
 
     emit(ROOT / "index.html", index_page(players, top10_data, generated, classic), f"{BASE}/", "1.0")
     print("index.html")
@@ -1232,7 +1263,7 @@ def main() -> None:
                 d.mkdir(parents=True, exist_ok=True)
                 emit(d / "index.html", classic_page(y, p, rec, xp, crosshair["reference"], players_by_slug),
                      f"{BASE}/classic/{y['year']}/{p['id']}/", "0.7")
-                write_if_changed(ROOT / "cfg" / "classic" / f"{rec['slug']}.cfg", classic_cfg(rec, xp, y["year"], p))
+                write_if_changed(ROOT / "cfg" / "classic" / f"{rec['slug']}.cfg", classic_cfg(rec, xp, y, p))
                 m += 1
         print(f"classic pages: {m}")
 
