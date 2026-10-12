@@ -14,6 +14,7 @@ Run AFTER scrape.py, top10.py and crosshair.mjs (reads data/*.json, cfg/raw/*.cf
 Canonical origin: https://copyprosta.com
 """
 
+import hashlib
 import json
 import math
 import re
@@ -69,6 +70,13 @@ FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox
            "%3Crect width='100' height='100' rx='20' fill='%23ff8a3c'/%3E"
            "%3Ctext x='50' y='68' font-size='52' text-anchor='middle' font-family='monospace' "
            "font-weight='bold' fill='%231a0e02'%3ECS%3C/text%3E%3C/svg%3E")
+
+
+def asset_url(name: str) -> str:
+    """/assets/<name>?v=<content hash>: a deploy that changes the file changes the URL, so
+    browsers never pair new pages with a cached older app.js or style.css."""
+    digest = hashlib.sha256((ROOT / "assets" / name).read_bytes()).hexdigest()[:10]
+    return f"/assets/{name}?v={digest}"
 
 
 def json_script(obj) -> str:
@@ -591,7 +599,7 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None, classic_e
   <meta name="twitter:description" content="{esc(og_desc)}">
   <meta name="twitter:image" content="{avatar_url}">
   <link rel="icon" href="{FAVICON}">
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="{asset_url('style.css')}">
   <script type="application/ld+json">
   {json_script(person)}
   </script>
@@ -641,7 +649,7 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None, classic_e
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script type="application/json" id="player-data">{embed}</script>
-  <script src="/assets/app.js"></script>
+  <script src="{asset_url('app.js')}"></script>
 </body>
 </html>
 '''
@@ -925,7 +933,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
   <meta property="og:image" content="{image}">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="{FAVICON}">
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="{asset_url('style.css')}">
 </head>
 <body data-page="player-static">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -973,7 +981,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script type="application/json" id="player-data">{embed}</script>
-  <script src="/assets/app.js"></script>
+  <script src="{asset_url('app.js')}"></script>
 </body>
 </html>
 '''
@@ -1037,7 +1045,7 @@ def classic_index_page(classic, players_by_slug) -> str:
   <meta property="og:url" content="{BASE}/classic/">
   <meta property="og:image" content="{BASE}/assets/og-default.png">
   <link rel="icon" href="{FAVICON}">
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="{asset_url('style.css')}">
 </head>
 <body data-page="plain">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -1159,7 +1167,7 @@ def index_page(players, top10_data, generated, classic=None) -> str:
   <meta name="twitter:description" content="Copy any pro's CS2 config as console commands: crosshair (converted to the new system), sensitivity, viewmodel, HUD, radar.">
   <meta name="twitter:image" content="{BASE}/assets/og-default.png">
   <link rel="icon" href="{FAVICON}">
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="{asset_url('style.css')}">
   <script type="application/ld+json">{json_script(ld)}</script>
 </head>
 <body data-page="index">
@@ -1218,7 +1226,7 @@ def index_page(players, top10_data, generated, classic=None) -> str:
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/assets/app.js"></script>
+  <script src="{asset_url('app.js')}"></script>
 </body>
 </html>
 '''
@@ -1259,7 +1267,7 @@ def not_found_page() -> str:
   <title>Page not found — CS2 Pro Configs</title>
   <meta name="robots" content="noindex">
   <link rel="icon" href="{FAVICON}">
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="{asset_url('style.css')}">
 </head>
 <body data-page="plain">
   <main class="wrap" style="min-height:70vh;display:flex;align-items:center;justify-content:center">
