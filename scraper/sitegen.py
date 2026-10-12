@@ -264,8 +264,8 @@ def res_key(r: str):
     return (int(w) if w.isdigit() else 0, int(h) if h.isdigit() else 0)
 
 
-def avatar_img(path: str, size: int, lazy: bool = False) -> str:
-    return (f'<img class="avatar" src="/{esc(path)}" alt="" width="{size}" height="{size}"'
+def avatar_img(path: str, size: int, lazy: bool = False, alt: str = "") -> str:
+    return (f'<img class="avatar" src="/{esc(path)}" alt="{esc(alt)}" width="{size}" height="{size}"'
             + (' loading="lazy"' if lazy else "") + ">")
 
 
@@ -699,9 +699,25 @@ def classic_rec(y, p, players_by_slug) -> dict:
            "convars": c.get("convars") or {},
            "tables": {"Mouse": c.get("mouse") or {}, "Video Settings": c.get("video") or {}}}
     current = players_by_slug.get(p.get("current_slug") or "")
-    if current and current.get("avatar"):
+    if p.get("photo"):
+        rec["avatar"] = p["photo"]["src"]  # a photo from that time, see photo_credit_html
+    elif current and current.get("avatar"):
         rec["avatar"] = current["avatar"]
     return rec
+
+
+def photo_alt(p) -> str:
+    ph = p.get("photo") or {}
+    return f"{p['nick']}" + (f" at {ph['event']}" if ph.get("event") else "") + (f", {ph['date']}" if ph.get("date") else "")
+
+
+def photo_credit_html(ph) -> str:
+    """CC attribution: what, when, who, licence (linked), where (Commons page)."""
+    lic = (f'<a href="{esc(ph["license_url"])}" target="_blank" rel="noopener nofollow">{esc(ph["license"])}</a>'
+           if ph.get("license_url") else esc(ph.get("license") or ""))
+    what = esc(ph.get("event") or "Photo")
+    return (f'<a href="{esc(ph["page"])}" target="_blank" rel="noopener nofollow">{what}</a> · {esc(ph.get("date") or "undated")}'
+            f' · by {esc(ph.get("author") or "unknown")} · {lic} · via Wikimedia Commons')
 
 
 def classic_cfg(rec, xp, year_obj, p) -> str:
@@ -820,6 +836,8 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
         f'''<li><b>{esc(pv["what"])}</b> · {esc(pv["date"])} · confidence {esc(pv["confidence"])} · {source_links(pv.get("sources"))}
           <details><summary>How the date is known</summary><p class="note">{esc(pv["date_basis"])}</p></details></li>'''
         for pv in c.get("provenance") or [])
+    if p.get("photo"):
+        prov_items += f'<li><b>Photo</b> · {photo_credit_html(p["photo"])}</li>'
     sources_html = (f'''<section class="section" id="sources">
       <div class="section-head"><h2>Where these settings come from</h2></div>
       <ul class="provenance">{prov_items}</ul>
@@ -849,7 +867,8 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     desc = (f"{nick}'s CS:GO settings from {c.get('date')} ({standing(year_obj, p)}"
             + (f", {p['team']}" if p.get("team") and not roster else "") + ") converted for CS2"
             + (": " + ", ".join(has) + (" and more as console commands." if more else ".") if has else "."))
-    avatar_html = avatar_img(rec["avatar"], 92) if rec.get("avatar") else letter_div(nick)
+    avatar_html = (avatar_img(rec["avatar"], 92, alt=photo_alt(p) if p.get("photo") else "") if rec.get("avatar")
+                   else letter_div(nick))
     image = f"{BASE}/{rec['avatar']}" if rec.get("avatar") else f"{BASE}/assets/og-default.png"
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -929,7 +948,8 @@ def classic_index_page(classic, players_by_slug) -> str:
         for p in y["players"]:
             c = p.get("config")
             current = players_by_slug.get(p.get("current_slug") or "")
-            avatar = (avatar_img(current["avatar"], 72, lazy=True) if current and current.get("avatar")
+            avatar = (avatar_img(p["photo"]["src"], 72, lazy=True, alt=photo_alt(p)) if p.get("photo") else
+                      avatar_img(current["avatar"], 72, lazy=True) if current and current.get("avatar")
                       else letter_div(p["nick"]))
             if c:
                 href = f"/classic/{gkey(y)}/{p['id']}/"
@@ -997,6 +1017,7 @@ def classic_index_page(classic, players_by_slug) -> str:
       <p class="note">{esc(classic.get("about") or "")}</p>
     </div>
     {"".join(sections)}
+    {classic_photo_credits_html(classic)}
   </main>
   <footer>
     <div class="wrap">
@@ -1006,6 +1027,23 @@ def classic_index_page(classic, players_by_slug) -> str:
 </body>
 </html>
 '''
+
+
+def classic_photo_credits_html(classic) -> str:
+    """Attribution for every photo the cards above use (each page also credits its own)."""
+    seen, items = set(), []
+    for y in classic["years"]:
+        for p in y["players"]:
+            ph = p.get("photo")
+            if ph and (p["nick"], ph["page"]) not in seen:
+                seen.add((p["nick"], ph["page"]))
+                items.append(f"<li><b>{esc(p['nick'])}</b> · {photo_credit_html(ph)}</li>")
+    if not items:
+        return ""
+    return (f'<section class="section classic-credits" id="photo-credits"><details><summary>Photo credits '
+            f'<span class="tag">{len(items)}</span></summary><ul class="provenance">{"".join(items)}</ul>'
+            '<p class="note">Freely licensed photos from Wikimedia Commons, cropped to fit; the photo closest to each entry\'s time is used.</p>'
+            '</details></section>')
 
 
 def classic_teaser_html(classic) -> str:
