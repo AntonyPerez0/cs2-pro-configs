@@ -31,7 +31,7 @@ const lib = (p) => import(join(LIB, p));
 const { parseLegacyTextWithNotes } = await lib('settings/import.js');
 const { infer } = await lib('solver/inference.js');
 const { exportQuantCFG, mergedExportOverrides } = await lib('solver/export.js');
-const { defaultExportGroups, nativeOutlineExtent } = await lib('settings/native.js');
+const { nativeOutlineExtent } = await lib('settings/native.js');
 const { defaultsWarning } = await lib('settings/outcomes.js');
 const { COMMUNITY_MODEL, COMMUNITY_REVISION } = await lib('geometry/community.js');
 const { forward } = await lib('solver/renderer.js');
@@ -59,8 +59,25 @@ export const CURRENT_CVARS = [
   'cl_crosshair_recoil', 'cl_crosshaircolor_r', 'cl_crosshaircolor_g', 'cl_crosshaircolor_b', 'cl_crosshaircolor_a',
   'cl_crosshair_dynamic_splitdist', 'cl_crosshair_dynamic_splitalpha_innermod',
   'cl_crosshair_dynamic_splitalpha_outermod', 'cl_crosshair_dynamic_maxdist_splitratio',
-  'cl_crosshair_dynamic_spread_limit', 'cl_crosshair_sniper_width', 'cl_crosshair_screen_height',
+  'cl_crosshair_dynamic_spread_limit', 'cl_crosshair_sniper_width', 'cl_ironsight_usecrosshaircolor',
+  'cl_ironsight_dot_scale', 'cl_crosshair_screen_height',
 ];
+// Crosshair cvars the converter doesn't write, with CS2's default and range (build 2000930 dump). A paste sets
+// every one that shapes its crosshair, so nothing of the visitor's own crosshair carries over, as a crosshair
+// share paste does: the iron-sight dot always, the split cvars for style 2 (the only one that splits, per the
+// 12 Feb 2014 notes that added them) and the spread limit for the styles that move (2 and 5).
+const EXTRA = {
+  cl_crosshair_dynamic_splitdist: [3, 0, 127],
+  cl_crosshair_dynamic_splitalpha_innermod: [0, 0, 1],
+  cl_crosshair_dynamic_splitalpha_outermod: [1, 0.3, 1],
+  cl_crosshair_dynamic_maxdist_splitratio: [1, 0, 1],
+  cl_crosshair_dynamic_spread_limit: [255, 0, 255],
+  cl_ironsight_usecrosshaircolor: [0, 0, 1],
+  cl_ironsight_dot_scale: [1, 0.1, 2],
+};
+const MOVING_STYLES = new Set([2, 5]);
+const appliesTo = (name, style) => (name === 'cl_crosshair_dynamic_spread_limit' ? MOVING_STYLES.has(style)
+  : name.startsWith('cl_crosshair_dynamic_') ? style === 2 : true);
 // present only in configs saved after the Sept 22, 2026 update
 const NEW_ONLY = ['cl_crosshair_length', 'cl_crosshair_thickness', 'cl_crosshair_gap', 'cl_crosshair_screen_height',
   'cl_crosshaircolor_a', 'cl_crosshairoutline_r', 'cl_crosshairoutline_g', 'cl_crosshairoutline_b', 'cl_crosshairoutline_a'];
@@ -102,6 +119,24 @@ function previewOf(native, height, flags, outlineMode, value) {
   }
 }
 
+/** Add the EXTRA cvars that shape this crosshair (value from the config, clamped to CS2's range, else CS2's
+ * default) before cl_crosshair_screen_height, and drop outline colour lines when the outline is off. */
+function complete(commands, cv) {
+  const value = (name) => commands.find((c) => c.startsWith(`${name} `))?.split(' ')[1];
+  const style = Number(value('cl_crosshairstyle'));
+  const out = Number(value('cl_crosshair_drawoutline')) > 0 ? commands
+    : commands.filter((c) => !c.startsWith('cl_crosshairoutline_'));
+  const have = new Set(out.map((c) => c.split(' ')[0]));
+  const add = [];
+  for (const [name, [dflt, lo, hi]] of Object.entries(EXTRA)) {
+    if (have.has(name) || !appliesTo(name, style)) continue;
+    const v = cv[name] === undefined ? null : numeric(cv[name]);
+    add.push(`${name} ${v === null ? dflt : Number(Math.min(hi, Math.max(lo, Number(v))).toFixed(4))}`);
+  }
+  const at = out.findIndex((c) => c.startsWith('cl_crosshair_screen_height '));
+  return at < 0 ? [...out, ...add] : [...out.slice(0, at), ...add, ...out.slice(at)];
+}
+
 /** A crosshair settings.gg already lists in the new format: copied as-is (current cvars only). */
 function passThrough(rec, height, source) {
   const cv = rec.convars ?? {};
@@ -114,6 +149,7 @@ function passThrough(rec, height, source) {
   const authored = numeric(cv.cl_crosshair_screen_height ?? '');
   const h = authored !== null && Number(authored) >= 240 ? Math.round(Number(authored)) : height;
   commands.push(`cl_crosshair_screen_height ${h}`);
+  commands.splice(0, commands.length, ...complete(commands, cv));
   const value = (name) => commands.find((c) => c.startsWith(`${name} `))?.split(' ')[1];
   const int = (name, d) => Math.round(Number(value(name) ?? d));
   const native = { length: int('cl_crosshair_length', 8), thickness: int('cl_crosshair_thickness', 2), gap: int('cl_crosshair_gap', 4) };
@@ -147,17 +183,10 @@ export function convertPlayer(rec) {
   if (report.blockers.length) return { kind: 'blocked', height, heightSource: source, blockers: report.blockers.map(pageText) };
 
   const overrides = mergedExportOverrides(report);
-  const commands = exportQuantCFG(report, defaultExportGroups(parsed.assigned, report.settings, overrides)).split(';');
+  // every line group (colour, opacity, outline colour, recoil ...), not only the ones the old config set,
+  // then the cvars the converter doesn't write: the paste fully defines the crosshair
+  const commands = complete(exportQuantCFG(report, null).split(';'), rec.convars ?? {});
   const value = (name) => commands.find((c) => c.startsWith(`${name} `))?.split(' ')[1];
-  const style = Number(value('cl_crosshairstyle'));
-
-  // the split-pip cvars only affect style 2 (the converter itself doesn't emit them)
-  if (style === 2) {
-    const at = commands.findIndex((c) => c.startsWith('cl_crosshair_screen_height '));
-    const dyn = legacy.filter(([k, v]) => k.startsWith('cl_crosshair_dynamic_') && NUMBER.test(String(v).trim()))
-      .map(([k, v]) => `${k} ${String(v).trim()}`);
-    commands.splice(at, 0, ...dyn);
-  }
 
   const settings = report.settings, native = report.chosen.native;
   const flags = { dot: Boolean(settings.dot), t_style: overrides.t_style ?? Boolean(settings.t_style) };

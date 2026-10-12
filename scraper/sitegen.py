@@ -442,6 +442,10 @@ def crosshair_section_html(rec, xp, reference, source_note=None) -> str:
                  f"Many pros rebuilt their crosshair after the update, so this may not be what {esc(nick)} uses now{history}.</p>\n"
                  f'          <p class="note">Valve published no conversion formula. This uses a community reconstruction '
                  f"({ref_link}) that hasn't been checked against in-game captures.</p>")
+    # the paste sets every setting that shapes this crosshair (crosshair.mjs complete())
+    about += ('\n          <p class="note">The paste sets every setting that shapes this crosshair, including the '
+              "iron-sight dot (CS2's defaults where their config has no value), so nothing from your current crosshair "
+              "carries over.</p>")
     pieces = chunk(cmds)
     buttons = "".join(
         f'<button type="button" class="btn small" data-copy="{esc("; ".join(piece))}">'

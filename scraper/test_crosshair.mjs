@@ -60,8 +60,23 @@ check('colour index 7 keeps its stored RGB and warns',
 const jame = conv(rec('jame'));
 check('size-0 dot design drawn with short arms, dot on', [Number(jame.cv.cl_crosshair_length) > 0, jame.cv.cl_crosshairdot], [true, '1']);
 check('no invented dot', conv(rec('perx')).cv.cl_crosshairdot, '0');
-check('injection in a style-2 split value is dropped',
-  conv(rec('hades', { cl_crosshair_dynamic_splitdist: '7; quit' })).cv.cl_crosshair_dynamic_splitdist, undefined);
+check('injection in a style-2 split value is dropped (CS2 default used instead)',
+  conv(rec('hades', { cl_crosshair_dynamic_splitdist: '7; quit' })).cv.cl_crosshair_dynamic_splitdist, '3');
+check('no command carries a ";" or other non-number value', conv(rec('hades', { cl_crosshair_dynamic_splitdist: '7; quit' }))
+  .commands.filter((c) => !/^[a-z_]+ -?\d+(\.\d+)?$/.test(c)), []);
+
+// ---- a paste fully defines the crosshair: nothing of the visitor's own carries over ----
+const donkX = conv(rec('donk'));
+check('iron-sight dot always set (CS2 defaults when the config has none)',
+  [donkX.cv.cl_ironsight_usecrosshaircolor, donkX.cv.cl_ironsight_dot_scale], ['0', '1']);
+check('a static style leaves out the split and spread cvars (no effect on it)',
+  Object.keys(donkX.cv).filter((k) => k.startsWith('cl_crosshair_dynamic_')), []);
+check('outline colour only with an outline', [donkX.cv.cl_crosshair_drawoutline, donkX.cv.cl_crosshairoutline_r], ['0', undefined]);
+const hadesX = conv(rec('hades'));
+check('a moving style gets its config\'s split values, clamped to CS2, and the spread limit',
+  ['splitdist', 'splitalpha_innermod', 'splitalpha_outermod', 'maxdist_splitratio', 'spread_limit']
+    .map((k) => hadesX.cv[`cl_crosshair_dynamic_${k}`] !== undefined), [true, true, true, true, true]);
+check('screen height stays last', hadesX.commands.at(-1).startsWith('cl_crosshair_screen_height '), true);
 check('only current cvars', [...new Set(Object.keys(FIX).filter((k) => k !== '_about')
   .flatMap((s) => convertPlayer(rec(s)).commands.map((c) => c.split(' ')[0])))].filter((k) => !CURRENT_CVARS.includes(k)), []);
 check('screen height is the last command', donk.commands.at(-1), 'cl_crosshair_screen_height 960');
