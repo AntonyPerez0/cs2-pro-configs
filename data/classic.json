@@ -5348,11 +5348,11 @@
      },
      "photo": {
       "src": "data/avatars/classic/seangares-c9-ibp-2015.webp",
-      "file": "File:Seangares_cropped.jpg",
-      "page": "https://commons.wikimedia.org/wiki/File:Seangares_cropped.jpg",
-      "date": "2017-11-05",
-      "event": "Americas Minor, ELEAGUE Major Boston 2018 qualifier (Toronto)",
-      "author": "Patar knight",
+      "file": "File:IEM_2015_San_Jose_Day_1_-_19.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:IEM_2015_San_Jose_Day_1_-_19.jpg",
+      "date": "2015-11-21",
+      "event": "IEM San Jose 2015",
+      "author": "Kevin Chang for Team Liquid",
       "license": "CC BY-SA 4.0",
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
      }
@@ -6480,7 +6480,10 @@
      "standing": "iBUYPOWER until November 2014",
      "lineup_note": "He played for Torqued in January 2015."
     }
-   ]
+   ],
+   "team_notes": {
+    "iBUYPOWER": "until 5 January, then as GX"
+   }
   }
  ]
 }

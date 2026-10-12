@@ -688,6 +688,17 @@ def in_lineup(y, p) -> bool:
     return is_roster(y) and not p.get("standing")
 
 
+CS2_RELEASE = "2023-09-27"
+
+
+def config_game(c) -> str:
+    """What a classic config's settings are from: CS:GO, or CS2 before the Sept 2026
+    crosshair update for a source dated after CS2 replaced CS:GO."""
+    w = c.get("window") or []
+    start = w[0] if len(w) == 2 else str(c.get("date") or "")
+    return "pre-update CS2" if start >= CS2_RELEASE else "CS:GO"
+
+
 def classic_key(y, p) -> str:
     return f"{gkey(y)}/{p['id']}"
 
@@ -717,17 +728,20 @@ def photo_credit_html(ph) -> str:
            if ph.get("license_url") else esc(ph.get("license") or ""))
     what = esc(ph.get("event") or "Photo")
     return (f'<a href="{esc(ph["page"])}" target="_blank" rel="noopener nofollow">{what}</a> · {esc(ph.get("date") or "undated")}'
-            f' · by {esc(ph.get("author") or "unknown")} · {lic} · via Wikimedia Commons')
+            f' · by {esc(ph.get("author") or "unknown")} · {lic} · via Wikimedia Commons · cropped')
 
 
 def classic_cfg(rec, xp, year_obj, p) -> str:
     c = p["config"]
     head = [
-        f"// {p['nick']} - {standing(year_obj, p)}, CS:GO config from {c['date']}",
+        f"// {p['nick']} - {standing(year_obj, p)}, {config_game(c)} config from {c['date']}",
         f"// {BASE}/classic/{gkey(year_obj)}/{p['id']}/",
         *(["// Converted for CS2: crosshair converted to the Sept 2026 crosshair system (community",
             "// reconstruction); convars CS2 renamed are renamed, ones it no longer has are left out."]
           if crosshair_commands(xp) else
+          ["// Converted for CS2 (its crosshair can't be converted, see the page): convars CS2",
+           "// renamed are renamed, ones it no longer has are left out."]
+          if any(k.startswith("cl_crosshair") for k in c.get("convars") or {}) else
           ["// Converted for CS2 (no crosshair in this config): convars CS2 renamed are renamed,",
            "// ones it no longer has are left out."]),
         f"// Save as Counter-Strike Global Offensive/game/csgo/cfg/{rec['slug']}.cfg, then run: exec {rec['slug']}",
@@ -823,15 +837,17 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
         links.append(f'<a href="/p/{esc(current["slug"])}/">current settings</a>')
     links.append(f'<a href="/classic/#y{key}">' + ("both lineups" if roster else f"all of {year}") + "</a>")
 
-    era = (f"{esc(nick)} played CS 1.6 in {year}, so these are their CS:GO settings "
-           if p.get("game") == "CS 1.6" else f"These are {esc(nick)}'s CS:GO settings ")
+    game = config_game(c)
+    era = (f"{esc(nick)} played CS 1.6 in {year}, so these are their {game} settings "
+           if p.get("game") == "CS 1.6" else f"These are {esc(nick)}'s {game} settings ")
     when = classic_date_note(year_obj, c, kind_of(xp) in ("converted", "copied"))
     if roster and not in_lineup(year_obj, p):
         intro = f"{esc(p['standing'])}." + (f" {esc(p['lineup_note'])}" if p.get("lineup_note") else "")
     elif roster:
         mates = [q["nick"] for q in year_obj["players"]
                  if q.get("team") == p.get("team") and q["id"] != p["id"] and in_lineup(year_obj, q)]
-        intro = (f"{esc(p.get('team'))} in {esc(year_obj.get('when'))}"
+        team_note = (year_obj.get("team_notes") or {}).get(p.get("team"))
+        intro = (f"{esc(p.get('team'))} in {esc(year_obj.get('when'))}" + (f" ({esc(team_note)})" if team_note else "")
                  + (f", with {esc(', '.join(mates[:-1]))} and {esc(mates[-1])}" if len(mates) > 1 else "") + ".")
     else:
         intro = f'#{p["rank"]} in {esc(year_obj["ranking"])}' + (f" ({esc(p['team'])})" if p.get("team") else "") + "."
@@ -851,8 +867,8 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     original = "\n".join(f"{k} {v}" for k, v in (c.get("convars") or {}).items())
     all_sources = list(dict.fromkeys(u for pv in c.get("provenance") or [] for u in pv.get("sources") or [])) or c.get("sources")
     original_html = (f'''<section class="section">
-      <div class="section-head"><h2>Original config <span class="tag">CS:GO</span></h2></div>
-      <details class="raw"><summary>Show the documented CS:GO settings</summary>{cmd_block_raw(original)}</details>
+      <div class="section-head"><h2>Original config <span class="tag">{esc(game)}</span></h2></div>
+      <details class="raw"><summary>Show the documented {esc(game)} settings</summary>{cmd_block_raw(original)}</details>
       <p class="note">The settings as documented ({source_links(all_sources)}), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
     </section>''' if original else "")
     notes_html = f'<p class="note">{esc(c["notes"])}</p>' if c.get("notes") else ""
@@ -860,7 +876,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
                  if xh_cmds and len(chunk(xh_cmds)) == 1 else
                  '<a class="btn" href="#crosshair">Crosshair ↓</a>' if xh_cmds else "")
     cfg_href = f"/cfg/classic/{rec['slug']}.cfg"
-    title = (f"{nick} ({standing(year_obj, p)}) CS:GO Config Converted for CS2" if roster else
+    title = (f"{nick} ({standing(year_obj, p)}) {'CS:GO ' if game == 'CS:GO' else ''}Config Converted for CS2" if roster else
              f"{nick} {year} CS:GO Config Converted for CS2 — #{p['rank']} {year_obj['short']}")
     has = ([f"crosshair converted to the new crosshair system"] if xh_cmds else []) + (
         [f"{dpi} DPI x {sens} sens ({edpi} eDPI)"] if edpi else [f"sensitivity {sens}"] if sens else []) + (
@@ -868,7 +884,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     # "and more" only when the config has commands beyond the ones named
     named = len(xh_cmds) + (1 if sens else 0) + len(section_commands(rec).get("viewmodel") or [])
     more = len(full_commands(rec, xp)) > named
-    desc = (f"{nick}'s CS:GO settings from {c.get('date')} ({standing(year_obj, p)}"
+    desc = (f"{nick}'s {game} settings from {c.get('date')} ({standing(year_obj, p)}"
             + (f", {p['team']}" if p.get("team") and not roster else "") + ") converted for CS2"
             + (": " + ", ".join(has) + (" and more as console commands." if more else ".") if has else "."))
     avatar_html = (avatar_img(rec["avatar"], 92, alt=photo_alt(p) if p.get("photo") else "") if rec.get("avatar")
@@ -1371,7 +1387,7 @@ def main() -> None:
                 d = ROOT / "classic" / gkey(y) / p["id"]
                 d.mkdir(parents=True, exist_ok=True)
                 emit(d / "index.html", classic_page(y, p, rec, xp, crosshair["reference"], players_by_slug),
-                     f"{BASE}/classic/{y['year']}/{p['id']}/", "0.7")
+                     f"{BASE}/classic/{gkey(y)}/{p['id']}/", "0.7")
                 write_if_changed(ROOT / "cfg" / "classic" / f"{rec['slug']}.cfg", classic_cfg(rec, xp, y, p))
                 m += 1
         print(f"classic pages: {m}")
