@@ -133,7 +133,8 @@ if classic_path.exists():
             # a lineup: five players per team, each with a team, and what the page shows
             teams = {}
             for p in y["players"]:
-                teams[p.get("team")] = teams.get(p.get("team"), 0) + 1
+                if not p.get("standing"):  # players who had left by then are extra
+                    teams[p.get("team")] = teams.get(p.get("team"), 0) + 1
             check(f"classic {gkey(y)}: five players per team", sorted(teams.values()), [5] * len(teams))
             check(f"classic {gkey(y)}: lineup fields", [k for k in ("title", "when", "target", "label", "key")
                                                         if not y.get(k)], [])
