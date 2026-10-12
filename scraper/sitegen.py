@@ -749,14 +749,16 @@ def source_links(urls) -> str:
         for host, us in hosts.items())
 
 
-def classic_date_note(y, c) -> str:
+def classic_date_note(y, c, converted=None) -> str:
+    """converted: whether the crosshair converted (None: the config has crosshair settings)."""
     year = y["year"]
     date = str(c.get("date") or "")
     cy = int(date[:4]) if date[:4].isdigit() else None
     if cy is None:
         return "undated"
-    has_xh = any(k.startswith("cl_crosshair") for k in c.get("convars") or {})
-    closest = " that can be converted" if has_xh else ""
+    if converted is None:
+        converted = any(k.startswith("cl_crosshair") for k in c.get("convars") or {})
+    closest = " that can be converted" if converted else ""
     if is_roster(y):
         # does the config's date, or its window (whose end is exclusive), reach into the lineup's month?
         t = y.get("target") or ""
@@ -821,7 +823,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
 
     era = (f"{esc(nick)} played CS 1.6 in {year}, so these are their CS:GO settings "
            if p.get("game") == "CS 1.6" else f"These are {esc(nick)}'s CS:GO settings ")
-    when = classic_date_note(year_obj, c)
+    when = classic_date_note(year_obj, c, kind_of(xp) in ("converted", "copied"))
     if roster and not in_lineup(year_obj, p):
         intro = f"{esc(p['standing'])}." + (f" {esc(p['lineup_note'])}" if p.get("lineup_note") else "")
     elif roster:
@@ -944,7 +946,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
 def classic_index_page(classic, players_by_slug) -> str:
     sections = []
     for y in classic["years"]:
-        cards = []
+        cards = {}  # one grid per team for a lineup group, one for a ranking
         for p in y["players"]:
             c = p.get("config")
             current = players_by_slug.get(p.get("current_slug") or "")
@@ -962,16 +964,19 @@ def classic_index_page(classic, players_by_slug) -> str:
                      f'<span class="top10-rank{" medal" if p["rank"] <= 3 else ""}">#{p["rank"]}</span>')
             inner = (f'{badge}{avatar}<span class="top10-nick">{esc(p["nick"])}</span>'
                      f'<span class="top10-team">{esc(p.get("standing") or p.get("team") or "")}</span>{sub}')
-            cards.append(f'<li class="top10-card"><a href="{href}">{inner}</a></li>' if href
-                         else f'<li class="top10-card"><div class="card-static">{inner}</div></li>')
+            cards.setdefault(p.get("team") if is_roster(y) else "", []).append(
+                f'<li class="top10-card"><a href="{href}">{inner}</a></li>' if href
+                else f'<li class="top10-card"><div class="card-static">{inner}</div></li>')
+        grids = "".join((f'<h3 class="classic-team">{esc(team)}</h3>' if team else "")
+                        + f'<ol class="top10-grid">{"".join(items)}</ol>' for team, items in cards.items())
         sections.append(f'''<section class="top10 classic-year" id="y{gkey(y)}" aria-labelledby="y{gkey(y)}-title">
   <div class="top10-head">
     <h2 id="y{gkey(y)}-title">{esc(y.get("title") or y["year"])}</h2>
-    <span class="top10-list">{esc(y["ranking"])}</span>
+    <span class="top10-list">{esc(y["when"] if is_roster(y) else y["ranking"])}</span>
     <span class="top10-src">{source_links(y.get("sources"))}</span>
   </div>
   {f'<p class="top10-note">{esc(y["note"])}</p>' if y.get("note") else ""}
-  <ol class="top10-grid">{"".join(cards)}</ol>
+  {grids}
 </section>''')
     years = [y["year"] for y in classic["years"] if not is_roster(y)]
     span = f"{min(years)}–{max(years)}"
