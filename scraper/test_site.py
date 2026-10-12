@@ -120,32 +120,41 @@ check("names are not mis-decoded UTF-8 (\"NovÃ½\")",
       [p["slug"] for p in index["players"] for k in ("nick", "real_name") if p.get(k) and demojibake(p[k]) != p[k]][:5], [])
 check("demojibake keeps real Latin-1 text", [demojibake("Tim Ångström"), demojibake("NovÃ½")], ["Tim Ångström", "Nový"])
 
-# ---- classic section (top 10 of 2011-2015), when present ----
+# ---- classic section (top 10 of 2011-2015 and lineups), when present ----
 classic_path = ROOT / "data" / "classic.json"
 if classic_path.exists():
-    from sitegen import classic_cfg, classic_rec  # noqa: E402
+    from sitegen import classic_cfg, classic_key, classic_rec, gkey, is_roster  # noqa: E402
     classic = json.loads(classic_path.read_text())
     by_slug = {p["slug"]: p for p in index["players"]}
     XC = xh.get("classic", {})
     missing, bad_copy, bad_cfg, bad_link = [], [], [], []
     for y in classic["years"]:
-        ranks = sorted(p["rank"] for p in y["players"])
-        check(f"classic {y['year']}: ranks 1..n" + (" with n = 10 for HLTV lists" if y["ranking"].startswith("HLTV") else ""),
-              ranks, list(range(1, (10 if y["ranking"].startswith("HLTV") else len(ranks)) + 1)))
+        if is_roster(y):
+            # a lineup: five players per team, each with a team, and what the page shows
+            teams = {}
+            for p in y["players"]:
+                teams[p.get("team")] = teams.get(p.get("team"), 0) + 1
+            check(f"classic {gkey(y)}: five players per team", sorted(teams.values()), [5] * len(teams))
+            check(f"classic {gkey(y)}: lineup fields", [k for k in ("title", "when", "target", "label", "key")
+                                                        if not y.get(k)], [])
+        else:
+            ranks = sorted(p["rank"] for p in y["players"])
+            check(f"classic {y['year']}: ranks 1..n" + (" with n = 10 for HLTV lists" if y["ranking"].startswith("HLTV") else ""),
+                  ranks, list(range(1, (10 if y["ranking"].startswith("HLTV") else len(ranks)) + 1)))
         for p in y["players"]:
             if p.get("current_slug") and p["current_slug"] not in by_slug:
                 # settings.gg dropped the player: the page just loses the link
                 print(f"note: classic {y['year']}/{p['id']}: current player {p['current_slug']} is gone")
             if not p.get("config"):
                 continue
-            key = f"{y['year']}/{p['id']}"
+            key = classic_key(y, p)
             if key not in XC:
                 missing.append(key)
                 continue
             for field in ("date", "date_basis", "sources", "confidence"):
                 if not p["config"].get(field):
                     missing.append(f"{key}:{field}")
-            page = ROOT / "classic" / str(y["year"]) / p["id"] / "index.html"
+            page = ROOT / "classic" / gkey(y) / p["id"] / "index.html"
             if not page.exists():
                 missing.append(f"{key}:page")
                 continue
@@ -154,7 +163,7 @@ if classic_path.exists():
             for value in re.findall(r'data-copy="([^"]*)"', page_html):
                 if len(html.unescape(value)) > LINE_LIMIT:
                     bad_copy.append(key)
-            rec = classic_rec(y["year"], p, by_slug)
+            rec = classic_rec(y, p, by_slug)
             cfg = (ROOT / "cfg" / "classic" / f"{rec['slug']}.cfg").read_text(encoding="utf-8")
             if cfg != classic_cfg(rec, XC[key], y, p):
                 bad_cfg.append(key)
@@ -162,10 +171,10 @@ if classic_path.exists():
     check("classic: copy buttons fit one console line", sorted(set(bad_copy))[:5], [])
     check("classic: .cfg files are current", bad_cfg[:5], [])
     check("classic: links to current players resolve", bad_link[:5], [])
-    check("classic: convar values are numbers", [f"{y['year']}/{p['id']}:{k}" for y in classic["years"] for p in y["players"]
+    check("classic: convar values are numbers", [f"{classic_key(y, p)}:{k}" for y in classic["years"] for p in y["players"]
           if p.get("config") for k, v in p["config"]["convars"].items() if not re.fullmatch(r"-?\d+(\.\d+)?", str(v))][:5], [])
     check("classic: crosshair configs set a colour (no 2026 default fills in)",
-          [f"{y['year']}/{p['id']}" for y in classic["years"] for p in y["players"] if p.get("config")
+          [classic_key(y, p) for y in classic["years"] for p in y["players"] if p.get("config")
            and "cl_crosshairsize" in p["config"]["convars"] and "cl_crosshaircolor" not in p["config"]["convars"]], [])
     urls = [u for y in classic["years"] for u in y["sources"]] + [
         u for y in classic["years"] for p in y["players"] if p.get("config")

@@ -514,8 +514,8 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None, classic_e
     links.append(f'<a href="https://settings.gg/players/{esc(slug)}" target="_blank" rel="noopener">settings.gg</a>')
     if rec.get("steamid64"):
         links.append(f'<a href="https://procrosshairs.com/player/{esc(rec["steamid64"])}/{esc(slug)}" target="_blank" rel="noopener">crosshair history</a>')
-    for year, cid, rank, short in classic_entries:
-        links.append(f'<a href="/classic/{year}/{esc(cid)}/">#{rank} {esc(short)} (classic)</a>')
+    for key, cid, stood in classic_entries:
+        links.append(f'<a href="/classic/{esc(key)}/{esc(cid)}/">{esc(stood)} (classic)</a>')
 
     avatar_html = avatar_img(rec["avatar"], 92) if rec.get("avatar") else letter_div(nick)
     download = f'<a class="btn ghost" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download .cfg</a>'
@@ -657,16 +657,37 @@ def cmd_block_raw(text: str) -> str:
     return f'<div class="cmd" tabindex="0" role="group" aria-label="Config file, scrollable"><pre>{esc(text)}</pre></div>'
 
 
-# ---------------- classic: top 10 of 2011-2015 ----------------
+# ---------------- classic: top 10 of 2011-2015, and famous lineups ----------------
+# A group in classic.json is a year's ranking (players have a rank) or, with
+# "kind": "roster", teams' lineups at a point in time ("when", e.g. January 2015).
 
-def classic_key(year, p) -> str:
-    return f"{year}/{p['id']}"
+def gkey(y) -> str:
+    """A group's URL segment and anchor: the year, or its own key."""
+    return str(y.get("key") or y["year"])
 
 
-def classic_rec(year, p, players_by_slug) -> dict:
+def is_roster(y) -> bool:
+    return y.get("kind") == "roster"
+
+
+def glabel(y) -> str:
+    """Short name for chips and headings: "2013", "C9 & iBP · Jan 2015"."""
+    return y.get("label") or str(y["year"])
+
+
+def standing(y, p) -> str:
+    """Where the player stood: "#3 HLTV Top 20 of 2013" or "Cloud9, January 2015"."""
+    return f"{p.get('team')}, {y.get('when')}" if is_roster(y) else f"#{p['rank']} {y['short']}"
+
+
+def classic_key(y, p) -> str:
+    return f"{gkey(y)}/{p['id']}"
+
+
+def classic_rec(y, p, players_by_slug) -> dict:
     """A classic entry's dated config in the record shape the page helpers read."""
     c = p["config"]
-    rec = {"slug": f"{p['id']}-{year}", "nick": p["nick"], "real_name": p.get("real_name") or "",
+    rec = {"slug": f"{p['id']}-{gkey(y)}", "nick": p["nick"], "real_name": p.get("real_name") or "",
            "convars": c.get("convars") or {},
            "tables": {"Mouse": c.get("mouse") or {}, "Video Settings": c.get("video") or {}}}
     current = players_by_slug.get(p.get("current_slug") or "")
@@ -676,11 +697,10 @@ def classic_rec(year, p, players_by_slug) -> dict:
 
 
 def classic_cfg(rec, xp, year_obj, p) -> str:
-    year = year_obj["year"]
     c = p["config"]
     head = [
-        f"// {p['nick']} - #{p['rank']} {year_obj['short']}, CS:GO config from {c['date']}",
-        f"// {BASE}/classic/{year}/{p['id']}/",
+        f"// {p['nick']} - {standing(year_obj, p)}, CS:GO config from {c['date']}",
+        f"// {BASE}/classic/{gkey(year_obj)}/{p['id']}/",
         *(["// Converted for CS2: crosshair converted to the Sept 2026 crosshair system (community",
             "// reconstruction); convars CS2 renamed are renamed, ones it no longer has are left out."]
           if crosshair_commands(xp) else
@@ -705,15 +725,24 @@ def source_links(urls) -> str:
         for host, us in hosts.items())
 
 
-def classic_date_note(year, c) -> str:
+def classic_date_note(y, c) -> str:
+    year = y["year"]
     date = str(c.get("date") or "")
     cy = int(date[:4]) if date[:4].isdigit() else None
+    if cy is None:
+        return "undated"
+    has_xh = any(k.startswith("cl_crosshair") for k in c.get("convars") or {})
+    closest = " that can be converted" if has_xh else ""
+    if is_roster(y):
+        # does the config's date, or its window (whose end is exclusive), reach into the lineup's month?
+        t = y.get("target") or ""
+        w = c.get("window")
+        if t and (date.startswith(t) or (w and len(w) == 2 and w[0] <= f"{t}-31" and w[1] > f"{t}-01")):
+            return f"from {esc(date)}, the time of this lineup"
+        return f"from {esc(date)}, the closest to {esc(y.get('when'))} we found{closest}"
     if cy == year:
         return f"from {esc(date)}, the year of the ranking"
-    if cy is not None:
-        has_xh = any(k.startswith("cl_crosshair") for k in c.get("convars") or {})
-        return f"from {esc(date)}, the closest to {year} we found" + (" that can be converted" if has_xh else "")
-    return "undated"
+    return f"from {esc(date)}, the closest to {year} we found{closest}"
 
 
 def classic_other_dates(c) -> str:
@@ -731,10 +760,11 @@ def classic_other_dates(c) -> str:
 
 def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     year = year_obj["year"]
+    key, label, roster = gkey(year_obj), glabel(year_obj), is_roster(year_obj)
     c = p["config"]
     nick = p["nick"]
     real = p.get("real_name") or ""
-    url = f"{BASE}/classic/{year}/{p['id']}/"
+    url = f"{BASE}/classic/{key}/{p['id']}/"
     parts = console_parts(rec, xp)
     xh_cmds = crosshair_commands(xp)
     mouse = c.get("mouse") or {}
@@ -748,10 +778,11 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     embed = json_script({"dpi": dpi, "sens": sens, "parts": [cmds for _, cmds in parts]})
     current = players_by_slug.get(p.get("current_slug") or "")
 
-    chips = [f'<span class="chip"><b>#{p["rank"]}</b> {esc(year_obj["short"])}</span>']
+    chips = ([f'<span class="chip"><b>{esc(p.get("team"))}</b> {esc(year_obj.get("when"))}</span>'] if roster else
+             [f'<span class="chip"><b>#{p["rank"]}</b> {esc(year_obj["short"])}</span>'])
     if p.get("prize"):
         chips.append(f'<span class="chip">{esc(p["prize"])} in 2012</span>')
-    if p.get("team"):
+    if p.get("team") and not roster:
         chips.append(f'<span class="chip">{esc(p["team"])}</span>')
     chips.append(f'<span class="chip">config {esc(c.get("date") or "undated")}</span>')
     if dpi:
@@ -762,11 +793,17 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
     links = []
     if current:
         links.append(f'<a href="/p/{esc(current["slug"])}/">current settings</a>')
-    links.append(f'<a href="/classic/#y{year}">all of {year}</a>')
+    links.append(f'<a href="/classic/#y{key}">' + ("both lineups" if roster else f"all of {year}") + "</a>")
 
     era = (f"{esc(nick)} played CS 1.6 in {year}, so these are their CS:GO settings "
            if p.get("game") == "CS 1.6" else f"These are {esc(nick)}'s CS:GO settings ")
-    when = classic_date_note(year, c)
+    when = classic_date_note(year_obj, c)
+    if roster:
+        mates = [q["nick"] for q in year_obj["players"] if q.get("team") == p.get("team") and q["id"] != p["id"]]
+        intro = (f"{esc(p.get('team'))} in {esc(year_obj.get('when'))}"
+                 + (f", with {esc(', '.join(mates[:-1]))} and {esc(mates[-1])}" if len(mates) > 1 else "") + ".")
+    else:
+        intro = f'#{p["rank"]} in {esc(year_obj["ranking"])}' + (f" ({esc(p['team'])})" if p.get("team") else "") + "."
     source_note = f'{era}{when} (see <a href="#sources">where these settings come from</a>).'
     prov_items = "".join(
         f'''<li><b>{esc(pv["what"])}</b> · {esc(pv["date"])} · confidence {esc(pv["confidence"])} · {source_links(pv.get("sources"))}
@@ -790,15 +827,16 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
                  if xh_cmds and len(chunk(xh_cmds)) == 1 else
                  '<a class="btn" href="#crosshair">Crosshair ↓</a>' if xh_cmds else "")
     cfg_href = f"/cfg/classic/{rec['slug']}.cfg"
-    title = f"{nick} {year} CS:GO Config Converted for CS2 — #{p['rank']} {year_obj['short']}"
+    title = (f"{nick} ({p.get('team')}, {year_obj.get('when')}) CS:GO Config Converted for CS2" if roster else
+             f"{nick} {year} CS:GO Config Converted for CS2 — #{p['rank']} {year_obj['short']}")
     has = ([f"crosshair converted to the new crosshair system"] if xh_cmds else []) + (
         [f"{dpi} DPI x {sens} sens ({edpi} eDPI)"] if edpi else [f"sensitivity {sens}"] if sens else []) + (
         ["viewmodel"] if section_commands(rec).get("viewmodel") else [])
     # "and more" only when the config has commands beyond the ones named
     named = len(xh_cmds) + (1 if sens else 0) + len(section_commands(rec).get("viewmodel") or [])
     more = len(full_commands(rec, xp)) > named
-    desc = (f"{nick}'s CS:GO settings from {c.get('date')} (#{p['rank']} {year_obj['short']}"
-            + (f", {p['team']}" if p.get("team") else "") + ") converted for CS2"
+    desc = (f"{nick}'s CS:GO settings from {c.get('date')} ({standing(year_obj, p)}"
+            + (f", {p['team']}" if p.get("team") and not roster else "") + ") converted for CS2"
             + (": " + ", ".join(has) + (" and more as console commands." if more else ".") if has else "."))
     avatar_html = avatar_img(rec["avatar"], 92) if rec.get("avatar") else letter_div(nick)
     image = f"{BASE}/{rec['avatar']}" if rec.get("avatar") else f"{BASE}/assets/og-default.png"
@@ -812,7 +850,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
   <link rel="canonical" href="{url}">
   <meta name="theme-color" content="#0d1014">
   <meta property="og:site_name" content="CS2 Pro Configs">
-  <meta property="og:title" content="{esc(nick)} {year} — classic CS:GO config for CS2">
+  <meta property="og:title" content="{esc(nick)} {esc(year_obj.get("when") if roster else year)} — classic CS:GO config for CS2">
   <meta property="og:description" content="{esc(desc)}">
   <meta property="og:type" content="article">
   <meta property="og:url" content="{url}">
@@ -833,17 +871,17 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
   </header>
 
   <main class="wrap" id="main">
-    <nav aria-label="Breadcrumb"><a class="back" href="/classic/#y{year}">← Classic · {year}</a></nav>
+    <nav aria-label="Breadcrumb"><a class="back" href="/classic/#y{key}">← Classic · {esc(label)}</a></nav>
     <div class="profile-head">
       {avatar_html}
       <div>
-        <h1>{esc(nick)} <span class="h1-year">{year}</span></h1>
+        <h1>{esc(nick)} <span class="h1-year">{esc(year_obj.get("h1") or year)}</span></h1>
         <div class="real">{esc(real)}</div>
         <div class="links">{"".join(links)}</div>
       </div>
     </div>
     <div class="chips profile-chips">{"".join(chips)}</div>
-    <p class="note classic-note">#{p["rank"]} in {esc(year_obj["ranking"])}{f" ({esc(p['team'])})" if p.get("team") else ""}. {era}{when}{classic_other_dates(c)}. Source confidence: <b>{esc(confidence)}</b>.</p>
+    <p class="note classic-note">{intro} {era}{when}{classic_other_dates(c)}. Source confidence: <b>{esc(confidence)}</b>.</p>
     {notes_html}
     <div class="head-actions">
       {head_copy}
@@ -861,7 +899,7 @@ def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
 
   <footer>
     <div class="wrap">
-      <p>Rankings: {esc(year_obj["ranking"])} ({source_links(year_obj.get("sources"))}) · Crosshair conversion by <a href="{esc(reference["url"])}" target="_blank" rel="noopener">{esc(reference["name"])}</a> (MIT) · Unofficial fan-made tool, not affiliated with Valve, HLTV or any player.</p>
+      <p>{"Lineups" if roster else "Rankings"}: {esc(year_obj["ranking"])} ({source_links(year_obj.get("sources"))}) · Crosshair conversion by <a href="{esc(reference["url"])}" target="_blank" rel="noopener">{esc(reference["name"])}</a> (MIT) · Unofficial fan-made tool, not affiliated with Valve, HLTV or any player.</p>
     </div>
   </footer>
 
@@ -883,29 +921,33 @@ def classic_index_page(classic, players_by_slug) -> str:
             avatar = (avatar_img(current["avatar"], 72, lazy=True) if current and current.get("avatar")
                       else letter_div(p["nick"]))
             if c:
-                href = f"/classic/{y['year']}/{p['id']}/"
+                href = f"/classic/{gkey(y)}/{p['id']}/"
                 sub = f'<span class="classic-date">config {esc(c.get("date") or "undated")}</span>'
             else:
                 href = f"/p/{current['slug']}/" if current else None
                 sub = '<span class="classic-date none">no CS:GO config documented</span>'
-            inner = (f'<span class="top10-rank{" medal" if p["rank"] <= 3 else ""}">#{p["rank"]}</span>{avatar}'
-                     f'<span class="top10-nick">{esc(p["nick"])}</span>'
+            short_team = (y.get("badges") or {}).get(p.get("team"), p.get("team") or "")
+            badge = (f'<span class="top10-rank">{esc(short_team)}</span>' if is_roster(y) else
+                     f'<span class="top10-rank{" medal" if p["rank"] <= 3 else ""}">#{p["rank"]}</span>')
+            inner = (f'{badge}{avatar}<span class="top10-nick">{esc(p["nick"])}</span>'
                      f'<span class="top10-team">{esc(p.get("team") or "")}</span>{sub}')
             cards.append(f'<li class="top10-card"><a href="{href}">{inner}</a></li>' if href
                          else f'<li class="top10-card"><div class="card-static">{inner}</div></li>')
-        sections.append(f'''<section class="top10 classic-year" id="y{y["year"]}" aria-labelledby="y{y["year"]}-title">
+        sections.append(f'''<section class="top10 classic-year" id="y{gkey(y)}" aria-labelledby="y{gkey(y)}-title">
   <div class="top10-head">
-    <h2 id="y{y["year"]}-title">{y["year"]}</h2>
+    <h2 id="y{gkey(y)}-title">{esc(y.get("title") or y["year"])}</h2>
     <span class="top10-list">{esc(y["ranking"])}</span>
     <span class="top10-src">{source_links(y.get("sources"))}</span>
   </div>
   {f'<p class="top10-note">{esc(y["note"])}</p>' if y.get("note") else ""}
   <ol class="top10-grid">{"".join(cards)}</ol>
 </section>''')
-    years = [y["year"] for y in classic["years"]]
+    years = [y["year"] for y in classic["years"] if not is_roster(y)]
     span = f"{min(years)}–{max(years)}"
-    jump = " ".join(f'<a class="chip" href="#y{y}">{y}</a>' for y in years)
-    desc = (f"The top 10 Counter-Strike players of each year {span} with their CS:GO settings converted for CS2: "
+    jump = " ".join(f'<a class="chip" href="#y{gkey(y)}">{esc(glabel(y))}</a>' for y in classic["years"])
+    lineups = [f"{y['title']} in {y['when']}" for y in classic["years"] if is_roster(y)]
+    plus = f", plus {' and '.join(lineups)}" if lineups else ""
+    desc = (f"The top 10 Counter-Strike players of each year {span}{plus}, with their CS:GO settings converted for CS2: "
             "crosshair, sensitivity and viewmodel as copy-paste console commands.")
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -937,9 +979,9 @@ def classic_index_page(classic, players_by_slug) -> str:
   <main class="wrap" id="main">
     <div class="hero">
       <h1>Classic configs<span class="dot">.</span> {span}</h1>
-      <p>The top 10 players of each year from {span}, with their CS:GO settings converted for CS2: the crosshair converted to the
+      <p>The top 10 players of each year from {span}{esc(plus)}, with their CS:GO settings converted for CS2: the crosshair converted to the
          new crosshair system, sensitivity, viewmodel and the rest as console commands. Each config is dated and sourced; when
-         nothing from the exact year is documented (or it can't be converted), the closest one is used and its date shown.</p>
+         nothing from the exact time is documented (or it can't be converted), the closest one is used and its date shown.</p>
       <div class="chips classic-jump">{jump}</div>
       <p class="note">{esc(classic.get("about") or "")}</p>
     </div>
@@ -958,12 +1000,14 @@ def classic_index_page(classic, players_by_slug) -> str:
 def classic_teaser_html(classic) -> str:
     if not classic:
         return ""
-    years = [y["year"] for y in classic["years"]]
+    years = [y["year"] for y in classic["years"] if not is_roster(y)]
     span = f"{min(years)}–{max(years)}"
-    chips = " ".join(f'<a class="chip" href="/classic/#y{y}">{y}</a>' for y in years)
+    chips = " ".join(f'<a class="chip" href="/classic/#y{gkey(y)}">{esc(glabel(y))}</a>' for y in classic["years"])
+    lineups = [f"{y['title']} in {y['when']}" for y in classic["years"] if is_roster(y)]
+    plus = f", plus {' and '.join(lineups)}," if lineups else ","
     return f'''<section class="classic-teaser" aria-labelledby="classic-teaser-title">
   <div><h2 id="classic-teaser-title">Classic configs · {span}</h2>
-  <p>The top 10 players of each year from {span}, their CS:GO settings converted for CS2.</p></div>
+  <p>The top 10 players of each year from {span}{esc(plus)} their CS:GO settings converted for CS2.</p></div>
   <div class="chips">{chips}</div>
   <a class="btn ghost small" href="/classic/">Browse classic configs →</a>
 </section>'''
@@ -1232,7 +1276,7 @@ def main() -> None:
     for y in (classic or {}).get("years", []):
         for p in y["players"]:
             if p.get("config") and p.get("current_slug"):
-                classic_of.setdefault(p["current_slug"], []).append((y["year"], p["id"], p["rank"], y["short"]))
+                classic_of.setdefault(p["current_slug"], []).append((gkey(y), p["id"], standing(y, p)))
 
     emit(ROOT / "index.html", index_page(players, top10_data, generated, classic), f"{BASE}/", "1.0")
     print("index.html")
@@ -1263,12 +1307,12 @@ def main() -> None:
             for p in y["players"]:
                 if not p.get("config"):
                     continue
-                xp = crosshair.get("classic", {}).get(classic_key(y["year"], p))
+                xp = crosshair.get("classic", {}).get(classic_key(y, p))
                 if xp is None:
-                    raise SystemExit(f"data/crosshair.json lacks classic {classic_key(y['year'], p)}: "
+                    raise SystemExit(f"data/crosshair.json lacks classic {classic_key(y, p)}: "
                                      "run node scraper/crosshair.mjs first")
-                rec = classic_rec(y["year"], p, players_by_slug)
-                d = ROOT / "classic" / str(y["year"]) / p["id"]
+                rec = classic_rec(y, p, players_by_slug)
+                d = ROOT / "classic" / gkey(y) / p["id"]
                 d.mkdir(parents=True, exist_ok=True)
                 emit(d / "index.html", classic_page(y, p, rec, xp, crosshair["reference"], players_by_slug),
                      f"{BASE}/classic/{y['year']}/{p['id']}/", "0.7")
