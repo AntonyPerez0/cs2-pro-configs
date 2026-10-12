@@ -6,32 +6,34 @@ Prerenders the whole site to plain HTML so search engines (and users
 without JS) see full content:
   index.html          - hero, HLTV top 10, prerendered player grid
   p/<slug>/index.html - one static page per player (clean URLs)
+  cfg/<slug>.cfg      - the converted config as an exec-able file
   player.html         - redirect stub for legacy ?p= links
   sitemap.xml, robots.txt, 404.html
 
-Run AFTER scrape.py / top10.py (reads data/*.json, cfg/*.cfg).
+Run AFTER scrape.py, top10.py and crosshair.mjs (reads data/*.json, cfg/raw/*.cfg).
 Canonical origin: https://copyprosta.com
 """
 
 import json
+import math
 import re
-import sys
 from datetime import datetime, timezone
 from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from xhair_convert import convert_crosshair, convert_geometry, safe_value  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = "https://copyprosta.com"
 
-CONSOLE_SKIP = {"cl_drawhud", "cl_radar_size", "setting.defaultres", "setting.defaultresheight"}
-XHAIR_REMOVED = {
-    "cl_crosshairgap", "cl_crosshairusealpha", "cl_crosshaircolor",
-    "cl_crosshair_outlinethickness", "cl_crosshairgap_useweaponvalue",
+# CS2 still ships the Source tokenizer, which rejects a console line of 510 or
+# more characters ("...overflows the tokenizer buffer.. Skipping!"), so every
+# console copy string is kept at or under this, with a margin
+LINE_LIMIT = 500
+
+CONSOLE_SKIP = {
+    "cl_drawhud", "cl_radar_size", "setting.defaultres", "setting.defaultresheight",
+    # removed by the Sept 2026 crosshair update; the cl_crosshair* convars are
+    # replaced as a whole by the converted crosshair commands
     "cl_fixedcrosshairgap",
 }
-XHAIR_HIDDEN_LEGACY = {"cl_crosshairsize", "cl_crosshairthickness", "cl_crosshairalpha"}
 
 BUCKETS = [
     ("crosshair", "Crosshair", "cl_crosshair_*", lambda n: n.startswith("cl_crosshair")),
@@ -46,6 +48,13 @@ BUCKETS = [
          "cl_show_clan_in_death_notice", "cl_allow_animated_avatars",
          "cl_teamcounter_playercount_instead_of_avatars"))),
     ("misc", "Performance & Other", "misc", None),
+]
+
+# the full config as console lines: crosshair, then mouse/viewmodel/radar, then HUD/misc
+PART_GROUPS = [
+    ("Crosshair", ("crosshair",)),
+    ("Mouse, viewmodel & radar", ("mouse", "viewmodel", "radar")),
+    ("HUD & other", ("hud", "misc")),
 ]
 
 FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E"
@@ -65,6 +74,21 @@ def esc(s) -> str:
             .replace('"', "&quot;").replace("'", "&#39;"))
 
 
+def safe_value(v):
+    """Value as it goes into a ;-joined console line, or None to drop it.
+    Anything containing ; quotes or newlines would inject extra commands.
+    Booleans become 1/0, which every convar accepts."""
+    s = str(v).strip()
+    if not s or any(c in s for c in ';"\n\r'):
+        return None
+    low = s.lower()
+    if low == "true":
+        return "1"
+    if low == "false":
+        return "0"
+    return s
+
+
 def bucket_convars(convars):
     out = {key: [] for key, *_ in BUCKETS}
     for k, v in (convars or {}).items():
@@ -81,24 +105,74 @@ def bucket_convars(convars):
     return out
 
 
-def full_commands(rec):
-    """Console command list in paste order: converted crosshair first, so the
-    most important part lands even if a very long paste gets truncated.
-    Returns (commands, warnings) with warnings as readable strings."""
-    cv = rec.get("convars") or {}
-    xc_cmds, warnings = convert_crosshair(cv)
-    out = [f"{k} {v}" for k, v in xc_cmds]
-    buckets = bucket_convars(cv)
-    for key, _title, _tag, _t in BUCKETS:
+def section_commands(rec) -> dict:
+    """Console commands per non-crosshair bucket (the crosshair comes from the
+    converter, see crosshair_commands)."""
+    buckets = bucket_convars(rec.get("convars"))
+    out = {}
+    for key, *_ in BUCKETS:
         if key == "crosshair":
             continue
+        out[key] = []
         for k, v in buckets[key]:
-            if k in CONSOLE_SKIP or k in XHAIR_REMOVED or k in XHAIR_HIDDEN_LEGACY:
+            if k in CONSOLE_SKIP:
                 continue
             sv = safe_value(v)
             if sv is not None:
-                out.append(f"{k} {sv}")
-    return out, warnings
+                out[key].append(f"{k} {sv}")
+    return out
+
+
+def crosshair_commands(xp) -> list:
+    """Converted crosshair commands, or [] when the converter refused the input."""
+    return list(xp.get("commands") or []) if xp else []
+
+
+def chunk(cmds, limit=LINE_LIMIT) -> list:
+    """Split commands into groups whose "; "-joined line is at most `limit` characters."""
+    out, cur = [], []
+    for c in cmds:
+        if len(c) > limit:
+            raise ValueError(f"console command longer than {limit} characters: {c[:60]}...")
+        if cur and len("; ".join(cur + [c])) > limit:
+            out.append(cur)
+            cur = []
+        cur.append(c)
+    if cur:
+        out.append(cur)
+    return out
+
+
+def console_parts(rec, xp) -> list:
+    """The full config as [(label, commands)], every part one console line of at
+    most LINE_LIMIT characters."""
+    sections = section_commands(rec)
+    parts = []
+    for label, keys in PART_GROUPS:
+        cmds = crosshair_commands(xp) if keys == ("crosshair",) else [c for k in keys for c in sections[k]]
+        pieces = chunk(cmds)
+        for i, piece in enumerate(pieces):
+            parts.append((label + (f" ({i + 1}/{len(pieces)})" if len(pieces) > 1 else ""), piece))
+    return parts
+
+
+def full_commands(rec, xp) -> list:
+    """Every console command in paste order (crosshair first)."""
+    return [c for _, cmds in console_parts(rec, xp) for c in cmds]
+
+
+def player_cfg(rec, xp) -> str:
+    """The converted config as an exec-able .cfg file, one command per line."""
+    slug = rec["slug"]
+    nick = rec.get("nick") or slug
+    head = [
+        f"// {nick} - CS2 config from {BASE}/p/{slug}/",
+        "// Converted from the pre-patch settings settings.gg lists for this player; the crosshair",
+        "// is converted to the Sept 2026 crosshair system (community reconstruction).",
+        f"// Save as Counter-Strike Global Offensive/game/csgo/cfg/{slug}.cfg, then run: exec {slug}",
+        "",
+    ]
+    return "\n".join(head + full_commands(rec, xp)) + "\n"
 
 
 def letter_hue(nick: str) -> int:
@@ -115,6 +189,10 @@ def cmd_pre(cmds) -> str:
     cmds = list(cmds)
     spans = [f"<span>{esc(c)}{';' if i < len(cmds) - 1 else ''}</span>" for i, c in enumerate(cmds)]
     return "<pre>" + " ".join(spans) + "</pre>"
+
+
+def cmd_block(cmds, label="Console commands") -> str:
+    return f'<div class="cmd" tabindex="0" role="group" aria-label="{esc(label)}, scrollable">{cmd_pre(cmds)}</div>'
 
 
 def res_key(r: str):
@@ -136,27 +214,21 @@ def letter_div(nick: str) -> str:
 
 
 def category_sections_html(rec) -> str:
-    buckets = bucket_convars(rec.get("convars"))
+    sections = section_commands(rec)
     mouse = (rec.get("tables") or {}).get("Mouse", {})
     parts = []
     for key, title, tag, _t in BUCKETS:
-        if key == "crosshair":
+        if key == "crosshair" or not sections[key]:
             continue
-        fixed = []
-        for k, v in buckets[key]:
-            if k in CONSOLE_SKIP or k in XHAIR_REMOVED or k in XHAIR_HIDDEN_LEGACY:
-                continue
-            sv = safe_value(v)
-            if sv is not None:
-                fixed.append((k, sv))
-        if not fixed:
-            continue
-        line = [f"{k} {v}" for k, v in fixed]
-        text = "; ".join(line)
+        pieces = chunk(sections[key])
+        buttons = "".join(
+            f'<button type="button" class="btn ghost small" data-copy="{esc("; ".join(piece))}">'
+            f'Copy{f" {i + 1}/{len(pieces)}" if len(pieces) > 1 else ""}</button>'
+            for i, piece in enumerate(pieces))
         parts.append(f'''<section class="section">
   <div class="section-head"><h2>{esc(title)} <span class="tag">{esc(tag)}</span></h2>
-  <button type="button" class="btn ghost small" data-copy="{esc(text)}">Copy</button></div>
-  <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable">{cmd_pre(line)}</div>''')
+  {buttons}</div>
+  {cmd_block(sections[key])}''')
         if key == "mouse":
             bits = []
             if mouse.get("DPI"):
@@ -200,67 +272,96 @@ def video_tables_html(rec):
 </section>'''
 
 
-def xhair_svg(cv, aria: str):
-    """Prerendered inline-SVG crosshair, 1 game px = 1 CSS px unless it has
-    to be resized to fit the 64-160px box. Ships in the HTML itself, so it
-    renders without JavaScript and can't come out blank the way a JS-drawn
-    canvas could. Returns (svg, label)."""
-    cmds, _ = convert_crosshair(cv)
-    d = {k: v for k, v in cmds}
-    iv = lambda k, dflt: int(float(d.get(k, dflt)))
-    length = max(0, iv("cl_crosshair_length", 8))
-    th = max(1, iv("cl_crosshair_thickness", 2))
-    gap = max(0, iv("cl_crosshair_gap", 4))
-    on = lambda k: str(d.get(k, 0)).strip().lower() in ("1", "true")
-    dot = on("cl_crosshairdot")
-    t_shape = on("cl_crosshair_t")
-    outline = on("cl_crosshair_drawoutline")
-    r = iv("cl_crosshaircolor_r", 255)
-    g = iv("cl_crosshaircolor_g", 255)
-    b = iv("cl_crosshaircolor_b", 255)
-    a = max(0, min(255, iv("cl_crosshaircolor_a", 255))) / 255
+def _cell(v: float) -> int:
+    # the converter's raster convention: a rect edge at v covers cells from ceil(v - 0.5)
+    return math.ceil(v - 0.5)
 
-    near = th // 2 + gap
-    span = near + length
-    half = span + 4
-    size = half * 2
+
+def xhair_svg(preview: dict, height: int, aria: str):
+    """Inline-SVG preview of the converted crosshair: the pixel rectangles the
+    converter's renderer model draws at the pro's resolution, 1 game px = 1 CSS
+    px unless resized to fit the 64-160px box. Ships in the HTML, so it renders
+    without JavaScript. Returns (svg, label)."""
+    def cells(rects):
+        out = []
+        for x, y, w, h in rects:
+            x0, y0 = _cell(x), _cell(y)
+            out.append((x0, y0, _cell(x + w) - x0, _cell(y + h) - y0))
+        return [r for r in out if r[2] > 0 and r[3] > 0]
+
+    fill, outline = cells(preview["fill"]), cells(preview["outline"])
+    extent = max([max(-x, x + w, -y, y + h) for x, y, w, h in fill + outline] or [4])
+    half = extent + 3
+    size = 2 * half
     disp = max(64, min(160, size))
-    label = ("drawn to scale — enlarged to fit" if size < disp else
-             "drawn to scale — shrunk to fit" if size > disp else "actual size")
+    label = (f"{height}p pixels, enlarged" if size < disp else
+             f"{height}p pixels, shrunk to fit" if size > disp else f"1:1 at {height}p")
 
-    arms = []
-    if length > 0:
-        arms.append([-(near + length), -th / 2, length, th])   # left
-        arms.append([near, -th / 2, length, th])               # right
-        if not t_shape:
-            arms.append([-th / 2, -(near + length), th, length])  # top
-        arms.append([-th / 2, near, th, length])               # bottom
-    if dot:
-        arms.append([-th / 2, -th / 2, th, th])
+    def rgba(c):
+        return f"rgba({c[0]},{c[1]},{c[2]},{c[3] / 255:.3f})"
 
-    rects = "".join(
-        f'<rect x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}"/>'
-        for x, y, w, h in arms)
-    outline_rects = "".join(
-        f'<rect x="{x - 1:g}" y="{y - 1:g}" width="{w + 2:g}" height="{h + 2:g}"/>'
-        for x, y, w, h in arms)
+    def path(rects):
+        # one path, so overlapping rects are filled once (no doubled alpha)
+        return "".join(f"M{x} {y}h{w}v{h}h{-w}z" for x, y, w, h in rects)
 
-    # the viewBox (centered on the origin, 4px margin) does all the fitting:
-    # small crosshairs are enlarged into the 64px box, ones over 160px shrunk
     parts = [
-        f'<svg class="xhair-svg" width="{disp}" height="{disp}" '
-        f'viewBox="{-half} {-half} {size} {size}" role="img" '
-        f'aria-label="Crosshair preview, {label}: {esc(aria)}">',
-        f'<rect x="{-half}" y="{-half}" width="{size}" height="{size}" fill="#20242b"/>',
+        f'<svg class="xhair-svg" width="{disp}" height="{disp}" viewBox="{-half} {-half} {size} {size}" '
+        f'shape-rendering="crispEdges" role="img" aria-label="Crosshair preview, {label}: {esc(aria)}">',
+        f'<rect x="{-half}" y="{-half}" width="{size}" height="{size}" fill="#4a505b"/>',
     ]
-    if outline and arms:
-        parts.append('<g fill="rgba(0,0,0,0.9)">' + outline_rects + "</g>")
-    parts.append(f'<g fill="rgba({r},{g},{b},{a:.3f})">{rects}</g>')
+    if outline and preview.get("outlineRgba"):
+        parts.append(f'<path fill="{rgba(preview["outlineRgba"])}" d="{path(outline)}"/>')
+    if fill:
+        parts.append(f'<path fill="{rgba(preview["rgba"])}" d="{path(fill)}"/>')
     parts.append("</svg>")
     return "".join(parts), label
 
 
-def player_page(rec: dict, top10_rank=None) -> str:
+def crosshair_section_html(rec, xp, reference) -> str:
+    slug = rec["slug"]
+    nick = rec.get("nick") or slug
+    history = (f' — see their <a href="https://procrosshairs.com/player/{esc(rec["steamid64"])}/{esc(slug)}" '
+               f'target="_blank" rel="noopener">crosshair history</a>' if rec.get("steamid64") else "")
+    ref_link = (f'<a href="{esc(reference["url"])}" target="_blank" rel="noopener">{esc(reference["name"])}</a> '
+                f'v{esc(reference["version"])}, model {esc(reference["model"])}, CS2 build {esc(reference["build"])}')
+    cmds = crosshair_commands(xp)
+    if not cmds:
+        why = " ".join((xp or {}).get("blockers") or []) or (xp or {}).get("error") or "no data"
+        return f'''<section class="section" id="crosshair">
+      <div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2></div>
+      <p class="note warn">This crosshair can't be converted automatically: {esc(why)}</p>
+      <p class="note">Converter: {ref_link}.</p>
+    </section>'''
+
+    n = xp["native"]
+    height = xp["height"]
+    aria = f"{n['length']} pixel arms, {n['thickness']} pixel thick, gap {n['gap']}, at {height}p"
+    svg, label = xhair_svg(xp["preview"], height, aria) if xp.get("preview") else ("", "no preview")
+    notes = ""
+    if xp.get("warnings"):
+        notes = ('<ul class="xh-notes" aria-label="Conversion notes">'
+                 + "".join(f"<li>{esc(w['text'])}</li>" for w in xp["warnings"]) + "</ul>")
+    authored = (f"authored at {height}p, {esc(nick)}'s resolution" if xp.get("heightSource") == "resolution"
+                else f"authored at {height}p (their resolution isn't listed)")
+    return f'''<section class="section" id="crosshair">
+      <div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2>
+        <button type="button" class="btn small" data-copy="{esc("; ".join(cmds))}">Copy crosshair</button></div>
+      <div class="xhair-box">
+        <div class="xhair-preview">
+          {svg}
+          <div class="xhair-label">{label}</div>
+        </div>
+        <div class="xhair-meta">
+          {cmd_block(cmds, "Crosshair commands")}
+          {notes}
+          <p class="note">Converted from the pre-patch crosshair settings.gg lists for {esc(nick)} to CS2's crosshair system since the Sept 22, 2026 update, {authored}; CS2 rescales it to your resolution. Many pros rebuilt their crosshair after the update, so this may not be what {esc(nick)} uses now{history}.</p>
+          <p class="note">Valve published no conversion formula. This uses a community reconstruction ({ref_link}) that hasn't been checked against in-game captures.</p>
+        </div>
+      </div>
+    </section>'''
+
+
+def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None) -> str:
     slug = rec["slug"]
     nick = rec.get("nick") or slug
     real = rec.get("real_name") or ""
@@ -268,11 +369,8 @@ def player_page(rec: dict, top10_rank=None) -> str:
     mouse = (rec.get("tables") or {}).get("Mouse", {})
     video = (rec.get("tables") or {}).get("Video Settings", {})
 
-    cmds, warnings = full_commands(rec)
-    full_block = "; ".join(cmds)
-    xc_cmds, _ = convert_crosshair(cv)
-    xh_line = [f"{k} {v}" for k, v in xc_cmds]
-    xh_text = "; ".join(xh_line)
+    parts = console_parts(rec, xp)
+    xh_cmds = crosshair_commands(xp)
 
     dpi = mouse.get("DPI", "")
     sens = cv.get("sensitivity", "")
@@ -282,22 +380,22 @@ def player_page(rec: dict, top10_rank=None) -> str:
         edpi = None
 
     res = video.get("Resolution", "")
-    desc = (f"Copy {nick}'s full CS2 config in one paste: converted crosshair"
+    desc = (f"{nick}'s CS2 settings as console commands: crosshair converted to the new crosshair system"
             + (f", {dpi} DPI x {sens} sens ({edpi} eDPI)" if edpi else "")
             + (f", {res}" + (f" {video['Scaling Mode']}" if video.get("Scaling Mode") else "") if res else "")
-            + ", viewmodel, HUD, radar and launch options - ready for the CS2 console.")
+            + ", viewmodel, HUD, radar and launch options - copy, paste, play.")
 
     avatar_url = f"{BASE}/{rec['avatar']}" if rec.get("avatar") else f"{BASE}/assets/og-default.png"
-    og_desc = (f"Copy {nick}'s full CS2 config in one paste: crosshair, sensitivity"
-               + (f" ({edpi} eDPI)" if edpi else "") + ", viewmodel, HUD, radar.")
+    og_desc = (f"{nick}'s CS2 crosshair (converted to the new system), sensitivity"
+               + (f" ({edpi} eDPI)" if edpi else "") + ", viewmodel, HUD and radar as copy-paste console commands.")
 
     # only what app.js's DPI matcher reads
-    embed = json_script({"dpi": dpi, "sens": sens, "commands": cmds})
+    embed = json_script({"dpi": dpi, "sens": sens, "parts": [cmds for _, cmds in parts]})
 
     raw_cfg = ""
-    cfg_path = ROOT / "cfg" / f"{slug}.cfg"
-    if cfg_path.exists():
-        raw_cfg = cfg_path.read_text(encoding="utf-8", errors="replace")
+    raw_path = ROOT / "cfg" / "raw" / f"{slug}.cfg"
+    if raw_path.exists():
+        raw_cfg = raw_path.read_text(encoding="utf-8", errors="replace")
 
     chips = []
     if top10_rank:
@@ -318,23 +416,24 @@ def player_page(rec: dict, top10_rank=None) -> str:
         links.append(f'<a href="https://procrosshairs.com/player/{esc(rec["steamid64"])}/{esc(slug)}" target="_blank" rel="noopener">crosshair history</a>')
 
     avatar_html = avatar_img(rec["avatar"], 92) if rec.get("avatar") else letter_div(nick)
+    download = f'<a class="btn ghost" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download .cfg</a>'
 
-    warnings_html = ""
-    if warnings:
-        warnings_html = '<p class="note warn">' + "<br>".join("⚠ " + esc(w) for w in warnings) + "</p>"
+    part_blocks = "\n".join(f'''<div class="part">
+        <div class="part-head"><span class="part-label">Part {i + 1} · {esc(label)}</span>
+          <button type="button" class="btn small" data-copy="{esc("; ".join(cmds))}">Copy part {i + 1}</button>
+          <span class="mydpi-slot" data-part="{i}"></span></div>
+        {cmd_block(cmds)}
+      </div>''' for i, (label, cmds) in enumerate(parts))
 
     raw_html = ""
     if raw_cfg:
         raw_html = f'''<section class="section">
-      <div class="section-head"><h2>Raw autoexec.cfg <span class="tag">file</span></h2>
-        <button type="button" class="btn ghost small" data-copy="{esc(raw_cfg)}">Copy raw</button>
-        <a class="btn ghost small" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download</a>
+      <div class="section-head"><h2>Original autoexec.cfg <span class="tag">pre-patch</span></h2>
+        <a class="btn ghost small" href="/cfg/raw/{esc(slug)}.cfg" download="{esc(slug)}-original.cfg">Download original</a>
       </div>
-      <details class="raw"><summary>Show raw config file</summary><div class="cmd" tabindex="0" role="group" aria-label="Config file, scrollable"><pre>{esc(raw_cfg)}</pre></div></details>
-      <p class="note">The exact autoexec.cfg from the source site — in the <b>original pre-patch format</b> (some crosshair convars in it were removed by the Sept 22, 2026 update). For applying settings use the copy blocks above.</p>
+      <details class="raw"><summary>Show original config file</summary>{cmd_block_raw(raw_cfg)}</details>
+      <p class="note">The autoexec.cfg exactly as settings.gg serves it, in the format from before the Sept 22, 2026 update: its crosshair settings no longer work in CS2, so don't exec it — use the converted commands or .cfg above.</p>
     </section>'''
-    download_html = (f'<a class="btn ghost" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download .cfg</a>'
-                     if raw_cfg else "")
 
     launch = rec.get("launch_options")
     launch_html = ""
@@ -342,17 +441,9 @@ def player_page(rec: dict, top10_rank=None) -> str:
         launch_html = f'''<section class="section">
   <div class="section-head"><h2>Launch Options <span class="tag">Steam</span></h2>
   <button type="button" class="btn ghost small" data-copy="{esc(launch)}">Copy</button></div>
-  <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre>{esc(launch)}</pre></div>
+  <div class="cmd" tabindex="0" role="group" aria-label="Launch options, scrollable"><pre>{esc(launch)}</pre></div>
   <p class="note">Steam → right-click Counter-Strike 2 → Properties → Launch Options → paste.</p>
 </section>'''
-
-    try:
-        g = convert_geometry(float(cv.get("cl_crosshairsize", 0) or 0),
-                             float(cv.get("cl_crosshairthickness", 0) or 0),
-                             float(cv.get("cl_crosshairgap", 0) or 0))
-        aria = f"{g['length']} pixel arms, {max(1, g['thickness'])} pixel thick, gap {g['gap']}"
-    except Exception:
-        aria = "crosshair preview"
 
     entity = {
         "@type": "Person",
@@ -367,7 +458,8 @@ def player_page(rec: dict, top10_rank=None) -> str:
         "@type": "ProfilePage",
         "mainEntity": {k: v for k, v in entity.items() if v},  # no nulls in structured data
     }
-    xh_svg, xh_label = xhair_svg(cv, aria)
+    head_copy = (f'<button type="button" class="btn" data-copy="{esc("; ".join(xh_cmds))}">Copy crosshair</button>'
+                 if xh_cmds else "")
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -416,31 +508,18 @@ def player_page(rec: dict, top10_rank=None) -> str:
     </div>
     <div class="chips profile-chips">{''.join(chips)}</div>
     <div class="head-actions">
-      <button type="button" class="btn" data-copy="{esc(full_block)}">Copy full config</button>
-      {download_html}
+      {head_copy}
+      {download}
+      <a class="btn ghost" href="#full-config">Full config ↓</a>
     </div>
-    <section class="section">
-      <div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2>
-        <button type="button" class="btn small" data-copy="{esc(xh_text)}">Copy crosshair</button></div>
-      <div class="xhair-box">
-        <div class="xhair-preview">
-          {xh_svg}
-          <div class="xhair-label">{xh_label}</div>
-        </div>
-        <div class="xhair-meta">
-          <div class="cmd" tabindex="0" role="group" aria-label="Crosshair commands, scrollable">{cmd_pre(xh_line)}</div>
-          {warnings_html}
-          <p class="note">CS2's Sept 22, 2026 "Rush Hour" patch replaced the crosshair system, so these commands are converted to the new convars from {esc(nick)}'s original settings (reference: <a href="https://github.com/sebastianspicker/small-indie-crosshair-company" target="_blank" rel="noopener">community crosshair migration study</a>, build 2000914). They're also included at the start of the <b>Full config</b> below.</p>
-        </div>
-      </div>
-    </section>
+    {crosshair_section_html(rec, xp, reference)}
 
-    <section class="section">
-      <div class="section-head"><h2>Full config <span class="tag">paste in console</span></h2>
-        <button type="button" class="btn small" data-copy="{esc(full_block)}">Copy all</button>
-        <span id="btn-mydpi-slot"></span></div>
-      <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable">{cmd_pre(cmds)}</div>
-      <p class="note">One single line, <code>;</code>-separated so the console runs every command: press <b>~</b> in CS2, paste, hit Enter — done. (The CS2 console is single-line input, so multi-line pastes are unreliable.) The crosshair part is converted to the convars added by the Sept 22, 2026 patch; convars that were removed, renamed, cheat-protected or nonexistent in CS2 are filtered out. If a very long paste ever gets cut off, use the shorter per-section commands below instead.</p>
+    <section class="section" id="full-config">
+      <div class="section-head"><h2>Full config <span class="tag">{len(parts)} part{"s" if len(parts) != 1 else ""}</span></h2>
+        {download.replace('class="btn ghost"', 'class="btn ghost small"')}</div>
+      <p class="note lead">The CS2 console can reject a pasted line of 510 characters or more, so the full config comes in parts: press <b>~</b> in CS2, paste part 1, press Enter, then do the same with the next part. Or download the .cfg, save it in <code>Counter-Strike Global Offensive/game/csgo/cfg/</code> and run <code>exec {esc(slug)}</code> in the console.</p>
+      {part_blocks}
+      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
     </section>
 
     {category_sections_html(rec)}
@@ -451,7 +530,7 @@ def player_page(rec: dict, top10_rank=None) -> str:
 
   <footer>
     <div class="wrap">
-      <p>Settings data from <a href="https://settings.gg/players" target="_blank" rel="noopener">settings.gg</a> · Unofficial fan-made tool, not affiliated with Valve or settings.gg. CS2 and Counter-Strike are trademarks of Valve.</p>
+      <p>Settings data from <a href="https://settings.gg/players" target="_blank" rel="noopener">settings.gg</a> · Crosshair conversion by <a href="{esc(reference["url"])}" target="_blank" rel="noopener">{esc(reference["name"])}</a> (MIT) · Unofficial fan-made tool, not affiliated with Valve or settings.gg. CS2 and Counter-Strike are trademarks of Valve.</p>
     </div>
   </footer>
 
@@ -461,6 +540,10 @@ def player_page(rec: dict, top10_rank=None) -> str:
 </body>
 </html>
 '''
+
+
+def cmd_block_raw(text: str) -> str:
+    return f'<div class="cmd" tabindex="0" role="group" aria-label="Config file, scrollable"><pre>{esc(text)}</pre></div>'
 
 
 def index_page(players, top10_data, generated) -> str:
@@ -516,7 +599,7 @@ def index_page(players, top10_data, generated) -> str:
   <meta property="og:image" content="{BASE}/assets/og-default.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="CS2 Pro Configs — Pro Player Settings as Console Commands">
-  <meta name="twitter:description" content="Copy any pro's full CS2 config in one paste: crosshair, sensitivity, viewmodel, HUD, radar.">
+  <meta name="twitter:description" content="Copy any pro's CS2 config as console commands: crosshair (converted to the new system), sensitivity, viewmodel, HUD, radar.">
   <meta name="twitter:image" content="{BASE}/assets/og-default.png">
   <link rel="icon" href="{FAVICON}">
   <link rel="stylesheet" href="/assets/style.css">
@@ -538,13 +621,13 @@ def index_page(players, top10_data, generated) -> str:
 
   <main class="wrap" id="main">
     <div class="hero">
-      <h1>Play like a pro<span class="dot">.</span> One paste.</h1>
-      <p>Full CS2 settings from {count} of the world's best players, converted into ready-to-paste console commands.
-         Pick a player, hit copy, paste into your console — crosshair, sensitivity, viewmodel, HUD and radar apply instantly.</p>
+      <h1>Play like a pro<span class="dot">.</span> Copy, paste, play.</h1>
+      <p>Full CS2 settings from {count} of the world's best players as ready-to-paste console commands, with each crosshair
+         converted to the new crosshair system from the Sept 22, 2026 update. Pick a player, copy, paste into your console.</p>
       <div class="steps">
         <div class="step"><b><span class="num">1</span>Pick a pro</b>Search by nickname and open their profile.</div>
-        <div class="step"><b><span class="num">2</span>Copy the config</b>Grab the full config or just a section like crosshair.</div>
-        <div class="step"><b><span class="num">3</span>Paste in CS2 console</b>Press <b>~</b> in CS2, paste, Enter. Done — settings applied.</div>
+        <div class="step"><b><span class="num">2</span>Copy the config</b>Grab the crosshair, a single section, or the full config (in 2–3 parts).</div>
+        <div class="step"><b><span class="num">3</span>Paste in CS2 console</b>Press <b>~</b> in CS2, paste, Enter. Or download the .cfg and <code>exec</code> it.</div>
       </div>
     </div>
 
@@ -698,6 +781,13 @@ def main() -> None:
     if top10_data:
         top10_rank = {t["slug"]: t["rank"] for t in top10_data.get("players", []) if t.get("slug")}
 
+    # converted crosshairs, written by `node scraper/crosshair.mjs` after scrape.py
+    crosshair = json.loads((ROOT / "data" / "crosshair.json").read_text(encoding="utf-8"))
+    missing = [p["slug"] for p in players if p["slug"] not in crosshair["players"]]
+    if missing:
+        raise SystemExit(f"data/crosshair.json lacks {len(missing)} player(s) ({', '.join(missing[:5])}): "
+                         "run node scraper/crosshair.mjs first")
+
     # sitemap lastmod moves only when a page's HTML actually changes, so
     # crawlers aren't told all 600+ pages changed on every weekly refresh
     today = datetime.now(timezone.utc).date().isoformat()
@@ -718,11 +808,14 @@ def main() -> None:
         if not f.exists():
             continue
         rec = json.loads(f.read_text())
+        xp = crosshair["players"][slug]
         d = ROOT / "p" / slug
         d.mkdir(parents=True, exist_ok=True)
-        emit(d / "index.html", player_page(rec, top10_rank.get(slug)), f"{BASE}/p/{slug}/", "0.8")
+        emit(d / "index.html", player_page(rec, xp, crosshair["reference"], top10_rank.get(slug)),
+             f"{BASE}/p/{slug}/", "0.8")
+        write_if_changed(ROOT / "cfg" / f"{slug}.cfg", player_cfg(rec, xp))
         n += 1
-    print(f"p/ pages: {n}")
+    print(f"p/ pages and cfg/ files: {n}")
 
     write_if_changed(ROOT / "player.html", redirect_stub())
     write_if_changed(ROOT / "404.html", not_found_page())

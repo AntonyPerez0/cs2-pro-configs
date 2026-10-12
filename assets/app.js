@@ -178,7 +178,7 @@ function runIndex() {
 
 /* ---------------- static player pages: enhancement only ----------------
    Content is prerendered; this wires the DPI sensitivity matcher and the
-   "Copy all at my DPI" button from the embedded #player-data JSON. */
+   "Copy part N at my DPI" button from the embedded #player-data JSON. */
 
 function runPlayerStatic() {
   let data;
@@ -190,24 +190,27 @@ function runPlayerStatic() {
   const base = proEdpi(data.dpi, data.sens);
   if (!base) return;
 
-  /* "Copy all at my DPI" button -> #btn-mydpi-slot */
-  const mySlot = $("#btn-mydpi-slot");
+  /* "Copy part N at my DPI" button next to the full-config part that holds
+     the sensitivity command */
+  const parts = Array.isArray(data.parts) ? data.parts : [];
+  const sensPart = parts.findIndex((cmds) => cmds.some((c) => c.startsWith("sensitivity ")));
+  const mySlot = sensPart >= 0 ? $(`.mydpi-slot[data-part="${sensPart}"]`) : null;
   let refreshAdjusted = () => {};
-  if (mySlot && Array.isArray(data.commands)) {
+  if (mySlot) {
     const btnMy = document.createElement("button");
     btnMy.type = "button";
     btnMy.className = "btn ghost small";
     btnMy.hidden = true;
-    btnMy.title = "Same config, but the sensitivity line is rewritten so the speed (eDPI) matches this pro on YOUR mouse DPI";
+    btnMy.title = "Same part, but the sensitivity command is rewritten so the speed (eDPI) matches this pro on YOUR mouse DPI";
     mySlot.appendChild(btnMy);
     refreshAdjusted = () => {
       const dpi = getUserDpi();
       const sens = sensForDpi(base, dpi);
       if (sens !== null) {
-        btnMy.dataset.copy = data.commands
+        btnMy.dataset.copy = parts[sensPart]
           .map((c) => (c.startsWith("sensitivity ") ? `sensitivity ${sens}` : c))
           .join("; ");
-        btnMy.textContent = `Copy all at my DPI (${dpi})`;
+        btnMy.textContent = `Copy part ${sensPart + 1} at my DPI (${dpi})`;
         btnMy.hidden = false;
       } else {
         btnMy.hidden = true;
@@ -229,7 +232,7 @@ function runPlayerStatic() {
       <span class="dpi-result" aria-live="polite"></span>
       <button type="button" class="btn ghost small" hidden></button>
     </div>
-    <p class="note">Matching keeps the same <b>eDPI</b> (${Math.round(base.edpi)}) — that's <b>${base.cm.toFixed(1)} cm</b> per 360° turn at any DPI. Enter your DPI and use this sensitivity instead of theirs (or use <b>Copy all at my DPI</b> in the Full config above, which rewrites the <code>sensitivity</code> line for you).</p>`;
+    <p class="note">Matching keeps the same <b>eDPI</b> (${Math.round(base.edpi)}) — that's <b>${base.cm.toFixed(1)} cm</b> per 360° turn at any DPI. Enter your DPI and use this sensitivity instead of theirs${sensPart >= 0 ? ` (or use <b>Copy part ${sensPart + 1} at my DPI</b> in the Full config above, which rewrites the <code>sensitivity</code> command for you)` : ""}.</p>`;
   dpiSlot.replaceWith(box);
   const input = $(".dpi-input", box);
   const result = $(".dpi-result", box);
