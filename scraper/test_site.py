@@ -219,6 +219,16 @@ for f in list((ROOT / "p").glob("*/index.html")) + list((ROOT / "classic").glob(
         no_matcher.append(str(f.parent.relative_to(ROOT)) + " (no slot)")
 check("every profile with a sensitivity has the DPI matcher", no_matcher[:5], [])
 
+# ---- every page loads the current app.js / style.css (hash-versioned URLs, so no cached old copy) ----
+import hashlib  # noqa: E402
+want = {n: hashlib.sha256((ROOT / "assets" / n).read_bytes()).hexdigest()[:10] for n in ("app.js", "style.css")}
+stale = []
+for f in [ROOT / "index.html", ROOT / "404.html", *(ROOT / "p").glob("*/index.html"), *(ROOT / "classic").rglob("index.html")]:
+    for name, v in re.findall(r'/assets/(app\.js|style\.css)(?:\?v=(\w+))?"', f.read_text(encoding="utf-8")):
+        if v != want[name]:
+            stale.append(f"{f.relative_to(ROOT)}: {name}?v={v}")
+check("pages load the current app.js and style.css", stale[:5], [])
+
 # ---- sitemap: every URL is a real page, and every page is listed ----
 locs = re.findall(r"<loc>https://[^/]+(/[^<]*)</loc>", (ROOT / "sitemap.xml").read_text(encoding="utf-8"))
 check("sitemap URLs resolve to pages", [u for u in locs if not (ROOT / u.lstrip("/") / "index.html").is_file()
