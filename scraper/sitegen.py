@@ -28,14 +28,16 @@ BASE = "https://copyprosta.com"
 # console copy string is kept at or under this, with a margin
 LINE_LIMIT = 500
 
-CONSOLE_SKIP = {
-    "cl_drawhud", "cl_radar_size", "setting.defaultres", "setting.defaultresheight",
-    # removed by the Sept 2026 crosshair update; the cl_crosshair* convars are
-    # replaced as a whole by the converted crosshair commands
-    "cl_fixedcrosshairgap",
-    # not a CS2 convar or command (absent from the build 2000930 dump)
-    "cl_mouselook",
-}
+# convars a CS2 config can set, with [min, max], from the game's convar dump
+# (scraper/tools/cs2_convars.py). Anything else - removed, renamed, cheat-protected
+# or never a CS2 convar (cl_drawhud, cl_radar_size, cl_mouselook, setting.defaultres,
+# m_rawinput, ...) - is left out of every paste. The cl_crosshair* convars are
+# replaced as a whole by the converted crosshair commands.
+CS2_CONVARS = json.loads((Path(__file__).resolve().parent / "cs2_convars.json").read_text())["convars"]
+# CS:GO names CS2 renamed (old configs)
+RENAMED = {"zoom_sensitivity_ratio_mouse": "zoom_sensitivity_ratio"}
+# CS:GO cl_righthand 1 (right hand) is CS2 cl_prefer_lefthanded 0
+INVERTED = {"cl_righthand": "cl_prefer_lefthanded"}
 
 BUCKETS = [
     ("crosshair", "Crosshair", "cl_crosshair_*", lambda n: n.startswith("cl_crosshair")),
@@ -107,6 +109,32 @@ def bucket_convars(convars):
     return out
 
 
+def cs2_command(k, v):
+    """(command, note) for one config convar as CS2 accepts it: renamed where CS2
+    renamed it, clamped to CS2's range, or (None, note) when CS2 has no such convar
+    or the value is unsafe. note is None when nothing changed."""
+    sv = safe_value(v)
+    if sv is None:
+        return None, None
+    name = RENAMED.get(k, k)
+    if k in INVERTED and sv in ("0", "1"):
+        name, sv = INVERTED[k], "1" if sv == "0" else "0"
+    if name not in CS2_CONVARS:
+        return None, f"{k} doesn't exist in CS2, left out"
+    note = f"{k} is called {name} in CS2" if name != k else None
+    lo, hi = CS2_CONVARS[name]
+    try:
+        x = float(sv)
+    except ValueError:
+        return f"{name} {sv}", note
+    clamped = max(lo, x) if lo is not None else x
+    clamped = min(hi, clamped) if hi is not None else clamped
+    if clamped != x:
+        sv = f"{clamped:g}"
+        note = f"{k} {v} is outside CS2's range, set to {sv}"
+    return f"{name} {sv}", note
+
+
 def section_commands(rec) -> dict:
     """Console commands per non-crosshair bucket (the crosshair comes from the
     converter, see crosshair_commands)."""
@@ -117,12 +145,19 @@ def section_commands(rec) -> dict:
             continue
         out[key] = []
         for k, v in buckets[key]:
-            if k in CONSOLE_SKIP:
-                continue
-            sv = safe_value(v)
-            if sv is not None:
-                out[key].append(f"{k} {sv}")
+            cmd, _note = cs2_command(k, v)
+            if cmd is not None:
+                out[key].append(cmd)
     return out
+
+
+def adaptation_notes(rec) -> list:
+    """What cs2_command changed in a config (renamed, clamped, left out)."""
+    notes = []
+    for k, v in (rec.get("convars") or {}).items():
+        if not k.startswith("cl_crosshair"):
+            notes.append(cs2_command(k, v)[1])
+    return [n for n in notes if n]
 
 
 def kind_of(xp) -> str:
@@ -326,7 +361,7 @@ def xhair_svg(preview: dict, height: int, aria: str):
     return "".join(parts), label
 
 
-def crosshair_section_html(rec, xp, reference) -> str:
+def crosshair_section_html(rec, xp, reference, source_note=None) -> str:
     slug = rec["slug"]
     nick = rec.get("nick") or slug
     history = (f' — see their <a href="https://procrosshairs.com/player/{esc(rec["steamid64"])}/{esc(slug)}" '
@@ -354,7 +389,12 @@ def crosshair_section_html(rec, xp, reference) -> str:
         "resolution": f"authored at {height}p, {esc(nick)}'s resolution",
         "config": f"authored at {height}p, as their config says",
     }.get(xp.get("heightSource"), f"authored at {height}p (their resolution isn't listed)")
-    if kind_of(xp) == "copied":
+    if source_note:
+        about = (f'<p class="note">{source_note} Converted to CS2\'s crosshair system since the Sept 22, 2026 update, '
+                 f"{authored}; CS2 rescales it to your resolution.</p>\n"
+                 f'          <p class="note">Valve published no conversion formula. This uses a community reconstruction '
+                 f"({ref_link}) that hasn't been checked against in-game captures.</p>")
+    elif kind_of(xp) == "copied":
         about = (f'<p class="note">settings.gg lists {esc(nick)}\'s crosshair in the format CS2 uses since the '
                  f"Sept 22, 2026 update, so it's copied as-is, {authored}; CS2 rescales it to your resolution.</p>")
     else:
@@ -444,13 +484,6 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None) -> str:
 
     avatar_html = avatar_img(rec["avatar"], 92) if rec.get("avatar") else letter_div(nick)
     download = f'<a class="btn ghost" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download .cfg</a>'
-
-    part_blocks = "\n".join(f'''<div class="part">
-        <div class="part-head"><span class="part-label">Part {i + 1} · {esc(label)}</span>
-          <button type="button" class="btn small" data-copy="{esc("; ".join(cmds))}">Copy part {i + 1}</button>
-          <span class="mydpi-slot" data-part="{i}"></span></div>
-        {cmd_block(cmds)}
-      </div>''' for i, (label, cmds) in enumerate(parts))
 
     raw_html = ""
     if raw_cfg:
@@ -546,13 +579,7 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None) -> str:
     </div>
     {crosshair_section_html(rec, xp, reference)}
 
-    <section class="section" id="full-config">
-      <div class="section-head"><h2>Full config <span class="tag">{len(parts)} part{"s" if len(parts) != 1 else ""}</span></h2>
-        {download.replace('class="btn ghost"', 'class="btn ghost small"')}</div>
-      <p class="note lead">The CS2 console can reject a pasted line longer than 510 characters, so the full config comes in parts: press <b>~</b> in CS2, paste part 1, press Enter, then do the same with the next part. Or download the .cfg, save it in <code>Counter-Strike Global Offensive/game/csgo/cfg/</code> and run <code>exec {esc(slug)}</code> in the console.</p>
-      {part_blocks}
-      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
-    </section>
+    {full_config_html(parts, f"/cfg/{slug}.cfg", slug)}
 
     {category_sections_html(rec)}
     {launch_html}
@@ -574,11 +601,303 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None) -> str:
 '''
 
 
+def full_config_html(parts, cfg_href: str, cfg_name: str) -> str:
+    part_blocks = "\n".join(f'''<div class="part">
+        <div class="part-head"><span class="part-label">Part {i + 1} · {esc(label)}</span>
+          <button type="button" class="btn small" data-copy="{esc("; ".join(cmds))}">Copy part {i + 1}</button>
+          <span class="mydpi-slot" data-part="{i}"></span></div>
+        {cmd_block(cmds)}
+      </div>''' for i, (label, cmds) in enumerate(parts))
+    return f'''<section class="section" id="full-config">
+      <div class="section-head"><h2>Full config <span class="tag">{len(parts)} part{"s" if len(parts) != 1 else ""}</span></h2>
+        <a class="btn ghost small" href="{esc(cfg_href)}" download="{esc(cfg_name)}.cfg">Download .cfg</a></div>
+      <p class="note lead">The CS2 console can reject a pasted line longer than 510 characters, so the full config comes in parts: press <b>~</b> in CS2, paste part 1, press Enter, then do the same with the next part. Or download the .cfg, save it in <code>Counter-Strike Global Offensive/game/csgo/cfg/</code> and run <code>exec {esc(cfg_name)}</code> in the console.</p>
+      {part_blocks}
+      <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
+    </section>'''
+
+
 def cmd_block_raw(text: str) -> str:
     return f'<div class="cmd" tabindex="0" role="group" aria-label="Config file, scrollable"><pre>{esc(text)}</pre></div>'
 
 
-def index_page(players, top10_data, generated) -> str:
+# ---------------- classic: top 10 of 2011-2015 ----------------
+
+def classic_key(year, p) -> str:
+    return f"{year}/{p['id']}"
+
+
+def classic_rec(year, p, players_by_slug) -> dict:
+    """A classic entry's dated config in the record shape the page helpers read."""
+    c = p["config"]
+    rec = {"slug": f"{p['id']}-{year}", "nick": p["nick"], "real_name": p.get("real_name") or "",
+           "convars": c.get("convars") or {},
+           "tables": {"Mouse": c.get("mouse") or {}, "Video Settings": c.get("video") or {}}}
+    current = players_by_slug.get(p.get("current_slug") or "")
+    if current and current.get("avatar"):
+        rec["avatar"] = current["avatar"]
+    return rec
+
+
+def classic_cfg(rec, xp, year, p) -> str:
+    c = p["config"]
+    head = [
+        f"// {p['nick']} - #{p['rank']} of {year}, CS:GO config from {c['date']} - {BASE}/classic/{year}/{p['id']}/",
+        "// Converted for CS2: crosshair converted to the Sept 2026 crosshair system (community",
+        "// reconstruction); convars CS2 renamed are renamed, ones it no longer has are left out.",
+        f"// Save as Counter-Strike Global Offensive/game/csgo/cfg/{rec['slug']}.cfg, then run: exec {rec['slug']}",
+        "",
+    ]
+    return "\n".join(head + full_commands(rec, xp)) + "\n"
+
+
+def source_links(urls) -> str:
+    out = []
+    for i, u in enumerate(urls or []):
+        host = re.sub(r"^https?://(www\.)?", "", u).split("/")[0] or u
+        out.append(f'<a href="{esc(u)}" target="_blank" rel="noopener nofollow">{esc(host)}</a>')
+    return ", ".join(out)
+
+
+def classic_date_note(year, c) -> str:
+    date = str(c.get("date") or "")
+    cy = int(date[:4]) if date[:4].isdigit() else None
+    if cy == year:
+        return f"from {esc(date)}, the year of the ranking"
+    if cy is not None:
+        return f"from {esc(date)}, the closest documented to {year}"
+    return "undated"
+
+
+def classic_page(year_obj, p, rec, xp, reference, players_by_slug) -> str:
+    year = year_obj["year"]
+    c = p["config"]
+    nick = p["nick"]
+    real = p.get("real_name") or ""
+    url = f"{BASE}/classic/{year}/{p['id']}/"
+    parts = console_parts(rec, xp)
+    xh_cmds = crosshair_commands(xp)
+    mouse = c.get("mouse") or {}
+    video = c.get("video") or {}
+    dpi = mouse.get("DPI", "")
+    sens = rec["convars"].get("sensitivity", "")
+    try:
+        edpi = int(float(dpi) * float(sens))
+    except (TypeError, ValueError):
+        edpi = None
+    embed = json_script({"dpi": dpi, "sens": sens, "parts": [cmds for _, cmds in parts]})
+    current = players_by_slug.get(p.get("current_slug") or "")
+
+    chips = [f'<span class="chip"><b>#{p["rank"]}</b> {esc(year_obj["short"])}</span>']
+    if p.get("team"):
+        chips.append(f'<span class="chip">{esc(p["team"])}</span>')
+    chips.append(f'<span class="chip">config {esc(c.get("date") or "undated")}</span>')
+    if dpi:
+        chips.append(f'<span class="chip"><b>{esc(dpi)}</b> DPI</span>')
+    for k in ("Resolution", "Aspect Ratio", "Scaling Mode"):
+        if video.get(k):
+            chips.append(f'<span class="chip">{esc(video[k])}</span>')
+    links = []
+    if current:
+        links.append(f'<a href="/p/{esc(current["slug"])}/">current settings</a>')
+    links.append(f'<a href="/classic/#y{year}">all of {year}</a>')
+
+    era = (f"{esc(nick)} played CS 1.6 in {year}, so these are their CS:GO settings "
+           if p.get("game") == "CS 1.6" else f"These are {esc(nick)}'s CS:GO settings ")
+    when = classic_date_note(year, c)
+    source_note = (f"{era}{when} ({esc(c.get('date_basis') or 'date basis not given')}; "
+                   f"source: {source_links(c.get('sources'))}).")
+    confidence = c.get("confidence") or "medium"
+    adapted = adaptation_notes(rec)
+    adapted_html = ""
+    if adapted:
+        adapted_html = ('<section class="section"><div class="section-head"><h2>Adapted for CS2 <span class="tag">'
+                        f'{len(adapted)}</span></h2></div><ul class="xh-notes plain">'
+                        + "".join(f"<li>{esc(n)}</li>" for n in adapted) + "</ul></section>")
+    original = "\n".join(f"{k} {v}" for k, v in (c.get("convars") or {}).items())
+    original_html = (f'''<section class="section">
+      <div class="section-head"><h2>Original config <span class="tag">CS:GO</span></h2></div>
+      <details class="raw"><summary>Show the documented CS:GO settings</summary>{cmd_block_raw(original)}</details>
+      <p class="note">The settings as documented ({source_links(c.get("sources"))}), before converting. Several of these convars don't exist in CS2, so use the commands above.</p>
+    </section>''' if original else "")
+    notes_html = f'<p class="note">{esc(c["notes"])}</p>' if c.get("notes") else ""
+    head_copy = (f'<button type="button" class="btn" data-copy="{esc("; ".join(xh_cmds))}">Copy crosshair</button>'
+                 if xh_cmds and len(chunk(xh_cmds)) == 1 else
+                 '<a class="btn" href="#crosshair">Crosshair ↓</a>' if xh_cmds else "")
+    cfg_href = f"/cfg/classic/{rec['slug']}.cfg"
+    title = f"{nick} {year} CS:GO Config Converted for CS2 — #{p['rank']} {year_obj['short']}"
+    desc = (f"{nick}'s CS:GO settings from {c.get('date')} (#{p['rank']} of {year}, {p.get('team') or ''}) converted for CS2: "
+            "crosshair converted to the new crosshair system"
+            + (f", {dpi} DPI x {sens} sens ({edpi} eDPI)" if edpi else "") + ", viewmodel and more as console commands.")
+    avatar_html = avatar_img(rec["avatar"], 92) if rec.get("avatar") else letter_div(nick)
+    image = f"{BASE}/{rec['avatar']}" if rec.get("avatar") else f"{BASE}/assets/og-default.png"
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{esc(title)}</title>
+  <meta name="description" content="{esc(desc)}">
+  <link rel="canonical" href="{url}">
+  <meta name="theme-color" content="#0d1014">
+  <meta property="og:site_name" content="CS2 Pro Configs">
+  <meta property="og:title" content="{esc(nick)} {year} — classic CS:GO config for CS2">
+  <meta property="og:description" content="{esc(desc)}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{url}">
+  <meta property="og:image" content="{image}">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="{FAVICON}">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-page="player-static">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="logo" href="/">CS2<span class="dot">//</span>PROS <small>configs</small></a>
+      <div class="spacer"></div>
+      <a class="btn ghost small" href="/classic/">Classic</a>
+      <a class="btn ghost small" href="/">All players</a>
+    </div>
+  </header>
+
+  <main class="wrap" id="main">
+    <nav aria-label="Breadcrumb"><a class="back" href="/classic/#y{year}">← Classic · {year}</a></nav>
+    <div class="profile-head">
+      {avatar_html}
+      <div>
+        <h1>{esc(nick)} <span class="h1-year">{year}</span></h1>
+        <div class="real">{esc(real)}</div>
+        <div class="links">{"".join(links)}</div>
+      </div>
+    </div>
+    <div class="chips profile-chips">{"".join(chips)}</div>
+    <p class="note classic-note">#{p["rank"]} in {esc(year_obj["ranking"])}{f" ({esc(p['team'])})" if p.get("team") else ""}. {era}{when}. Source confidence: <b>{esc(confidence)}</b>.</p>
+    {notes_html}
+    <div class="head-actions">
+      {head_copy}
+      <a class="btn ghost" href="{cfg_href}" download="{esc(rec["slug"])}.cfg">Download .cfg</a>
+      <a class="btn ghost" href="#full-config">Full config ↓</a>
+    </div>
+    {crosshair_section_html(rec, xp, reference, source_note=source_note)}
+    {full_config_html(parts, cfg_href, rec["slug"])}
+    {category_sections_html(rec)}
+    {adapted_html}
+    {video_tables_html(rec)}
+    {original_html}
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Rankings: {esc(year_obj["ranking"])} ({source_links(year_obj.get("sources"))}) · Crosshair conversion by <a href="{esc(reference["url"])}" target="_blank" rel="noopener">{esc(reference["name"])}</a> (MIT) · Unofficial fan-made tool, not affiliated with Valve, HLTV or any player.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="application/json" id="player-data">{embed}</script>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
+'''
+
+
+def classic_index_page(classic, players_by_slug) -> str:
+    sections = []
+    for y in classic["years"]:
+        cards = []
+        for p in y["players"]:
+            c = p.get("config")
+            current = players_by_slug.get(p.get("current_slug") or "")
+            avatar = (avatar_img(current["avatar"], 72, lazy=True) if current and current.get("avatar")
+                      else letter_div(p["nick"]))
+            if c:
+                href = f"/classic/{y['year']}/{p['id']}/"
+                sub = f'<span class="classic-date">config {esc(c.get("date") or "undated")}</span>'
+            else:
+                href = f"/p/{current['slug']}/" if current else None
+                sub = '<span class="classic-date none">no CS:GO config documented</span>'
+            inner = (f'<span class="top10-rank{" medal" if p["rank"] <= 3 else ""}">#{p["rank"]}</span>{avatar}'
+                     f'<span class="top10-nick">{esc(p["nick"])}</span>'
+                     f'<span class="top10-team">{esc(p.get("team") or "")}</span>{sub}')
+            cards.append(f'<li class="top10-card"><a href="{href}">{inner}</a></li>' if href
+                         else f'<li class="top10-card"><div class="card-static">{inner}</div></li>')
+        sections.append(f'''<section class="top10 classic-year" id="y{y["year"]}" aria-labelledby="y{y["year"]}-title">
+  <div class="top10-head">
+    <h2 id="y{y["year"]}-title">{y["year"]}</h2>
+    <span class="top10-list">{esc(y["ranking"])}</span>
+    <span class="top10-src">{source_links(y.get("sources"))}</span>
+  </div>
+  {f'<p class="top10-note">{esc(y["note"])}</p>' if y.get("note") else ""}
+  <ol class="top10-grid">{"".join(cards)}</ol>
+</section>''')
+    years = [y["year"] for y in classic["years"]]
+    span = f"{min(years)}–{max(years)}"
+    jump = " ".join(f'<a class="chip" href="#y{y}">{y}</a>' for y in years)
+    desc = (f"The top 10 Counter-Strike players of each year {span} with their CS:GO settings converted for CS2: "
+            "crosshair, sensitivity and viewmodel as copy-paste console commands.")
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classic CS:GO Pro Configs {span}, Converted for CS2 — Top 10 of Each Year</title>
+  <meta name="description" content="{esc(desc)}">
+  <link rel="canonical" href="{BASE}/classic/">
+  <meta name="theme-color" content="#0d1014">
+  <meta property="og:site_name" content="CS2 Pro Configs">
+  <meta property="og:title" content="Classic pro configs {span}, converted for CS2">
+  <meta property="og:description" content="{esc(desc)}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{BASE}/classic/">
+  <meta property="og:image" content="{BASE}/assets/og-default.png">
+  <link rel="icon" href="{FAVICON}">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-page="plain">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="logo" href="/">CS2<span class="dot">//</span>PROS <small>configs</small></a>
+      <div class="spacer"></div>
+      <a class="btn ghost small" href="/">All players</a>
+    </div>
+  </header>
+  <main class="wrap" id="main">
+    <div class="hero">
+      <h1>Classic configs<span class="dot">.</span> {span}</h1>
+      <p>The top 10 players of each year from {span}, with their CS:GO settings converted for CS2: the crosshair converted to the
+         new crosshair system, sensitivity, viewmodel and the rest as console commands. Each config is dated and sourced; when
+         nothing from the exact year is documented, the closest documented config is used and labelled.</p>
+      <div class="chips classic-jump">{jump}</div>
+      <p class="note">{esc(classic.get("about") or "")}</p>
+    </div>
+    {"".join(sections)}
+  </main>
+  <footer>
+    <div class="wrap">
+      <p>Crosshair conversion: community reconstruction (not checked against in-game captures). Unofficial fan-made tool, not affiliated with Valve, HLTV or any player.</p>
+    </div>
+  </footer>
+</body>
+</html>
+'''
+
+
+def classic_teaser_html(classic) -> str:
+    if not classic:
+        return ""
+    years = [y["year"] for y in classic["years"]]
+    span = f"{min(years)}–{max(years)}"
+    chips = " ".join(f'<a class="chip" href="/classic/#y{y}">{y}</a>' for y in years)
+    return f'''<section class="classic-teaser" aria-labelledby="classic-teaser-title">
+  <div><h2 id="classic-teaser-title">Classic configs · {span}</h2>
+  <p>The top 10 players of each year from {span}, their CS:GO settings converted for CS2.</p></div>
+  <div class="chips">{chips}</div>
+  <a class="btn ghost small" href="/classic/">Browse classic configs →</a>
+</section>'''
+
+
+def index_page(players, top10_data, generated, classic=None) -> str:
     count = len(players)
 
     cards = []
@@ -664,6 +983,7 @@ def index_page(players, top10_data, generated) -> str:
     </div>
 
     {top10_section_html(top10_data, players)}
+    {classic_teaser_html(classic)}
 
     <div class="controls">
       <label for="sort">Sort</label>
@@ -830,7 +1150,12 @@ def main() -> None:
         changed = write_if_changed(path, html)
         entries.append((url, today if changed or url not in prev else prev[url], priority))
 
-    emit(ROOT / "index.html", index_page(players, top10_data, generated), f"{BASE}/", "1.0")
+    try:
+        classic = json.loads((ROOT / "data" / "classic.json").read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        classic = None
+
+    emit(ROOT / "index.html", index_page(players, top10_data, generated, classic), f"{BASE}/", "1.0")
     print("index.html")
 
     n = 0
@@ -848,6 +1173,29 @@ def main() -> None:
         write_if_changed(ROOT / "cfg" / f"{slug}.cfg", player_cfg(rec, xp))
         n += 1
     print(f"p/ pages and cfg/ files: {n}")
+
+    if classic:
+        players_by_slug = {p["slug"]: p for p in players}
+        (ROOT / "classic").mkdir(exist_ok=True)
+        (ROOT / "cfg" / "classic").mkdir(parents=True, exist_ok=True)
+        emit(ROOT / "classic" / "index.html", classic_index_page(classic, players_by_slug), f"{BASE}/classic/", "0.9")
+        m = 0
+        for y in classic["years"]:
+            for p in y["players"]:
+                if not p.get("config"):
+                    continue
+                xp = crosshair.get("classic", {}).get(classic_key(y["year"], p))
+                if xp is None:
+                    raise SystemExit(f"data/crosshair.json lacks classic {classic_key(y['year'], p)}: "
+                                     "run node scraper/crosshair.mjs first")
+                rec = classic_rec(y["year"], p, players_by_slug)
+                d = ROOT / "classic" / str(y["year"]) / p["id"]
+                d.mkdir(parents=True, exist_ok=True)
+                emit(d / "index.html", classic_page(y, p, rec, xp, crosshair["reference"], players_by_slug),
+                     f"{BASE}/classic/{y['year']}/{p['id']}/", "0.7")
+                write_if_changed(ROOT / "cfg" / "classic" / f"{rec['slug']}.cfg", classic_cfg(rec, xp, y["year"], p))
+                m += 1
+        print(f"classic pages: {m}")
 
     write_if_changed(ROOT / "player.html", redirect_stub())
     write_if_changed(ROOT / "404.html", not_found_page())

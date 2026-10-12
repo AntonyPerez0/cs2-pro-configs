@@ -5,6 +5,9 @@
  * used since the Sept 22, 2026 "Rush Hour" update, with the vendored
  * community reference converter (scraper/vendor/small-indie-crosshair-company).
  *
+ * Also converts the classic configs in data/classic.json (top 10 pros of
+ * 2011-2015, CS:GO-era settings).
+ *
  * Writes data/crosshair.json, which sitegen.py reads. Run after scrape.py:
  *   node scraper/crosshair.mjs           write data/crosshair.json
  *   node scraper/crosshair.mjs --check   exit 1 if the file is out of date
@@ -130,7 +133,7 @@ export function convertPlayer(rec) {
   // post-update cvar the legacy parser refuses; it does nothing for a static cross
   const legacy = Object.entries(rec.convars ?? {}).filter(([k, v]) =>
     k.startsWith('cl_crosshair') && k !== 'cl_crosshair_dynamic_spread_limit' && numeric(v) !== null);
-  if (!legacy.length) return { kind: 'blocked', height, heightSource: source, blockers: ['settings.gg lists no crosshair settings for this player.'] };
+  if (!legacy.length) return { kind: 'blocked', height, heightSource: source, blockers: ['No crosshair settings are listed for this player.'] };
   const parsed = parseLegacyTextWithNotes(legacy.map(([k, v]) => `${k} ${v}`).join('\n'));
   const options = { oldHeight: height, currentHeight: height, authoredHeight: height, styleTarget: 'family' };
   const report = infer({ settings: parsed.config, options, selectedModelId: COMMUNITY_MODEL.id });
@@ -172,6 +175,38 @@ export function convertPlayer(rec) {
   };
 }
 
+/** A classic entry's dated config as the record shape convertPlayer reads. */
+export const classicRecord = (year, p) => ({
+  slug: `${year}/${p.id}`,
+  convars: p.config.convars ?? {},
+  tables: { 'Video Settings': p.config.video ?? {} },
+});
+
+function convertSafely(rec) {
+  try {
+    return convertPlayer(rec);
+  } catch (e) {
+    const { height, source } = playerHeight(rec);
+    return { kind: 'blocked', height, heightSource: source, error: String(e.message ?? e) };
+  }
+}
+
+function buildClassic() {
+  let classic;
+  try {
+    classic = JSON.parse(readFileSync(join(ROOT, 'data', 'classic.json'), 'utf8'));
+  } catch {
+    return null;
+  }
+  const out = {};
+  for (const y of classic.years) {
+    for (const p of y.players) {
+      if (p.config) out[`${y.year}/${p.id}`] = convertSafely(classicRecord(y.year, p));
+    }
+  }
+  return out;
+}
+
 function build() {
   const index = JSON.parse(readFileSync(join(ROOT, 'data', 'index.json'), 'utf8'));
   const players = {};
@@ -193,8 +228,10 @@ function build() {
     if (players[slug].error || players[slug].blockers) console.error(`${slug}: ${players[slug].error ?? players[slug].blockers.join(' ')}`);
   }
   // one player per line keeps the weekly diff readable
-  const body = Object.entries(players).map(([slug, p]) => `${JSON.stringify(slug)}:${JSON.stringify(p)}`).join(',\n');
-  return { text: `{"reference":${JSON.stringify(REFERENCE)},\n"players":{\n${body}\n}}\n`, count: Object.keys(players).length, failed };
+  const lines = (obj) => Object.entries(obj).map(([k, p]) => `${JSON.stringify(k)}:${JSON.stringify(p)}`).join(',\n');
+  const classic = buildClassic();
+  const tail = classic ? `,\n"classic":{\n${lines(classic)}\n}` : '';
+  return { text: `{"reference":${JSON.stringify(REFERENCE)},\n"players":{\n${lines(players)}\n}${tail}}\n`, count: Object.keys(players).length, failed };
 }
 
 const isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];

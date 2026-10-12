@@ -116,6 +116,46 @@ check("long crosshair split into copy pieces that fit",
       (len(copies) > 1, all(len(c) <= LINE_LIMIT for c in copies), "; ".join(copies) == "; ".join(long_xp["commands"])),
       (True, True, True))
 
+# ---- classic section (top 10 of 2011-2015), when present ----
+classic_path = ROOT / "data" / "classic.json"
+if classic_path.exists():
+    from sitegen import classic_cfg, classic_rec  # noqa: E402
+    classic = json.loads(classic_path.read_text())
+    by_slug = {p["slug"]: p for p in index["players"]}
+    XC = xh.get("classic", {})
+    missing, bad_copy, bad_cfg, bad_link = [], [], [], []
+    for y in classic["years"]:
+        check(f"classic {y['year']}: 10 ranked players", sorted(p["rank"] for p in y["players"]), list(range(1, 11)))
+        for p in y["players"]:
+            if p.get("current_slug") and p["current_slug"] not in by_slug:
+                bad_link.append(p["id"])
+            if not p.get("config"):
+                continue
+            key = f"{y['year']}/{p['id']}"
+            if key not in XC:
+                missing.append(key)
+                continue
+            for field in ("date", "date_basis", "sources", "confidence"):
+                if not p["config"].get(field):
+                    missing.append(f"{key}:{field}")
+            page = ROOT / "classic" / str(y["year"]) / p["id"] / "index.html"
+            if not page.exists():
+                missing.append(f"{key}:page")
+                continue
+            for value in re.findall(r'data-copy="([^"]*)"', page.read_text(encoding="utf-8")):
+                if len(html.unescape(value)) > LINE_LIMIT:
+                    bad_copy.append(key)
+            rec = classic_rec(y["year"], p, by_slug)
+            cfg = (ROOT / "cfg" / "classic" / f"{rec['slug']}.cfg").read_text(encoding="utf-8")
+            if cfg != classic_cfg(rec, XC[key], y["year"], p):
+                bad_cfg.append(key)
+    check("classic: every config converted, dated, sourced and paged", missing[:5], [])
+    check("classic: copy buttons fit one console line", sorted(set(bad_copy))[:5], [])
+    check("classic: .cfg files are current", bad_cfg[:5], [])
+    check("classic: links to current players resolve", bad_link[:5], [])
+    pastes = [c for k, x in XC.items() for c in x.get("commands", [])]
+    check("classic: only current crosshair cvars", sorted({c.split(" ")[0] for c in pastes} - CURRENT_XHAIR), [])
+
 # ---- hardening helpers ----
 s = json_script({"v": "a</script>b"})
 check("json escapes </", "</script>" not in s, True)
