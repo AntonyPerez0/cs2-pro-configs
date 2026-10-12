@@ -187,7 +187,10 @@ function runPlayerStatic() {
   } catch (_) {
     return;
   }
-  const base = proEdpi(data.dpi, data.sens);
+  /* a classic config may not document the pro's DPI: then dpi_assumed (from
+     another source, shown on the page) stands in, and the visitor can change it */
+  const assumed = !proEdpi(data.dpi, data.sens) && data.dpi_assumed ? String(data.dpi_assumed) : null;
+  let base = proEdpi(assumed || data.dpi, data.sens);
   if (!base) return;
 
   /* "Copy part N at my DPI" button next to the full-config part that holds
@@ -225,18 +228,28 @@ function runPlayerStatic() {
   const box = document.createElement("div");
   box.className = "dpi-match";
   box.innerHTML = `
+    ${assumed ? `<div class="dpi-line">
+      <label class="dpi-label">Their DPI (assumed)
+        <input type="number" min="50" step="50" inputmode="numeric" class="dpi-input dpi-theirs" value="${parseInt(assumed, 10)}">
+      </label>
+    </div>` : ""}
     <div class="dpi-line">
       <label class="dpi-label">Your mouse DPI
-        <input type="number" min="50" step="50" inputmode="numeric" class="dpi-input" placeholder="e.g. 1600">
+        <input type="number" min="50" step="50" inputmode="numeric" class="dpi-input dpi-yours" placeholder="e.g. 1600">
       </label>
       <span class="dpi-result" aria-live="polite"></span>
       <button type="button" class="btn ghost small" hidden></button>
     </div>
-    <p class="note">Matching keeps the same <b>eDPI</b> (${Math.round(base.edpi)}) — that's <b>${base.cm.toFixed(1)} cm</b> per 360° turn at any DPI. Enter your DPI and use this sensitivity instead of theirs${sensPart >= 0 ? ` (or use <b>Copy part ${sensPart + 1} at my DPI</b> in the Full config above, which rewrites the <code>sensitivity</code> command for you)` : ""}.</p>`;
+    <p class="note dpi-note"></p>`;
   dpiSlot.replaceWith(box);
-  const input = $(".dpi-input", box);
+  const input = $(".dpi-yours", box);
+  const theirs = $(".dpi-theirs", box);
   const result = $(".dpi-result", box);
   const btnSens = $("button", box);
+  const note = $(".dpi-note", box);
+  const renderNote = () => {
+    note.innerHTML = `Matching keeps the same <b>eDPI</b> (${Math.round(base.edpi)}) — that's <b>${base.cm.toFixed(1)} cm</b> per 360° turn at any DPI. Enter your DPI and use this sensitivity instead of theirs${sensPart >= 0 ? ` (or use <b>Copy part ${sensPart + 1} at my DPI</b> in the Full config above, which rewrites the <code>sensitivity</code> command for you)` : ""}.`;
+  };
   const saved = getUserDpi();
   if (saved) input.value = saved;
   const update = () => {
@@ -255,6 +268,16 @@ function runPlayerStatic() {
     refreshAdjusted();
   };
   input.addEventListener("input", update);
+  if (theirs) {
+    theirs.addEventListener("input", () => {
+      const next = proEdpi(theirs.value, data.sens);
+      if (!next) return;  // keep the last valid value while typing
+      base = next;
+      renderNote();
+      update();
+    });
+  }
+  renderNote();
   if (saved) update();
 }
 

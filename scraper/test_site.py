@@ -204,6 +204,17 @@ if classic_path.exists():
     pastes = [c for k, x in XC.items() for c in x.get("commands", [])]
     check("classic: only current crosshair cvars", sorted({c.split(" ")[0] for c in pastes} - CURRENT_XHAIR), [])
 
+# ---- every profile with a sensitivity gets the DPI matcher (a DPI, documented or assumed) ----
+no_matcher = []
+for f in list((ROOT / "p").glob("*/index.html")) + list((ROOT / "classic").glob("*/*/index.html")):
+    m = re.search(r'<script type="application/json" id="player-data">(.*?)</script>', f.read_text(encoding="utf-8"), re.S)
+    pd = json.loads(m.group(1)) if m else {}
+    if pd.get("sens") and not (re.sub(r"\D", "", str(pd.get("dpi") or "")) or pd.get("dpi_assumed")):
+        no_matcher.append(str(f.parent.relative_to(ROOT)))
+    if pd.get("sens") and 'id="dpi-slot"' not in f.read_text(encoding="utf-8"):
+        no_matcher.append(str(f.parent.relative_to(ROOT)) + " (no slot)")
+check("every profile with a sensitivity has the DPI matcher", no_matcher[:5], [])
+
 # ---- sitemap: every URL is a real page, and every page is listed ----
 locs = re.findall(r"<loc>https://[^/]+(/[^<]*)</loc>", (ROOT / "sitemap.xml").read_text(encoding="utf-8"))
 check("sitemap URLs resolve to pages", [u for u in locs if not (ROOT / u.lstrip("/") / "index.html").is_file()

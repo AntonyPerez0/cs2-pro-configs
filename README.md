@@ -175,10 +175,12 @@ links): `python3 -m http.server` and open http://localhost:8000.
   upper bound. Every page shows the date, its source and how the date is known. When
   the crosshair, sensitivity and resolution come from different configs, the page says
   which part is from when. DPI is only paired with a sensitivity from a config with
-  the same sensitivity, so the eDPI never mixes eras. A crosshair is converted at the
-  resolution its own source gives. Two players (trace 2011, Gux 2011) have no
-  documented CS:GO config and are listed without one. swag only ever used crosshair
-  style 1, which can't be converted, so his page says so.
+  the same sensitivity, so the eDPI never mixes eras; when no such DPI exists, the DPI
+  matcher assumes the one in the player's setup.gg profile (`dpi_hint`), says so, and
+  lets the visitor change it. A crosshair is converted at the resolution its own
+  source gives. Two players (trace 2011, Gux 2011) have no documented CS:GO config and
+  are listed without one. swag only ever used crosshair style 1, which can't be
+  converted, so his page says so.
 - **Conversion.** The same converter as the current players. Crosshair settings
   CS:GO added later are set to what the player had then, not CS2's defaults:
   `cl_crosshair_drawoutline` (added 22 May 2013), `cl_crosshairgap_useweaponvalue`
