@@ -23,8 +23,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 BASE = "https://copyprosta.com"
 
-# CS2 still ships the Source tokenizer, which rejects a console line of 510 or
-# more characters ("...overflows the tokenizer buffer.. Skipping!"), so every
+# CS2 still ships the Source tokenizer, which rejects a console line longer than
+# 510 characters ("...overflows the tokenizer buffer.. Skipping!"), so every
 # console copy string is kept at or under this, with a margin
 LINE_LIMIT = 500
 
@@ -33,6 +33,8 @@ CONSOLE_SKIP = {
     # removed by the Sept 2026 crosshair update; the cl_crosshair* convars are
     # replaced as a whole by the converted crosshair commands
     "cl_fixedcrosshairgap",
+    # not a CS2 convar or command (absent from the build 2000930 dump)
+    "cl_mouselook",
 }
 
 BUCKETS = [
@@ -123,6 +125,11 @@ def section_commands(rec) -> dict:
     return out
 
 
+def kind_of(xp) -> str:
+    """"converted" from pre-patch settings, "copied" (already new format) or "blocked"."""
+    return (xp or {}).get("kind") or ("converted" if (xp or {}).get("commands") else "blocked")
+
+
 def crosshair_commands(xp) -> list:
     """Converted crosshair commands, or [] when the converter refused the input."""
     return list(xp.get("commands") or []) if xp else []
@@ -165,13 +172,15 @@ def player_cfg(rec, xp) -> str:
     """The converted config as an exec-able .cfg file, one command per line."""
     slug = rec["slug"]
     nick = rec.get("nick") or slug
-    head = [
-        f"// {nick} - CS2 config from {BASE}/p/{slug}/",
-        "// Converted from the pre-patch settings settings.gg lists for this player; the crosshair",
-        "// is converted to the Sept 2026 crosshair system (community reconstruction).",
-        f"// Save as Counter-Strike Global Offensive/game/csgo/cfg/{slug}.cfg, then run: exec {slug}",
-        "",
-    ]
+    about = {
+        "converted": ["// From the settings settings.gg lists for this player; the pre-patch crosshair",
+                      "// is converted to the Sept 2026 crosshair system (community reconstruction)."],
+        "copied": ["// From the settings settings.gg lists for this player; the crosshair is copied",
+                   "// as listed (already in the format CS2 uses since the Sept 2026 update)."],
+    }.get(kind_of(xp), ["// From the settings settings.gg lists for this player. The crosshair couldn't",
+                        "// be converted automatically and is not included."])
+    head = [f"// {nick} - CS2 config from {BASE}/p/{slug}/", *about,
+            f"// Save as Counter-Strike Global Offensive/game/csgo/cfg/{slug}.cfg, then run: exec {slug}", ""]
     return "\n".join(head + full_commands(rec, xp)) + "\n"
 
 
@@ -336,16 +345,32 @@ def crosshair_section_html(rec, xp, reference) -> str:
     n = xp["native"]
     height = xp["height"]
     aria = f"{n['length']} pixel arms, {n['thickness']} pixel thick, gap {n['gap']}, at {height}p"
-    svg, label = xhair_svg(xp["preview"], height, aria) if xp.get("preview") else ("", "no preview")
+    svg, label = xhair_svg(xp["preview"], height, aria) if xp.get("preview") else ("", "no preview for this style")
     notes = ""
     if xp.get("warnings"):
         notes = ('<ul class="xh-notes" aria-label="Conversion notes">'
                  + "".join(f"<li>{esc(w['text'])}</li>" for w in xp["warnings"]) + "</ul>")
-    authored = (f"authored at {height}p, {esc(nick)}'s resolution" if xp.get("heightSource") == "resolution"
-                else f"authored at {height}p (their resolution isn't listed)")
+    authored = {
+        "resolution": f"authored at {height}p, {esc(nick)}'s resolution",
+        "config": f"authored at {height}p, as their config says",
+    }.get(xp.get("heightSource"), f"authored at {height}p (their resolution isn't listed)")
+    if kind_of(xp) == "copied":
+        about = (f'<p class="note">settings.gg lists {esc(nick)}\'s crosshair in the format CS2 uses since the '
+                 f"Sept 22, 2026 update, so it's copied as-is, {authored}; CS2 rescales it to your resolution.</p>")
+    else:
+        about = (f'<p class="note">Converted from the pre-patch crosshair settings.gg lists for {esc(nick)} to CS2\'s '
+                 f"crosshair system since the Sept 22, 2026 update, {authored}; CS2 rescales it to your resolution. "
+                 f"Many pros rebuilt their crosshair after the update, so this may not be what {esc(nick)} uses now{history}.</p>\n"
+                 f'          <p class="note">Valve published no conversion formula. This uses a community reconstruction '
+                 f"({ref_link}) that hasn't been checked against in-game captures.</p>")
+    pieces = chunk(cmds)
+    buttons = "".join(
+        f'<button type="button" class="btn small" data-copy="{esc("; ".join(piece))}">'
+        f'Copy crosshair{f" {i + 1}/{len(pieces)}" if len(pieces) > 1 else ""}</button>'
+        for i, piece in enumerate(pieces))
     return f'''<section class="section" id="crosshair">
       <div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2>
-        <button type="button" class="btn small" data-copy="{esc("; ".join(cmds))}">Copy crosshair</button></div>
+        {buttons}</div>
       <div class="xhair-box">
         <div class="xhair-preview">
           {svg}
@@ -354,8 +379,7 @@ def crosshair_section_html(rec, xp, reference) -> str:
         <div class="xhair-meta">
           {cmd_block(cmds, "Crosshair commands")}
           {notes}
-          <p class="note">Converted from the pre-patch crosshair settings.gg lists for {esc(nick)} to CS2's crosshair system since the Sept 22, 2026 update, {authored}; CS2 rescales it to your resolution. Many pros rebuilt their crosshair after the update, so this may not be what {esc(nick)} uses now{history}.</p>
-          <p class="note">Valve published no conversion formula. This uses a community reconstruction ({ref_link}) that hasn't been checked against in-game captures.</p>
+          {about}
         </div>
       </div>
     </section>'''
@@ -380,13 +404,16 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None) -> str:
         edpi = None
 
     res = video.get("Resolution", "")
-    desc = (f"{nick}'s CS2 settings as console commands: crosshair converted to the new crosshair system"
+    kind = kind_of(xp)
+    xh_phrase = {"converted": "crosshair converted to the new crosshair system", "copied": "crosshair"}.get(kind)
+    desc = (f"{nick}'s CS2 settings as console commands: " + (xh_phrase or "sensitivity")
             + (f", {dpi} DPI x {sens} sens ({edpi} eDPI)" if edpi else "")
             + (f", {res}" + (f" {video['Scaling Mode']}" if video.get("Scaling Mode") else "") if res else "")
             + ", viewmodel, HUD, radar and launch options - copy, paste, play.")
 
     avatar_url = f"{BASE}/{rec['avatar']}" if rec.get("avatar") else f"{BASE}/assets/og-default.png"
-    og_desc = (f"{nick}'s CS2 crosshair (converted to the new system), sensitivity"
+    og_desc = (f"{nick}'s CS2 " + ({"converted": "crosshair (converted to the new system), sensitivity",
+                                     "copied": "crosshair, sensitivity"}.get(kind, "sensitivity"))
                + (f" ({edpi} eDPI)" if edpi else "") + ", viewmodel, HUD and radar as copy-paste console commands.")
 
     # only what app.js's DPI matcher reads
@@ -428,11 +455,11 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None) -> str:
     raw_html = ""
     if raw_cfg:
         raw_html = f'''<section class="section">
-      <div class="section-head"><h2>Original autoexec.cfg <span class="tag">pre-patch</span></h2>
+      <div class="section-head"><h2>Original autoexec.cfg <span class="tag">{"settings.gg" if kind == "copied" else "pre-patch"}</span></h2>
         <a class="btn ghost small" href="/cfg/raw/{esc(slug)}.cfg" download="{esc(slug)}-original.cfg">Download original</a>
       </div>
       <details class="raw"><summary>Show original config file</summary>{cmd_block_raw(raw_cfg)}</details>
-      <p class="note">The autoexec.cfg exactly as settings.gg serves it, in the format from before the Sept 22, 2026 update: its crosshair settings no longer work in CS2, so don't exec it — use the converted commands or .cfg above.</p>
+      <p class="note">{"The autoexec.cfg exactly as settings.gg serves it. The commands and .cfg above leave out the convars that don't work in CS2." if kind == "copied" else "The autoexec.cfg exactly as settings.gg serves it, in the format from before the Sept 22, 2026 update: its crosshair settings no longer work in CS2, so don't exec it — use the converted commands or .cfg above."}</p>
     </section>'''
 
     launch = rec.get("launch_options")
@@ -458,8 +485,13 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None) -> str:
         "@type": "ProfilePage",
         "mainEntity": {k: v for k, v in entity.items() if v},  # no nulls in structured data
     }
-    head_copy = (f'<button type="button" class="btn" data-copy="{esc("; ".join(xh_cmds))}">Copy crosshair</button>'
-                 if xh_cmds else "")
+    if not xh_cmds:
+        head_copy = ""
+    elif len(chunk(xh_cmds)) == 1:
+        head_copy = f'<button type="button" class="btn" data-copy="{esc("; ".join(xh_cmds))}">Copy crosshair</button>'
+    else:
+        head_copy = '<a class="btn" href="#crosshair">Crosshair ↓</a>'
+
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -517,7 +549,7 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None) -> str:
     <section class="section" id="full-config">
       <div class="section-head"><h2>Full config <span class="tag">{len(parts)} part{"s" if len(parts) != 1 else ""}</span></h2>
         {download.replace('class="btn ghost"', 'class="btn ghost small"')}</div>
-      <p class="note lead">The CS2 console can reject a pasted line of 510 characters or more, so the full config comes in parts: press <b>~</b> in CS2, paste part 1, press Enter, then do the same with the next part. Or download the .cfg, save it in <code>Counter-Strike Global Offensive/game/csgo/cfg/</code> and run <code>exec {esc(slug)}</code> in the console.</p>
+      <p class="note lead">The CS2 console can reject a pasted line longer than 510 characters, so the full config comes in parts: press <b>~</b> in CS2, paste part 1, press Enter, then do the same with the next part. Or download the .cfg, save it in <code>Counter-Strike Global Offensive/game/csgo/cfg/</code> and run <code>exec {esc(slug)}</code> in the console.</p>
       {part_blocks}
       <p class="note">Convars that were removed, renamed, cheat-protected or don't exist in CS2 are left out.</p>
     </section>

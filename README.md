@@ -16,10 +16,12 @@ Or download the player's **.cfg**, save it in
 `Counter-Strike Global Offensive/game/csgo/cfg/` and run `exec <name>` in the
 console (for example `exec donk`). It holds the same converted commands, one per line.
 
-Why parts: CS2 still ships the Source tokenizer, which rejects a console line of
-510 characters or more ("…overflows the tokenizer buffer.. Skipping!"), and a
-pro's full config is 540–1,250 characters. Every copy button on the site is kept
-at 500 characters or less, and the build fails if one isn't.
+Why parts: CS2 still ships the Source tokenizer, which rejects a console line
+longer than 510 characters ("…overflows the tokenizer buffer.. Skipping!"), and
+most pros' full configs are longer (up to about 1,200 characters). So the full
+config is split by section (crosshair; mouse, viewmodel & radar; HUD & other).
+Every copy button on the site is kept at 500 characters or less, and the build
+fails if one isn't.
 
 ### The crosshair
 
@@ -50,19 +52,22 @@ through 2000930), vendored under `scraper/vendor/`:
   it is copied as-is.
 
 Valve published no conversion formula, so this is a community reconstruction,
-not checked against in-game captures. It does reproduce the post-patch
-crosshairs pros have published where we could find them (demo-derived codes,
-Oct 2026): donk, KSCERATO, YEKINDAR and w0nderful at 2/2/1, FalleN at 3/2/0 with no
-outline. These are pinned in `scraper/test_crosshair.mjs`. Many pros rebuilt their
-crosshair after the update, so a conversion of their old one may differ from what
-they use now. Each player page says so and links their crosshair history.
+not checked against in-game captures. For some pros, converting their old
+crosshair gives the one they published after the update (demo-derived codes,
+Oct 2026): donk, KSCERATO, xiELO, YEKINDAR and w0nderful at length/thickness/gap
+2/2/1, and FalleN at 3/2/0 with no outline. These are pinned in
+`scraper/test_crosshair.mjs`. Not every pro matches. yuurih had the same old
+settings as donk but published 2/2/0, and FL1T published 2/1/1 where the conversion
+gives 2/1/2. Others (Jame, HObbit, zweih, molodoy) built a different crosshair
+after the update. So a conversion of a pro's old crosshair may differ from what they
+use now. Each player page says so and links their crosshair history.
 
 Notes:
 
 - **Mouse DPI / polling rate** are set in your mouse software, not the game. Make
   sure your driver matches the player's DPI shown on their page.
 - **Video settings** (resolution, aspect ratio, stretched scaling) can't be applied via console. They're shown on each player page as manual tables, and the resolution can be forced with launch options.
-- Convars that don't exist in CS2 or are cheat-protected (`cl_radar_size`, `cl_drawhud`, `setting.defaultres`, `setting.defaultresheight`) are filtered out automatically.
+- Convars that don't exist in CS2 or are cheat-protected (`cl_radar_size`, `cl_drawhud`, `cl_mouselook`, `setting.defaultres`, `setting.defaultresheight`, plus the removed crosshair convars) are filtered out automatically.
 - Each page also shows the original settings.gg `autoexec.cfg` (pre-patch format,
   `cfg/raw/`). Don't exec it: its crosshair settings no longer work.
 
