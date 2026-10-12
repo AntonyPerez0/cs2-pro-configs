@@ -17,8 +17,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
-from sitegen import (LINE_LIMIT, chunk, console_parts, full_commands, json_script,  # noqa: E402
-                     player_cfg, res_key, safe_value)
+from sitegen import (LINE_LIMIT, chunk, console_parts, crosshair_section_html, full_commands,  # noqa: E402
+                     json_script, player_cfg, res_key, safe_value)
 from scrape import KEY_RE, image_ext  # noqa: E402
 
 FAILS = []
@@ -50,8 +50,13 @@ def cmds(slug):
 
 # ---- converter output covers every player and uses only current cvars ----
 check("every player converted", sorted(set(records) - set(P)), [])
-check("no converter crashes", sorted(s for s, p in P.items() if p.get("error")), [])
-converted = [s for s, p in P.items() if p.get("commands") and p.get("heightSource") != "config"]
+# a player the converter can't handle gets a "can't be converted" note; only a
+# broken converter (crosshair.mjs's own 10% limit) should stop the refresh
+errors = sorted(s for s, p in P.items() if p.get("error"))
+if errors:
+    print(f"converter errors (shown on their pages as can't be converted): {errors}")
+check("converter errors within crosshair.mjs's 10% limit", len(errors) <= len(P) / 10, True)
+converted = [s for s, p in P.items() if p.get("kind") == "converted"]
 vendored = (HERE / "vendor" / "small-indie-crosshair-company" / "VENDORED.md").read_text()
 check("pinned reference commit matches the vendored copy", xh["reference"]["commit"] in vendored, True)
 check("only current crosshair cvars",
@@ -68,7 +73,9 @@ check("authored at the pro's own height, screen_height last", bad_height[:5], []
 # ---- conversion rules, on every converted player ----
 outline_mismatch = [s for s in converted if ("cl_crosshairoutline_a" in cmds(s)) != (cmds(s).get("cl_crosshair_drawoutline", "0") != "0")]
 check("outline colour set exactly when an outline is drawn", outline_mismatch[:5], [])
-additive = [s for s in converted if records[s]["convars"].get("cl_crosshairusealpha") == "false"]
+additive = [s for s in converted if records[s]["convars"].get("cl_crosshairusealpha") == "false"
+            # the converter deliberately redraws an outline-only shape as black bars at the old 200
+            and not any(w["code"] == "outline-only-as-core" for w in P[s].get("warnings", []))]
 check("usealpha off -> opacity 255", sorted({cmds(s)["cl_crosshaircolor_a"] for s in additive} - {"255"}), [])
 check("split-pip cvars only for style 2",
       sorted(s for s in converted if cmds(s)["cl_crosshairstyle"] != "2" and any(c.startswith("cl_crosshair_dynamic_") for c in P[s]["commands"])), [])
@@ -94,11 +101,20 @@ for slug, rec in records.items():
         if len(html.unescape(value)) > LINE_LIMIT:
             page_bad.append(slug)
     cfg = (ROOT / "cfg" / f"{slug}.cfg").read_text(encoding="utf-8")
-    if [l for l in cfg.splitlines() if l and not l.startswith("//")] != full_commands(rec, P[slug]):
+    if ([l for l in cfg.splitlines() if l and not l.startswith("//")] != full_commands(rec, P[slug])
+            or f"exec {slug}" not in cfg):
         cfg_bad.append(slug)
 check("every copy button on every page fits one console line", sorted(set(page_bad))[:5], [])
-check("downloadable .cfg is the converted config", cfg_bad[:5], [])
-check("cfg header names the exec command", f"exec donk" in player_cfg(records["donk"], P["donk"]), True)
+check("downloadable .cfg is the converted config and names its exec command", cfg_bad[:5], [])
+
+# a crosshair longer than one console line gets one copy button per piece
+some = next(iter(records))
+long_xp = {**P[some], "kind": "converted", "commands": [f"cl_crosshair_dynamic_splitdist {i:020d}" for i in range(20)]}
+section = crosshair_section_html(records[some], long_xp, xh["reference"])
+copies = [html.unescape(v) for v in re.findall(r'data-copy="([^"]*)"', section)]
+check("long crosshair split into copy pieces that fit",
+      (len(copies) > 1, all(len(c) <= LINE_LIMIT for c in copies), "; ".join(copies) == "; ".join(long_xp["commands"])),
+      (True, True, True))
 
 # ---- hardening helpers ----
 s = json_script({"v": "a</script>b"})

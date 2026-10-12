@@ -17,7 +17,8 @@
 
 * { box-sizing: border-box; }
 
-html { color-scheme: dark; }
+/* in-page links (#full-config) land below the sticky header */
+html { color-scheme: dark; scroll-padding-top: 72px; }
 
 body {
   margin: 0;

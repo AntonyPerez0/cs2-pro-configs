@@ -33,7 +33,7 @@ const conv = (r) => {
 const geo = (o) => [o.cv.cl_crosshair_length, o.cv.cl_crosshair_thickness, o.cv.cl_crosshair_gap].map(Number);
 
 // ---- anchors: published post-patch crosshairs ----
-for (const slug of ['donk', 'kscerato', 'yekindar', 'w0nderful']) check(`${slug}: old 1/1/-4 family -> published 2/2/1`, geo(conv(rec(slug))), [2, 2, 1]);
+for (const slug of ['donk', 'kscerato', 'xielo', 'yekindar', 'w0nderful']) check(`${slug}: old 1/1/-4 family -> published 2/2/1`, geo(conv(rec(slug))), [2, 2, 1]);
 const donk = conv(rec('donk'));
 check('donk authored at his 960p', [donk.height, donk.cv.cl_crosshair_screen_height], [960, '960']);
 check('donk: alpha slider off -> opacity 255 (published)', donk.cv.cl_crosshaircolor_a, '255');
@@ -78,6 +78,16 @@ check('new format copied as-is', geo(already), [3, 1, 2]);
 check('new format keeps its authored height', already.cv.cl_crosshair_screen_height, '1440');
 check('new format drops legacy and unsafe values', ['cl_crosshairgap' in already.cv, 'cl_crosshaircolor_r' in already.cv], [false, false]);
 check('new format normalizes booleans', already.cv.cl_crosshairdot, '0');
+
+check('converted entries say so', donk.kind, 'converted');
+check('new-format entries are marked copied', already.kind, 'copied');
+check('new-format default style (7, quad) gets no static-cross preview',
+  conv({ slug: 'x', convars: { cl_crosshair_length: '3', cl_crosshair_thickness: '1', cl_crosshair_gap: '2' }, tables: {} }).preview, null);
+check('new-format spread limit is kept', conv({ slug: 'x', convars: { cl_crosshairstyle: '7', cl_crosshair_length: '3',
+  cl_crosshair_dynamic_spread_limit: '128' }, tables: {} }).cv.cl_crosshair_dynamic_spread_limit, '128');
+check('a legacy config with spread_limit still converts', geo(conv(rec('donk', { cl_crosshair_dynamic_spread_limit: '255' }))), [2, 2, 1]);
+const empty = convertPlayer({ slug: 'x', convars: { sensitivity: '1' }, tables: {} });
+check('no crosshair settings -> blocked, not a crash', [empty.kind, empty.blockers?.length], ['blocked', 1]);
 
 if (fails.length) {
   console.log(`${fails.length} failure(s) of ${n} checks:`);

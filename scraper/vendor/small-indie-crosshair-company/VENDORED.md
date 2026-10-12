@@ -13,5 +13,5 @@ pre-patch crosshair into the current crosshair cvars.
 To update: copy a newer `lib/` over this one, update the commit above and the
 `REFERENCE` constant in `scraper/crosshair.mjs`, run `node scraper/crosshair.mjs` and
 `python3 scraper/sitegen.py`, and review the diff of `data/crosshair.json`
-(the tests in `scraper/test_site.py` pin conversions that match pros' published
+(`scraper/test_crosshair.mjs` pins conversions that match pros' published
 post-patch crosshairs).

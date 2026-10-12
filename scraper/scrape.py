@@ -215,13 +215,15 @@ def scrape_player(entry: dict) -> dict:
         raise RuntimeError(f"profile HTTP {pr.status_code}")
     rec.update(parse_profile(pr.text, slug))
 
+    # a missing or unreadable config fails the player, so main() keeps last
+    # week's record instead of replacing it with an empty one
     cr = fetch(f"{BASE}/api/download/{slug}")
-    convars, raw_cfg = {}, None
-    if cr.status_code == 200:
-        try:
-            convars, raw_cfg = parse_config_zip(cr.content)
-        except Exception:
-            pass
+    if cr.status_code != 200:
+        raise RuntimeError(f"config HTTP {cr.status_code}")
+    try:
+        convars, raw_cfg = parse_config_zip(cr.content)
+    except Exception as e:
+        raise RuntimeError(f"config unreadable: {e}") from e
     rec["convars"] = convars
     rec["raw_cfg"] = raw_cfg
 

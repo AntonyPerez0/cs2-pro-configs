@@ -56,7 +56,7 @@ export const CURRENT_CVARS = [
   'cl_crosshair_recoil', 'cl_crosshaircolor_r', 'cl_crosshaircolor_g', 'cl_crosshaircolor_b', 'cl_crosshaircolor_a',
   'cl_crosshair_dynamic_splitdist', 'cl_crosshair_dynamic_splitalpha_innermod',
   'cl_crosshair_dynamic_splitalpha_outermod', 'cl_crosshair_dynamic_maxdist_splitratio',
-  'cl_crosshair_sniper_width', 'cl_crosshair_screen_height',
+  'cl_crosshair_dynamic_spread_limit', 'cl_crosshair_sniper_width', 'cl_crosshair_screen_height',
 ];
 // present only in configs saved after the Sept 22, 2026 update
 const NEW_ONLY = ['cl_crosshair_length', 'cl_crosshair_thickness', 'cl_crosshair_gap', 'cl_crosshair_screen_height',
@@ -109,13 +109,16 @@ function passThrough(rec, height, source) {
   const native = { length: int('cl_crosshair_length', 8), thickness: int('cl_crosshair_thickness', 2), gap: int('cl_crosshair_gap', 4) };
   const flags = { dot: value('cl_crosshairdot') === '1', t_style: value('cl_crosshair_t') === '1' };
   return {
+    kind: 'copied',
     height: h,
     heightSource: authored !== null ? 'config' : source,
     commands,
     native,
     shape: null,
     warnings: [{ code: 'already-new-format', text: 'settings.gg already lists this crosshair in the format CS2 uses since the Sept 22, 2026 update, so it is copied as-is instead of converted.' }],
-    preview: previewOf(native, h, flags, int('cl_crosshair_drawoutline', 0), value),
+    // the static-cross model only draws styles 2/4/5 (circle, dot-only, square and quad styles differ);
+    // a missing style is the game default 7
+    preview: [2, 4, 5].includes(int('cl_crosshairstyle', 7)) ? previewOf(native, h, flags, int('cl_crosshair_drawoutline', 0), value) : null,
   };
 }
 
@@ -123,12 +126,15 @@ export function convertPlayer(rec) {
   const { height, source } = playerHeight(rec);
   if (NEW_ONLY.some((k) => rec.convars?.[k] !== undefined)) return passThrough(rec, height, source);
   // numbers and booleans only: anything else (e.g. a value with ';') is dropped
-  // here rather than letting it reject the whole crosshair
-  const legacy = Object.entries(rec.convars ?? {}).filter(([k, v]) => k.startsWith('cl_crosshair') && numeric(v) !== null);
+  // here rather than letting it reject the whole crosshair. spread_limit is a
+  // post-update cvar the legacy parser refuses; it does nothing for a static cross
+  const legacy = Object.entries(rec.convars ?? {}).filter(([k, v]) =>
+    k.startsWith('cl_crosshair') && k !== 'cl_crosshair_dynamic_spread_limit' && numeric(v) !== null);
+  if (!legacy.length) return { kind: 'blocked', height, heightSource: source, blockers: ['settings.gg lists no crosshair settings for this player.'] };
   const parsed = parseLegacyTextWithNotes(legacy.map(([k, v]) => `${k} ${v}`).join('\n'));
   const options = { oldHeight: height, currentHeight: height, authoredHeight: height, styleTarget: 'family' };
   const report = infer({ settings: parsed.config, options, selectedModelId: COMMUNITY_MODEL.id });
-  if (report.blockers.length) return { height, heightSource: source, blockers: report.blockers };
+  if (report.blockers.length) return { kind: 'blocked', height, heightSource: source, blockers: report.blockers };
 
   const overrides = mergedExportOverrides(report);
   const commands = exportQuantCFG(report, defaultExportGroups(parsed.assigned, report.settings, overrides)).split(';');
@@ -149,6 +155,7 @@ export function convertPlayer(rec) {
   const filled = defaultsWarning(parsed.notes);
   const outlineOn = Number(value('cl_crosshair_drawoutline')) > 0;
   return {
+    kind: 'converted',
     height,
     heightSource: source,
     commands,
@@ -180,7 +187,8 @@ function build() {
       players[slug] = convertPlayer(rec);
     } catch (e) {
       failed++;
-      players[slug] = { ...playerHeight(rec), error: String(e.message ?? e) };
+      const { height, source } = playerHeight(rec);
+      players[slug] = { kind: 'blocked', height, heightSource: source, error: String(e.message ?? e) };
     }
     if (players[slug].error || players[slug].blockers) console.error(`${slug}: ${players[slug].error ?? players[slug].blockers.join(' ')}`);
   }
