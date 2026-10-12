@@ -106,6 +106,8 @@ check('2012 style 2 says CS2 style 2 is the accurate one', codes(classic('2012-1
 check('2015 style 2 has no such note', codes(classic('2015', { cl_crosshairstyle: '2' })).includes('era-style-2'), false);
 check('2013 (unknown day): outline existed by May, so off by default', codes(classic('2013')), ['era-features-off', 'era-default-off']);
 const windowed = classic('2013', {}, { window: ['2013-01-13', '2013-04-25'] });
+check('a window ending on the update day predates it', classic('2014-07', {}, { window: ['2014-07-23', '2014-08-01'] })
+  .notes[0].text.includes('cl_crosshairgap_useweaponvalue'), true);
 check('a known window narrows the era', [windowed.convars.cl_crosshairgap_useweaponvalue, codes(windowed)], ['1', ['era-features-off']]);
 check('2022: off by default, recoil cheat-protected', codes(classic('2022-04-30', { cl_crosshair_drawoutline: '1' })),
   ['era-default-off', 'era-recoil-cheat']);

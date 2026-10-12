@@ -4,7 +4,8 @@
 The dump is DumpSource2/convars.txt (plus game/csgo/steam.inf for the build)
 from https://github.com/SteamDatabase/GameTracking-CS2. Keeps the convars a
 player config can set: not development-only, not cheat-protected. Each maps to
-[min, max] (null when unbounded).
+[min, max] (null when unbounded). Cheat-protected names are listed apart, so a
+page can say why they are left out.
 
   python3 scraper/tools/cs2_convars.py <convars.txt> <steam.inf>
 """
@@ -19,13 +20,16 @@ LINE = re.compile(r"^(\S+) (.*?) \(((?:min: (\S+), )?(?:max: (\S+), )?)([^()]*)\
 
 def main(convars_path: str, steam_inf: str) -> None:
     info = dict(l.split("=", 1) for l in Path(steam_inf).read_text().splitlines() if "=" in l)
-    out = {}
+    out, cheat = {}, []
     for line in Path(convars_path).read_text(encoding="utf-8", errors="replace").splitlines():
         m = LINE.match(line)
         if not m:
             continue
         name, flags = m.group(1), set(m.group(6).split())
-        if flags & {"developmentonly", "cheat"}:
+        if "developmentonly" in flags:
+            continue
+        if "cheat" in flags:
+            cheat.append(name)  # exists, but a config can't set it
             continue
         num = lambda v: None if v is None else float(v)
         out[name] = [num(m.group(4)), num(m.group(5))]
@@ -35,10 +39,11 @@ def main(convars_path: str, steam_inf: str) -> None:
         "build": info.get("ClientVersion"),
         "date": info.get("VersionDate"),
         "convars": dict(sorted(out.items())),
+        "cheat": sorted(cheat),
     }
     target = Path(__file__).resolve().parent.parent / "cs2_convars.json"
     target.write_text(json.dumps(doc, separators=(",", ":"), ensure_ascii=False) + "\n")
-    print(f"{target.name}: {len(out)} convars, build {doc['build']}")
+    print(f"{target.name}: {len(out)} convars, {len(cheat)} cheat-protected, build {doc['build']}")
 
 
 if __name__ == "__main__":

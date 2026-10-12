@@ -162,15 +162,17 @@ links): `python3 -m http.server` and open http://localhost:8000.
   2012 has 8 players.
 - **Configs.** 2011 was a CS 1.6 ranking, so those players get their CS:GO settings.
   Each entry uses the player's config closest to the ranking year that can be
-  converted, mostly game-written `config.cfg` files from setup.gg's public archive. A
-  file is dated from the settings it contains, checked against Valve's release notes
-  (a setting added on a known date bounds when the file was saved), or else from the
-  archive's commit date as an upper bound. Every page shows the date, its source and
-  how the date is known. When the crosshair, sensitivity and resolution come from
-  different configs, the page says which part is from when. DPI is only paired with a
-  sensitivity from a config with the same sensitivity, so the eDPI never mixes eras. A
-  crosshair is converted at the resolution its own source gives. Two players (trace
-  2011, Gux 2011) have no documented CS:GO config and are listed without one.
+  converted, mostly game-written `config.cfg` files from setup.gg's public archive,
+  plus Liquipedia's settings tables. A date comes from the settings a file contains,
+  checked against Valve's release notes (a setting added on a known date bounds when
+  the file was saved), from a date written in the file or on its source (a header
+  comment, Liquipedia's "Updated as of"), or else from the archive's commit date as an
+  upper bound. Every page shows the date, its source and how the date is known. When
+  the crosshair, sensitivity and resolution come from different configs, the page says
+  which part is from when. DPI is only paired with a sensitivity from a config with
+  the same sensitivity, so the eDPI never mixes eras. A crosshair is converted at the
+  resolution its own source gives. Two players (trace 2011, Gux 2011) have no
+  documented CS:GO config and are listed without one.
 - **Conversion.** The same converter as the current players. Crosshair settings
   CS:GO added later are set to what the player had then, not CS2's defaults:
   `cl_crosshair_drawoutline` (added 22 May 2013), `cl_crosshairgap_useweaponvalue`

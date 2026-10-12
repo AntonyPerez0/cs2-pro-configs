@@ -212,24 +212,27 @@ export function classicRecord(year, p) {
   const rewrite = {};  // converter warning code -> text for this era
   if (Object.keys(convars).some((k) => k.startsWith('cl_crosshair'))) {
     // a known window ("saved between ...") is narrower than the date label
+    // A window ends on the update whose setting the file lacks, so it was saved before that day.
     const w = p.config.window;
-    const span = Array.isArray(w) && w.length === 2 ? w : dateSpan(p.config.date);
+    const fromWindow = Array.isArray(w) && w.length === 2;
+    const span = fromWindow ? w : dateSpan(p.config.date);
+    const before = (day) => Boolean(span) && (fromWindow ? span[1] <= day : span[1] < day);
     const style = String(convars.cl_crosshairstyle ?? '').trim();
     const notYet = [], cheat = [], byDefault = [];
-    if (style === '4' && span && span[1] < STYLE4_STATIC_GAP && convars.cl_crosshairgap_useweaponvalue === undefined) {
+    if (style === '4' && before(STYLE4_STATIC_GAP) && convars.cl_crosshairgap_useweaponvalue === undefined) {
       // the converter's weapon-gap-dropped warning then says what that means now
       convars.cl_crosshairgap_useweaponvalue = '1';
       rewrite['weapon-gap-dropped'] = 'Until 5 Jun 2013 the style 4 gap changed per weapon; the current game has one gap, so the ' +
         'export uses the gap without the weapon value.';
     }
-    if (style === '2' && span && span[1] < STYLE2_ACCURATE) {
+    if (style === '2' && before(STYLE2_ACCURATE)) {
       notes.push({ code: 'era-style-2', text: 'Style 2 was the original classic crosshair until February 2014: it showed when you fired but not ' +
         'weapon accuracy (style 5 later recreated it). In CS2, style 2 is the later, accurate version, so it spreads more ' +
         'with movement and inaccuracy than this crosshair did.' });
     }
     for (const [k, added] of ERA) {
       if (convars[k] !== undefined) continue;
-      if (span && span[1] < added) notYet.push(k);
+      if (before(added)) notYet.push(k);
       else if (k === 'cl_crosshair_recoil') {
         if (span && span[0] >= CS2_RELEASE) continue;  // a CS2 config: the parser's default applies
         cheat.push(k);

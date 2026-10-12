@@ -1,5 +1,5 @@
 {
- "about": "Rankings: HLTV's Top 20 Players of the Year (2011, 2013-2015) and Esports Earnings' 2012 CS:GO prize money. Configs come from public archives of pro CS:GO configs, mostly game-written config.cfg files in setup.gg's GitHub archive. A file is dated from the settings it contains, checked against Valve's release notes, or else from the archive's commit date as an upper bound; each page lists its sources and how each date is known.",
+ "about": "Rankings: HLTV's Top 20 Players of the Year (2011, 2013-2015) and Esports Earnings' 2012 CS:GO prize money. Configs come from public archives of pro CS:GO configs (mostly game-written config.cfg files in setup.gg's GitHub archive) and Liquipedia's settings tables. A date comes from the settings a file contains (checked against Valve's release notes), from a date written in the file or on its source (a header comment, Liquipedia's \"Updated as of\"), or else from the archive's commit date as an upper bound; each page lists its sources and how each date is known.",
  "years": [
   {
    "year": 2011,
