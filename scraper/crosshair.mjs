@@ -206,7 +206,7 @@ function dateSpan(d) {
 }
 
 /** A classic entry's dated config as the record shape convertPlayer reads, plus notes on what was assumed. */
-export function classicRecord(year, p) {
+export function classicRecord(year, p, key = year) {
   const convars = { ...(p.config.convars ?? {}) };
   const notes = [];
   const rewrite = {};  // converter warning code -> text for this era
@@ -254,7 +254,7 @@ export function classicRecord(year, p) {
   // the crosshair is converted at the resolution its own source gives, when that differs from the video settings shown
   const video = { ...(p.config.video ?? {}) };
   if (p.config.crosshair_resolution) video.Resolution = p.config.crosshair_resolution;
-  return { slug: `${year}/${p.id}`, convars, tables: { 'Video Settings': video }, notes, rewrite };
+  return { slug: `${key}/${p.id}`, convars, tables: { 'Video Settings': video }, notes, rewrite };
 }
 
 function convertSafely(rec) {
@@ -277,11 +277,12 @@ function buildClassic() {
   for (const y of classic.years) {
     for (const p of y.players) {
       if (!p.config) continue;
-      const rec = classicRecord(y.year, p);
+      const key = y.key ?? y.year;  // a lineup group has its own key
+      const rec = classicRecord(y.year, p, key);
       const x = convertSafely(rec);
       if (x.warnings) x.warnings = [...rec.notes, ...x.warnings.map((w) => (rec.rewrite[w.code] ? { ...w, text: rec.rewrite[w.code] } : w))];
       if (p.config.crosshair_resolution && x.heightSource === 'resolution') x.heightSource = 'crosshair-source';
-      out[`${y.year}/${p.id}`] = x;
+      out[`${key}/${p.id}`] = x;
     }
   }
   return out;
