@@ -3347,7 +3347,7 @@
     },
     {
      "rank": 9,
-     "nick": "KRIMZ",
+     "nick": "KRiMZ",
      "real_name": "Freddy Johansson",
      "team": "fnatic",
      "game": "CS:GO",
@@ -4688,6 +4688,1297 @@
        }
       ]
      }
+    }
+   ]
+  },
+  {
+   "year": 2015,
+   "key": "c9-ibp-2015",
+   "kind": "roster",
+   "title": "Cloud9 and iBUYPOWER",
+   "when": "January 2015",
+   "target": "2015-01",
+   "label": "C9 & iBP · Jan 2015",
+   "h1": "Jan 2015",
+   "ranking": "Cloud9 and iBUYPOWER lineups, January 2015",
+   "short": "Cloud9 & iBUYPOWER, Jan 2015",
+   "badges": {
+    "Cloud9": "C9",
+    "iBUYPOWER": "iBP"
+   },
+   "sources": [
+    "https://www.gosugamers.net/counterstrike/news/29354-cloud9-and-denial-esports-make-roster-changes-in-a-north-american-shuffle",
+    "https://www.cybersport.ru/base/teams/no_org/team-ibuypower-cs-go",
+    "https://www.gosugamers.net/counterstrike/news/33847-valve-confirm-ibp-life-bans"
+   ],
+   "note": "North America's two leading teams at the start of 2015. On 15 December 2014 Cloud9 swapped Hiko for ShahZaM and Hiko joined iBUYPOWER, which had just brought back DaZeD. On 5 January the iBUYPOWER five left the organisation and played on as GX until late January, when Valve banned DaZeD, swag and AZK, along with former teammate steel, over a match the 2014 iBUYPOWER team had thrown. steel, who had left in November 2014, is listed with them.",
+   "players": [
+    {
+     "nick": "n0thing",
+     "real_name": "Jordan Gilbert",
+     "team": "Cloud9",
+     "game": "CS:GO",
+     "id": "n0thing",
+     "current_slug": null,
+     "config": {
+      "date": "2013",
+      "window": [
+       "2013-06-27",
+       "2014-02-12"
+      ],
+      "date_basis": "His own game-written config.cfg (in-game name 'coL.n0thing', sensitivity 1.85) from setup.gg's archive. It stores a medal-stats timestamp of 27 Jun 2013 and lacks the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between those dates.",
+      "sources": [
+       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/n0thing/config.cfg",
+       "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+      ],
+      "confidence": "medium",
+      "convars": {
+       "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "1",
+       "cl_crosshairalpha": "300",
+       "cl_crosshaircolor": "1",
+       "cl_crosshairdot": "0",
+       "cl_crosshairgap": "1.5",
+       "cl_crosshairscale": "0",
+       "cl_crosshairsize": "5",
+       "cl_crosshairstyle": "4",
+       "cl_crosshairthickness": "1.5",
+       "cl_crosshairusealpha": "1",
+       "cl_fixedcrosshairgap": "3",
+       "cl_radar_always_centered": "0",
+       "cl_radar_icon_scale_min": "0.6",
+       "cl_radar_rotate": "1",
+       "cl_radar_scale": "0.4",
+       "cl_righthand": "1",
+       "cl_showloadout": "1",
+       "hud_scaling": "0.95",
+       "hud_showtargetid": "0",
+       "m_customaccel": "0",
+       "m_customaccel_exponent": "100",
+       "m_customaccel_max": "1",
+       "m_customaccel_scale": "1",
+       "m_mouseaccel1": "0",
+       "m_mouseaccel2": "0",
+       "m_mousespeed": "1",
+       "m_pitch": "0.022",
+       "m_rawinput": "1",
+       "m_yaw": "0.022",
+       "safezonex": "1",
+       "safezoney": "1",
+       "sensitivity": "1.85",
+       "viewmodel_fov": "68",
+       "viewmodel_offset_x": "2.5",
+       "viewmodel_offset_y": "0",
+       "viewmodel_offset_z": "-1.5",
+       "viewmodel_presetpos": "3",
+       "zoom_sensitivity_ratio_mouse": "1"
+      },
+      "mouse": {},
+      "video": {
+       "Resolution": "1280x1024",
+       "Aspect Ratio": "5:4"
+      },
+      "provenance": [
+       {
+        "what": "Crosshair, viewmodel, HUD and radar",
+        "date": "2013",
+        "window": [
+         "2013-06-27",
+         "2014-02-12"
+        ],
+        "date_basis": "His own game-written config.cfg (in-game name 'coL.n0thing', sensitivity 1.85) from setup.gg's archive. It stores a medal-stats timestamp of 27 Jun 2013 and lacks the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between those dates.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/n0thing/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Sensitivity",
+        "date": "2013",
+        "window": [
+         "2013-06-27",
+         "2014-02-12"
+        ],
+        "date_basis": "His own game-written config.cfg (in-game name 'coL.n0thing', sensitivity 1.85) from setup.gg's archive. It stores a medal-stats timestamp of 27 Jun 2013 and lacks the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between those dates.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/n0thing/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Resolution",
+        "date": "2016-12-13",
+        "date_basis": "setup.gg's profile for n0thing (data.yml), added on 13 Dec 2016 and unchanged since, lists 1280x1024 at 5:4. The profile has no date of its own, so 13 Dec 2016 is only the latest date this can be from.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/n0thing/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "low"
+       }
+      ],
+      "notes": "A third-party alias from September 2015 (in luckolen's autoexec.cfg) is closer in time and similar (style 4, size 5.5, gap 0), but it sets no colour and names no source, so his own config is used."
+     }
+    },
+    {
+     "nick": "seang@res",
+     "real_name": "Sean Gares",
+     "team": "Cloud9",
+     "game": "CS:GO",
+     "id": "seangares",
+     "current_slug": null,
+     "config": {
+      "date": "2019-04-09",
+      "date_basis": "Liquipedia's seang@res page (revision 2624925, cached on 21 Oct 2023 in Lindeneg/csgo-pro-settings) marks its crosshair table 'Updated as of 2019-04-09' and cites a Twitch clip. Its hardware table (updated 31 Oct 2020) lists 1280x960 stretched, so the crosshair is converted at 960p.",
+      "sources": [
+       "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip",
+       "https://liquipedia.net/counterstrike/index.php?title=Sgares&oldid=2624925",
+       "https://clips.twitch.tv/BlindingAverageBottlePoooound"
+      ],
+      "confidence": "low",
+      "convars": {
+       "cl_crosshairstyle": "4",
+       "cl_crosshairsize": "1",
+       "cl_crosshairthickness": "0.4",
+       "cl_crosshairgap": "-1",
+       "cl_crosshairdot": "0",
+       "cl_crosshaircolor": "1",
+       "cl_crosshairalpha": "255",
+       "cl_crosshairusealpha": "1",
+       "cl_crosshair_drawoutline": "1",
+       "cl_crosshair_outlinethickness": "1",
+       "cl_crosshair_sniper_width": "1",
+       "sensitivity": "1.9",
+       "m_customaccel": "0",
+       "m_rawinput": "0"
+      },
+      "mouse": {
+       "DPI": "400"
+      },
+      "video": {
+       "Resolution": "1920x1080",
+       "Aspect Ratio": "16:9"
+      },
+      "crosshair_resolution": "1280x960",
+      "provenance": [
+       {
+        "what": "Crosshair",
+        "date": "2019-04-09",
+        "date_basis": "Liquipedia's seang@res page (revision 2624925, cached on 21 Oct 2023 in Lindeneg/csgo-pro-settings) marks its crosshair table 'Updated as of 2019-04-09' and cites a Twitch clip. Its hardware table (updated 31 Oct 2020) lists 1280x960 stretched, so the crosshair is converted at 960p.",
+        "sources": [
+         "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip",
+         "https://liquipedia.net/counterstrike/index.php?title=Sgares&oldid=2624925",
+         "https://clips.twitch.tv/BlindingAverageBottlePoooound"
+        ],
+        "confidence": "low"
+       },
+       {
+        "what": "Sensitivity",
+        "date": "2016-12-13",
+        "date_basis": "setup.gg's profile for sgares (data.yml), added on 13 Dec 2016 and unchanged since, lists sensitivity 1.9 at 400 DPI, raw input off and no acceleration. It has no date of its own, so 13 Dec 2016 is only the latest date these can be from.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/sgares/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "low"
+       },
+       {
+        "what": "Resolution",
+        "date": "2016-12-13",
+        "date_basis": "Same setup.gg profile (data.yml), added on 13 Dec 2016 and unchanged since, lists 1920x1080 at 16:9. 13 Dec 2016 is only the latest date this can be from.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/sgares/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "low"
+       }
+      ],
+      "notes": "No crosshair of his from closer to 2015 is known. Liquipedia's table is marked as updated in April 2019, more than four years after this lineup, so it may differ from what he used on Cloud9."
+     }
+    },
+    {
+     "nick": "shroud",
+     "real_name": "Michael Grzesiek",
+     "team": "Cloud9",
+     "game": "CS:GO",
+     "id": "shroud",
+     "current_slug": null,
+     "config": {
+      "date": "2014-07",
+      "window": [
+       "2014-07-05",
+       "2014-07-23"
+      ],
+      "date_basis": "shroud's game-written config.cfg (in-game name 'shroud') from setup.gg's archive. Its Operation Breakout reminder stores a timestamp of 5 Jul 2014, and it lacks cl_radar_square_with_scoreboard and engine_no_focus_sleep, both added on 23 Jul 2014, so it was saved between those dates.",
+      "sources": [
+       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/shroud/config.cfg",
+       "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+      ],
+      "confidence": "medium",
+      "convars": {
+       "cl_crosshairstyle": "4",
+       "cl_crosshairsize": "3.5",
+       "cl_crosshairthickness": "1.1",
+       "cl_crosshairgap": "0",
+       "cl_crosshaircolor": "5",
+       "cl_crosshaircolor_r": "250",
+       "cl_crosshaircolor_g": "250",
+       "cl_crosshaircolor_b": "250",
+       "cl_crosshairalpha": "255",
+       "cl_crosshairusealpha": "1",
+       "cl_crosshairdot": "0",
+       "cl_crosshair_drawoutline": "1",
+       "cl_crosshair_outlinethickness": "1",
+       "cl_crosshairscale": "1",
+       "cl_crosshair_dynamic_splitdist": "3",
+       "cl_crosshair_dynamic_splitalpha_innermod": "1",
+       "cl_crosshair_dynamic_splitalpha_outermod": "0.3",
+       "cl_crosshair_dynamic_maxdist_splitratio": "0",
+       "viewmodel_fov": "68",
+       "viewmodel_offset_x": "2.5",
+       "viewmodel_offset_y": "1",
+       "viewmodel_offset_z": "-1.5",
+       "viewmodel_presetpos": "0",
+       "cl_righthand": "1",
+       "hud_scaling": "0.95",
+       "hud_showtargetid": "1",
+       "cl_hud_color": "1",
+       "cl_hud_background_alpha": "1",
+       "cl_hud_bomb_under_radar": "1",
+       "cl_hud_healthammo_style": "1",
+       "cl_hud_playercount_pos": "1",
+       "cl_hud_playercount_showcount": "1",
+       "cl_hud_radar_scale": "1.005",
+       "cl_radar_scale": "0.5",
+       "cl_radar_always_centered": "0",
+       "cl_radar_rotate": "1",
+       "cl_radar_icon_scale_min": "1",
+       "cl_teammate_colors_show": "2",
+       "cl_showloadout": "0",
+       "safezonex": "1",
+       "safezoney": "1",
+       "sensitivity": "2.1375",
+       "zoom_sensitivity_ratio_mouse": "1",
+       "m_rawinput": "0",
+       "m_customaccel": "0",
+       "m_customaccel_exponent": "1",
+       "m_customaccel_max": "0",
+       "m_customaccel_scale": "0.04",
+       "m_mouseaccel1": "0",
+       "m_mouseaccel2": "0",
+       "m_mousespeed": "0",
+       "m_pitch": "0.022",
+       "m_yaw": "0.022"
+      },
+      "mouse": {},
+      "video": {
+       "Resolution": "1920x1080",
+       "Aspect Ratio": "16:9"
+      },
+      "provenance": [
+       {
+        "what": "Crosshair, viewmodel, HUD and radar",
+        "date": "2014-07",
+        "window": [
+         "2014-07-05",
+         "2014-07-23"
+        ],
+        "date_basis": "shroud's game-written config.cfg (in-game name 'shroud') from setup.gg's archive. Its Operation Breakout reminder stores a timestamp of 5 Jul 2014, and it lacks cl_radar_square_with_scoreboard and engine_no_focus_sleep, both added on 23 Jul 2014, so it was saved between those dates.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/shroud/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Sensitivity",
+        "date": "2014-07",
+        "window": [
+         "2014-07-05",
+         "2014-07-23"
+        ],
+        "date_basis": "Same game-written config.cfg as the crosshair (sensitivity 2.1375, zoom ratio 1, raw input off), saved between 5 Jul 2014 (its Operation Breakout reminder timestamp) and 23 Jul 2014 (settings it lacks).",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/shroud/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Resolution",
+        "date": "2016-12-13",
+        "date_basis": "shroud's setup.gg profile (data.yml), added on 13 Dec 2016 with his team as Cloud9 and unchanged since, lists 1920x1080 at 16:9; that is the latest date it can be from. Its sensitivity (2 at 400 DPI) differs from the 2014 config's 2.1375, so its DPI is not used.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/shroud/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "medium"
+       }
+      ]
+     }
+    },
+    {
+     "nick": "Semphis",
+     "real_name": "Kory Friesen",
+     "team": "Cloud9",
+     "game": "CS:GO",
+     "id": "semphis",
+     "current_slug": null,
+     "config": {
+      "date": "2013",
+      "window": [
+       "2013-08-28",
+       "2014-01-23"
+      ],
+      "date_basis": "Semphis's game-written config.cfg (in-game name 'coL.SoundBlaster | SEMPHIS') from setup.gg's archive. Its medal-stats timestamp is 28 Aug 2013, and it lacks lobby_voice_chat_enabled, which matches the 23 Jan 2014 change that made the lobby microphone button remember its state, so it was saved between those dates.",
+      "sources": [
+       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Semphis/config.cfg",
+       "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+      ],
+      "confidence": "medium",
+      "convars": {
+       "cl_crosshairstyle": "4",
+       "cl_crosshairsize": "3",
+       "cl_crosshairthickness": "0.5",
+       "cl_crosshairgap": "0",
+       "cl_crosshaircolor": "5",
+       "cl_crosshaircolor_r": "250",
+       "cl_crosshaircolor_g": "0",
+       "cl_crosshaircolor_b": "0",
+       "cl_crosshairalpha": "999999",
+       "cl_crosshairusealpha": "1",
+       "cl_crosshairdot": "0",
+       "cl_crosshair_drawoutline": "1",
+       "cl_crosshair_outlinethickness": "1",
+       "cl_crosshairscale": "0",
+       "viewmodel_fov": "68",
+       "viewmodel_offset_x": "2.5",
+       "viewmodel_offset_y": "0",
+       "viewmodel_offset_z": "-1.5",
+       "viewmodel_presetpos": "3",
+       "cl_righthand": "1",
+       "hud_scaling": "0.95",
+       "hud_showtargetid": "0",
+       "cl_radar_scale": "0.25",
+       "cl_radar_always_centered": "0",
+       "cl_radar_rotate": "1",
+       "cl_radar_icon_scale_min": "0.6",
+       "cl_showloadout": "1",
+       "safezonex": "1",
+       "safezoney": "1",
+       "sensitivity": "1.7",
+       "zoom_sensitivity_ratio_mouse": "1",
+       "m_rawinput": "1",
+       "m_customaccel": "0",
+       "m_customaccel_exponent": "1.2",
+       "m_customaccel_max": "0",
+       "m_customaccel_scale": "0.04",
+       "m_mouseaccel1": "0",
+       "m_mouseaccel2": "0",
+       "m_mousespeed": "1",
+       "m_pitch": "0.022",
+       "m_yaw": "0.022"
+      },
+      "mouse": {},
+      "video": {
+       "Resolution": "1600x900"
+      },
+      "provenance": [
+       {
+        "what": "Crosshair, viewmodel, HUD and radar",
+        "date": "2013",
+        "window": [
+         "2013-08-28",
+         "2014-01-23"
+        ],
+        "date_basis": "Semphis's game-written config.cfg (in-game name 'coL.SoundBlaster | SEMPHIS') from setup.gg's archive. Its medal-stats timestamp is 28 Aug 2013, and it lacks lobby_voice_chat_enabled, which matches the 23 Jan 2014 change that made the lobby microphone button remember its state, so it was saved between those dates.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Semphis/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Sensitivity",
+        "date": "2013",
+        "window": [
+         "2013-08-28",
+         "2014-01-23"
+        ],
+        "date_basis": "Same game-written config.cfg as the crosshair (sensitivity 1.7, zoom ratio 1), saved between 28 Aug 2013 (its medal-stats timestamp) and 23 Jan 2014 (lobby_voice_chat_enabled missing).",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Semphis/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Resolution",
+        "date": "2016-12-13",
+        "date_basis": "Semphis's setup.gg profile (data.yml), added on 13 Dec 2016 with his team as TSM and unchanged since, lists 1600x900; that is the latest date it can be from. Its aspect-ratio field says 4:3, which doesn't fit 1600x900, so only the resolution is shown, and its sensitivity (1.5 at 450 DPI) differs from the config's 1.7, so its DPI is not used.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/semphis/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "low"
+       }
+      ],
+      "notes": "Some key-bind lines in the archived file are garbled (\"+ USE\", a bind split across two lines), which setup.gg corrected in a later commit; the settings lines, the crosshair included, are in the game's own sorted format."
+     }
+    },
+    {
+     "nick": "ShahZaM",
+     "real_name": "Shahzeeb Khan",
+     "team": "Cloud9",
+     "game": "CS:GO",
+     "id": "shahzam",
+     "current_slug": null,
+     "config": {
+      "date": "2023-10-19",
+      "date_basis": "ProSettings.net's page for him, last updated on 19 Oct 2023, after he had moved to VALORANT, as saved in a scrape of its CS2 player pages uploaded to GitHub on 10 Jan 2024 (a scrape of 20 Mar 2024 gives the same last-updated date). The crosshair is decoded from the page's share code; the viewmodel, HUD and radar come from its tables.",
+      "sources": [
+       "https://github.com/miahj1/prosettings-scraper/blob/16e579e4cc2805cb778214cb5a1bc2f3c3f555b5/prosettings_cs2_scrape.csv",
+       "https://github.com/rennyS/prosettings_scraper/blob/323215aa819885776252a79933e8750a3e345e17/player_info.csv",
+       "https://prosettings.net/players/shahzam/"
+      ],
+      "confidence": "low",
+      "convars": {
+       "cl_crosshairstyle": "4",
+       "cl_crosshairsize": "2",
+       "cl_crosshairthickness": "0.5",
+       "cl_crosshairgap": "-2",
+       "cl_crosshairdot": "0",
+       "cl_crosshaircolor": "1",
+       "cl_crosshaircolor_r": "50",
+       "cl_crosshaircolor_g": "250",
+       "cl_crosshaircolor_b": "50",
+       "cl_crosshairalpha": "200",
+       "cl_crosshairusealpha": "1",
+       "cl_crosshair_t": "0",
+       "cl_crosshairgap_useweaponvalue": "0",
+       "cl_crosshair_recoil": "0",
+       "viewmodel_fov": "60",
+       "viewmodel_offset_x": "1",
+       "viewmodel_offset_y": "1",
+       "viewmodel_offset_z": "-1.5",
+       "viewmodel_presetpos": "1",
+       "hud_scaling": "0.85",
+       "cl_radar_always_centered": "1",
+       "cl_radar_rotate": "1",
+       "cl_radar_square_with_scoreboard": "0",
+       "cl_hud_radar_scale": "1",
+       "cl_radar_scale": "0.4",
+       "sensitivity": "1.7",
+       "m_rawinput": "1",
+       "m_customaccel": "0"
+      },
+      "mouse": {
+       "DPI": "400"
+      },
+      "video": {
+       "Resolution": "1024x768",
+       "Aspect Ratio": "4:3"
+      },
+      "provenance": [
+       {
+        "what": "Crosshair, viewmodel, HUD and radar",
+        "date": "2023-10-19",
+        "date_basis": "ProSettings.net's page for him, last updated on 19 Oct 2023, after he had moved to VALORANT, as saved in a scrape of its CS2 player pages uploaded to GitHub on 10 Jan 2024 (a scrape of 20 Mar 2024 gives the same last-updated date). The crosshair is decoded from the page's share code; the viewmodel, HUD and radar come from its tables.",
+        "sources": [
+         "https://github.com/miahj1/prosettings-scraper/blob/16e579e4cc2805cb778214cb5a1bc2f3c3f555b5/prosettings_cs2_scrape.csv",
+         "https://github.com/rennyS/prosettings_scraper/blob/323215aa819885776252a79933e8750a3e345e17/player_info.csv",
+         "https://prosettings.net/players/shahzam/"
+        ],
+        "confidence": "low"
+       },
+       {
+        "what": "Sensitivity",
+        "date": "2016",
+        "window": [
+         "2016-05-08",
+         "2016-12-13"
+        ],
+        "date_basis": "setup.gg's profile for him (data.yml), first published on 13 Dec 2016, lists sensitivity 1.7 at 400 DPI with raw input on and no acceleration. It lists him on Echo Fox, where he played from 8 May to 3 Dec 2016 (Liquipedia), so the values most likely date from that time.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/shahzam/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2",
+         "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip"
+        ],
+        "confidence": "low"
+       },
+       {
+        "what": "Resolution",
+        "date": "2016",
+        "window": [
+         "2016-05-08",
+         "2016-12-13"
+        ],
+        "date_basis": "The same setup.gg profile lists 1024x768 at 4:3. It has no date of its own; it lists him on Echo Fox (8 May to 3 Dec 2016) and was published on 13 Dec 2016.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/shahzam/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "low"
+       }
+      ],
+      "notes": "No convertible crosshair of his from closer to this lineup could be found: this one is from ProSettings.net's page for him as last updated in October 2023, almost nine years after this lineup and after he had left Counter-Strike for VALORANT, and may differ from what he used then. It is a third-party listing decoded from a share code, not his own config; the code's outline and split settings are the same in every code in that scrape, so they are left out. The saved copy has only his VALORANT video settings, so the crosshair is converted at the 1024x768 from setup.gg."
+     }
+    },
+    {
+     "nick": "AZK",
+     "real_name": "Keven Larivière",
+     "team": "iBUYPOWER",
+     "game": "CS:GO",
+     "id": "azk",
+     "current_slug": null,
+     "config": {
+      "date": "2014",
+      "window": [
+       "2014-08-08",
+       "2014-10-10"
+      ],
+      "date_basis": "A config.cfg written by AZK's game (in-game name 'kza'), from setup.gg's archive. It has cl_obs_interp_enable, the switch for the spectator-camera interpolation added on 8 Aug 2014, but not the music-volume settings added on 10 Oct 2014, so it was saved between those dates.",
+      "sources": [
+       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/AZK/config.cfg",
+       "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a",
+       "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/azk/config/config.cfg"
+      ],
+      "confidence": "medium",
+      "convars": {
+       "cl_crosshairstyle": "2",
+       "cl_crosshairsize": "2",
+       "cl_crosshairthickness": "1",
+       "cl_crosshairgap": "-2",
+       "cl_crosshaircolor": "1",
+       "cl_crosshaircolor_r": "250",
+       "cl_crosshaircolor_g": "250",
+       "cl_crosshaircolor_b": "250",
+       "cl_crosshairalpha": "999",
+       "cl_crosshairusealpha": "1",
+       "cl_crosshairdot": "0",
+       "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "1",
+       "cl_crosshairgap_useweaponvalue": "0",
+       "cl_crosshairscale": "0",
+       "cl_crosshair_dynamic_splitdist": "5",
+       "cl_crosshair_dynamic_splitalpha_innermod": "1",
+       "cl_crosshair_dynamic_splitalpha_outermod": "1",
+       "cl_crosshair_dynamic_maxdist_splitratio": "0",
+       "viewmodel_fov": "60",
+       "viewmodel_offset_x": "1",
+       "viewmodel_offset_y": "1",
+       "viewmodel_offset_z": "-1.5",
+       "viewmodel_presetpos": "1",
+       "cl_righthand": "1",
+       "hud_scaling": "0.95",
+       "hud_showtargetid": "1",
+       "cl_hud_color": "0",
+       "cl_hud_background_alpha": "0.5",
+       "cl_hud_healthammo_style": "0",
+       "cl_hud_radar_scale": "1",
+       "cl_hud_bomb_under_radar": "1",
+       "cl_hud_playercount_pos": "0",
+       "cl_hud_playercount_showcount": "0",
+       "cl_radar_scale": "0.5",
+       "cl_radar_always_centered": "1",
+       "cl_radar_rotate": "1",
+       "cl_radar_icon_scale_min": "0.6",
+       "cl_radar_square_with_scoreboard": "1",
+       "safezonex": "1",
+       "safezoney": "1",
+       "cl_teammate_colors_show": "1",
+       "cl_showloadout": "1",
+       "sensitivity": "2",
+       "zoom_sensitivity_ratio_mouse": "1",
+       "m_rawinput": "0",
+       "m_customaccel": "0",
+       "m_customaccel_exponent": "1.05",
+       "m_customaccel_max": "0",
+       "m_customaccel_scale": "0.04",
+       "m_mouseaccel1": "0",
+       "m_mouseaccel2": "0",
+       "m_mousespeed": "1",
+       "m_pitch": "0.022",
+       "m_yaw": "0.022"
+      },
+      "mouse": {
+       "DPI": "400",
+       "Polling rate": "1000 Hz"
+      },
+      "video": {
+       "Resolution": "1280x960",
+       "Aspect Ratio": "4:3"
+      },
+      "provenance": [
+       {
+        "what": "Crosshair, viewmodel, HUD and radar",
+        "date": "2014",
+        "window": [
+         "2014-08-08",
+         "2014-10-10"
+        ],
+        "date_basis": "A config.cfg written by AZK's game (in-game name 'kza'), from setup.gg's archive. It has cl_obs_interp_enable, the switch for the spectator-camera interpolation added on 8 Aug 2014, but not the music-volume settings added on 10 Oct 2014, so it was saved between those dates.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/AZK/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a",
+         "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/azk/config/config.cfg"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Sensitivity",
+        "date": "2014",
+        "window": [
+         "2014-08-08",
+         "2014-10-10"
+        ],
+        "date_basis": "Same game-written config.cfg as the crosshair (sensitivity 2, zoom ratio 1, raw input off), saved between 8 Aug 2014 (it has that update's spectator-interpolation switch) and 10 Oct 2014 (it lacks that update's music-volume settings).",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/AZK/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "DPI (same sensitivity)",
+        "date": "2016-12-13",
+        "date_basis": "setup.gg's profile for AZK (data.yml), added on 13 Dec 2016 and never changed, lists sensitivity 2, the same as the 2014 config, with 400 DPI at 1000 Hz and raw input off. It doesn't say when the values were collected, so this is the latest possible date.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/azk/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Resolution",
+        "date": "2016-12-13",
+        "date_basis": "The same setup.gg profile, added on 13 Dec 2016 and never changed, lists 1280x960 at 4:3. It doesn't say when the values were collected, so this is the latest possible date.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/azk/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "medium"
+       }
+      ],
+      "notes": "His config binds the up and down arrow keys to crosshair colours 4 (cyan) and 1 (green), and the [ and ] keys to view model presets 1 and 3, so the green crosshair and the view model saved here may only be the ones he had last switched to."
+     }
+    },
+    {
+     "nick": "DaZeD",
+     "real_name": "Sam Marine",
+     "team": "iBUYPOWER",
+     "game": "CS:GO",
+     "id": "dazed",
+     "current_slug": null,
+     "config": {
+      "date": "2014",
+      "window": [
+       "2014-05-01",
+       "2014-07-01"
+      ],
+      "date_basis": "A config.cfg written by DaZeD's game (in-game name 'iBP DaZeD NetcodeGuides.com'), from setup.gg's archive. It has the cl_hud_* settings added on 1 May 2014 but neither the Operation Breakout reminder (Breakout launched 1 Jul 2014) nor the settings added on 23 Jul 2014, so it was saved in May or June 2014.",
+      "sources": [
+       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/DaZeD/config.cfg",
+       "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a",
+       "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/dazed/config/config.cfg"
+      ],
+      "confidence": "medium",
+      "convars": {
+       "cl_crosshairstyle": "4",
+       "cl_crosshairsize": "4",
+       "cl_crosshairthickness": "0",
+       "cl_crosshairgap": "-1",
+       "cl_crosshaircolor": "5",
+       "cl_crosshaircolor_r": "255",
+       "cl_crosshaircolor_g": "0",
+       "cl_crosshaircolor_b": "0",
+       "cl_crosshairalpha": "9999",
+       "cl_crosshairusealpha": "1",
+       "cl_crosshairdot": "1",
+       "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "1",
+       "cl_crosshairscale": "4",
+       "cl_crosshair_dynamic_splitdist": "3",
+       "cl_crosshair_dynamic_splitalpha_innermod": "1",
+       "cl_crosshair_dynamic_splitalpha_outermod": "1",
+       "cl_crosshair_dynamic_maxdist_splitratio": "1",
+       "viewmodel_fov": "68",
+       "viewmodel_offset_x": "2.5",
+       "viewmodel_offset_y": "0",
+       "viewmodel_offset_z": "-1.5",
+       "viewmodel_presetpos": "3",
+       "cl_righthand": "1",
+       "hud_scaling": "0.85",
+       "hud_showtargetid": "1",
+       "cl_hud_color": "8",
+       "cl_hud_background_alpha": "0",
+       "cl_hud_healthammo_style": "1",
+       "cl_hud_radar_scale": "1",
+       "cl_hud_bomb_under_radar": "1",
+       "cl_hud_playercount_pos": "0",
+       "cl_hud_playercount_showcount": "0",
+       "cl_radar_scale": "0.7",
+       "cl_radar_always_centered": "1",
+       "cl_radar_rotate": "1",
+       "cl_radar_icon_scale_min": "0.6",
+       "safezonex": "1",
+       "safezoney": "1",
+       "cl_teammate_colors_show": "0",
+       "cl_showloadout": "0",
+       "sensitivity": "2.025",
+       "zoom_sensitivity_ratio_mouse": "1",
+       "m_rawinput": "1",
+       "m_customaccel": "0",
+       "m_customaccel_exponent": "1.05",
+       "m_customaccel_max": "0",
+       "m_customaccel_scale": "0.04",
+       "m_mouseaccel1": "0",
+       "m_mouseaccel2": "0",
+       "m_mousespeed": "1",
+       "m_pitch": "0.022",
+       "m_yaw": "0.022"
+      },
+      "mouse": {
+       "DPI": "400",
+       "Polling rate": "500 Hz"
+      },
+      "video": {
+       "Resolution": "1024x768",
+       "Aspect Ratio": "4:3"
+      },
+      "provenance": [
+       {
+        "what": "Crosshair, viewmodel, HUD and radar",
+        "date": "2014",
+        "window": [
+         "2014-05-01",
+         "2014-07-01"
+        ],
+        "date_basis": "A config.cfg written by DaZeD's game (in-game name 'iBP DaZeD NetcodeGuides.com'), from setup.gg's archive. It has the cl_hud_* settings added on 1 May 2014 but neither the Operation Breakout reminder (Breakout launched 1 Jul 2014) nor the settings added on 23 Jul 2014, so it was saved in May or June 2014.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/DaZeD/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a",
+         "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/dazed/config/config.cfg"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Sensitivity",
+        "date": "2014",
+        "window": [
+         "2014-05-01",
+         "2014-07-01"
+        ],
+        "date_basis": "Same game-written config.cfg as the crosshair (sensitivity 2.025, zoom ratio 1, raw input on), saved between 1 May 2014 (it has the cl_hud_* settings) and 1 Jul 2014 (it lacks the Operation Breakout reminder).",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/DaZeD/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "DPI (same sensitivity)",
+        "date": "2016-12-13",
+        "date_basis": "setup.gg's profile for DaZeD (data.yml), first published on 13 Dec 2016, lists sensitivity 2.025, the same as the 2014 config, with 400 DPI at 500 Hz. An edit two days later changed the polling rate to 1000 Hz along with a different mouse; the original, older values are used. Neither says when the values were collected.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/dazed/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2",
+         "https://github.com/setupgg/data/commit/cd2c7810382316becaf989cd35a947b5f6b6ba85"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Resolution",
+        "date": "2016-12-13",
+        "date_basis": "The same setup.gg profile lists 1024x768 at 4:3, unchanged since it was first published on 13 Dec 2016. It doesn't say when the values were collected, so this is the latest possible date.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/dazed/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "medium"
+       }
+      ]
+     }
+    },
+    {
+     "nick": "Hiko",
+     "real_name": "Spencer Martin",
+     "team": "iBUYPOWER",
+     "game": "CS:GO",
+     "id": "hiko",
+     "current_slug": null,
+     "config": {
+      "date": "2014",
+      "window": [
+       "2014-08-04",
+       "2014-10-10"
+      ],
+      "date_basis": "A config.cfg written by Hiko's game (in-game name 'Hiko <Logitech>'), from setup.gg's archive. Its Operation Breakout reminder stores a timestamp of 4 Aug 2014, and it lacks snd_menumusic_volume and the other music-volume settings added on 10 Oct 2014, so it was saved between those dates.",
+      "sources": [
+       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Hiko/config.cfg",
+       "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a",
+       "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/hiko/config/config.cfg"
+      ],
+      "confidence": "medium",
+      "convars": {
+       "cl_crosshairstyle": "2",
+       "cl_crosshairsize": "2",
+       "cl_crosshairthickness": "1",
+       "cl_crosshairgap": "-2",
+       "cl_crosshaircolor": "6",
+       "cl_crosshaircolor_r": "255",
+       "cl_crosshaircolor_g": "255",
+       "cl_crosshaircolor_b": "255",
+       "cl_crosshairalpha": "255",
+       "cl_crosshairusealpha": "1",
+       "cl_crosshairdot": "0",
+       "cl_crosshair_drawoutline": "1",
+       "cl_crosshair_outlinethickness": "0.5",
+       "cl_crosshairgap_useweaponvalue": "0",
+       "cl_crosshairscale": "0",
+       "cl_crosshair_dynamic_splitdist": "5",
+       "cl_crosshair_dynamic_splitalpha_innermod": "1",
+       "cl_crosshair_dynamic_splitalpha_outermod": "0.3",
+       "cl_crosshair_dynamic_maxdist_splitratio": "0",
+       "viewmodel_fov": "68",
+       "viewmodel_offset_x": "2.5",
+       "viewmodel_offset_y": "0",
+       "viewmodel_offset_z": "-1.5",
+       "viewmodel_presetpos": "3",
+       "cl_righthand": "1",
+       "hud_scaling": "0.95",
+       "hud_showtargetid": "0",
+       "cl_hud_color": "2",
+       "cl_hud_background_alpha": "0.5",
+       "cl_hud_healthammo_style": "1",
+       "cl_hud_radar_scale": "1",
+       "cl_hud_bomb_under_radar": "1",
+       "cl_hud_playercount_pos": "1",
+       "cl_hud_playercount_showcount": "1",
+       "cl_radar_scale": "0.25",
+       "cl_radar_always_centered": "1",
+       "cl_radar_rotate": "1",
+       "cl_radar_icon_scale_min": "0.6",
+       "cl_radar_square_with_scoreboard": "0",
+       "safezonex": "1",
+       "safezoney": "1",
+       "cl_teammate_colors_show": "2",
+       "cl_showloadout": "1",
+       "sensitivity": "4",
+       "zoom_sensitivity_ratio_mouse": "1",
+       "m_rawinput": "1",
+       "m_customaccel": "0",
+       "m_customaccel_exponent": "1",
+       "m_customaccel_max": "0",
+       "m_customaccel_scale": "0.04",
+       "m_mouseaccel1": "0",
+       "m_mouseaccel2": "0",
+       "m_mousespeed": "1",
+       "m_pitch": "0.022",
+       "m_yaw": "0.022"
+      },
+      "mouse": {},
+      "video": {
+       "Resolution": "1280x960",
+       "Aspect Ratio": "4:3"
+      },
+      "provenance": [
+       {
+        "what": "Crosshair, viewmodel, HUD and radar",
+        "date": "2014",
+        "window": [
+         "2014-08-04",
+         "2014-10-10"
+        ],
+        "date_basis": "A config.cfg written by Hiko's game (in-game name 'Hiko <Logitech>'), from setup.gg's archive. Its Operation Breakout reminder stores a timestamp of 4 Aug 2014, and it lacks snd_menumusic_volume and the other music-volume settings added on 10 Oct 2014, so it was saved between those dates.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Hiko/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a",
+         "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/hiko/config/config.cfg"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Sensitivity",
+        "date": "2014",
+        "window": [
+         "2014-08-04",
+         "2014-10-10"
+        ],
+        "date_basis": "Same game-written config.cfg as the crosshair (sensitivity 4, zoom ratio 1, raw input on), saved between 4 Aug 2014 (its Operation Breakout reminder timestamp) and 10 Oct 2014 (the music-volume settings it lacks).",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Hiko/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a",
+         "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/hiko/config/config.cfg"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Resolution",
+        "date": "2016-12-13",
+        "date_basis": "From setup.gg's profile for Hiko (data.yml), published on 13 Dec 2016 and not changed since. It doesn't say when the values were collected, so this is the latest possible date.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/hiko/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "medium"
+       }
+      ]
+     }
+    },
+    {
+     "nick": "Skadoodle",
+     "real_name": "Tyler Latham",
+     "team": "iBUYPOWER",
+     "game": "CS:GO",
+     "id": "skadoodle",
+     "current_slug": null,
+     "config": {
+      "date": "2025-01-28",
+      "date_basis": "ProSettings.net's Counter-Strike 2 settings for him, from a copy of the page saved to GitHub on 3 Nov 2025 and marked last updated 28 Jan 2025. A scrape of the page uploaded to GitHub on 10 Jan 2024 already listed the same length, thickness, gap and colour but gave the style as Unknown.",
+      "sources": [
+       "https://github.com/Colxinn/OptiPlay/blob/39dfe2432278078e4621032ce0280f3bfcd56d4d/cache/prosettings/aHR0cHM6Ly9wcm9zZXR0aW5ncy5uZXQvcGxheWVycy9za2Fkb29kbGUv.html",
+       "https://github.com/miahj1/prosettings-scraper/blob/16e579e4cc2805cb778214cb5a1bc2f3c3f555b5/prosettings_cs2_scrape.csv",
+       "https://prosettings.net/players/skadoodle/"
+      ],
+      "confidence": "low",
+      "convars": {
+       "cl_crosshairstyle": "4",
+       "cl_crosshairsize": "3",
+       "cl_crosshairthickness": "0.5",
+       "cl_crosshairgap": "-2",
+       "cl_crosshairdot": "0",
+       "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "1",
+       "cl_crosshaircolor": "1",
+       "cl_crosshairusealpha": "1",
+       "cl_crosshair_t": "0",
+       "cl_crosshair_recoil": "0",
+       "cl_crosshairgap_useweaponvalue": "0",
+       "cl_crosshair_dynamic_splitdist": "7",
+       "cl_fixedcrosshairgap": "3",
+       "cl_crosshair_dynamic_splitalpha_innermod": "1",
+       "cl_crosshair_dynamic_splitalpha_outermod": "0.5",
+       "cl_crosshair_dynamic_maxdist_splitratio": "0.5",
+       "cl_crosshair_sniper_width": "0",
+       "viewmodel_fov": "68",
+       "viewmodel_offset_x": "2.5",
+       "viewmodel_offset_y": "0",
+       "viewmodel_offset_z": "-1.5",
+       "viewmodel_presetpos": "2",
+       "sensitivity": "1.4",
+       "m_rawinput": "1",
+       "m_customaccel": "0"
+      },
+      "mouse": {
+       "DPI": "400"
+      },
+      "video": {
+       "Resolution": "1024x768",
+       "Aspect Ratio": "4:3"
+      },
+      "provenance": [
+       {
+        "what": "Crosshair and viewmodel",
+        "date": "2025-01-28",
+        "date_basis": "ProSettings.net's Counter-Strike 2 settings for him, from a copy of the page saved to GitHub on 3 Nov 2025 and marked last updated 28 Jan 2025. A scrape of the page uploaded to GitHub on 10 Jan 2024 already listed the same length, thickness, gap and colour but gave the style as Unknown.",
+        "sources": [
+         "https://github.com/Colxinn/OptiPlay/blob/39dfe2432278078e4621032ce0280f3bfcd56d4d/cache/prosettings/aHR0cHM6Ly9wcm9zZXR0aW5ncy5uZXQvcGxheWVycy9za2Fkb29kbGUv.html",
+         "https://github.com/miahj1/prosettings-scraper/blob/16e579e4cc2805cb778214cb5a1bc2f3c3f555b5/prosettings_cs2_scrape.csv",
+         "https://prosettings.net/players/skadoodle/"
+        ],
+        "confidence": "low"
+       },
+       {
+        "what": "Sensitivity",
+        "date": "2016",
+        "window": [
+         "2015-04-29",
+         "2016-12-13"
+        ],
+        "date_basis": "setup.gg's profile for him (data.yml), first published on 13 Dec 2016, lists sensitivity 1.4 at 400 DPI with raw input on and no acceleration. It lists him on Cloud9, which he joined on 29 Apr 2015 (Liquipedia), so the values most likely date from between then and 13 Dec 2016.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/skadoodle/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2",
+         "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip"
+        ],
+        "confidence": "low"
+       },
+       {
+        "what": "Resolution",
+        "date": "2016",
+        "window": [
+         "2015-04-29",
+         "2016-12-13"
+        ],
+        "date_basis": "The same setup.gg profile lists 1024x768 at 4:3. It has no date of its own; it lists him on Cloud9, which he joined on 29 Apr 2015, and was published on 13 Dec 2016.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/skadoodle/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "low"
+       }
+      ],
+      "notes": "No convertible crosshair of his from closer to this lineup could be found: this one is ProSettings.net's listing of his Counter-Strike 2 settings, last updated in January 2025, ten years after this lineup, and may differ from what he used then. It is a third-party table, not his own config. It gives an alpha value of 1, which would make the crosshair almost invisible, so that value is left out and the default opacity is used. Two fan apps from 2017 list the same sensitivity, 1.4, at 800 DPI instead of 400."
+     }
+    },
+    {
+     "nick": "swag",
+     "real_name": "Braxton Pierce",
+     "team": "iBUYPOWER",
+     "game": "CS:GO",
+     "id": "swag",
+     "current_slug": null,
+     "config": {
+      "date": "2016",
+      "window": [
+       "2016-01-20",
+       "2016-06-06"
+      ],
+      "date_basis": "A config.cfg written by swag's game (in-game name 'brax'), added to setup.gg's archive on 6 Jun 2016. It has cl_crosshair_sniper_width, added on 20 Jan 2016, so it was saved between those dates.",
+      "sources": [
+       "https://github.com/setupgg/csgo/blob/2294eb42e6d4f16ffad391ad647c9660643b41d5/swag/config.cfg",
+       "https://github.com/setupgg/csgo/commit/2294eb42e6d4f16ffad391ad647c9660643b41d5",
+       "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/swag/config/config.cfg"
+      ],
+      "confidence": "medium",
+      "convars": {
+       "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_dynamic_maxdist_splitratio": "0",
+       "cl_crosshair_dynamic_splitalpha_innermod": "0",
+       "cl_crosshair_dynamic_splitalpha_outermod": "0.5",
+       "cl_crosshair_dynamic_splitdist": "100",
+       "cl_crosshair_outlinethickness": "1",
+       "cl_crosshair_sniper_width": "0.01",
+       "cl_crosshairalpha": "500",
+       "cl_crosshaircolor": "1",
+       "cl_crosshaircolor_b": "255",
+       "cl_crosshaircolor_g": "255",
+       "cl_crosshaircolor_r": "255",
+       "cl_crosshairdot": "0",
+       "cl_crosshairgap": "-3",
+       "cl_crosshairgap_useweaponvalue": "0",
+       "cl_crosshairscale": "4",
+       "cl_crosshairsize": "3",
+       "cl_crosshairstyle": "1",
+       "cl_crosshairthickness": "1",
+       "cl_crosshairusealpha": "1",
+       "cl_fixedcrosshairgap": "-2",
+       "cl_hud_background_alpha": "0.08",
+       "cl_hud_bomb_under_radar": "1",
+       "cl_hud_color": "1",
+       "cl_hud_healthammo_style": "0",
+       "cl_hud_playercount_pos": "0",
+       "cl_hud_playercount_showcount": "0",
+       "cl_hud_radar_scale": "1",
+       "cl_radar_always_centered": "1",
+       "cl_radar_icon_scale_min": "0.6",
+       "cl_radar_rotate": "1",
+       "cl_radar_scale": "0.7",
+       "cl_radar_square_with_scoreboard": "1",
+       "cl_righthand": "1",
+       "cl_show_clan_in_death_notice": "1",
+       "cl_showloadout": "1",
+       "cl_teammate_colors_show": "1",
+       "hud_scaling": "0.85",
+       "hud_showtargetid": "1",
+       "m_customaccel": "3",
+       "m_customaccel_exponent": "1.05",
+       "m_customaccel_max": "0",
+       "m_customaccel_scale": "0",
+       "m_mouseaccel1": "0",
+       "m_mouseaccel2": "0",
+       "m_mousespeed": "1",
+       "m_pitch": "0.022",
+       "m_rawinput": "0",
+       "m_yaw": "0.022",
+       "safezonex": "1",
+       "safezoney": "1",
+       "sensitivity": "1.1",
+       "viewmodel_fov": "68",
+       "viewmodel_offset_x": "2.5",
+       "viewmodel_offset_y": "0",
+       "viewmodel_offset_z": "-1.5",
+       "viewmodel_presetpos": "3",
+       "zoom_sensitivity_ratio_mouse": "1"
+      },
+      "mouse": {},
+      "video": {
+       "Resolution": "1920x1080",
+       "Aspect Ratio": "16:9"
+      },
+      "provenance": [
+       {
+        "what": "Crosshair, viewmodel, HUD and radar",
+        "date": "2016",
+        "window": [
+         "2016-01-20",
+         "2016-06-06"
+        ],
+        "date_basis": "A config.cfg written by swag's game (in-game name 'brax'), added to setup.gg's archive on 6 Jun 2016. It has cl_crosshair_sniper_width, added on 20 Jan 2016, so it was saved between those dates.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/2294eb42e6d4f16ffad391ad647c9660643b41d5/swag/config.cfg",
+         "https://github.com/setupgg/csgo/commit/2294eb42e6d4f16ffad391ad647c9660643b41d5",
+         "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/swag/config/config.cfg"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Sensitivity",
+        "date": "2016",
+        "window": [
+         "2016-01-20",
+         "2016-06-06"
+        ],
+        "date_basis": "A config.cfg written by swag's game (in-game name 'brax'), added to setup.gg's archive on 6 Jun 2016. It has cl_crosshair_sniper_width, added on 20 Jan 2016, so it was saved between those dates.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/2294eb42e6d4f16ffad391ad647c9660643b41d5/swag/config.cfg",
+         "https://github.com/setupgg/csgo/commit/2294eb42e6d4f16ffad391ad647c9660643b41d5",
+         "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/swag/config/config.cfg"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Resolution",
+        "date": "2016-12-13",
+        "date_basis": "From setup.gg's profile for swag (data.yml), published on 13 Dec 2016 and not changed since. It doesn't say when the values were collected, so this is the latest possible date.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/swag/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "medium"
+       }
+      ],
+      "notes": "Every crosshair of his own that is dated (spring 2013, early 2016, Liquipedia's 2018 table) uses style 1, the default static crosshair, which can't be converted. This is his early-2016 config, the closest to January 2015."
+     }
+    },
+    {
+     "nick": "steel",
+     "real_name": "Joshua Nissan",
+     "team": "iBUYPOWER",
+     "game": "CS:GO",
+     "id": "steel",
+     "current_slug": null,
+     "config": {
+      "date": "2014-07",
+      "window": [
+       "2014-07-03",
+       "2014-07-23"
+      ],
+      "date_basis": "A config.cfg written by steel's game (in-game name 'iBP steel'), from setup.gg's archive. Its Operation Breakout reminder stores a timestamp of 3 Jul 2014, and it lacks cl_radar_square_with_scoreboard and engine_no_focus_sleep, both added on 23 Jul 2014, so it was saved between those dates.",
+      "sources": [
+       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/steel/config.cfg",
+       "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a",
+       "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/steel/config/config.cfg"
+      ],
+      "confidence": "high",
+      "convars": {
+       "cl_crosshairstyle": "4",
+       "cl_crosshairsize": "2.5",
+       "cl_crosshairthickness": "1",
+       "cl_crosshairgap": "-1",
+       "cl_crosshaircolor": "5",
+       "cl_crosshaircolor_r": "255",
+       "cl_crosshaircolor_g": "255",
+       "cl_crosshaircolor_b": "255",
+       "cl_crosshairalpha": "999",
+       "cl_crosshairusealpha": "1",
+       "cl_crosshairdot": "0",
+       "cl_crosshair_drawoutline": "1",
+       "cl_crosshair_outlinethickness": "1",
+       "cl_crosshairscale": "0",
+       "cl_crosshair_dynamic_splitdist": "7",
+       "cl_crosshair_dynamic_splitalpha_innermod": "1",
+       "cl_crosshair_dynamic_splitalpha_outermod": "0.5",
+       "cl_crosshair_dynamic_maxdist_splitratio": "0.35",
+       "viewmodel_fov": "68",
+       "viewmodel_offset_x": "2.5",
+       "viewmodel_offset_y": "0",
+       "viewmodel_offset_z": "-1.5",
+       "viewmodel_presetpos": "3",
+       "cl_righthand": "0",
+       "hud_scaling": "0.95",
+       "hud_showtargetid": "1",
+       "cl_hud_color": "5",
+       "cl_hud_background_alpha": "1",
+       "cl_hud_healthammo_style": "0",
+       "cl_hud_radar_scale": "1",
+       "cl_hud_bomb_under_radar": "1",
+       "cl_hud_playercount_pos": "0",
+       "cl_hud_playercount_showcount": "1",
+       "cl_radar_scale": "0.4825",
+       "cl_radar_always_centered": "1",
+       "cl_radar_rotate": "1",
+       "cl_radar_icon_scale_min": "0.6",
+       "safezonex": "1",
+       "safezoney": "1",
+       "cl_teammate_colors_show": "0",
+       "cl_show_clan_in_death_notice": "0",
+       "cl_showloadout": "1",
+       "sensitivity": "0.7826",
+       "zoom_sensitivity_ratio_mouse": "1",
+       "m_rawinput": "1",
+       "m_customaccel": "0",
+       "m_customaccel_exponent": "1.05",
+       "m_customaccel_max": "0",
+       "m_customaccel_scale": "0.04",
+       "m_mouseaccel1": "0",
+       "m_mouseaccel2": "0",
+       "m_mousespeed": "1",
+       "m_pitch": "0.022",
+       "m_yaw": "0.022"
+      },
+      "mouse": {},
+      "video": {
+       "Resolution": "1280x720",
+       "Aspect Ratio": "16:9"
+      },
+      "provenance": [
+       {
+        "what": "Crosshair, viewmodel, HUD and radar",
+        "date": "2014-07",
+        "window": [
+         "2014-07-03",
+         "2014-07-23"
+        ],
+        "date_basis": "A config.cfg written by steel's game (in-game name 'iBP steel'), from setup.gg's archive. Its Operation Breakout reminder stores a timestamp of 3 Jul 2014, and it lacks cl_radar_square_with_scoreboard and engine_no_focus_sleep, both added on 23 Jul 2014, so it was saved between those dates.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/steel/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a",
+         "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/steel/config/config.cfg"
+        ],
+        "confidence": "high"
+       },
+       {
+        "what": "Sensitivity",
+        "date": "2014-07",
+        "window": [
+         "2014-07-03",
+         "2014-07-23"
+        ],
+        "date_basis": "Same game-written config.cfg as the crosshair (sensitivity 0.7826, zoom ratio 1), saved between 3 Jul 2014 (its Operation Breakout reminder timestamp) and 23 Jul 2014 (the update whose radar and focus-sleep settings it lacks).",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/steel/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+        ],
+        "confidence": "high"
+       },
+       {
+        "what": "Resolution",
+        "date": "2016-12-13",
+        "date_basis": "setup.gg's profile for steel (data.yml), first published on 13 Dec 2016, lists 1280x720 at 16:9; the resolution has not changed since. It doesn't say when the values were collected, so this is the latest possible date.",
+        "sources": [
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/steel/data.yml",
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+        ],
+        "confidence": "medium"
+       }
+      ],
+      "notes": "His config binds C to switch cl_righthand between left and right hand, so the left-handed view model saved here (cl_righthand 0) may only be the side he had last switched to."
+     },
+     "standing": "iBUYPOWER until November 2014",
+     "lineup_note": "He played for Torqued in January 2015."
     }
    ]
   }
