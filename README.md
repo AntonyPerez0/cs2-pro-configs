@@ -50,6 +50,14 @@ through 2000930), vendored under `scraper/vendor/`:
   note on the player page.
 - **Already new format:** if settings.gg ever lists a crosshair in the new format,
   it is copied as-is.
+- **Complete pastes:** like a crosshair share paste (e.g. csstats.gg's), a paste
+  sets every setting that shapes that crosshair, so nothing from the visitor's own
+  crosshair carries over: colour, opacity, outline (and its colour when on), recoil,
+  the iron-sight dot (`cl_ironsight_*`), the split cvars for style 2 and the spread
+  limit for styles 2 and 5. Values come from the pro's config, clamped to CS2's
+  range, or else CS2's defaults. Settings that can't change that crosshair (split
+  values on a static style) are left out, which keeps most pastes to one console
+  line (the console rejects lines over 510 characters; longer pastes come in parts).
 
 Valve published no conversion formula, so this is a community reconstruction,
 not checked against in-game captures. For some pros, converting their old

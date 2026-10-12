@@ -45,23 +45,24 @@
     </div>
     <div class="chips profile-chips"><span class="chip"><b>400</b> DPI</span><span class="chip">1000 Hz</span><span class="chip">1280x960</span><span class="chip">4:3</span></div>
     <div class="head-actions">
-      <button type="button" class="btn" data-copy="cl_crosshairstyle 4; cl_crosshair_length 2; cl_crosshair_thickness 2; cl_crosshair_gap 1; cl_crosshairdot 0; cl_crosshair_t 0; cl_crosshair_drawoutline 0; cl_crosshair_recoil 0; cl_crosshaircolor_r 0; cl_crosshaircolor_g 255; cl_crosshaircolor_b 145; cl_crosshaircolor_a 255; cl_crosshair_screen_height 960">Copy crosshair</button>
+      <button type="button" class="btn" data-copy="cl_crosshairstyle 4; cl_crosshair_length 2; cl_crosshair_thickness 2; cl_crosshair_gap 1; cl_crosshairdot 0; cl_crosshair_t 0; cl_crosshair_drawoutline 0; cl_crosshair_recoil 0; cl_crosshaircolor_r 0; cl_crosshaircolor_g 255; cl_crosshaircolor_b 145; cl_crosshaircolor_a 255; cl_ironsight_usecrosshaircolor 0; cl_ironsight_dot_scale 1; cl_crosshair_screen_height 960">Copy crosshair</button>
       <a class="btn ghost" href="/cfg/uli.cfg" download="uli.cfg">Download .cfg</a>
       <a class="btn ghost" href="#full-config">Full config ↓</a>
     </div>
     <section class="section" id="crosshair">
       <div class="section-head"><h2>Crosshair <span class="tag">new system</span></h2>
-        <button type="button" class="btn small" data-copy="cl_crosshairstyle 4; cl_crosshair_length 2; cl_crosshair_thickness 2; cl_crosshair_gap 1; cl_crosshairdot 0; cl_crosshair_t 0; cl_crosshair_drawoutline 0; cl_crosshair_recoil 0; cl_crosshaircolor_r 0; cl_crosshaircolor_g 255; cl_crosshaircolor_b 145; cl_crosshaircolor_a 255; cl_crosshair_screen_height 960">Copy crosshair</button></div>
+        <button type="button" class="btn small" data-copy="cl_crosshairstyle 4; cl_crosshair_length 2; cl_crosshair_thickness 2; cl_crosshair_gap 1; cl_crosshairdot 0; cl_crosshair_t 0; cl_crosshair_drawoutline 0; cl_crosshair_recoil 0; cl_crosshaircolor_r 0; cl_crosshaircolor_g 255; cl_crosshaircolor_b 145; cl_crosshaircolor_a 255; cl_ironsight_usecrosshaircolor 0; cl_ironsight_dot_scale 1; cl_crosshair_screen_height 960">Copy crosshair</button></div>
       <div class="xhair-box">
         <div class="xhair-preview">
           <svg class="xhair-svg" width="64" height="64" viewBox="-6 -6 12 12" shape-rendering="crispEdges" role="img" aria-label="Crosshair preview, 960p pixels, enlarged: 2 pixel arms, 2 pixel thick, gap 1, at 960p"><rect x="-6" y="-6" width="12" height="12" fill="#4a505b"/><path fill="rgba(0,255,145,1.000)" d="M-3 -1h2v2h-2zM1 -1h2v2h-2zM-1 1h2v2h-2zM-1 -3h2v2h-2z"/></svg>
           <div class="xhair-label">960p pixels, enlarged</div>
         </div>
         <div class="xhair-meta">
-          <div class="cmd" tabindex="0" role="group" aria-label="Crosshair commands, scrollable"><pre><span>cl_crosshairstyle 4;</span> <span>cl_crosshair_length 2;</span> <span>cl_crosshair_thickness 2;</span> <span>cl_crosshair_gap 1;</span> <span>cl_crosshairdot 0;</span> <span>cl_crosshair_t 0;</span> <span>cl_crosshair_drawoutline 0;</span> <span>cl_crosshair_recoil 0;</span> <span>cl_crosshaircolor_r 0;</span> <span>cl_crosshaircolor_g 255;</span> <span>cl_crosshaircolor_b 145;</span> <span>cl_crosshaircolor_a 255;</span> <span>cl_crosshair_screen_height 960</span></pre></div>
+          <div class="cmd" tabindex="0" role="group" aria-label="Crosshair commands, scrollable"><pre><span>cl_crosshairstyle 4;</span> <span>cl_crosshair_length 2;</span> <span>cl_crosshair_thickness 2;</span> <span>cl_crosshair_gap 1;</span> <span>cl_crosshairdot 0;</span> <span>cl_crosshair_t 0;</span> <span>cl_crosshair_drawoutline 0;</span> <span>cl_crosshair_recoil 0;</span> <span>cl_crosshaircolor_r 0;</span> <span>cl_crosshaircolor_g 255;</span> <span>cl_crosshaircolor_b 145;</span> <span>cl_crosshaircolor_a 255;</span> <span>cl_ironsight_usecrosshaircolor 0;</span> <span>cl_ironsight_dot_scale 1;</span> <span>cl_crosshair_screen_height 960</span></pre></div>
           
           <p class="note">Converted from the pre-patch crosshair settings.gg lists for uli to CS2's crosshair system since the Sept 22, 2026 update, authored at 960p, uli's resolution; CS2 rescales it to your resolution. Many pros rebuilt their crosshair after the update, so this may not be what uli uses now — see their <a href="https://procrosshairs.com/player/76561198012528425/uli" target="_blank" rel="noopener">crosshair history</a>.</p>
           <p class="note">Valve published no conversion formula. This uses a community reconstruction (<a href="https://github.com/sebastianspicker/small-indie-crosshair-company" target="_blank" rel="noopener">small-indie-crosshair-company</a> v0.19.1, model community-static-v11, CS2 build 2000922) that hasn't been checked against in-game captures.</p>
+          <p class="note">The paste sets every setting that shapes this crosshair, including the iron-sight dot (CS2's defaults where their config has no value), so nothing from your current crosshair carries over.</p>
         </div>
       </div>
     </section>
@@ -72,9 +73,9 @@
       <p class="note lead">The CS2 console can reject a pasted line longer than 510 characters, so the full config comes in parts: press <b>~</b> in CS2, paste part 1, press Enter, then do the same with the next part. Or download the .cfg, save it in <code>Counter-Strike Global Offensive/game/csgo/cfg/</code> and run <code>exec uli</code> in the console.</p>
       <div class="part">
         <div class="part-head"><span class="part-label">Part 1 · Crosshair</span>
-          <button type="button" class="btn small" data-copy="cl_crosshairstyle 4; cl_crosshair_length 2; cl_crosshair_thickness 2; cl_crosshair_gap 1; cl_crosshairdot 0; cl_crosshair_t 0; cl_crosshair_drawoutline 0; cl_crosshair_recoil 0; cl_crosshaircolor_r 0; cl_crosshaircolor_g 255; cl_crosshaircolor_b 145; cl_crosshaircolor_a 255; cl_crosshair_screen_height 960">Copy part 1</button>
+          <button type="button" class="btn small" data-copy="cl_crosshairstyle 4; cl_crosshair_length 2; cl_crosshair_thickness 2; cl_crosshair_gap 1; cl_crosshairdot 0; cl_crosshair_t 0; cl_crosshair_drawoutline 0; cl_crosshair_recoil 0; cl_crosshaircolor_r 0; cl_crosshaircolor_g 255; cl_crosshaircolor_b 145; cl_crosshaircolor_a 255; cl_ironsight_usecrosshaircolor 0; cl_ironsight_dot_scale 1; cl_crosshair_screen_height 960">Copy part 1</button>
           <span class="mydpi-slot" data-part="0"></span></div>
-        <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>cl_crosshairstyle 4;</span> <span>cl_crosshair_length 2;</span> <span>cl_crosshair_thickness 2;</span> <span>cl_crosshair_gap 1;</span> <span>cl_crosshairdot 0;</span> <span>cl_crosshair_t 0;</span> <span>cl_crosshair_drawoutline 0;</span> <span>cl_crosshair_recoil 0;</span> <span>cl_crosshaircolor_r 0;</span> <span>cl_crosshaircolor_g 255;</span> <span>cl_crosshaircolor_b 145;</span> <span>cl_crosshaircolor_a 255;</span> <span>cl_crosshair_screen_height 960</span></pre></div>
+        <div class="cmd" tabindex="0" role="group" aria-label="Console commands, scrollable"><pre><span>cl_crosshairstyle 4;</span> <span>cl_crosshair_length 2;</span> <span>cl_crosshair_thickness 2;</span> <span>cl_crosshair_gap 1;</span> <span>cl_crosshairdot 0;</span> <span>cl_crosshair_t 0;</span> <span>cl_crosshair_drawoutline 0;</span> <span>cl_crosshair_recoil 0;</span> <span>cl_crosshaircolor_r 0;</span> <span>cl_crosshaircolor_g 255;</span> <span>cl_crosshaircolor_b 145;</span> <span>cl_crosshaircolor_a 255;</span> <span>cl_ironsight_usecrosshaircolor 0;</span> <span>cl_ironsight_dot_scale 1;</span> <span>cl_crosshair_screen_height 960</span></pre></div>
       </div>
 <div class="part">
         <div class="part-head"><span class="part-label">Part 2 · Mouse, viewmodel &amp; radar</span>
@@ -162,7 +163,7 @@
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script type="application/json" id="player-data">{"dpi":"400","sens":"1.65","parts":[["cl_crosshairstyle 4","cl_crosshair_length 2","cl_crosshair_thickness 2","cl_crosshair_gap 1","cl_crosshairdot 0","cl_crosshair_t 0","cl_crosshair_drawoutline 0","cl_crosshair_recoil 0","cl_crosshaircolor_r 0","cl_crosshaircolor_g 255","cl_crosshaircolor_b 145","cl_crosshaircolor_a 255","cl_crosshair_screen_height 960"],["sensitivity 1.65","zoom_sensitivity_ratio 0.8","viewmodel_fov 68","viewmodel_offset_x 2.5","viewmodel_offset_y 0","viewmodel_offset_z -1.5"],["r_fullscreen_gamma 2.6"]]}</script>
+  <script type="application/json" id="player-data">{"dpi":"400","sens":"1.65","parts":[["cl_crosshairstyle 4","cl_crosshair_length 2","cl_crosshair_thickness 2","cl_crosshair_gap 1","cl_crosshairdot 0","cl_crosshair_t 0","cl_crosshair_drawoutline 0","cl_crosshair_recoil 0","cl_crosshaircolor_r 0","cl_crosshaircolor_g 255","cl_crosshaircolor_b 145","cl_crosshaircolor_a 255","cl_ironsight_usecrosshaircolor 0","cl_ironsight_dot_scale 1","cl_crosshair_screen_height 960"],["sensitivity 1.65","zoom_sensitivity_ratio 0.8","viewmodel_fov 68","viewmodel_offset_x 2.5","viewmodel_offset_y 0","viewmodel_offset_z -1.5"],["r_fullscreen_gamma 2.6"]]}</script>
   <script src="/assets/app.js"></script>
 </body>
 </html>

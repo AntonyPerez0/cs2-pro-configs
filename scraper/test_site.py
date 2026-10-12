@@ -34,7 +34,7 @@ def check(name, got, want):
 
 # crosshair cvars of the current game (build 2000922, unchanged through 2000930);
 # mirrors CURRENT_CVARS in crosshair.mjs
-CURRENT_XHAIR = set(re.findall(r"'(cl_crosshair\w*)'", re.search(
+CURRENT_XHAIR = set(re.findall(r"'(cl_(?:crosshair|ironsight)\w*)'", re.search(
     r"CURRENT_CVARS = \[(.*?)\];", (HERE / "crosshair.mjs").read_text(), re.S).group(1)))
 
 index = json.loads((ROOT / "data" / "index.json").read_text())
@@ -78,7 +78,11 @@ additive = [s for s in converted if records[s]["convars"].get("cl_crosshairuseal
             and not any(w["code"] == "outline-only-as-core" for w in P[s].get("warnings", []))]
 check("usealpha off -> opacity 255", sorted({cmds(s)["cl_crosshaircolor_a"] for s in additive} - {"255"}), [])
 check("split-pip cvars only for style 2",
-      sorted(s for s in converted if cmds(s)["cl_crosshairstyle"] != "2" and any(c.startswith("cl_crosshair_dynamic_") for c in P[s]["commands"])), [])
+      sorted(s for s in converted if cmds(s)["cl_crosshairstyle"] != "2" and any(
+          c.startswith("cl_crosshair_dynamic_split") or c.startswith("cl_crosshair_dynamic_maxdist") for c in P[s]["commands"])), [])
+check("every paste sets the iron-sight dot (nothing of the visitor's own carries over)",
+      sorted(s for s, p in P.items() if p.get("commands") and not {"cl_ironsight_usecrosshaircolor", "cl_ironsight_dot_scale"}
+             <= {c.split(" ")[0] for c in p["commands"]})[:5], [])
 
 # ---- console line limit: every part and copy string fits ----
 too_long = []
