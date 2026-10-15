@@ -766,7 +766,7 @@ def photo_alt(p) -> str:
 
 
 def photo_credit_html(ph) -> str:
-    """CC attribution: what, when, who, licence (linked), where (Commons page)."""
+    """CC attribution: what, when, who, licence (linked), where (the Commons or Flickr page)."""
     lic = (f'<a href="{esc(ph["license_url"])}" target="_blank" rel="noopener nofollow">{esc(ph["license"])}</a>'
            if ph.get("license_url") else esc(ph.get("license") or ""))
     what = esc(ph.get("event") or "Photo")
@@ -1131,7 +1131,7 @@ def classic_photo_credits_html(classic) -> str:
         return ""
     return (f'<section class="section classic-credits" id="photo-credits"><details><summary>Photo credits '
             f'<span class="tag">{len(items)}</span></summary><ul class="provenance">{"".join(items)}</ul>'
-            '<p class="note">Freely licensed photos from Wikimedia Commons, cropped to fit; the photo closest to each entry\'s time is used.</p>'
+            '<p class="note">Freely licensed photos from Wikimedia Commons and Flickr, cropped to fit; the photo closest to each entry\'s time is used.</p>'
             '</details></section>')
 
 
