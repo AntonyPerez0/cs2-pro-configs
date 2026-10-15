@@ -4,7 +4,9 @@
  * real pros' pre-patch settings), so they don't depend on the weekly scrape.
  *
  * The anchors are pros whose post-patch crosshair is known from demo-derived
- * share codes (xhair.pro / procrosshairs, Oct 2026). The other checks pin rules
+ * share codes (procrosshairs.com, Oct 3-11 2026; xiELO, YEKINDAR and FalleN also on
+ * xhair.pro, Oct 5. xhair.pro's donk and w0nderful "CS" codes are its own conversions
+ * of their legacy codes, so they are not used). The other checks pin rules
  * established from CS2's current convar dump and patch notes. Exit 1 on failure.
  */
 
@@ -33,7 +35,13 @@ const conv = (r) => {
 const geo = (o) => [o.cv.cl_crosshair_length, o.cv.cl_crosshair_thickness, o.cv.cl_crosshair_gap].map(Number);
 
 // ---- anchors: published post-patch crosshairs ----
-for (const slug of ['donk', 'kscerato', 'xielo', 'yekindar', 'w0nderful']) check(`${slug}: old 1/1/-4 family -> published 2/2/1`, geo(conv(rec(slug))), [2, 2, 1]);
+for (const slug of ['donk', 'xielo', 'yekindar', 'w0nderful']) check(`${slug}: old 1/1/-4 family -> published 2/2/1`, geo(conv(rec(slug))), [2, 2, 1]);
+// KSCERATO's settings.gg crosshair is the same family, but after the update he plays a Static Quadrant (style 9):
+// this pins the rule only (xhair.pro's 2/2/1 code for him is xiELO's, from the same match)
+check('kscerato: settings.gg 1/1/-4 -> 2/2/1 (rule, not his published crosshair)', geo(conv(rec('kscerato'))), [2, 2, 1]);
+const at = (slug, res) => conv({ ...rec(slug), tables: { 'Video Settings': { Resolution: res } } });
+check('yekindar at the 1050p his post-patch code records -> published 2/2/1', geo(at('yekindar', '1680x1050')), [2, 2, 1]);
+check('w0nderful at the 1024p his post-patch code records -> published 2/2/1', geo(at('w0nderful', '1280x1024')), [2, 2, 1]);
 const donk = conv(rec('donk'));
 check('donk authored at his 960p', [donk.height, donk.cv.cl_crosshair_screen_height], [960, '960']);
 check('donk: alpha slider off -> opacity 255 (published)', donk.cv.cl_crosshaircolor_a, '255');
@@ -49,19 +57,29 @@ check('full outline sets the outline colour (black, old additive 200)',
 check('no outline -> no outline colour', 'cl_crosshairoutline_a' in donk.cv, false);
 check('old style 5 keeps its family', conv(rec('fino')).cv.cl_crosshairstyle, '5');
 const hades = conv(rec('hades'));
-check('old style 2 keeps its family', hades.cv.cl_crosshairstyle, '2');
+// a style-2 crosshair with arms (KSCERATO's settings as style 2: 1/1/-4 at 960, static 2/2/1)
+const s2 = (over = {}) => conv(rec('kscerato', { cl_crosshairstyle: '2', ...over }));
+check('old style 2 keeps its family', s2().cv.cl_crosshairstyle, '2');
+check('style 2: the gap is an offset from the weapon spread (static gap minus 4, may be negative)',
+  [geo(s2()), s2().native.gap], [[2, 2, -3], -3]);
+check('...and the preview keeps the at-rest static shape', s2().preview.fill.map(([x, y, w, h]) => [w, h]), conv(rec('kscerato')).preview.fill.map(([x, y, w, h]) => [w, h]));
+check('a dot-only style 2 never moved, so it stays a Static Cross', [hades.cv.cl_crosshairstyle, hades.cv.cl_crosshairdot, 'cl_crosshair_dynamic_splitdist' in hades.cv], ['4', '1', false]);
+check('old style 3 never split: CS2 style 2 without a split', ['maxdist_splitratio', 'splitalpha_innermod', 'splitalpha_outermod']
+  .map((k) => s2({ cl_crosshairstyle: '3' }).cv[`cl_crosshair_dynamic_${k}`]), ['1', '0', '1']);
 check('split-pip cvars only for style 2', Object.keys(donk.cv).filter((k) => k.startsWith('cl_crosshair_dynamic_')), []);
 check('weapon gap warns', hades.warnings.some((w) => w.code === 'weapon-gap-dropped'), true);
 const nivera = conv(rec('nivera'));
-check('colour index 7 keeps its stored RGB and warns',
-  [nivera.cv.cl_crosshaircolor_r, nivera.cv.cl_crosshaircolor_g, nivera.cv.cl_crosshaircolor_b, nivera.warnings.some((w) => w.code === 'color-index-unknown')],
-  ['0', '255', '0', true]);
+check('colour index 7 is not a preset: the old default green, with a warning',
+  [nivera.cv.cl_crosshaircolor_r, nivera.cv.cl_crosshaircolor_g, nivera.cv.cl_crosshaircolor_b, nivera.warnings.some((w) => w.code === 'color-index-default')],
+  ['50', '250', '50', true]);
+check('no page says the old game may have drawn it 1 px smaller (it rounded, ties to even)',
+  Object.keys(FIX).filter((k) => k !== '_about').filter((sl) => conv(rec(sl)).warnings.some((w) => w.code === 'legacy-rounding-disagreement')), []);
 const jame = conv(rec('jame'));
 check('size-0 dot design drawn with short arms, dot on', [Number(jame.cv.cl_crosshair_length) > 0, jame.cv.cl_crosshairdot], [true, '1']);
 check('no invented dot', conv(rec('perx')).cv.cl_crosshairdot, '0');
 check('injection in a style-2 split value is dropped (CS2 default used instead)',
-  conv(rec('hades', { cl_crosshair_dynamic_splitdist: '7; quit' })).cv.cl_crosshair_dynamic_splitdist, '3');
-check('no command carries a ";" or other non-number value', conv(rec('hades', { cl_crosshair_dynamic_splitdist: '7; quit' }))
+  s2({ cl_crosshair_dynamic_splitdist: '7; quit' }).cv.cl_crosshair_dynamic_splitdist, '3');
+check('no command carries a ";" or other non-number value', s2({ cl_crosshair_dynamic_splitdist: '7; quit' })
   .commands.filter((c) => !/^[a-z_]+ -?\d+(\.\d+)?$/.test(c)), []);
 
 // ---- a paste fully defines the crosshair: nothing of the visitor's own carries over ----
@@ -74,11 +92,13 @@ check('outline colour only with an outline', [donkX.cv.cl_crosshair_drawoutline,
 const hadesX = conv(rec('hades'));
 const DYN = ['splitdist', 'splitalpha_innermod', 'splitalpha_outermod', 'maxdist_splitratio', 'spread_limit'];
 check('style 2 gets the split cvars, not the spread limit (CS2 shows it for styles 0, 1 and 7 only)',
-  DYN.map((k) => hadesX.cv[`cl_crosshair_dynamic_${k}`]), ['3', '0', '1', '1', undefined]);
+  DYN.map((k) => s2({ cl_crosshair_dynamic_splitdist: '3', cl_crosshair_dynamic_splitalpha_innermod: '0',
+    cl_crosshair_dynamic_splitalpha_outermod: '1', cl_crosshair_dynamic_maxdist_splitratio: '1' }).cv[`cl_crosshair_dynamic_${k}`]),
+  ['3', '0', '1', '1', undefined]);
 check('split values come from the config', DYN.map((k) => conv(rec('kscerato', { cl_crosshairstyle: '2' })).cv[`cl_crosshair_dynamic_${k}`]),
   ['7', '1', '0.5', '0.3', undefined]);
-check('split values are clamped to CS2\'s ranges', DYN.slice(0, 3).map((k) => conv(rec('hades', {
-  cl_crosshair_dynamic_splitalpha_outermod: '0.1', cl_crosshair_dynamic_splitdist: '500' })).cv[`cl_crosshair_dynamic_${k}`]),
+check('split values are clamped to CS2\'s ranges', DYN.slice(0, 3).map((k) => s2({ cl_crosshair_dynamic_splitalpha_innermod: '0',
+  cl_crosshair_dynamic_splitalpha_outermod: '0.1', cl_crosshair_dynamic_splitdist: '500' }).cv[`cl_crosshair_dynamic_${k}`]),
   ['127', '0', '0.3']);
 check('screen height stays last', hadesX.commands.at(-1).startsWith('cl_crosshair_screen_height '), true);
 check('only current cvars', [...new Set(Object.keys(FIX).filter((k) => k !== '_about')
@@ -139,7 +159,15 @@ check('...in words that fit a config without the setting', c2012.rewrite['weapon
 check('2014 style 4: weapon gap off (not added yet)', classic('2014-04').convars.cl_crosshairgap_useweaponvalue, '0');
 check('2012 style 2 says CS2 style 2 is the accurate one', codes(classic('2012-12-13', { cl_crosshairstyle: '2' })).includes('era-style-2'), true);
 check('2015 style 2 has no such note', codes(classic('2015', { cl_crosshairstyle: '2' })).includes('era-style-2'), false);
-check('2013 (unknown day): outline existed by May, so off by default', codes(classic('2013')), ['era-features-off', 'era-default-off']);
+check('2013 (unknown day): outline existed by May, so on by default (CS:GO\'s default)', [codes(classic('2013')),
+  classic('2013').convars.cl_crosshair_drawoutline], [['era-features-off', 'era-default-outline'], '1']);
+check('a CS:GO outline width below 0.1 was drawn at 0.1: the half outline', [codes(classic('2014-04', { cl_crosshair_drawoutline: '1',
+  cl_crosshair_outlinethickness: '0' })).includes('outline-min'), convertPlayer(classic('2014-04', { cl_crosshair_drawoutline: '1',
+  cl_crosshair_outlinethickness: '0' })).commands.includes('cl_crosshair_drawoutline 2')], [true, true]);
+check('an unlisted CS:GO style (6) was drawn like style 5', [convertPlayer(classic('2014-07', { cl_crosshairstyle: '6' })).commands[0],
+  codes(classic('2014-07', { cl_crosshairstyle: '6' })).includes('style-unlisted')], ['cl_crosshairstyle 5', true]);
+check('the original style 2 (before 12 Feb 2014) is exported as style 5, not CS2\'s accurate style 2',
+  convertPlayer(classic('2012-12-13', { cl_crosshairstyle: '2' })).commands[0], 'cl_crosshairstyle 5');
 const windowed = classic('2013', {}, { window: ['2013-01-13', '2013-04-25'] });
 check('a window ending on the update day predates it', classic('2014-07', {}, { window: ['2014-07-23', '2014-08-01'] })
   .notes[0].text.includes('cl_crosshairgap_useweaponvalue'), true);

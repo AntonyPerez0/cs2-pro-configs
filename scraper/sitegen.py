@@ -459,7 +459,8 @@ def crosshair_section_html(rec, xp, reference, source_note=None) -> str:
         about = (f'<p class="note">{source_note} Converted to CS2\'s crosshair system since the Sept 22, 2026 update, '
                  f"{authored}; CS2 rescales it to your resolution.</p>\n"
                  f'          <p class="note">Valve published no conversion formula. This uses a community reconstruction '
-                 f"({ref_link}) that hasn't been checked against in-game captures.</p>")
+                 f"({ref_link}); for Static Cross at 1080p and 960p it agrees with the rule crosshairrestore.com measured from "
+                 f"in-game screenshots (CS2 builds before Sept 30), and nothing else has been checked against captures.</p>")
     elif kind_of(xp) == "copied":
         about = (f'<p class="note">settings.gg lists {esc(nick)}\'s crosshair in the format CS2 uses since the '
                  f"Sept 22, 2026 update, so it's copied as-is, {authored}; CS2 rescales it to your resolution.</p>")
@@ -468,7 +469,8 @@ def crosshair_section_html(rec, xp, reference, source_note=None) -> str:
                  f"crosshair system since the Sept 22, 2026 update, {authored}; CS2 rescales it to your resolution. "
                  f"Many pros rebuilt their crosshair after the update, so this may not be what {esc(nick)} uses now{history}.</p>\n"
                  f'          <p class="note">Valve published no conversion formula. This uses a community reconstruction '
-                 f"({ref_link}) that hasn't been checked against in-game captures.</p>")
+                 f"({ref_link}); for Static Cross at 1080p and 960p it agrees with the rule crosshairrestore.com measured from "
+                 f"in-game screenshots (CS2 builds before Sept 30), and nothing else has been checked against captures.</p>")
     # the paste sets every setting that shapes this crosshair (crosshair.mjs complete())
     about += ('\n          <p class="note">The paste sets every setting that shapes this crosshair, including the '
               "iron-sight dot (CS2's defaults where their config has no value), so nothing from your current crosshair "
@@ -1089,7 +1091,7 @@ def classic_index_page(classic, players_by_slug) -> str:
   </main>
   <footer>
     <div class="wrap">
-      <p>Crosshair conversion: community reconstruction (not checked against in-game captures). Unofficial fan-made tool, not affiliated with Valve, HLTV or any player.</p>
+      <p>Crosshair conversion: community reconstruction (only Static Cross at 1080p and 960p is checked against third-party in-game captures). Unofficial fan-made tool, not affiliated with Valve, HLTV or any player.</p>
     </div>
   </footer>
 </body>
