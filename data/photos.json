@@ -1,0 +1,295 @@
+{
+ "about": "Freely licensed photos (Wikimedia Commons or Flickr, CC0/public domain/CC BY/CC BY-SA) for players settings.gg has no avatar for. Each crop stays under its source photo's licence, credited on the player's page.",
+ "players": {
+  "aerial": {
+   "src": "data/avatars/free/aerial.webp",
+   "file": "408A0468",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526107213/",
+   "date": "2018-07-05",
+   "event": "ESL One Cologne 2018",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "autimatic": {
+   "src": "data/avatars/free/autimatic.webp",
+   "file": "autimatic",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526223750/",
+   "date": "2018",
+   "event": "FACEIT Major London 2018 (probable)",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "azr": {
+   "src": "data/avatars/free/azr.webp",
+   "file": "P1120773",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526288891/",
+   "date": "2019-09-06",
+   "event": "StarLadder Major Berlin 2019",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "brehze": {
+   "src": "data/avatars/free/brehze.webp",
+   "file": "IMG_9601",
+   "page": "https://www.flickr.com/photos/vakarm_net/54525956441/",
+   "date": "2019",
+   "event": "Intel Extreme Masters (Evil Geniuses era)",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "captainmo": {
+   "src": "data/avatars/free/captainmo.webp",
+   "file": "captainMo",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526066519/",
+   "date": "2018-09",
+   "event": "FACEIT Major London 2018",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "degster": {
+   "src": "data/avatars/free/degster.webp",
+   "file": "IMG_1023",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526509295/",
+   "date": "2023-04-08",
+   "event": "BLAST.tv Paris Major 2023 Europe RMR",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "dupreeh": {
+   "src": "data/avatars/free/dupreeh.webp",
+   "file": "File:Dupreeh BLAST Backstage Copenhagen 2018 (cropped).jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Dupreeh_BLAST_Backstage_Copenhagen_2018_(cropped).jpg",
+   "date": "2019-11-05",
+   "event": "BLAST Pro Series Copenhagen",
+   "author": "BLAST Premier",
+   "license": "CC BY 3.0",
+   "license_url": "https://creativecommons.org/licenses/by/3.0/",
+   "via": "Wikimedia Commons"
+  },
+  "flusha": {
+   "src": "data/avatars/free/flusha.webp",
+   "file": "flusha (2)",
+   "page": "https://www.flickr.com/photos/vakarm_net/54525878186/",
+   "date": "2018",
+   "event": "FACEIT Major London 2018 (probable)",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "freakazoid": {
+   "src": "data/avatars/free/freakazoid.webp",
+   "file": "IMG_9321",
+   "page": "https://www.flickr.com/photos/vakarm_net/54524253254/",
+   "date": "2015-10-28",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "gla1ve": {
+   "src": "data/avatars/free/gla1ve.webp",
+   "file": "IMG_9933",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526429419/",
+   "date": "2024-02-22",
+   "event": "PGL Major Copenhagen 2024 European RMR",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "golden": {
+   "src": "data/avatars/free/golden.webp",
+   "file": "Golden",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526122063/",
+   "date": "2018-08-15",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "jkaem": {
+   "src": "data/avatars/free/jkaem.webp",
+   "file": "IMG_9055",
+   "page": "https://www.flickr.com/photos/vakarm_net/54525369207/",
+   "date": "2024-02-19",
+   "event": "PGL Major Copenhagen 2024 European RMR",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "jl": {
+   "src": "data/avatars/free/jl.webp",
+   "file": "IMG_4109",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526443619/",
+   "date": "2024-03-29",
+   "event": "PGL CS2 Major Copenhagen 2024",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "k0nfig": {
+   "src": "data/avatars/free/k0nfig.webp",
+   "file": "IMG_2433",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526161291/",
+   "date": "2023-04-13",
+   "event": "BLAST.tv Paris Major 2023 Europe RMR",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "kjaerbye": {
+   "src": "data/avatars/free/kjaerbye.webp",
+   "file": "IMG_1919",
+   "page": "https://www.flickr.com/photos/vakarm_net/54525642024/",
+   "date": "2017-01-29",
+   "event": "ELEAGUE Major Atlanta 2017",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "nbk-": {
+   "src": "data/avatars/free/nbk-.webp",
+   "file": "IMG_5378",
+   "page": "https://www.flickr.com/photos/vakarm_net/54509416888/",
+   "date": "2012-08-29",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "oskar": {
+   "src": "data/avatars/free/oskar.webp",
+   "file": "IMG_3571",
+   "page": "https://www.flickr.com/photos/vakarm_net/54525018732/",
+   "date": "2019-02",
+   "event": "IEM Katowice 2019",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "refrezh": {
+   "src": "data/avatars/free/refrezh.webp",
+   "file": "IMG_9155",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526588645/",
+   "date": "2024-02-19",
+   "event": "PGL Major Copenhagen 2024 European RMR",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "roej": {
+   "src": "data/avatars/free/roej.webp",
+   "file": "IMG_9139",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526588640/",
+   "date": "2024-02-19",
+   "event": "PGL Major Copenhagen 2024 European RMR",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "rush": {
+   "src": "data/avatars/free/rush.webp",
+   "file": "RUSH (1)",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526065654/",
+   "date": "2018-09",
+   "event": "FACEIT Major London 2018 (inferred)",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "seized": {
+   "src": "data/avatars/free/seized.webp",
+   "file": "DSC_0501",
+   "page": "https://www.flickr.com/photos/vakarm_net/54524266898/",
+   "date": "2015-07-12",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "stewie2k": {
+   "src": "data/avatars/free/stewie2k.webp",
+   "file": "IMG_9654",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526199958/",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "styko": {
+   "src": "data/avatars/free/styko.webp",
+   "file": "IMG_9048",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526589195/",
+   "date": "2024-02-19",
+   "event": "PGL Major Copenhagen 2024 European RMR",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "syrson": {
+   "src": "data/avatars/free/syrson.webp",
+   "file": "IMG_7807",
+   "page": "https://www.flickr.com/photos/vakarm_net/54525236867/",
+   "date": "2022-10-09",
+   "event": "IEM Rio Major 2022 European RMR",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "taz": {
+   "src": "data/avatars/free/taz.webp",
+   "file": "IMG_7968",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526485243/",
+   "date": "2024-02-14",
+   "event": "PGL Copenhagen 2024 (RMR), as G2 coach",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "tizian": {
+   "src": "data/avatars/free/tizian.webp",
+   "file": "tiziaN",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526222595/",
+   "date": "2018-08-15",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  },
+  "xseven": {
+   "src": "data/avatars/free/xseven.webp",
+   "file": "408A0405",
+   "page": "https://www.flickr.com/photos/vakarm_net/54526207595/",
+   "date": "2018-07-05",
+   "event": "ESL One Cologne 2018",
+   "author": "VaKarM.net",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0/",
+   "via": "Flickr"
+  }
+ }
+}

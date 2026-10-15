@@ -673,6 +673,16 @@
         ]
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/friis-2011.webp",
+      "file": "CPH vendredi matin 145",
+      "page": "https://www.flickr.com/photos/vakarm_net/54506237766/",
+      "date": "2011-09-15",
+      "author": "VaKarM.net",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "via": "Flickr"
      }
     },
     {
@@ -1424,6 +1434,17 @@
        "date": "2016-12-13",
        "source": "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/fifflaren/data.yml"
       }
+     },
+     "photo": {
+      "src": "data/avatars/classic/fifflaren-2012.webp",
+      "file": "IMG_1211",
+      "page": "https://www.flickr.com/photos/vakarm_net/54509239241/",
+      "date": "2014-11",
+      "event": "DreamHack Winter 2014",
+      "author": "VaKarM.net",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "via": "Flickr"
      }
     },
     {
@@ -1627,6 +1648,16 @@
        }
       ],
       "notes": "No crosshair of his from 2012 to 2015 was found: Liquipedia's RpK page has no crosshair table before May 2016, and setup.gg's config archive has no file for him. The May 2016 table is the earliest. Within five weeks the page changed his resolution three times (1920x1080, 1280x960, 1280x1024, all stretched), and on 29 Jun 2016 the crosshair became a red one (style 4, size 3, thickness 1, gap -3). His crosshair there from 5 Jan 2021, citing params.gg, is green with size 1, thickness 0 and gap -3."
+     },
+     "photo": {
+      "src": "data/avatars/classic/rpk-2012.webp",
+      "file": "rpk_profil",
+      "page": "https://www.flickr.com/photos/vakarm_net/54477614980/",
+      "event": "ESL European Nations Championship (team France)",
+      "author": "VaKarM.net",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "via": "Flickr"
      }
     },
     {
@@ -2589,6 +2620,16 @@
        "date": "2016-12-13",
        "source": "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/scream/data.yml"
       }
+     },
+     "photo": {
+      "src": "data/avatars/classic/scream-2013.webp",
+      "file": "IMG_0472",
+      "page": "https://www.flickr.com/photos/vakarm_net/54509429574/",
+      "date": "2013-05",
+      "author": "VaKarM.net",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "via": "Flickr"
      }
     },
     {
@@ -5985,6 +6026,17 @@
        }
       ],
       "notes": "No crosshair of his from his Cloud9 time (Aug 2014 to Apr 2015) is known: this one is from his compLexity config, saved 12 to 17 months before this lineup. The first crosshair Liquipedia lists for him, added on 18 Aug 2016 when he played for TSM (revision 416323), has the same style, size and thickness but gap -2 and green (colour 1) instead of red. Some key-bind lines in the archived file are garbled (\"+ USE\", a bind split across two lines), which setup.gg corrected in a later commit; the settings lines, the crosshair included, are in the game's own sorted format."
+     },
+     "photo": {
+      "src": "data/avatars/classic/semphis-c9-ibp-2015.webp",
+      "file": "DSCN0253",
+      "page": "https://www.flickr.com/photos/vakarm_net/54508355092/",
+      "date": "2014-10-30",
+      "event": "ESWC 2014",
+      "author": "VaKarM.net",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "via": "Flickr"
      }
     },
     {
@@ -6239,6 +6291,16 @@
        }
       ],
       "notes": "His config binds the up and down arrow keys to crosshair colours 4 (cyan) and 1 (green), and the [ and ] keys to view model presets 1 and 3, so the green crosshair and the view model saved here may only be the ones he had last switched to."
+     },
+     "photo": {
+      "src": "data/avatars/classic/azk-c9-ibp-2015.webp",
+      "file": "IMG_7982",
+      "page": "https://www.flickr.com/photos/vakarm_net/54509544780/",
+      "date": "2013-01-18",
+      "author": "VaKarM.net",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "via": "Flickr"
      }
     },
     {
@@ -6376,6 +6438,16 @@
         "confidence": "medium"
        }
       ]
+     },
+     "photo": {
+      "src": "data/avatars/classic/dazed-c9-ibp-2015.webp",
+      "file": "IMG_8924",
+      "page": "https://www.flickr.com/photos/vakarm_net/54509580095/",
+      "date": "2013-04-17",
+      "author": "VaKarM.net",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "via": "Flickr"
      }
     },
     {
@@ -6773,6 +6845,17 @@
        }
       ],
       "notes": "Every crosshair of his own that is dated (spring 2013, early 2016, Liquipedia's 2018 table) uses style 1, the default static crosshair, which can't be converted. This is his early-2016 config, the closest to January 2015. The sensitivity is not taken from it: Liquipedia's table, unchanged from August 2014 to January 2015, gives 2.15 at 400 DPI, the same 2.15 as his 2012-13 config, where this one has 1.1."
+     },
+     "photo": {
+      "src": "data/avatars/classic/swag-c9-ibp-2015.webp",
+      "file": "IMG_7983",
+      "page": "https://www.flickr.com/photos/vakarm_net/54509544765/",
+      "date": "2014-08",
+      "event": "Gfinity 2014 Summer Masters (album \"Gfinity 3 (08/2014)\")",
+      "author": "VaKarM.net",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "via": "Flickr"
      }
     },
     {
