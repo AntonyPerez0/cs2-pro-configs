@@ -556,7 +556,10 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None, classic_e
     for key, cid, stood in classic_entries:
         links.append(f'<a href="/classic/{esc(key)}/{esc(cid)}/">{esc(stood)} (classic)</a>')
 
-    avatar_html = avatar_img(rec["avatar"], 92) if rec.get("avatar") else letter_div(nick)
+    ph = rec.get("photo")
+    alt = (f"{nick}" + (f" at {ph['event']}" if ph.get("event") else "") + (f", {ph['date']}" if ph.get("date") else "")) if ph else ""
+    avatar_html = avatar_img(rec["avatar"], 92, alt=alt) if rec.get("avatar") else letter_div(nick)
+    photo_credit = f' · Photo: {photo_credit_html(ph)}' if ph else ""
     download = f'<a class="btn ghost" href="/cfg/{esc(slug)}.cfg" download="{esc(slug)}.cfg">Download .cfg</a>'
 
     raw_html = ""
@@ -664,7 +667,7 @@ def player_page(rec: dict, xp: dict, reference: dict, top10_rank=None, classic_e
 
   <footer>
     <div class="wrap">
-      <p>Settings data from <a href="https://settings.gg/players" target="_blank" rel="noopener">settings.gg</a> · Crosshair conversion by <a href="{esc(reference["url"])}" target="_blank" rel="noopener">{esc(reference["name"])}</a> (MIT) · Unofficial fan-made tool, not affiliated with Valve or settings.gg. CS2 and Counter-Strike are trademarks of Valve.</p>
+      <p>Settings data from <a href="https://settings.gg/players" target="_blank" rel="noopener">settings.gg</a> · Crosshair conversion by <a href="{esc(reference["url"])}" target="_blank" rel="noopener">{esc(reference["name"])}</a> (MIT){photo_credit} · Unofficial fan-made tool, not affiliated with Valve or settings.gg. CS2 and Counter-Strike are trademarks of Valve.</p>
     </div>
   </footer>
 
@@ -768,7 +771,23 @@ def photo_credit_html(ph) -> str:
            if ph.get("license_url") else esc(ph.get("license") or ""))
     what = esc(ph.get("event") or "Photo")
     return (f'<a href="{esc(ph["page"])}" target="_blank" rel="noopener nofollow">{what}</a> · {esc(ph.get("date") or "undated")}'
-            f' · by {esc(ph.get("author") or "unknown")} · {lic} · via Wikimedia Commons · cropped')
+            f' · by {esc(ph.get("author") or "unknown")} · {lic} · via {esc(ph.get("via") or "Wikimedia Commons")} · cropped')
+
+
+def load_photos() -> dict:
+    """slug -> a freely licensed photo (data/photos.json) for players settings.gg has no avatar for."""
+    try:
+        return json.loads((ROOT / "data" / "photos.json").read_text(encoding="utf-8"))["players"]
+    except FileNotFoundError:
+        return {}
+
+
+def with_photo(p: dict, photos: dict) -> dict:
+    """The record with the free photo as its avatar when it has none of its own."""
+    ph = photos.get(p.get("slug"))
+    if p.get("avatar") or not ph or not (ROOT / ph["src"]).exists():
+        return p
+    return {**p, "avatar": ph["src"], "photo": ph}
 
 
 def classic_cfg(rec, xp, year_obj, p) -> str:
@@ -1357,7 +1376,8 @@ def robots_txt() -> str:
 
 def main() -> None:
     index = json.loads((ROOT / "data" / "index.json").read_text(encoding="utf-8"))
-    players = index["players"]
+    photos = load_photos()
+    players = [with_photo(p, photos) for p in index["players"]]
     generated = index["meta"]["generated"]
 
     try:
@@ -1406,7 +1426,7 @@ def main() -> None:
         f = ROOT / "data" / "players" / f"{slug}.json"
         if not f.exists():
             continue
-        rec = json.loads(f.read_text(encoding="utf-8"))
+        rec = with_photo(json.loads(f.read_text(encoding="utf-8")), photos)
         xp = crosshair["players"][slug]
         d = ROOT / "p" / slug
         d.mkdir(parents=True, exist_ok=True)
