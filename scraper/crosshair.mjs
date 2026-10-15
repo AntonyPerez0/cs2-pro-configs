@@ -16,7 +16,8 @@
  * authored height) and cl_crosshair_screen_height is set to it: the old game
  * scaled size and thickness with the resolution, and the new game scales the
  * pixel values from the height they were authored at. Old styles 2 and 5 keep
- * their family (Valve kept both numbers and families in the new style list).
+ * their family (Valve kept both numbers and families in the new style list);
+ * style 2's gap is an offset from the weapon's spread, as it was in the old game.
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -112,6 +113,11 @@ const cells = (r) => [r.x, r.y, r.w, r.h];
 // the converter's texts address someone pasting into its app; reword them for a page
 const pageText = (t) => String(t)
   .replace(/ Add cl_crosshairstyle 4 to the paste[^.]*\./, '')
+  .replace(/^Exported style 2 keeps the old style family\. .*$/, 'Exported as style 2, Dynamic Cross (Classic), which like the old ' +
+    "style 2 places the bars at the weapon's spread plus the gap, so the gap is the old one without Static Cross's fixed 4 px " +
+    'and can be negative. The at-rest shape matches the old one with a rifle; this is from the game code, not checked in game.')
+  .replace(/^Exported style 5 keeps the old style family\. .*$/, 'Exported as style 5, Dynamic Cross (Legacy/Shot Feedback), which ' +
+    'like the old style 5 rests at this gap and widens when you fire; how far it widens is not checked in game.')
   .replace('Not in the paste, game defaults used: ', 'Not in this config, so the pre-update game defaults are used: ')
   .replace("Added from the old game's defaults because your paste did not set them: ",
     'Not in this config, so the pre-update game defaults are used: ');
@@ -196,18 +202,40 @@ export function convertPlayer(rec) {
   const legacy = Object.entries(rec.convars ?? {}).filter(([k, v]) =>
     k.startsWith('cl_crosshair') && k !== 'cl_crosshair_dynamic_spread_limit' && numeric(v) !== null);
   if (!legacy.length) return { kind: 'blocked', height, heightSource: source, blockers: ['No crosshair settings are listed for this player.'] };
+  // The old painter's colour switch had presets 0-4, 5 for the r/g/b values and a default branch of green 50/250/50
+  // for any other value (CS:GO's game code, 2016-17; CS:S had the same switch), so an index such as 6 or 7 drew green.
+  const own = [];
+  const ci = legacy.findIndex(([k]) => k === 'cl_crosshaircolor');
+  if (ci >= 0 && !(Math.trunc(Number(numeric(legacy[ci][1]))) >= 0 && Math.trunc(Number(numeric(legacy[ci][1]))) <= 5)) {
+    own.push({ code: 'color-index-default', text: `Old colour index ${legacy[ci][1]} is not a preset; the old game drew it in its ` +
+      'default green (50, 250, 50) and ignored the stored RGB, so that green is used.' });
+    legacy[ci] = ['cl_crosshaircolor', '1'];
+  }
   const parsed = parseLegacyTextWithNotes(legacy.map(([k, v]) => `${k} ${v}`).join('\n'));
   const options = { oldHeight: height, currentHeight: height, authoredHeight: height, styleTarget: 'family' };
-  const report = infer({ settings: parsed.config, options, selectedModelId: COMMUNITY_MODEL.id });
+  let report = infer({ settings: parsed.config, options, selectedModelId: COMMUNITY_MODEL.id });
+  // An old style 2/3 crosshair without arms (old arm length 0 px: a dot) never moved, and CS2's style 2 would push the
+  // export's short arms (kept inside the dot) out by the weapon's spread, so it stays a Static Cross.
+  if (!report.blockers.length && [2, 3].includes(report.settings.style) && report.legacy?.length === 0)
+    report = infer({ settings: parsed.config, options: { ...options, styleTarget: 'static' }, selectedModelId: COMMUNITY_MODEL.id });
   if (report.blockers.length) return { kind: 'blocked', height, heightSource: source, blockers: report.blockers.map(pageText) };
 
   const overrides = mergedExportOverrides(report);
+  const settings = report.settings, native = report.chosen.native;
+  // old style 3 never split, so it gets CS2 style 2's no-split values (ratio 1, inner 0, outer 1)
+  const cv = settings.style === 3 ? { ...rec.convars, cl_crosshair_dynamic_maxdist_splitratio: '1',
+    cl_crosshair_dynamic_splitalpha_innermod: '0', cl_crosshair_dynamic_splitalpha_outermod: '1' } : (rec.convars ?? {});
   // every line group (colour, opacity, outline colour, recoil ...), not only the ones the old config set,
   // then the cvars the converter doesn't write: the paste fully defines the crosshair
-  const commands = complete(exportQuantCFG(report, null).split(';'), rec.convars ?? {});
+  let commands = complete(exportQuantCFG(report, null).split(';'), cv);
   const value = (name) => commands.find((c) => c.startsWith(`${name} `))?.split(' ')[1];
-
-  const settings = report.settings, native = report.chosen.native;
+  // Style 2 (old from 12 Feb 2014, and old 3) drew its bars at the weapon's spread plus the gap, in whole pixels
+  // (CS:GO's game code, 2016-17), and CS2's style 2 does the same: Valve allowed negative gaps for this style only
+  // (30 Sep 2026), and two decompiles of the current client draw it at spread + gap. Static Cross adds a fixed 4
+  // instead, so the style-2 gap is the static one minus 4, which is floor(old gap) + ceil(thickness / 2) and can be
+  // negative (the cvar takes -3840..3840). The preview keeps the static shape: the at-rest look with a rifle.
+  const gap = value('cl_crosshairstyle') === '2' ? native.gap - 4 : native.gap;
+  if (gap !== native.gap) commands = commands.map((c) => (c.startsWith('cl_crosshair_gap ') ? `cl_crosshair_gap ${gap}` : c));
   const flags = { dot: Boolean(settings.dot), t_style: overrides.t_style ?? Boolean(settings.t_style) };
   const geometry = forward(native, height, COMMUNITY_MODEL);
   const filled = defaultsWarning(parsed.notes);
@@ -217,10 +245,13 @@ export function convertPlayer(rec) {
     height,
     heightSource: source,
     commands,
-    native: { length: native.length, thickness: native.thickness, gap: native.gap },
+    native: { length: native.length, thickness: native.thickness, gap },
     shape: report.shapeCheck?.status ?? null,
-    warnings: [...(filled ? [filled] : []), ...report.warnings]
-      .filter((w) => !GENERIC.has(w.code)).map((w) => ({ code: w.code, text: pageText(w.text ?? w.message) })),
+    // legacy-rounding-disagreement compares with a truncating model that CS:GO's code (round to nearest, ties to even)
+    // and pre-update captures (crosshairrestore.com) contradict, so it would only cast doubt on correct pixels
+    warnings: [...own, ...(filled ? [filled] : []), ...report.warnings]
+      .filter((w) => !GENERIC.has(w.code) && w.code !== 'legacy-rounding-disagreement')
+      .map((w) => ({ code: w.code, text: pageText(w.text ?? w.message) })),
     preview: {
       fill: rectangles(geometry, flags).map(cells),
       outline: outlineOn ? outlineRectangles(geometry, flags, nativeOutlineExtent(settings, overrides.outlineMode)).map(cells) : [],
@@ -265,8 +296,19 @@ export function classicRecord(year, p, key = year) {
     const fromWindow = Array.isArray(w) && w.length === 2;
     const span = fromWindow ? w : dateSpan(p.config.date);
     const before = (day) => Boolean(span) && (fromWindow ? span[1] <= day : span[1] < day);
+    const csgoEra = Boolean(span) && span[1] < CS2_RELEASE;
+    // CS:GO's cl_crosshairstyle had no bounds, and a style that is none of 2, 3 or 4 took the same path as style 5:
+    // at rest at round(4 x height / 1200 + gap), wider while firing (CS:GO's game code, 2016-17)
+    const raw = Number(String(convars.cl_crosshairstyle ?? '').trim());
+    if (csgoEra && Number.isFinite(raw) && Math.trunc(raw) >= 6) {
+      notes.push({ code: 'style-unlisted', text: `Style ${convars.cl_crosshairstyle} was not a listed style, but CS:GO accepted it and drew ` +
+        "it like style 5: at rest at round(4 × height / 1200 + gap), wider while firing (CS:GO's game code, 2016-17), so it is " +
+        'converted as style 5.' });
+      convars.cl_crosshairstyle = '5';
+    }
     const style = String(convars.cl_crosshairstyle ?? '').trim();
     const notYet = [], cheat = [], byDefault = [];
+    let outlineOn = null;
     if (style === '4' && before(STYLE4_STATIC_GAP) && convars.cl_crosshairgap_useweaponvalue === undefined) {
       // the converter's weapon-gap-dropped warning then says what that means now
       convars.cl_crosshairgap_useweaponvalue = '1';
@@ -274,9 +316,13 @@ export function classicRecord(year, p, key = year) {
         'export uses the gap without the weapon value.';
     }
     if (style === '2' && before(STYLE2_ACCURATE)) {
-      notes.push({ code: 'era-style-2', text: 'Style 2 was the original classic crosshair until February 2014: it showed when you fired but not ' +
-        'weapon accuracy (style 5 later recreated it). In CS2, style 2 is the later, accurate version, so it spreads more ' +
-        'with movement and inaccuracy than this crosshair did.' });
+      // not CS2's accurate style 2 but the shot-feedback kind, like style 5 (16 Jul 2014), whose at-rest rule it gets
+      convars.cl_crosshairstyle = '5';
+      notes.push({ code: 'era-style-2', text: 'Style 2 was the original classic crosshair until 12 Feb 2014: it widened when you fired but ' +
+        "didn't show weapon accuracy, which is what style 5 (added July 2014) does too, so it is exported as style 5. CS2's style 2 " +
+        'is the later, accurate version.' });
+      rewrite['legacy-style-5-gap'] = 'At rest the bars are placed at round(4 × height / 1200 + gap), the rule CS:GO kept for style 5; ' +
+        'no game code or capture from 2012-13 confirms it for the original style 2.';
     }
     for (const [k, added] of ERA) {
       if (convars[k] !== undefined) continue;
@@ -284,13 +330,29 @@ export function classicRecord(year, p, key = year) {
       else if (k === 'cl_crosshair_recoil') {
         if (span && span[0] >= CS2_RELEASE) continue;  // a CS2 config: the parser's default applies
         cheat.push(k);
+      } else if (k === 'cl_crosshair_drawoutline') {
+        // on by default (width 1) in CS:GO's 2016-17 code and in CS2; a game-written config of that time always lists it
+        convars[k] = '1';
+        if (convars.cl_crosshair_outlinethickness === undefined) convars.cl_crosshair_outlinethickness = '1';
+        outlineOn = { code: 'era-default-outline', text: 'Not in this config, so on with width 1, the default in CS:GO (2016-17 game ' +
+          'code) and in CS2; the default in 2013-2015 is not documented.' };
+        continue;
       } else byDefault.push(k);
       convars[k] = '0';
+    }
+    // CS:GO's outline thickness had a minimum of 0.1 (game code; game-written configs store "0.100000"), so a typed 0
+    // with the outline on drew 0.1: one pixel on the top and left edges
+    const ot = Number(convars.cl_crosshair_outlinethickness);
+    if (csgoEra && Number(convars.cl_crosshair_drawoutline) > 0 && Number.isFinite(ot) && ot < 0.1) {
+      notes.push({ code: 'outline-min', text: `cl_crosshair_outlinethickness ${convars.cl_crosshair_outlinethickness} is below CS:GO's ` +
+        'minimum of 0.1; the old game used 0.1, which drew the outline on the top and left edges only.' });
+      convars.cl_crosshair_outlinethickness = '0.1';
     }
     // with the outline off its thickness does nothing; set it so no "default used" note is shown for it
     if (convars.cl_crosshair_drawoutline === '0' && convars.cl_crosshair_outlinethickness === undefined) convars.cl_crosshair_outlinethickness = '1';
     if (notYet.length) notes.push({ code: 'era-features-off', text: `Not in this config because the setting didn't exist yet, so off: ${notYet.join(', ')}.` });
     if (byDefault.length) notes.push({ code: 'era-default-off', text: `Not in this config, so off, as CS:GO had it by default: ${byDefault.join(', ')}.` });
+    if (outlineOn) notes.push(outlineOn);
     if (cheat.length) notes.push({ code: 'era-recoil-cheat', text: 'cl_crosshair_recoil was cheat-protected in CS:GO, so off.' });
     const alpha = Number(convars.cl_crosshairalpha);
     if (Number.isFinite(alpha) && (alpha < 0 || alpha > 255)) {

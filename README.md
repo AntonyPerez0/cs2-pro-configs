@@ -28,7 +28,8 @@ fails if one isn't.
 CS2's Sept 22, 2026 "Rush Hour" update replaced the crosshair system. Sizes are now
 pixels at the resolution they were authored at (`cl_crosshair_screen_height`), and
 the game rescales them to yours. The gap is measured from the centre. Later updates
-added half outlines (Sept 24) and outline colours and a new style (Oct 1). Old share
+added half outlines and a Static Square style (Sept 23) and outline colours and a
+Static Quadrant style (Sept 30; dates UTC). Old share
 codes (`CSGO-…`) no longer import, and `cl_crosshairgap`, `cl_crosshaircolor`,
 `cl_crosshairusealpha`, `cl_crosshair_outlinethickness`,
 `cl_crosshairgap_useweaponvalue` and `cl_fixedcrosshairgap` were removed.
@@ -45,7 +46,15 @@ through 2000930), vendored under `scraper/vendor/`:
 - **Outline:** off, half or full, depending on the old outline thickness.
   Black outline colour.
 - **Opacity:** an old config with the alpha slider off gets opacity 255.
-- **Styles 2 and 5:** they keep their family, since Valve kept both numbers.
+- **Styles 2 and 5:** they keep their family, since Valve kept both numbers. Style 2
+  places its bars at the weapon's spread plus the gap, in the old game and in CS2
+  (Valve allowed negative gaps for this style only on Sept 30, and two decompiles of
+  the current client agree), so its gap is the old offset: the Static Cross gap minus
+  4, which can be negative. A dot-only style 2 crosshair, which never moved, becomes a
+  Static Cross. Style 5 rests at the old Legacy gap, `round(4 × height / 1200 + gap)`.
+- **Colour:** old preset colours use the old game's RGB (green 50/250/50 and so on);
+  an index other than 0-5 drew the default green and ignored the stored RGB, so it
+  becomes green with a note.
 - **Warnings:** dot-only, crossed-arm, weapon-gap and unusual-colour cases get a
   note on the player page.
 - **Already new format:** if settings.gg ever lists a crosshair in the new format,
@@ -63,16 +72,36 @@ through 2000930), vendored under `scraper/vendor/`:
   lines over 510 characters; a longer paste comes in parts, with the size
   settings and screen height together in the last).
 
-Valve published no conversion formula, so this is a community reconstruction,
-not checked against in-game captures. For some pros, converting their old
-crosshair gives the one they published after the update (demo-derived codes,
-Oct 2026): donk, KSCERATO, xiELO, YEKINDAR and w0nderful at length/thickness/gap
-2/2/1, and FalleN at 3/2/0 with no outline. These are pinned in
-`scraper/test_crosshair.mjs`. Not every pro matches. yuurih had the same old
-settings as donk but published 2/2/0, and FL1T published 2/1/1 where the conversion
-gives 2/1/2. Others (Jame, HObbit, zweih, molodoy) built a different crosshair
-after the update. So a conversion of a pro's old crosshair may differ from what they
-use now. Each player page says so and links their crosshair history.
+Valve published no conversion formula, so this is a community reconstruction. For
+Static Cross (style 4) at 1920x1080 and 1280x960, its sizes agree with the rule
+crosshairrestore.com measured from its owner's old- and new-game screenshots (builds
+2000908 and 2000914, Sept 23, 2026; the screenshots aren't published). Those
+captures predate the Sept 30 renderer change, and other styles and resolutions
+haven't been checked against captures. Old sizes are rounded to the nearest pixel,
+ties to even, as CS:GO's code did. For some pros, converting their old crosshair
+gives the one seen in their matches after the update (demo-derived share codes on
+procrosshairs.com, Oct 3-11, 2026): donk, xiELO, YEKINDAR and w0nderful at
+length/thickness/gap 2/2/1, and FalleN at 3/2/0 with no outline. These are pinned
+in `scraper/test_crosshair.mjs`. Not every pro matches. yuurih had the same old
+settings as donk on settings.gg but used 2/2/0, and FL1T used 2/1/1 at 800p, where
+the site converts his settings.gg values to 3/1/2 at 960p (2/1/2 at 800p). Others
+(KSCERATO, who moved to Static Quadrant, Jame and molodoy) built a different
+crosshair after the update. settings.gg's resolution can also be out of date: for
+about a third of pros with post-update codes (113 of 345, Oct 2026), the code
+records a different height than settings.gg lists. So a conversion of a pro's old
+crosshair may differ from what they use now. Each player page says so and links
+their crosshair history.
+
+Other converters were compared on every pro and classic entry (Oct 2026). Where
+they differ from this one, the cause is known: some leave out the half-thickness
+term of the centre-measured gap (keymap.io, cstools.io and others draw the gap 1 px
+smaller), use one fixed resolution or fixed factors, scale the gap with the
+resolution, round ties up or truncate, export opacity 200 for an old config with the
+alpha slider off, pass alpha above 255 through, use full-saturation preset colours,
+give style 5 the Static Cross gap, or switch every outline fully on. crosshairrestore.com,
+the only one with captures, gives the same crosshair for 286 of the 297 pros it
+converts; the rest differ only where the old arms touched (gap -5) or in how a 1.5
+outline is handled.
 
 Notes:
 
@@ -197,12 +226,15 @@ links): `python3 -m http.server` and open http://localhost:8000.
   CS:GO added later are set to what the player had then, not CS2's defaults:
   `cl_crosshair_drawoutline` (added 22 May 2013), `cl_crosshairgap_useweaponvalue`
   (1 Aug 2014, off by default), `cl_crosshair_t` (26 Sep 2017) are off when the config
-  predates them or doesn't set them, and `cl_crosshair_recoil` is off (cheat-protected
-  in CS:GO). Before 5 Jun 2013 the style 4 gap changed per weapon, which the page
-  notes, and before 12 Feb 2014 style 2 didn't show weapon accuracy, unlike CS2's
-  style 2, which the page also notes. Configs with a crosshair style the converter
-  can't read (style 6) are passed over for the closest one it can, and the page
-  says so.
+  predates them, `cl_crosshairgap_useweaponvalue` and `cl_crosshair_t` are off when a
+  later config doesn't set them, and `cl_crosshair_recoil` is off (cheat-protected in
+  CS:GO). A config from after 22 May 2013 that doesn't set the outline gets it on with
+  width 1, CS:GO's default, and an outline width below CS:GO's minimum of 0.1 is drawn
+  at 0.1 (the half outline). Before 5 Jun 2013 the style 4 gap changed per weapon,
+  which the page notes. Before 12 Feb 2014 style 2 widened when firing but didn't show
+  weapon accuracy, like style 5, so it is exported as style 5. CS:GO accepted styles
+  above 5 (GuardiaN used 6) and drew them like style 5, so they convert as style 5
+  with a note.
 
 - **Photos.** Each player's card and page show a freely licensed photo from Wikimedia
   Commons (CC BY, CC BY-SA, CC0 or public domain) taken as close as possible to the
