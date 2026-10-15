@@ -26,10 +26,11 @@
        "2014-04-23",
        "2014-05-01"
       ],
-      "date_basis": "A full config.cfg in the game's own format, from setup.gg's archive (uploaded 29 Apr 2016). It has the scoreboard-mouse setting added 23 Apr 2014 but none of the cl_hud_* settings added 1 May 2014, so it was saved in late April 2014. Its crosshair style 5 was only added on 16 Jul 2014, so that line may be later.",
+      "date_basis": "A full config.cfg in the game's own format, from setup.gg's archive (uploaded 29 Apr 2016); the identical file, crosshair included, was already in the CSGO-Optimiser repository on 12 Jun 2014. It has the scoreboard-mouse setting added 23 Apr 2014 but none of the cl_hud_* settings added 1 May 2014, so it was saved in late April 2014. It lacks cl_inventory_saved_filter and cl_inventory_saved_sort, although the same 23 Apr 2014 update began saving the inventory sort and filter, and every other config in setup.gg's archive saved after that update has them, so the file may have been edited by hand before June 2014. cl_crosshairstyle 5 is in this file although Valve added style 5 only on 16 Jul 2014. Six configs in setup.gg's archive dated before July 2014 have it (GMX, NEO, TaZ, moE, pasha and schneider), as does a pasha config in CSGO-Optimiser saved between May 2013 and January 2014, so players set it before Valve added it. What the game drew for it then is unknown.",
       "sources": [
        "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/NEO/config.cfg",
-       "https://github.com/setupgg/csgo/commit/a7612a6101f6a0c188df8867e8f991578cbfe63b"
+       "https://github.com/setupgg/csgo/commit/a7612a6101f6a0c188df8867e8f991578cbfe63b",
+       "https://github.com/CSGO-Analysis/CSGO-Optimiser/blob/1bc2f99948868f85658ceea32ebed610af4cd440/CSGO%20Optimiser/CSGO%20Optimiser/CSGO%20Optimiser/Resources/Profiles/neo/config.cfg"
       ],
       "confidence": "low",
       "convars": {
@@ -81,17 +82,18 @@
       },
       "mouse": {},
       "video": {
-       "Resolution": "800x600",
+       "Resolution": "1024x768",
        "Aspect Ratio": "4:3"
       },
       "provenance": [
        {
         "what": "Crosshair, viewmodel, HUD and radar",
         "date": "2014-04",
-        "date_basis": "A full config.cfg in the game's own format, from setup.gg's archive (uploaded 29 Apr 2016). It has the scoreboard-mouse setting added 23 Apr 2014 but none of the cl_hud_* settings added 1 May 2014, so it was saved in late April 2014. Its crosshair style 5 was only added on 16 Jul 2014, so that line may be later.",
+        "date_basis": "A full config.cfg in the game's own format, from setup.gg's archive (uploaded 29 Apr 2016); the identical file, crosshair included, was already in the CSGO-Optimiser repository on 12 Jun 2014. It has the scoreboard-mouse setting added 23 Apr 2014 but none of the cl_hud_* settings added 1 May 2014, so it was saved in late April 2014. It lacks cl_inventory_saved_filter and cl_inventory_saved_sort, although the same 23 Apr 2014 update began saving the inventory sort and filter, and every other config in setup.gg's archive saved after that update has them, so the file may have been edited by hand before June 2014. cl_crosshairstyle 5 is in this file although Valve added style 5 only on 16 Jul 2014. Six configs in setup.gg's archive dated before July 2014 have it (GMX, NEO, TaZ, moE, pasha and schneider), as does a pasha config in CSGO-Optimiser saved between May 2013 and January 2014, so players set it before Valve added it. What the game drew for it then is unknown.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/NEO/config.cfg",
-         "https://github.com/setupgg/csgo/commit/a7612a6101f6a0c188df8867e8f991578cbfe63b"
+         "https://github.com/setupgg/csgo/commit/a7612a6101f6a0c188df8867e8f991578cbfe63b",
+         "https://github.com/CSGO-Analysis/CSGO-Optimiser/blob/1bc2f99948868f85658ceea32ebed610af4cd440/CSGO%20Optimiser/CSGO%20Optimiser/CSGO%20Optimiser/Resources/Profiles/neo/config.cfg"
         ],
         "confidence": "low",
         "window": [
@@ -115,11 +117,11 @@
        },
        {
         "what": "Resolution",
-        "date": "2016-12-13",
-        "date_basis": "Player profile (data.yml) in setup.gg's GitHub data, first committed on 13 Dec 2016 and unchanged since. That is the latest date the settings can be from; the profile does not say when they were recorded.",
+        "date": "2014-06-12",
+        "date_basis": "The video.txt in CSGO-Optimiser's NEO profile lists 1024x768 at 4:3. That profile's config.cfg and autoexec.cfg are the same files that setup.gg later published for NEO, the crosshair's source. It was added to that repository on 12 Jun 2014, the latest date it can be from. setup.gg's profile for NEO (data.yml, published 13 Dec 2016) lists 800x600 instead; Liquipedia listed 1024x768 with black bars from March to July 2016 and 800x600 from February 2017.",
         "sources": [
-         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/neo/data.yml",
-         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+         "https://github.com/CSGO-Analysis/CSGO-Optimiser/blob/1bc2f99948868f85658ceea32ebed610af4cd440/CSGO%20Optimiser/CSGO%20Optimiser/CSGO%20Optimiser/Resources/Profiles/neo/video.txt",
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/neo/data.yml"
         ],
         "confidence": "medium"
        }
@@ -151,24 +153,29 @@
      "id": "get-right",
      "current_slug": null,
      "config": {
-      "date": "2012-12-13",
-      "date_basis": "Preset 'NiP GeT_RiGhT' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. It does not match his own August 2012 config (used for the sensitivity), which has a red dot.",
-      "sources": [
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
+      "date": "2012-08",
+      "window": [
+       "2012-08-14",
+       "2012-08-22"
       ],
-      "confidence": "low",
+      "date_basis": "Game-written config.cfg (name 'NiP-GeT_RiGhT-A-') from setup.gg's archive, the same file as the sensitivity. Its medal-stats timestamp is 14 Aug 2012 and it lacks cl_crosshairgap, which the 22 Aug 2012 update added, so it was saved between those dates. It is also older than cl_crosshairstyle: instead it has sfcrosshair 0 (the classic crosshair) and cl_dynamiccrosshair 0 (no widening when moving). Style 4 (Classic Static) and gap 0 are mapping choices for that; with size 0 and the dot on, the old game drew only the dot, so neither changes how it looks.",
+      "sources": [
+       "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/GeT_RiGhT/config.cfg",
+       "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/get_right/config/config.cfg"
+      ],
+      "confidence": "medium",
       "convars": {
        "cl_crosshairalpha": "200",
-       "cl_crosshaircolor": "1",
-       "cl_crosshaircolor_r": "50",
-       "cl_crosshaircolor_g": "250",
+       "cl_crosshaircolor": "0",
        "cl_crosshaircolor_b": "50",
-       "cl_crosshairdot": "0",
+       "cl_crosshaircolor_g": "250",
+       "cl_crosshaircolor_r": "50",
+       "cl_crosshairdot": "1",
        "cl_crosshairgap": "0",
-       "cl_crosshairsize": "5",
+       "cl_crosshairscale": "0",
+       "cl_crosshairsize": "0",
        "cl_crosshairstyle": "4",
-       "cl_crosshairthickness": "1.5",
+       "cl_crosshairthickness": "1.15",
        "cl_crosshairusealpha": "1",
        "sensitivity": "2.9",
        "zoom_sensitivity_ratio_mouse": "1",
@@ -191,13 +198,17 @@
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2012-12-13",
-        "date_basis": "Preset 'NiP GeT_RiGhT' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. It does not match his own August 2012 config (used for the sensitivity), which has a red dot.",
-        "sources": [
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
+        "date": "2012-08",
+        "window": [
+         "2012-08-14",
+         "2012-08-22"
         ],
-        "confidence": "low"
+        "date_basis": "Game-written config.cfg (name 'NiP-GeT_RiGhT-A-') from setup.gg's archive, the same file as the sensitivity. Its medal-stats timestamp is 14 Aug 2012 and it lacks cl_crosshairgap, which the 22 Aug 2012 update added, so it was saved between those dates. It is also older than cl_crosshairstyle: instead it has sfcrosshair 0 (the classic crosshair) and cl_dynamiccrosshair 0 (no widening when moving). Style 4 (Classic Static) and gap 0 are mapping choices for that; with size 0 and the dot on, the old game drew only the dot, so neither changes how it looks.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/GeT_RiGhT/config.cfg",
+         "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/get_right/config/config.cfg"
+        ],
+        "confidence": "medium"
        },
        {
         "what": "Sensitivity",
@@ -232,7 +243,7 @@
         "confidence": "low"
        }
       ],
-      "notes": "His own game-written config from August 2012 (the source of the sensitivity) shows a different crosshair: a red dot (cl_crosshairsize 0, cl_crosshairdot 1, cl_crosshaircolor 0, thickness 1.15, dynamic crosshair off). That file has no crosshair style setting, so it can't be converted reliably; the crosshair shown is a third-party preset from December 2012 and may not be what he used."
+      "notes": "Other sources show a green cross instead: a third-party preset from 13 Dec 2012 ('NiP GeT_RiGhT' in Skarbo's CS:GO crosshair generator: style 4, size 5, thickness 1.5, gap 0, alpha 200), and a Steam forum post of 11 Oct 2014 that points to NiP's team page (Classic Static, size 5, thickness 1.15). The red dot shown here is from his own config of August 2012; no source from him shows when he changed to the cross."
      },
      "photo": {
       "src": "data/avatars/classic/get-right-2011.webp",
@@ -254,25 +265,25 @@
      "id": "markeloff",
      "current_slug": null,
      "config": {
-      "date": "2023-01-20",
-      "date_basis": "Liquipedia's markeloff page (revision 2624115, as cached on 22 Oct 2023 in Lindeneg/csgo-pro-settings) marks its crosshair table 'Updated as of 2023-01-20'. That is when the table was last updated; the page does not say when he used this crosshair.",
+      "date": "2015-03-12",
+      "date_basis": "Liquipedia's markeloff page has had this Crosshair table since revision 123770 of 12 Mar 2015 (an edit on the KnifeRound.net wiki, whose history Liquipedia imported in May 2015), and it is unchanged in revision 213428 of 28 Sep 2015. The table cites no source, so the date is when it was added to the page, not when he set it. That first revision lists his resolution as 1280x720, so the crosshair is converted at 720p; from 12 Jun 2015 (revision 153908) the page lists the same crosshair with 1024x768 black bars, the resolution shown here. Its outline thickness 0 is read as the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 255, as the table gives no usealpha.",
       "sources": [
-       "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip",
-       "https://liquipedia.net/counterstrike/index.php?title=Markeloff&oldid=2624115"
+       "https://liquipedia.net/counterstrike/index.php?oldid=123770",
+       "https://liquipedia.net/counterstrike/index.php?oldid=153908",
+       "https://liquipedia.net/counterstrike/index.php?oldid=213428"
       ],
       "confidence": "low",
       "convars": {
-       "cl_crosshairstyle": "4",
-       "cl_crosshairsize": "4",
-       "cl_crosshairthickness": "0.5",
-       "cl_crosshairgap": "-3",
+       "cl_crosshairstyle": "5",
+       "cl_crosshairsize": "5",
+       "cl_crosshairthickness": "0",
+       "cl_crosshairgap": "-1",
        "cl_crosshairdot": "0",
-       "cl_crosshaircolor": "1",
-       "cl_crosshairalpha": "200",
+       "cl_crosshaircolor": "4",
+       "cl_crosshairalpha": "255",
        "cl_crosshairusealpha": "1",
        "cl_crosshair_drawoutline": "0",
-       "cl_crosshair_outlinethickness": "1",
-       "cl_crosshair_sniper_width": "1",
+       "cl_crosshair_outlinethickness": "0",
        "sensitivity": "2",
        "m_customaccel": "0",
        "m_rawinput": "0"
@@ -285,14 +296,16 @@
        "Resolution": "1024x768",
        "Aspect Ratio": "4:3"
       },
+      "crosshair_resolution": "1280x720",
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2023-01-20",
-        "date_basis": "Liquipedia's markeloff page (revision 2624115, as cached on 22 Oct 2023 in Lindeneg/csgo-pro-settings) marks its crosshair table 'Updated as of 2023-01-20'. That is when the table was last updated; the page does not say when he used this crosshair.",
+        "date": "2015-03-12",
+        "date_basis": "Liquipedia's markeloff page has had this Crosshair table since revision 123770 of 12 Mar 2015 (an edit on the KnifeRound.net wiki, whose history Liquipedia imported in May 2015), and it is unchanged in revision 213428 of 28 Sep 2015. The table cites no source, so the date is when it was added to the page, not when he set it. That first revision lists his resolution as 1280x720, so the crosshair is converted at 720p; from 12 Jun 2015 (revision 153908) the page lists the same crosshair with 1024x768 black bars, the resolution shown here. Its outline thickness 0 is read as the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 255, as the table gives no usealpha.",
         "sources": [
-         "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip",
-         "https://liquipedia.net/counterstrike/index.php?title=Markeloff&oldid=2624115"
+         "https://liquipedia.net/counterstrike/index.php?oldid=123770",
+         "https://liquipedia.net/counterstrike/index.php?oldid=153908",
+         "https://liquipedia.net/counterstrike/index.php?oldid=213428"
         ],
         "confidence": "low"
        },
@@ -421,11 +434,13 @@
        {
         "what": "Resolution",
         "date": "2016-12-13",
-        "date_basis": "setup.gg's player profile (1600x900, 16:9), created in setupgg/data's first commit on 13 Dec 2016 and never changed. It gives no date or source, so this is only when it was published.",
+        "date_basis": "setup.gg's player profile (1600x900, 16:9), created in setupgg/data's first commit on 13 Dec 2016 and never changed. It gives no date or source, so this is only when it was published. No source from before 2015 gives his resolution, and later ones disagree: Liquipedia first listed one on 10 Jul 2015 (revision 169989), 1600x900, then 1024x768 with black bars from 11 Oct 2015 (revision 224614), 1600x900 again by 23 Nov 2015 (revision 249916), 1280x960 on 20 Feb 2016 (revision 304995) and 1024x768 with black bars from 17 Apr 2016 (revision 343725) to 2019; the CS:GO Player Setups sheet (row updated 15 May 2016) lists 1280x960 4:3.",
         "sources": [
-         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/f0rest/data.yml"
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/f0rest/data.yml",
+         "https://liquipedia.net/counterstrike/index.php?oldid=169989",
+         "https://liquipedia.net/counterstrike/index.php?oldid=224614"
         ],
-        "confidence": "medium"
+        "confidence": "low"
        }
       ],
       "dpi_hint": {
@@ -460,7 +475,7 @@
        "2014-05-01",
        "2014-07-01"
       ],
-      "date_basis": "A full config.cfg in the game's own format, from setup.gg's archive (uploaded 29 Apr 2016). It has the cl_hud_* settings added 1 May 2014 but not the reminder setting for Operation Breakout, which launched 1 Jul 2014. Its crosshair style 5 was only added on 16 Jul 2014, so that line may be later.",
+      "date_basis": "A full config.cfg in the game's own format, from setup.gg's archive (uploaded 29 Apr 2016). It has the cl_hud_* settings added 1 May 2014 but not the reminder setting for Operation Breakout, which launched 1 Jul 2014. cl_crosshairstyle 5 is in this file although Valve added style 5 only on 16 Jul 2014. Six configs in setup.gg's archive dated before July 2014 have it (GMX, NEO, TaZ, moE, pasha and schneider), as does a pasha config in CSGO-Optimiser saved between May 2013 and January 2014, so players set it before Valve added it. What the game drew for it then is unknown.",
       "sources": [
        "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/TaZ/config.cfg",
        "https://github.com/setupgg/csgo/commit/a7612a6101f6a0c188df8867e8f991578cbfe63b"
@@ -524,7 +539,7 @@
        {
         "what": "Crosshair, viewmodel, HUD and radar",
         "date": "2014",
-        "date_basis": "A full config.cfg in the game's own format, from setup.gg's archive (uploaded 29 Apr 2016). It has the cl_hud_* settings added 1 May 2014 but not the reminder setting for Operation Breakout, which launched 1 Jul 2014. Its crosshair style 5 was only added on 16 Jul 2014, so that line may be later.",
+        "date_basis": "A full config.cfg in the game's own format, from setup.gg's archive (uploaded 29 Apr 2016). It has the cl_hud_* settings added 1 May 2014 but not the reminder setting for Operation Breakout, which launched 1 Jul 2014. cl_crosshairstyle 5 is in this file although Valve added style 5 only on 16 Jul 2014. Six configs in setup.gg's archive dated before July 2014 have it (GMX, NEO, TaZ, moE, pasha and schneider), as does a pasha config in CSGO-Optimiser saved between May 2013 and January 2014, so players set it before Valve added it. What the game drew for it then is unknown.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/TaZ/config.cfg",
          "https://github.com/setupgg/csgo/commit/a7612a6101f6a0c188df8867e8f991578cbfe63b"
@@ -551,11 +566,12 @@
        },
        {
         "what": "Resolution",
-        "date": "2016-12-13",
-        "date_basis": "Player profile (data.yml) in setup.gg's GitHub data, first committed on 13 Dec 2016 and unchanged since. That is the latest date the settings can be from; the profile does not say when they were recorded.",
+        "date": "2015-11-01",
+        "date_basis": "Liquipedia's TaZ page lists 1024x768 with black bars in revision 240193 of 1 Nov 2015, and setup.gg's profile for TaZ (data.yml, published 13 Dec 2016) lists the same. CSGO-Optimiser's TaZ profile, added on 12 Jun 2014, also has a video.txt with 1024x768 at 4:3, but its config.cfg is not this one (in-game name \"742\", sensitivity 2), so it may not be his.",
         "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=240193",
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/taz/data.yml",
-         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+         "https://github.com/CSGO-Analysis/CSGO-Optimiser/blob/1bc2f99948868f85658ceea32ebed610af4cd440/CSGO%20Optimiser/CSGO%20Optimiser/CSGO%20Optimiser/Resources/Profiles/taz/video.txt"
         ],
         "confidence": "medium"
        }
@@ -587,14 +603,24 @@
      "id": "friis",
      "current_slug": null,
      "config": {
-      "date": "2016",
-      "date_basis": "setup.gg's record for him, first published in the archive's initial import on 13 Dec 2016, so the settings date from then at the latest. The import listed him on SK Gaming, where he played from May 2015 to June 2016, so they most likely date from that time.",
+      "date": "2015-06-13",
+      "date_basis": "Liquipedia's Friis page has had this Crosshair table since revision 154829 of 13 Jun 2015, when he played for SK Gaming, and it is unchanged in revision 575934 of 9 Feb 2017. The table cites no source, so the date is when it was added to the page, not when he set it. The same revision lists sensitivity 2.5 at 400 DPI and 500 Hz, raw input on and 1024x768 with black bars, as setup.gg's record does. Its outline thickness 0 is read as the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 200, as the table gives no usealpha.",
       "sources": [
-       "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/friis/data.yml",
-       "https://github.com/setupgg/data/commit/cc7127f99424d1fa597ee67f9f705ec5e565d243"
+       "https://liquipedia.net/counterstrike/index.php?oldid=154829",
+       "https://liquipedia.net/counterstrike/index.php?oldid=575934"
       ],
       "confidence": "low",
       "convars": {
+       "cl_crosshairstyle": "4",
+       "cl_crosshairsize": "3",
+       "cl_crosshairthickness": "2",
+       "cl_crosshairgap": "0",
+       "cl_crosshairdot": "0",
+       "cl_crosshaircolor": "2",
+       "cl_crosshairalpha": "200",
+       "cl_crosshairusealpha": "1",
+       "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "0",
        "sensitivity": "2.5",
        "m_customaccel": "0",
        "m_rawinput": "1"
@@ -608,6 +634,16 @@
        "Aspect Ratio": "4:3"
       },
       "provenance": [
+       {
+        "what": "Crosshair",
+        "date": "2015-06-13",
+        "date_basis": "Liquipedia's Friis page has had this Crosshair table since revision 154829 of 13 Jun 2015, when he played for SK Gaming, and it is unchanged in revision 575934 of 9 Feb 2017. The table cites no source, so the date is when it was added to the page, not when he set it. The same revision lists sensitivity 2.5 at 400 DPI and 500 Hz, raw input on and 1024x768 with black bars, as setup.gg's record does. Its outline thickness 0 is read as the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 200, as the table gives no usealpha.",
+        "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=154829",
+         "https://liquipedia.net/counterstrike/index.php?oldid=575934"
+        ],
+        "confidence": "low"
+       },
        {
         "what": "Sensitivity",
         "date": "2016",
@@ -636,10 +672,6 @@
          "2016-12-13"
         ]
        }
-      ],
-      "window": [
-       "2015-05-30",
-       "2016-12-13"
       ]
      }
     },
@@ -788,9 +820,10 @@
      "id": "delpan",
      "current_slug": null,
      "config": {
-      "date": "2016-12",
-      "date_basis": "setup.gg's record for him, first published in the archive's initial import on 13 Dec 2016 and unchanged since. That is the latest date the settings can be from; the source doesn't say when he used them.",
+      "date": "2015-04-22",
+      "date_basis": "His row in the 'CS:GO Player Setups' spreadsheet, marked as last updated on 22 Apr 2015, lists sensitivity 1.7 at 360 DPI and 500 Hz, raw input on, no acceleration and 1280x960 with black bars. setup.gg's record for him, first published on 13 Dec 2016, has exactly the same values (cm/360 67.9 too), so it was most likely copied from that row. Liquipedia's Delpan page of 14 Sep 2014 (revision 119704, from the KnifeRound.net wiki) lists different values: 450 DPI and sensitivity 1.6 at 500 Hz.",
       "sources": [
+       "https://docs.google.com/spreadsheets/d/1UaM765-S515ibLyPaBtMnBz7xiao0HL5f-F1zk_CSF4",
        "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/delpan/data.yml"
       ],
       "confidence": "low",
@@ -810,18 +843,20 @@
       "provenance": [
        {
         "what": "Sensitivity",
-        "date": "2016-12",
-        "date_basis": "setup.gg's record for him, first published in the archive's initial import on 13 Dec 2016 and unchanged since. That is the latest date the settings can be from; the source doesn't say when he used them.",
+        "date": "2015-04-22",
+        "date_basis": "His row in the 'CS:GO Player Setups' spreadsheet, marked as last updated on 22 Apr 2015, lists sensitivity 1.7 at 360 DPI and 500 Hz, raw input on, no acceleration and 1280x960 with black bars. setup.gg's record for him, first published on 13 Dec 2016, has exactly the same values (cm/360 67.9 too), so it was most likely copied from that row. Liquipedia's Delpan page of 14 Sep 2014 (revision 119704, from the KnifeRound.net wiki) lists different values: 450 DPI and sensitivity 1.6 at 500 Hz.",
         "sources": [
+         "https://docs.google.com/spreadsheets/d/1UaM765-S515ibLyPaBtMnBz7xiao0HL5f-F1zk_CSF4",
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/delpan/data.yml"
         ],
         "confidence": "low"
        },
        {
         "what": "Resolution",
-        "date": "2016-12",
-        "date_basis": "setup.gg's record for him, first published in the archive's initial import on 13 Dec 2016 and unchanged since. That is the latest date the settings can be from; the source doesn't say when he used them.",
+        "date": "2015-04-22",
+        "date_basis": "His row in the 'CS:GO Player Setups' spreadsheet, marked as last updated on 22 Apr 2015, lists sensitivity 1.7 at 360 DPI and 500 Hz, raw input on, no acceleration and 1280x960 with black bars. setup.gg's record for him, first published on 13 Dec 2016, has exactly the same values (cm/360 67.9 too), so it was most likely copied from that row. Liquipedia's Delpan page of 14 Sep 2014 (revision 119704, from the KnifeRound.net wiki) lists different values: 450 DPI and sensitivity 1.6 at 500 Hz.",
         "sources": [
+         "https://docs.google.com/spreadsheets/d/1UaM765-S515ibLyPaBtMnBz7xiao0HL5f-F1zk_CSF4",
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/delpan/data.yml"
         ],
         "confidence": "low"
@@ -943,11 +978,13 @@
        {
         "what": "Resolution",
         "date": "2016-12-13",
-        "date_basis": "setup.gg's player profile (1600x900, 16:9), created in setupgg/data's first commit on 13 Dec 2016 and never changed. It gives no date or source, so this is only when it was published.",
+        "date_basis": "setup.gg's player profile (1600x900, 16:9), created in setupgg/data's first commit on 13 Dec 2016 and never changed. It gives no date or source, so this is only when it was published. No source from before 2015 gives his resolution, and later ones disagree: Liquipedia first listed one on 10 Jul 2015 (revision 169989), 1600x900, then 1024x768 with black bars from 11 Oct 2015 (revision 224614), 1600x900 again by 23 Nov 2015 (revision 249916), 1280x960 on 20 Feb 2016 (revision 304995) and 1024x768 with black bars from 17 Apr 2016 (revision 343725) to 2019; the CS:GO Player Setups sheet (row updated 15 May 2016) lists 1280x960 4:3.",
         "sources": [
-         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/f0rest/data.yml"
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/f0rest/data.yml",
+         "https://liquipedia.net/counterstrike/index.php?oldid=169989",
+         "https://liquipedia.net/counterstrike/index.php?oldid=224614"
         ],
-        "confidence": "medium"
+        "confidence": "low"
        }
       ],
       "dpi_hint": {
@@ -978,24 +1015,29 @@
      "current_slug": null,
      "prize": "$14,865.38",
      "config": {
-      "date": "2012-12-13",
-      "date_basis": "Preset 'NiP GeT_RiGhT' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. It does not match his own August 2012 config (used for the sensitivity), which has a red dot.",
-      "sources": [
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
+      "date": "2012-08",
+      "window": [
+       "2012-08-14",
+       "2012-08-22"
       ],
-      "confidence": "low",
+      "date_basis": "Game-written config.cfg (name 'NiP-GeT_RiGhT-A-') from setup.gg's archive, the same file as the sensitivity. Its medal-stats timestamp is 14 Aug 2012 and it lacks cl_crosshairgap, which the 22 Aug 2012 update added, so it was saved between those dates. It is also older than cl_crosshairstyle: instead it has sfcrosshair 0 (the classic crosshair) and cl_dynamiccrosshair 0 (no widening when moving). Style 4 (Classic Static) and gap 0 are mapping choices for that; with size 0 and the dot on, the old game drew only the dot, so neither changes how it looks.",
+      "sources": [
+       "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/GeT_RiGhT/config.cfg",
+       "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/get_right/config/config.cfg"
+      ],
+      "confidence": "medium",
       "convars": {
        "cl_crosshairalpha": "200",
-       "cl_crosshaircolor": "1",
-       "cl_crosshaircolor_r": "50",
-       "cl_crosshaircolor_g": "250",
+       "cl_crosshaircolor": "0",
        "cl_crosshaircolor_b": "50",
-       "cl_crosshairdot": "0",
+       "cl_crosshaircolor_g": "250",
+       "cl_crosshaircolor_r": "50",
+       "cl_crosshairdot": "1",
        "cl_crosshairgap": "0",
-       "cl_crosshairsize": "5",
+       "cl_crosshairscale": "0",
+       "cl_crosshairsize": "0",
        "cl_crosshairstyle": "4",
-       "cl_crosshairthickness": "1.5",
+       "cl_crosshairthickness": "1.15",
        "cl_crosshairusealpha": "1",
        "sensitivity": "2.9",
        "zoom_sensitivity_ratio_mouse": "1",
@@ -1018,13 +1060,17 @@
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2012-12-13",
-        "date_basis": "Preset 'NiP GeT_RiGhT' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. It does not match his own August 2012 config (used for the sensitivity), which has a red dot.",
-        "sources": [
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
+        "date": "2012-08",
+        "window": [
+         "2012-08-14",
+         "2012-08-22"
         ],
-        "confidence": "low"
+        "date_basis": "Game-written config.cfg (name 'NiP-GeT_RiGhT-A-') from setup.gg's archive, the same file as the sensitivity. Its medal-stats timestamp is 14 Aug 2012 and it lacks cl_crosshairgap, which the 22 Aug 2012 update added, so it was saved between those dates. It is also older than cl_crosshairstyle: instead it has sfcrosshair 0 (the classic crosshair) and cl_dynamiccrosshair 0 (no widening when moving). Style 4 (Classic Static) and gap 0 are mapping choices for that; with size 0 and the dot on, the old game drew only the dot, so neither changes how it looks.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/GeT_RiGhT/config.cfg",
+         "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/get_right/config/config.cfg"
+        ],
+        "confidence": "medium"
        },
        {
         "what": "Sensitivity",
@@ -1059,7 +1105,7 @@
         "confidence": "low"
        }
       ],
-      "notes": "His own game-written config from August 2012 (the source of the sensitivity) shows a different crosshair: a red dot (cl_crosshairsize 0, cl_crosshairdot 1, cl_crosshaircolor 0, thickness 1.15, dynamic crosshair off). That file has no crosshair style setting, so it can't be converted reliably; the crosshair shown is a third-party preset from December 2012 and may not be what he used."
+      "notes": "Other sources show a green cross instead: a third-party preset from 13 Dec 2012 ('NiP GeT_RiGhT' in Skarbo's CS:GO crosshair generator: style 4, size 5, thickness 1.5, gap 0, alpha 200), and a Steam forum post of 11 Oct 2014 that points to NiP's team page (Classic Static, size 5, thickness 1.15). The red dot shown here is from his own config of August 2012; no source from him shows when he changed to the cross."
      },
      "photo": {
       "src": "data/avatars/classic/get-right-2012.webp",
@@ -1082,21 +1128,28 @@
      "current_slug": null,
      "prize": "$14,603.51",
      "config": {
-      "date": "2012-12-13",
-      "date_basis": "Preset 'NiP Xizt' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. His own 2012 config (used for the sensitivity) agrees on size, gap, colour and alpha but has thickness 0.85.",
-      "sources": [
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
+      "date": "2012",
+      "window": [
+       "2012-08-22",
+       "2012-12-13"
       ],
-      "confidence": "low",
+      "date_basis": "Game-written config.cfg (name 'NiP-Xizt-') from setup.gg's archive, the same file as the sensitivity. It has cl_crosshairgap, added 22 Aug 2012, but not cl_crosshairstyle, which the game had by 13 Dec 2012, so it was saved between those dates. Instead of a style it has sfcrosshair 0 (the classic crosshair) and cl_dynamiccrosshair 0 (no widening when moving); style 4 (Classic Static), the style of his later configs, is a mapping choice for that. Whether this crosshair still widened when firing is not documented.",
+      "sources": [
+       "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/Xizt/config.cfg"
+      ],
+      "confidence": "medium",
       "convars": {
        "cl_crosshairalpha": "200",
        "cl_crosshaircolor": "1",
+       "cl_crosshaircolor_b": "50",
+       "cl_crosshaircolor_g": "250",
+       "cl_crosshaircolor_r": "50",
        "cl_crosshairdot": "0",
        "cl_crosshairgap": "-1",
+       "cl_crosshairscale": "0",
        "cl_crosshairsize": "5",
-       "cl_crosshairstyle": "2",
-       "cl_crosshairthickness": "1",
+       "cl_crosshairstyle": "4",
+       "cl_crosshairthickness": "0.85",
        "cl_crosshairusealpha": "1",
        "sensitivity": "2.8",
        "zoom_sensitivity_ratio_mouse": "1",
@@ -1117,13 +1170,16 @@
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2012-12-13",
-        "date_basis": "Preset 'NiP Xizt' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. His own 2012 config (used for the sensitivity) agrees on size, gap, colour and alpha but has thickness 0.85.",
-        "sources": [
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
+        "date": "2012",
+        "window": [
+         "2012-08-22",
+         "2012-12-13"
         ],
-        "confidence": "low"
+        "date_basis": "Game-written config.cfg (name 'NiP-Xizt-') from setup.gg's archive, the same file as the sensitivity. It has cl_crosshairgap, added 22 Aug 2012, but not cl_crosshairstyle, which the game had by 13 Dec 2012, so it was saved between those dates. Instead of a style it has sfcrosshair 0 (the classic crosshair) and cl_dynamiccrosshair 0 (no widening when moving); style 4 (Classic Static), the style of his later configs, is a mapping choice for that. Whether this crosshair still widened when firing is not documented.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/Xizt/config.cfg"
+        ],
+        "confidence": "medium"
        },
        {
         "what": "Sensitivity",
@@ -1153,6 +1209,7 @@
         ]
        }
       ],
+      "notes": "Skarbo's third-party CS:GO crosshair generator has a 'NiP Xizt' preset from 13 Dec 2012 with the same size, gap, colour and alpha but style 2 and thickness 1; his own config is used instead.",
       "dpi_hint": {
        "dpi": "400",
        "sens": "3",
@@ -1182,7 +1239,7 @@
      "prize": "$14,603.51",
      "config": {
       "date": "2012-12-13",
-      "date_basis": "Preset 'NiP friberg' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. His own 2012 config (used for the sensitivity) has the same colour (4) and size (2), with thickness 0.52 and the dynamic crosshair on.",
+      "date_basis": "Preset 'NiP friberg' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. His own 2012 config (used for the sensitivity) has the same colour (4) and size (2), with thickness 0.52 and the dynamic crosshair on. That config predates cl_crosshairgap (added 22 Aug 2012) and cl_crosshairstyle, so the preset's gap 0 and style 2 don't come from it; its cl_dynamiccrosshair 1 (widening when moving) fits style 2.",
       "sources": [
        "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
        "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
@@ -1222,7 +1279,7 @@
        {
         "what": "Crosshair",
         "date": "2012-12-13",
-        "date_basis": "Preset 'NiP friberg' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. His own 2012 config (used for the sensitivity) has the same colour (4) and size (2), with thickness 0.52 and the dynamic crosshair on.",
+        "date_basis": "Preset 'NiP friberg' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. His own 2012 config (used for the sensitivity) has the same colour (4) and size (2), with thickness 0.52 and the dynamic crosshair on. That config predates cl_crosshairgap (added 22 Aug 2012) and cl_crosshairstyle, so the preset's gap 0 and style 2 don't come from it; its cl_dynamiccrosshair 1 (widening when moving) fits style 2.",
         "sources": [
          "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
          "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
@@ -1242,11 +1299,12 @@
        {
         "what": "Resolution",
         "date": "2016-12-13",
-        "date_basis": "setup.gg's player profile (1280x1024, 5:4), created in setupgg/data's first commit on 13 Dec 2016 and never changed. It gives no date or source, so this is only when it was published.",
+        "date_basis": "setup.gg's player profile (1280x1024, 5:4), created in setupgg/data's first commit on 13 Dec 2016 and never changed. It gives no date or source, so this is only when it was published. No source from 2012 gives his resolution: a Steam forum post of 11 Oct 2014 that points to NiP's team page lists 1280x960 (with launch options -w 1280 -h 960), and the CS:GO Player Setups sheet (row updated 3 Mar 2016) lists 1280x1024 5:4 stretched to 16:9.",
         "sources": [
-         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/friberg/data.yml"
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/friberg/data.yml",
+         "https://steamcommunity.com/app/730/discussions/0/619568192805897226/"
         ],
-        "confidence": "medium"
+        "confidence": "low"
        }
       ],
       "dpi_hint": {
@@ -1277,24 +1335,28 @@
      "current_slug": null,
      "prize": "$14,603.51",
      "config": {
-      "date": "2012-12-13",
-      "date_basis": "Style and values from the 'NiP Fifflaren' preset in Skarbo's CS:GO crosshair generator, already in its first commit on 13 Dec 2012. His own late-2012 NiP config.cfg has the same colour, size, thickness, gap and dot, but no style setting.",
+      "date": "2012",
+      "window": [
+       "2012-08-22",
+       "2012-12-13"
+      ],
+      "date_basis": "Game-written config.cfg saved under the name 'NiP-Fifflaren-', published by setup.gg in 2016, the same file as the sensitivity. It has cl_crosshairgap (added 22 Aug 2012) but no cl_crosshairstyle, which Skarbo's generator already used on 13 Dec 2012, so it was most likely saved between those dates. Instead of a style it has sfcrosshair 0 (the classic crosshair) and cl_dynamiccrosshair 0 (no widening when moving); style 4 (Classic Static), the style of his next configs, is a mapping choice for that. Whether this crosshair still widened when firing is not documented.",
       "sources": [
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-       "https://github.com/Skarbo/CSGOCrosshair/commit/e569127951402d83d79b1ac8828c6a60cc211a00",
-       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Fifflaren/config.cfg"
+       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Fifflaren/config.cfg",
+       "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
       ],
       "confidence": "medium",
       "convars": {
-       "cl_crosshairalpha": "255",
+       "cl_crosshairalpha": "99999",
        "cl_crosshaircolor": "4",
-       "cl_crosshaircolor_b": "250",
-       "cl_crosshaircolor_g": "250",
-       "cl_crosshaircolor_r": "50",
+       "cl_crosshaircolor_b": "250.000000",
+       "cl_crosshaircolor_g": "250.000000",
+       "cl_crosshaircolor_r": "50.000000",
        "cl_crosshairdot": "0",
        "cl_crosshairgap": "0",
+       "cl_crosshairscale": "1000",
        "cl_crosshairsize": "3",
-       "cl_crosshairstyle": "2",
+       "cl_crosshairstyle": "4",
        "cl_crosshairthickness": "0.5",
        "cl_crosshairusealpha": "1",
        "sensitivity": "1",
@@ -1311,16 +1373,22 @@
        "m_yaw": "0.022"
       },
       "mouse": {},
-      "video": {},
+      "video": {
+       "Resolution": "1024x768",
+       "Aspect Ratio": "4:3"
+      },
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2012-12-13",
-        "date_basis": "Style and values from the 'NiP Fifflaren' preset in Skarbo's CS:GO crosshair generator, already in its first commit on 13 Dec 2012. His own late-2012 NiP config.cfg has the same colour, size, thickness, gap and dot, but no style setting.",
+        "date": "2012",
+        "window": [
+         "2012-08-22",
+         "2012-12-13"
+        ],
+        "date_basis": "Game-written config.cfg saved under the name 'NiP-Fifflaren-', published by setup.gg in 2016, the same file as the sensitivity. It has cl_crosshairgap (added 22 Aug 2012) but no cl_crosshairstyle, which Skarbo's generator already used on 13 Dec 2012, so it was most likely saved between those dates. Instead of a style it has sfcrosshair 0 (the classic crosshair) and cl_dynamiccrosshair 0 (no widening when moving); style 4 (Classic Static), the style of his next configs, is a mapping choice for that. Whether this crosshair still widened when firing is not documented.",
         "sources": [
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-         "https://github.com/Skarbo/CSGOCrosshair/commit/e569127951402d83d79b1ac8828c6a60cc211a00",
-         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Fifflaren/config.cfg"
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Fifflaren/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
         ],
         "confidence": "medium"
        },
@@ -1337,8 +1405,19 @@
          "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
         ],
         "confidence": "medium"
+       },
+       {
+        "what": "Resolution",
+        "date": "2014-06-12",
+        "date_basis": "video.txt (1024x768, aspect ratio mode 0, i.e. 4:3) in the 'fifflaren' profile of CSGO-Optimiser, a third-party tool, added in its commit of 12 Jun 2014; the file has no date of its own, so that is only the latest it can be from. The same profile's game-written config.cfg ('NiP-Fifflaren- Telia') has a medal-stats timestamp of 24 Aug 2013 and lacks lobby_voice_chat_enabled (added 23 Jan 2014), so it was saved between those dates. setup.gg's player profile (created 13 Dec 2016, undated) also lists 1024x768 at 4:3. No source from 2012 gives his resolution.",
+        "sources": [
+         "https://github.com/CSGO-Analysis/CSGO-Optimiser/blob/1bc2f99948868f85658ceea32ebed610af4cd440/CSGO%20Optimiser/CSGO%20Optimiser/CSGO%20Optimiser/Resources/Profiles/fifflaren/video.txt",
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/fifflaren/data.yml"
+        ],
+        "confidence": "low"
        }
       ],
+      "notes": "The 'NiP Fifflaren' preset in Skarbo's third-party CS:GO crosshair generator (13 Dec 2012) has the same colour, size, thickness, gap and dot, with alpha 255 and style 2; that style has no basis in his own config, which has the dynamic crosshair off. His next dated configs use style 4: CSGO-Optimiser's 'fifflaren' profile, saved between August 2013 and January 2014 (size 3, thickness 0.5, gap -2, colour 4), and Liquipedia in November 2014 (size 3, thickness 0.5, gap 0, colour 4).",
       "dpi_hint": {
        "dpi": "400",
        "sens": "2.2",
@@ -1485,26 +1564,24 @@
      "current_slug": null,
      "prize": "$5,163.58",
      "config": {
-      "date": "2021-01-05",
-      "date_basis": "Liquipedia's RpK page, read from a copy cached in Oct 2023, marks its crosshair table 'Updated as of 2021-01-05' and cites params.gg. Its hardware table, with the same date, lists 1280x1024 stretched, so the crosshair is converted at 1024p.",
+      "date": "2016-05-27",
+      "date_basis": "Liquipedia's RpK page first lists a Crosshair table in revision 370048 of 27 May 2016, when he played for G2, and kept it until 29 Jun 2016 (revision 387359). The table cites no source, so the date is when it was added to the page, not when he set it. That revision lists 1024x768 stretched, the resolution shown here. Its outline thickness 0 is read as the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 200, as the table gives no usealpha.",
       "sources": [
-       "https://github.com/Lindeneg/csgo-pro-settings/blob/ddf05eba5a050fcd11fc3039cf3089074488a51f/scraper-cache.zip",
-       "https://liquipedia.net/counterstrike/RpK",
-       "https://www.params.gg/players/rpk"
+       "https://liquipedia.net/counterstrike/index.php?oldid=370048",
+       "https://liquipedia.net/counterstrike/index.php?oldid=387359"
       ],
-      "confidence": "medium",
+      "confidence": "low",
       "convars": {
        "cl_crosshairstyle": "4",
-       "cl_crosshairsize": "1",
-       "cl_crosshairthickness": "0",
-       "cl_crosshairgap": "-3",
-       "cl_crosshair_drawoutline": "0",
-       "cl_crosshair_outlinethickness": "1",
+       "cl_crosshairsize": "5",
+       "cl_crosshairthickness": "1.15",
+       "cl_crosshairgap": "0",
        "cl_crosshairdot": "0",
        "cl_crosshaircolor": "1",
-       "cl_crosshairalpha": "255",
+       "cl_crosshairalpha": "200",
        "cl_crosshairusealpha": "1",
-       "cl_crosshair_sniper_width": "1",
+       "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "0",
        "sensitivity": "2",
        "m_customaccel": "0",
        "m_rawinput": "1"
@@ -1517,18 +1594,16 @@
        "Resolution": "1024x768",
        "Aspect Ratio": "4:3"
       },
-      "crosshair_resolution": "1280x1024",
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2021-01-05",
-        "date_basis": "Liquipedia's RpK page, read from a copy cached in Oct 2023, marks its crosshair table 'Updated as of 2021-01-05' and cites params.gg. Its hardware table, with the same date, lists 1280x1024 stretched, so the crosshair is converted at 1024p.",
+        "date": "2016-05-27",
+        "date_basis": "Liquipedia's RpK page first lists a Crosshair table in revision 370048 of 27 May 2016, when he played for G2, and kept it until 29 Jun 2016 (revision 387359). The table cites no source, so the date is when it was added to the page, not when he set it. That revision lists 1024x768 stretched, the resolution shown here. Its outline thickness 0 is read as the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 200, as the table gives no usealpha.",
         "sources": [
-         "https://github.com/Lindeneg/csgo-pro-settings/blob/ddf05eba5a050fcd11fc3039cf3089074488a51f/scraper-cache.zip",
-         "https://liquipedia.net/counterstrike/RpK",
-         "https://www.params.gg/players/rpk"
+         "https://liquipedia.net/counterstrike/index.php?oldid=370048",
+         "https://liquipedia.net/counterstrike/index.php?oldid=387359"
         ],
-        "confidence": "medium"
+        "confidence": "low"
        },
        {
         "what": "Sensitivity",
@@ -1543,14 +1618,15 @@
        {
         "what": "Resolution",
         "date": "2016",
-        "date_basis": "The same setup.gg player file, added on 13 Dec 2016 with no date of its own, lists 1024x768 at 4:3. This is the resolution shown here; the crosshair is converted at the 1280x1024 of its own 2021 source.",
+        "date_basis": "The same setup.gg player file, added on 13 Dec 2016 with no date of its own, lists 1024x768 at 4:3. The May 2016 Liquipedia revision the crosshair comes from lists 1024x768 too, stretched.",
         "sources": [
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/rpk/data.yml",
          "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
         ],
         "confidence": "low"
        }
-      ]
+      ],
+      "notes": "No crosshair of his from 2012 to 2015 was found: Liquipedia's RpK page has no crosshair table before May 2016, and setup.gg's config archive has no file for him. The May 2016 table is the earliest. Within five weeks the page changed his resolution three times (1920x1080, 1280x960, 1280x1024, all stretched), and on 29 Jun 2016 the crosshair became a red one (style 4, size 3, thickness 1, gap -3). His crosshair there from 5 Jan 2021, citing params.gg, is green with size 1, thickness 0 and gap -3."
      }
     },
     {
@@ -1693,25 +1769,24 @@
      "id": "get-right",
      "current_slug": null,
      "config": {
-      "date": "2012-12-13",
-      "date_basis": "Preset 'NiP GeT_RiGhT' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. It does not match his own August 2012 config (used for the sensitivity), which has a red dot.",
+      "date": "2014-10-11",
+      "date_basis": "Size 5, Classic Static (style 4), thickness 1.15 and green (colour 1) are from a reply posted on 11 Oct 2014 in a Steam forum thread that lists his settings; the same poster then points to NiP's team page (nip.gl/csgoteam) for more. The post gives no gap or alpha; those, and the outline off, come from Liquipedia's crosshair table of 20 Feb 2016 (see below), which agrees with everything the post gives.",
       "sources": [
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
+       "https://steamcommunity.com/app/730/discussions/0/619568192805897226/",
+       "https://liquipedia.net/counterstrike/index.php?oldid=304993"
       ],
       "confidence": "low",
       "convars": {
-       "cl_crosshairalpha": "200",
-       "cl_crosshaircolor": "1",
-       "cl_crosshaircolor_r": "50",
-       "cl_crosshaircolor_g": "250",
-       "cl_crosshaircolor_b": "50",
-       "cl_crosshairdot": "0",
-       "cl_crosshairgap": "0",
-       "cl_crosshairsize": "5",
        "cl_crosshairstyle": "4",
-       "cl_crosshairthickness": "1.5",
+       "cl_crosshairsize": "5",
+       "cl_crosshairthickness": "1.15",
+       "cl_crosshairgap": "-1",
+       "cl_crosshairdot": "0",
+       "cl_crosshaircolor": "1",
+       "cl_crosshairalpha": "200",
        "cl_crosshairusealpha": "1",
+       "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "0",
        "sensitivity": "2.9",
        "zoom_sensitivity_ratio_mouse": "1",
        "m_rawinput": "0",
@@ -1733,11 +1808,20 @@
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2012-12-13",
-        "date_basis": "Preset 'NiP GeT_RiGhT' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. It does not match his own August 2012 config (used for the sensitivity), which has a red dot.",
+        "date": "2014-10-11",
+        "date_basis": "Size 5, Classic Static (style 4), thickness 1.15 and green (colour 1) are from a reply posted on 11 Oct 2014 in a Steam forum thread that lists his settings; the same poster then points to NiP's team page (nip.gl/csgoteam) for more. The post gives no gap or alpha; those, and the outline off, come from Liquipedia's crosshair table of 20 Feb 2016 (see below), which agrees with everything the post gives.",
         "sources": [
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
+         "https://steamcommunity.com/app/730/discussions/0/619568192805897226/"
+        ],
+        "confidence": "low"
+       },
+       {
+        "what": "Crosshair gap and alpha (and outline off)",
+        "date": "2016-02-20",
+        "date_basis": "Liquipedia's GeT_RiGhT page got its first crosshair table in revision 304993 on 20 Feb 2016: style 4, size 5, thickness 1.15, gap -1, dot 0, colour 1, alpha 200 and outlinethickness 0, read here as the outline off. The table cites no source and was unchanged in Feb 2017 (revision 575941). Only its gap, alpha and outline are used, because the 2014 post doesn't give them; they may differ from what he used in 2014.",
+        "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=304993",
+         "https://liquipedia.net/counterstrike/index.php?oldid=575941"
         ],
         "confidence": "low"
        },
@@ -1774,7 +1858,7 @@
         "confidence": "low"
        }
       ],
-      "notes": "His own game-written config from August 2012 (the source of the sensitivity) shows a different crosshair: a red dot (cl_crosshairsize 0, cl_crosshairdot 1, cl_crosshaircolor 0, thickness 1.15, dynamic crosshair off). That file has no crosshair style setting, so it can't be converted reliably; the crosshair shown is a third-party preset from December 2012 and may not be what he used."
+      "notes": "No source dated 2013 gives his crosshair. The nearest, a third-party preset from 13 Dec 2012 ('NiP GeT_RiGhT' in Skarbo's CS:GO crosshair generator), has this cross with thickness 1.5 and gap 0, but his own August 2012 config, the October 2014 post and Liquipedia from 2016 all have thickness 1.15, so the preset's 1.5 is probably a transcription error and it isn't used; this is the crosshair listed for him in October 2014, with the gap and alpha from 2016. His August 2012 config shows a red dot instead (cl_crosshairsize 0, cl_crosshairdot 1, cl_crosshaircolor 0, thickness 1.15)."
      },
      "photo": {
       "src": "data/avatars/classic/get-right-2013.webp",
@@ -1796,26 +1880,30 @@
      "id": "f0rest",
      "current_slug": null,
      "config": {
-      "date": "2013-12-06",
-      "date_basis": "A 'NiP f0rest' block in a third-party autoexec.cfg gist, first added in its 6 Dec 2013 revision. Apart from cl_crosshairstyle 4, its size, thickness, gap and colour match his own 2012 config (used for the sensitivity).",
+      "date": "2012",
+      "window": [
+       "2012-09-08",
+       "2013-05-22"
+      ],
+      "date_basis": "Game-written config.cfg (in-game name 'NiP-iZnoGouD-'; Liquipedia lists iZnoGouD as one of his IDs) uploaded to gamerconfig.eu as config 2183, 'NiP.f0rest cfg'. Its medal-stats timestamp is 8 Sep 2012 and it lacks cl_crosshair_drawoutline, which the 22 May 2013 update added, so it was saved between those dates. The 'NiP f0rest' block that a third-party autoexec gist added on 6 Dec 2013 copies it, down to the stray apostrophe in cl_crosshairalpha \"999'\", which is written here as 999.",
       "sources": [
-       "https://gist.github.com/StumblinGrumblin/7743218/0cbd932ee6cf85603d6267de262cf7cd9e07af28",
-       "https://gist.github.com/StumblinGrumblin/7743218/a674d39f8bb06a8a99c32be8dba44169104c163f"
+       "https://www.gamerconfig.eu/config/counter-strike-global-offensive/nipf0rest+cfg,2183/",
+       "https://gist.github.com/StumblinGrumblin/7743218/0cbd932ee6cf85603d6267de262cf7cd9e07af28"
       ],
       "confidence": "medium",
       "convars": {
-       "cl_crosshairstyle": "4",
+       "cl_crosshairalpha": "999",
        "cl_crosshaircolor": "1",
-       "cl_crosshaircolor_r": "0",
-       "cl_crosshaircolor_g": "0",
        "cl_crosshaircolor_b": "0",
-       "cl_crosshairusealpha": "1",
-       "cl_crosshairalpha": "99999",
+       "cl_crosshaircolor_g": "0",
+       "cl_crosshaircolor_r": "0",
        "cl_crosshairdot": "0",
-       "cl_crosshairsize": "6",
-       "cl_crosshairthickness": "1",
        "cl_crosshairgap": "-1",
        "cl_crosshairscale": "0",
+       "cl_crosshairsize": "6",
+       "cl_crosshairstyle": "4",
+       "cl_crosshairthickness": "1",
+       "cl_crosshairusealpha": "1",
        "sensitivity": "3.28",
        "zoom_sensitivity_ratio_mouse": "1",
        "m_rawinput": "1",
@@ -1835,11 +1923,15 @@
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2013-12-06",
-        "date_basis": "A 'NiP f0rest' block in a third-party autoexec.cfg gist, first added in its 6 Dec 2013 revision. Apart from cl_crosshairstyle 4, its size, thickness, gap and colour match his own 2012 config (used for the sensitivity).",
+        "date": "2012",
+        "window": [
+         "2012-09-08",
+         "2013-05-22"
+        ],
+        "date_basis": "Game-written config.cfg (in-game name 'NiP-iZnoGouD-'; Liquipedia lists iZnoGouD as one of his IDs) uploaded to gamerconfig.eu as config 2183, 'NiP.f0rest cfg'. Its medal-stats timestamp is 8 Sep 2012 and it lacks cl_crosshair_drawoutline, which the 22 May 2013 update added, so it was saved between those dates. The 'NiP f0rest' block that a third-party autoexec gist added on 6 Dec 2013 copies it, down to the stray apostrophe in cl_crosshairalpha \"999'\", which is written here as 999.",
         "sources": [
-         "https://gist.github.com/StumblinGrumblin/7743218/0cbd932ee6cf85603d6267de262cf7cd9e07af28",
-         "https://gist.github.com/StumblinGrumblin/7743218/a674d39f8bb06a8a99c32be8dba44169104c163f"
+         "https://www.gamerconfig.eu/config/counter-strike-global-offensive/nipf0rest+cfg,2183/",
+         "https://gist.github.com/StumblinGrumblin/7743218/0cbd932ee6cf85603d6267de262cf7cd9e07af28"
         ],
         "confidence": "medium"
        },
@@ -1860,13 +1952,16 @@
        {
         "what": "Resolution",
         "date": "2016-12-13",
-        "date_basis": "setup.gg's player profile (1600x900, 16:9), created in setupgg/data's first commit on 13 Dec 2016 and never changed. It gives no date or source, so this is only when it was published.",
+        "date_basis": "setup.gg's player profile (1600x900, 16:9), created in setupgg/data's first commit on 13 Dec 2016 and never changed. It gives no date or source, so this is only when it was published. No source from before 2015 gives his resolution, and later ones disagree: Liquipedia first listed one on 10 Jul 2015 (revision 169989), 1600x900, then 1024x768 with black bars from 11 Oct 2015 (revision 224614), 1600x900 again by 23 Nov 2015 (revision 249916), 1280x960 on 20 Feb 2016 (revision 304995) and 1024x768 with black bars from 17 Apr 2016 (revision 343725) to 2019; the CS:GO Player Setups sheet (row updated 15 May 2016) lists 1280x960 4:3.",
         "sources": [
-         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/f0rest/data.yml"
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/f0rest/data.yml",
+         "https://liquipedia.net/counterstrike/index.php?oldid=169989",
+         "https://liquipedia.net/counterstrike/index.php?oldid=224614"
         ],
-        "confidence": "medium"
+        "confidence": "low"
        }
       ],
+      "notes": "The same crosshair was still passed around as his in December 2013 (the gist cited for the crosshair), and Liquipedia lists it for him from November 2014 to at least October 2015.",
       "dpi_hint": {
        "dpi": "400",
        "sens": "3.5",
@@ -1899,7 +1994,7 @@
        "2014-07-23",
        "2014-08-01"
       ],
-      "date_basis": "Game-written config.cfg from setup.gg's archive, with the in-game name 'EPSILON shoxieJESUS * Viewsonic'. It has engine_no_focus_sleep and cl_radar_square_with_scoreboard (added 23 Jul 2014) but not cl_crosshairgap_useweaponvalue (added 1 Aug 2014), so it was saved between those dates.",
+      "date_basis": "Game-written config.cfg from setup.gg's archive, with the in-game name 'EPSILON shoxieJESUS * Viewsonic'. It has engine_no_focus_sleep and cl_radar_square_with_scoreboard (added 23 Jul 2014) but not cl_crosshairgap_useweaponvalue (added 1 Aug 2014), so it was saved between those dates. He was then at Epsilon eSports, which Liquipedia lists him with from 9 Jun to 3 Sep 2014, seven months after his time at VeryGames (7 May to 31 Dec 2013) ended.",
       "sources": [
        "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/shox/config.cfg",
        "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a",
@@ -1958,7 +2053,7 @@
        {
         "what": "Crosshair, viewmodel, HUD and radar",
         "date": "2014-07",
-        "date_basis": "Game-written config.cfg from setup.gg's archive, with the in-game name 'EPSILON shoxieJESUS * Viewsonic'. It has engine_no_focus_sleep and cl_radar_square_with_scoreboard (added 23 Jul 2014) but not cl_crosshairgap_useweaponvalue (added 1 Aug 2014), so it was saved between those dates.",
+        "date_basis": "Game-written config.cfg from setup.gg's archive, with the in-game name 'EPSILON shoxieJESUS * Viewsonic'. It has engine_no_focus_sleep and cl_radar_square_with_scoreboard (added 23 Jul 2014) but not cl_crosshairgap_useweaponvalue (added 1 Aug 2014), so it was saved between those dates. He was then at Epsilon eSports, which Liquipedia lists him with from 9 Jun to 3 Sep 2014, seven months after his time at VeryGames (7 May to 31 Dec 2013) ended.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/shox/config.cfg",
          "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a",
@@ -1973,7 +2068,7 @@
        {
         "what": "Sensitivity",
         "date": "2013",
-        "date_basis": "Hand-written autoexec.cfg headed 'www.TEAM-VERYGAMES.net - autoexec.cfg - 08/12/2013' (8 Dec or 12 Aug 2013) with a 'VERYGAMES SERVERS' alias section. setup.gg also holds a Titan-branded copy (filed under cajunb) with the same header date, so the date is the template's; the VeryGames branding places this copy in his VeryGames days.",
+        "date_basis": "Hand-written autoexec.cfg headed 'www.TEAM-VERYGAMES.net - autoexec.cfg - 08/12/2013' (8 Dec or 12 Aug 2013) with a 'VERYGAMES SERVERS' alias section. setup.gg also holds a Titan-branded copy with the same header date, filed under cajunb but with a '// shox CVARS' section, so it is his own file re-branded for Titan with the header date kept; the VeryGames branding places this copy in his VeryGames days.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/shox/autoexec.cfg",
          "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/cajunb/config/autoexec.cfg"
@@ -1999,7 +2094,7 @@
         "confidence": "medium"
        }
       ],
-      "notes": "There is a config from 2013, but it doesn't record the crosshair style or gap, so the crosshair comes from the closest one that can be converted (July 2014)."
+      "notes": "There is a config from 2013, but it doesn't record the crosshair style or gap, so the crosshair comes from the closest one that can be converted (July 2014). That 2013 autoexec sets cl_crosshaircolor 4 (cyan), size 6.16, thickness 1.15 and cl_dynamiccrosshair 1, so his 2013 crosshair was probably cyan rather than the yellow one here."
      },
      "photo": {
       "src": "data/avatars/classic/shox-2013.webp",
@@ -2105,9 +2200,12 @@
        {
         "what": "Resolution",
         "date": "2016-12-13",
-        "date_basis": "setup.gg's profile for Dosia, published in setupgg/data on 13 Dec 2016 and not changed afterwards. It does not say when the settings were collected, and its sensitivity (2.5) differs from the config's 2, so its DPI is not used.",
+        "date_basis": "setup.gg's profile for Dosia, published in setupgg/data on 13 Dec 2016 and not changed afterwards. It does not say when the settings were collected, and its sensitivity (2.5) differs from the config's 2, so its DPI is not used. No source gives his resolution for 2013: Liquipedia's Dosia page, which starts in February 2014, first gives one in revision 145986 of 9 Jun 2015, 1600x900, which it still lists in revision 270775 of 8 Jan 2016; in revision 321581 of 13 Mar 2016 and later it lists 1024x768 with black bars, as setup.gg does. The converted crosshair may therefore be a pixel off from what he saw.",
         "sources": [
-         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/dosia/data.yml"
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/dosia/data.yml",
+         "https://liquipedia.net/counterstrike/index.php?oldid=145986",
+         "https://liquipedia.net/counterstrike/index.php?oldid=270775",
+         "https://liquipedia.net/counterstrike/index.php?oldid=321581"
         ],
         "confidence": "low"
        }
@@ -2266,21 +2364,28 @@
      "id": "xizt",
      "current_slug": null,
      "config": {
-      "date": "2012-12-13",
-      "date_basis": "Preset 'NiP Xizt' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. His own 2012 config (used for the sensitivity) agrees on size, gap, colour and alpha but has thickness 0.85.",
+      "date": "2012",
+      "window": [
+       "2012-08-22",
+       "2012-12-13"
+      ],
+      "date_basis": "Game-written config.cfg (name 'NiP-Xizt-') from setup.gg's archive, the same file as the sensitivity. It has cl_crosshairgap, added 22 Aug 2012, but not cl_crosshairstyle, which the game had by 13 Dec 2012, so it was saved between those dates. Instead of a style it has sfcrosshair 0 (the classic crosshair) and cl_dynamiccrosshair 0 (no widening when moving); style 4 (Classic Static), the style of his later configs, is a mapping choice for that. Whether this crosshair still widened when firing is not documented.",
       "sources": [
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
+       "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/Xizt/config.cfg"
       ],
       "confidence": "low",
       "convars": {
        "cl_crosshairalpha": "200",
        "cl_crosshaircolor": "1",
+       "cl_crosshaircolor_b": "50",
+       "cl_crosshaircolor_g": "250",
+       "cl_crosshaircolor_r": "50",
        "cl_crosshairdot": "0",
        "cl_crosshairgap": "-1",
+       "cl_crosshairscale": "0",
        "cl_crosshairsize": "5",
-       "cl_crosshairstyle": "2",
-       "cl_crosshairthickness": "1",
+       "cl_crosshairstyle": "4",
+       "cl_crosshairthickness": "0.85",
        "cl_crosshairusealpha": "1",
        "sensitivity": "2.8",
        "zoom_sensitivity_ratio_mouse": "1",
@@ -2301,11 +2406,14 @@
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2012-12-13",
-        "date_basis": "Preset 'NiP Xizt' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. His own 2012 config (used for the sensitivity) agrees on size, gap, colour and alpha but has thickness 0.85.",
+        "date": "2012",
+        "window": [
+         "2012-08-22",
+         "2012-12-13"
+        ],
+        "date_basis": "Game-written config.cfg (name 'NiP-Xizt-') from setup.gg's archive, the same file as the sensitivity. It has cl_crosshairgap, added 22 Aug 2012, but not cl_crosshairstyle, which the game had by 13 Dec 2012, so it was saved between those dates. Instead of a style it has sfcrosshair 0 (the classic crosshair) and cl_dynamiccrosshair 0 (no widening when moving); style 4 (Classic Static), the style of his later configs, is a mapping choice for that. Whether this crosshair still widened when firing is not documented.",
         "sources": [
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
+         "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/Xizt/config.cfg"
         ],
         "confidence": "low"
        },
@@ -2337,6 +2445,7 @@
         ]
        }
       ],
+      "notes": "No crosshair of his dated 2013 was found; this is his own config from late 2012. By November 2014 Liquipedia listed a thinner one (style 4, size 5, thickness 0, gap 0, alpha 255), and his game-written config saved between May 2015 and January 2016 has style 4, size 4, thickness 0 and gap 0, so he may have changed it during 2013 or 2014. Skarbo's third-party CS:GO crosshair generator has a 'NiP Xizt' preset from 13 Dec 2012 with the same size, gap, colour and alpha but style 2 and thickness 1; his own config is used instead.",
       "dpi_hint": {
        "dpi": "400",
        "sens": "3",
@@ -2369,12 +2478,12 @@
        "2014-01-23",
        "2014-02-12"
       ],
-      "date_basis": "Game-written config.cfg from setup.gg's archive. It has lobby_voice_chat_enabled, matching the 23 Jan 2014 change that made the lobby microphone button remember its state, but not the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between those dates.",
+      "date_basis": "Game-written config.cfg from setup.gg's archive. It has lobby_voice_chat_enabled, matching the 23 Jan 2014 change that made the lobby microphone button remember its state, but not the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between those dates. Its cl_clanid is the Steam group of Titan, which Liquipedia lists him with from 7 Jan 2014, so it was saved in his first weeks there, just after his VeryGames year. cl_crosshairstyle 5 is in this file although Valve added style 5 only on 16 Jul 2014. Six other configs in setup.gg's archive dated before July 2014 have it (GMX, NEO, TaZ, moE, pasha and schneider), as does a pasha config in CSGO-Optimiser saved between May 2013 and January 2014, so players set it before Valve added it. What the game drew for it then is unknown.",
       "sources": [
        "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/ScreaM/config.cfg",
        "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
       ],
-      "confidence": "medium",
+      "confidence": "low",
       "convars": {
        "cl_crosshairstyle": "5",
        "cl_crosshairsize": "2",
@@ -2414,18 +2523,32 @@
       },
       "provenance": [
        {
-        "what": "Crosshair, viewmodel, HUD and radar",
+        "what": "Crosshair",
         "date": "2014",
+        "window": [
+         "2014-01-23",
+         "2014-02-12"
+        ],
+        "date_basis": "Game-written config.cfg from setup.gg's archive. It has lobby_voice_chat_enabled, matching the 23 Jan 2014 change that made the lobby microphone button remember its state, but not the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between those dates. Its cl_clanid is the Steam group of Titan, which Liquipedia lists him with from 7 Jan 2014, so it was saved in his first weeks there, just after his VeryGames year. cl_crosshairstyle 5 is in this file although Valve added style 5 only on 16 Jul 2014. Six other configs in setup.gg's archive dated before July 2014 have it (GMX, NEO, TaZ, moE, pasha and schneider), as does a pasha config in CSGO-Optimiser saved between May 2013 and January 2014, so players set it before Valve added it. What the game drew for it then is unknown.",
+        "sources": [
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/ScreaM/config.cfg",
+         "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
+        ],
+        "confidence": "low"
+       },
+       {
+        "what": "Viewmodel, HUD and radar",
+        "date": "2014",
+        "window": [
+         "2014-01-23",
+         "2014-02-12"
+        ],
         "date_basis": "Game-written config.cfg from setup.gg's archive. It has lobby_voice_chat_enabled, matching the 23 Jan 2014 change that made the lobby microphone button remember its state, but not the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between those dates.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/ScreaM/config.cfg",
          "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
         ],
-        "confidence": "medium",
-        "window": [
-         "2014-01-23",
-         "2014-02-12"
-        ]
+        "confidence": "medium"
        },
        {
         "what": "Sensitivity",
@@ -2444,20 +2567,22 @@
        {
         "what": "Resolution",
         "date": "2016",
-        "date_basis": "video.txt added to setup.gg's archive on 30 Apr 2016 together with a game-written config.cfg named 'G2.Kinguin ScreaM SaiyajiN'. That config has cl_crosshair_sniper_width (added 20 Jan 2016), so it was saved between 20 Jan and 30 Apr 2016; the video settings are taken to be from the same time.",
+        "date_basis": "video.txt added to setup.gg's archive on 30 Apr 2016 together with a game-written config.cfg named 'G2.Kinguin ScreaM SaiyajiN'. That config has cl_crosshair_sniper_width (added 20 Jan 2016), so it was saved between 20 Jan and 30 Apr 2016; the video settings are taken to be from the same time. No source gives his resolution for 2013 or early 2014. Liquipedia's ScreaM page lists 800x600 with black bars in revision 194318 of 30 Aug 2015 and in revision 576105 of 9 Feb 2017, so the converted crosshair may be a pixel off from what he saw.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/b9ff7305ed0718a63265cb8e4beca22b4b81f71f/ScreaM/video.txt",
          "https://github.com/setupgg/csgo/blob/b9ff7305ed0718a63265cb8e4beca22b4b81f71f/ScreaM/config.cfg",
-         "https://github.com/setupgg/csgo/commit/b9ff7305ed0718a63265cb8e4beca22b4b81f71f"
+         "https://github.com/setupgg/csgo/commit/b9ff7305ed0718a63265cb8e4beca22b4b81f71f",
+         "https://liquipedia.net/counterstrike/index.php?oldid=194318",
+         "https://liquipedia.net/counterstrike/index.php?oldid=576105"
         ],
-        "confidence": "medium",
+        "confidence": "low",
         "window": [
          "2016-01-20",
          "2016-04-30"
         ]
        }
       ],
-      "notes": "His config sets crosshair style 5, which CS:GO only added on 16 Jul 2014, months after the file was saved, so the crosshair he saw at the time may have looked different. It is converted as style 5.",
+      "notes": "It is converted as style 5, as the file says. Liquipedia's page of 30 Aug 2015 (revision 194318), the closest dated source after it, lists style 4 with size 2, thickness 1, gap -2, cyan and alpha 255.",
       "dpi_hint": {
        "dpi": "400",
        "sens": "2.5",
@@ -2599,9 +2724,10 @@
        "2014-08-04",
        "2014-10-10"
       ],
-      "date_basis": "A config.cfg written by Hiko's game, from setup.gg's archive. Its Operation Breakout reminder stores a timestamp of 4 Aug 2014, and it lacks snd_menumusic_volume and the other music-volume settings that came with the 10 Oct 2014 update, so it was saved between those dates.",
+      "date_basis": "A config.cfg written by Hiko's game, from setup.gg's archive. Its Operation Breakout reminder stores a timestamp of 4 Aug 2014, and it lacks snd_menumusic_volume and the other music-volume settings that came with the 10 Oct 2014 update, so it was saved between those dates. It was saved after he had moved from compLexity to Cloud9 (1 Aug 2014 in Liquipedia's team history), 7 to 9 months after the end of 2013.",
       "sources": [
-       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Hiko/config.cfg"
+       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Hiko/config.cfg",
+       "https://liquipedia.net/counterstrike/index.php?oldid=267943"
       ],
       "confidence": "medium",
       "convars": {
@@ -2655,9 +2781,10 @@
          "2014-08-04",
          "2014-10-10"
         ],
-        "date_basis": "A config.cfg written by Hiko's game, from setup.gg's archive. Its Operation Breakout reminder stores a timestamp of 4 Aug 2014, and it lacks snd_menumusic_volume and the other music-volume settings that came with the 10 Oct 2014 update, so it was saved between those dates.",
+        "date_basis": "A config.cfg written by Hiko's game, from setup.gg's archive. Its Operation Breakout reminder stores a timestamp of 4 Aug 2014, and it lacks snd_menumusic_volume and the other music-volume settings that came with the 10 Oct 2014 update, so it was saved between those dates. It was saved after he had moved from compLexity to Cloud9 (1 Aug 2014 in Liquipedia's team history), 7 to 9 months after the end of 2013.",
         "sources": [
-         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Hiko/config.cfg"
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Hiko/config.cfg",
+         "https://liquipedia.net/counterstrike/index.php?oldid=267943"
         ],
         "confidence": "medium"
        },
@@ -2668,20 +2795,23 @@
          "2014-08-04",
          "2014-10-10"
         ],
-        "date_basis": "A config.cfg written by Hiko's game, from setup.gg's archive. Its Operation Breakout reminder stores a timestamp of 4 Aug 2014, and it lacks snd_menumusic_volume and the other music-volume settings that came with the 10 Oct 2014 update, so it was saved between those dates.",
+        "date_basis": "A config.cfg written by Hiko's game, from setup.gg's archive. Its Operation Breakout reminder stores a timestamp of 4 Aug 2014, and it lacks snd_menumusic_volume and the other music-volume settings that came with the 10 Oct 2014 update, so it was saved between those dates. It was saved after he had moved from compLexity to Cloud9 (1 Aug 2014 in Liquipedia's team history), 7 to 9 months after the end of 2013.",
         "sources": [
-         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Hiko/config.cfg"
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Hiko/config.cfg",
+         "https://liquipedia.net/counterstrike/index.php?oldid=267943"
         ],
         "confidence": "medium"
        },
        {
         "what": "Resolution",
         "date": "2016-12-13",
-        "date_basis": "From setup.gg's profile for Hiko (data.yml), published on 13 Dec 2016 and not changed since. It doesn't say when the values were collected, so this is the latest possible date.",
+        "date_basis": "From setup.gg's profile for Hiko (data.yml), published on 13 Dec 2016 and not changed since. It doesn't say when the values were collected, so this is the latest possible date. No source from 2013 to 2015 gives 1280x960: Liquipedia lists 1920x1080 on 23 Oct 2015 (revision 234246) and 1024x768 stretched from 15 Dec 2015 (revision 261904), changes between 1280x1024, 1920x1080 and 1024x768 during 2016, and first gives 1280x960 in Feb 2017. At 1024x768 the crosshair converts to length 3 instead of 4; at 1920x1080 it is the same as at 1280x960.",
         "sources": [
-         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/hiko/data.yml"
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/hiko/data.yml",
+         "https://liquipedia.net/counterstrike/index.php?oldid=234246",
+         "https://liquipedia.net/counterstrike/index.php?oldid=261904"
         ],
-        "confidence": "medium"
+        "confidence": "low"
        }
       ],
       "dpi_hint": {
@@ -2689,7 +2819,8 @@
        "sens": "3.7",
        "date": "2016-12-13",
        "source": "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/hiko/data.yml"
-      }
+      },
+      "notes": "No crosshair of his from 2013 is known; Liquipedia's page for him had no crosshair table until 17 May 2016 (revision 362679), and during 2016 alone it lists three different ones."
      },
      "photo": {
       "src": "data/avatars/classic/hiko-2013.webp",
@@ -2711,26 +2842,35 @@
      "id": "guardian",
      "current_slug": null,
      "config": {
-      "date": "2022-04-30",
-      "date_basis": "From the Crosshair Settings table on GuardiaN's Liquipedia page (copy cached in Oct 2023), marked 'Updated as of 2022-04-30' and citing a FACEIT match played that day.",
+      "date": "2014-07",
+      "window": [
+       "2014-07-23",
+       "2014-08-01"
+      ],
+      "date_basis": "A config.cfg written by GuardiaN's game, from setup.gg's archive. It has engine_no_focus_sleep and cl_radar_square_with_scoreboard (added 23 Jul 2014) but not cl_crosshairgap_useweaponvalue (added 1 Aug 2014), so it was saved between those dates. Its cl_crosshairstyle is 6, which is not one of the styles the game listed (0 to 5), but it is in the game's own alphabetical list of settings, so the game accepted and saved it.",
       "sources": [
-       "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip",
-       "https://liquipedia.net/counterstrike/GuardiaN",
-       "https://www.faceit.com/en/csgo/room/1-fdbc3d94-fb03-43db-92ba-23337c72b473"
+       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/GuardiaN/config.cfg"
       ],
       "confidence": "medium",
       "convars": {
-       "cl_crosshairstyle": "4",
-       "cl_crosshairsize": "1",
-       "cl_crosshairthickness": "0",
-       "cl_crosshairgap": "-2",
-       "cl_crosshairdot": "1",
-       "cl_crosshaircolor": "4",
-       "cl_crosshairalpha": "255",
+       "cl_crosshairstyle": "6",
+       "cl_crosshairsize": "2",
+       "cl_crosshairthickness": "0.5",
+       "cl_crosshairgap": "0",
+       "cl_crosshaircolor": "1",
+       "cl_crosshaircolor_r": "50",
+       "cl_crosshaircolor_g": "250",
+       "cl_crosshaircolor_b": "50",
+       "cl_crosshairalpha": "200",
        "cl_crosshairusealpha": "1",
-       "cl_crosshair_sniper_width": "1",
-       "cl_crosshair_outlinethickness": "0",
+       "cl_crosshairdot": "0",
        "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "1",
+       "cl_crosshair_dynamic_splitdist": "7",
+       "cl_crosshair_dynamic_splitalpha_innermod": "1",
+       "cl_crosshair_dynamic_splitalpha_outermod": "0.5",
+       "cl_crosshair_dynamic_maxdist_splitratio": "0.35",
+       "cl_crosshairscale": "0",
        "sensitivity": "1.3",
        "zoom_sensitivity_ratio_mouse": "1.2",
        "m_rawinput": "0",
@@ -2755,12 +2895,14 @@
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2022-04-30",
-        "date_basis": "From the Crosshair Settings table on GuardiaN's Liquipedia page (copy cached in Oct 2023), marked 'Updated as of 2022-04-30' and citing a FACEIT match played that day.",
+        "date": "2014-07",
+        "window": [
+         "2014-07-23",
+         "2014-08-01"
+        ],
+        "date_basis": "A config.cfg written by GuardiaN's game, from setup.gg's archive. It has engine_no_focus_sleep and cl_radar_square_with_scoreboard (added 23 Jul 2014) but not cl_crosshairgap_useweaponvalue (added 1 Aug 2014), so it was saved between those dates. Its cl_crosshairstyle is 6, which is not one of the styles the game listed (0 to 5), but it is in the game's own alphabetical list of settings, so the game accepted and saved it.",
         "sources": [
-         "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip",
-         "https://liquipedia.net/counterstrike/GuardiaN",
-         "https://www.faceit.com/en/csgo/room/1-fdbc3d94-fb03-43db-92ba-23337c72b473"
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/GuardiaN/config.cfg"
         ],
         "confidence": "medium"
        },
@@ -2796,7 +2938,7 @@
         "confidence": "low"
        }
       ],
-      "notes": "His own game-written config from July 2014 is closer to 2013, but its crosshair uses style 6, which has no known conversion, so the crosshair comes from the closest source that can be converted, his Liquipedia settings from 30 Apr 2022."
+      "notes": "The crosshair is from his own config of July 2014, the closest to 2013 found. Liquipedia's table from June 2015 lists a similar one as style 4: size 2, thickness 1, gap 0, green, alpha 255."
      },
      "photo": {
       "src": "data/avatars/classic/guardian-2013.webp",
@@ -2831,25 +2973,24 @@
      "id": "get-right",
      "current_slug": null,
      "config": {
-      "date": "2012-12-13",
-      "date_basis": "Preset 'NiP GeT_RiGhT' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. It does not match his own August 2012 config (used for the sensitivity), which has a red dot.",
+      "date": "2014-10-11",
+      "date_basis": "Size 5, Classic Static (style 4), thickness 1.15 and green (colour 1) are from a reply posted on 11 Oct 2014 in a Steam forum thread that lists his settings; the same poster then points to NiP's team page (nip.gl/csgoteam) for more. The post gives no gap or alpha; those, and the outline off, come from Liquipedia's crosshair table of 20 Feb 2016 (see below), which agrees with everything the post gives.",
       "sources": [
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-       "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
+       "https://steamcommunity.com/app/730/discussions/0/619568192805897226/",
+       "https://liquipedia.net/counterstrike/index.php?oldid=304993"
       ],
-      "confidence": "low",
+      "confidence": "medium",
       "convars": {
-       "cl_crosshairalpha": "200",
-       "cl_crosshaircolor": "1",
-       "cl_crosshaircolor_r": "50",
-       "cl_crosshaircolor_g": "250",
-       "cl_crosshaircolor_b": "50",
-       "cl_crosshairdot": "0",
-       "cl_crosshairgap": "0",
-       "cl_crosshairsize": "5",
        "cl_crosshairstyle": "4",
-       "cl_crosshairthickness": "1.5",
+       "cl_crosshairsize": "5",
+       "cl_crosshairthickness": "1.15",
+       "cl_crosshairgap": "-1",
+       "cl_crosshairdot": "0",
+       "cl_crosshaircolor": "1",
+       "cl_crosshairalpha": "200",
        "cl_crosshairusealpha": "1",
+       "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "0",
        "sensitivity": "2.9",
        "zoom_sensitivity_ratio_mouse": "1",
        "m_rawinput": "0",
@@ -2871,11 +3012,20 @@
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2012-12-13",
-        "date_basis": "Preset 'NiP GeT_RiGhT' in the first commit (13 Dec 2012) of Skarbo's CS:GO crosshair generator, a third-party tool; later commits never change its values. It does not match his own August 2012 config (used for the sensitivity), which has a red dot.",
+        "date": "2014-10-11",
+        "date_basis": "Size 5, Classic Static (style 4), thickness 1.15 and green (colour 1) are from a reply posted on 11 Oct 2014 in a Steam forum thread that lists his settings; the same poster then points to NiP's team page (nip.gl/csgoteam) for more. The post gives no gap or alpha; those, and the outline off, come from Liquipedia's crosshair table of 20 Feb 2016 (see below), which agrees with everything the post gives.",
         "sources": [
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/javascript/javascript.js",
-         "https://github.com/Skarbo/CSGOCrosshair/blob/e569127951402d83d79b1ac8828c6a60cc211a00/index.php"
+         "https://steamcommunity.com/app/730/discussions/0/619568192805897226/"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Crosshair gap and alpha (and outline off)",
+        "date": "2016-02-20",
+        "date_basis": "Liquipedia's GeT_RiGhT page got its first crosshair table in revision 304993 on 20 Feb 2016: style 4, size 5, thickness 1.15, gap -1, dot 0, colour 1, alpha 200 and outlinethickness 0, read here as the outline off. The table cites no source and was unchanged in Feb 2017 (revision 575941). Only its gap, alpha and outline are used, because the 2014 post doesn't give them; they may differ from what he used in 2014.",
+        "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=304993",
+         "https://liquipedia.net/counterstrike/index.php?oldid=575941"
         ],
         "confidence": "low"
        },
@@ -2912,7 +3062,7 @@
         "confidence": "low"
        }
       ],
-      "notes": "His own game-written config from August 2012 (the source of the sensitivity) shows a different crosshair: a red dot (cl_crosshairsize 0, cl_crosshairdot 1, cl_crosshaircolor 0, thickness 1.15, dynamic crosshair off). That file has no crosshair style setting, so it can't be converted reliably; the crosshair shown is a third-party preset from December 2012 and may not be what he used."
+      "notes": "A third-party preset from 13 Dec 2012 ('NiP GeT_RiGhT' in Skarbo's CS:GO crosshair generator) has the same cross but thickness 1.5 and gap 0. His own August 2012 config, the October 2014 post and Liquipedia from 2016 all have thickness 1.15, so the preset's 1.5 is probably a transcription error, and it isn't used. That August 2012 config shows a red dot instead (cl_crosshairsize 0, cl_crosshairdot 1, cl_crosshaircolor 0, thickness 1.15)."
      },
      "photo": {
       "src": "data/avatars/classic/get-right-2014.webp",
@@ -3025,6 +3175,7 @@
         "confidence": "low"
        }
       ],
+      "notes": "No crosshair of his dated 2014 was found: Liquipedia's settings table of 29 Nov 2014 (revision 127152) has only placeholder text. When he changed from this cyan crosshair with a dot to the red one without a dot (style 4, size 3, thickness 1, gap -3) that Liquipedia lists from May 2016, and that the 2015 entry uses, is not known, so in 2014 he may have used either.",
       "dpi_hint": {
        "dpi": "400",
        "sens": "1.7",
@@ -3057,7 +3208,7 @@
        "2014-02-27",
        "2014-04-23"
       ],
-      "date_basis": "Game-written config.cfg from setup.gg's archive. It has spec_usenumberkeys_nobinds (added 27 Feb 2014) but not cl_scoreboard_mouse_enable_binding (added 23 Apr 2014), so it was saved between those dates. Its crosshair style 5 was only announced on 16 Jul 2014, though three other configs in the archive dated before July 2014 also have it.",
+      "date_basis": "Game-written config.cfg from setup.gg's archive. It has spec_usenumberkeys_nobinds (added 27 Feb 2014) but not cl_scoreboard_mouse_enable_binding (added 23 Apr 2014), so it was saved between those dates. cl_crosshairstyle 5 is in this file although Valve added style 5 only on 16 Jul 2014. Six configs in setup.gg's archive dated before July 2014 have it (GMX, NEO, TaZ, moE, pasha and schneider), as does a pasha config in CSGO-Optimiser saved between May 2013 and January 2014, so players set it before Valve added it. What the game drew for it then is unknown.",
       "sources": [
        "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/pasha/config.cfg",
        "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/pasha/config/config.cfg"
@@ -3116,7 +3267,7 @@
        {
         "what": "Crosshair, viewmodel, HUD and radar",
         "date": "2014",
-        "date_basis": "Game-written config.cfg from setup.gg's archive. It has spec_usenumberkeys_nobinds (added 27 Feb 2014) but not cl_scoreboard_mouse_enable_binding (added 23 Apr 2014), so it was saved between those dates. Its crosshair style 5 was only announced on 16 Jul 2014, though three other configs in the archive dated before July 2014 also have it.",
+        "date_basis": "Game-written config.cfg from setup.gg's archive. It has spec_usenumberkeys_nobinds (added 27 Feb 2014) but not cl_scoreboard_mouse_enable_binding (added 23 Apr 2014), so it was saved between those dates. cl_crosshairstyle 5 is in this file although Valve added style 5 only on 16 Jul 2014. Six configs in setup.gg's archive dated before July 2014 have it (GMX, NEO, TaZ, moE, pasha and schneider), as does a pasha config in CSGO-Optimiser saved between May 2013 and January 2014, so players set it before Valve added it. What the game drew for it then is unknown.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/pasha/config.cfg",
          "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/pasha/config/config.cfg"
@@ -3143,13 +3294,14 @@
        },
        {
         "what": "Resolution",
-        "date": "2016-12-13",
-        "date_basis": "setup.gg's profile for pasha (data.yml), added to its data repository on 13 Dec 2016 and never changed. It doesn't say when the settings were collected. Its mouse settings are identical to KQLY's profile and its sensitivity (2.04) differs from the config's 2, so only the resolution is used.",
+        "date": "2014-06-12",
+        "date_basis": "The video.txt in CSGO-Optimiser's pasha profile lists 1280x720 at 16:9. It was added to that repository on 12 Jun 2014, the latest date it can be from; the profile's config.cfg, saved under the name paszaBiceps, has the same crosshair as this config. setup.gg's profile for pasha (data.yml, published 13 Dec 2016), whose mouse settings are identical to KQLY's profile, lists the same resolution.",
         "sources": [
+         "https://github.com/CSGO-Analysis/CSGO-Optimiser/blob/67ff5eef3135dbc94255efa3bdb8819c69b5b156/CSGO%20Optimiser/CSGO%20Optimiser/CSGO%20Optimiser/Resources/Profiles/pasha/video.txt",
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/pasha/data.yml",
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/kqly/data.yml"
         ],
-        "confidence": "low"
+        "confidence": "medium"
        }
       ],
       "dpi_hint": {
@@ -3184,12 +3336,12 @@
        "2013-01-13",
        "2013-04-25"
       ],
-      "date_basis": "Game-written config.cfg from setup.gg's archive. The only timestamp in it is from 13 Jan 2013, and its game-written lines lack the radar settings added on 25 Apr 2013 (the unquoted cl_radar_scale line at the end was added by hand), so it was saved between those dates. setup.gg later edited the gap from -2 to 0 (1 May 2016); the original -2 is used.",
+      "date_basis": "Game-written config.cfg from setup.gg's archive. The only timestamp in it is a medal time of 13 Jan 2013, and its game-written lines lack the radar settings added on 25 Apr 2013 (the unquoted cl_radar_scale line at the end was added by hand), so it was saved between those dates. The file is not wholly his. Its medal time is also in both of ScreaM's configs in the archive (from early 2014 and from 2016) and in no other player's file, it shares the rare cl_crosshairalpha 9999 and cl_crosshairscale 1000 with ScreaM's 2014 file, and its cl_clanid is the Steam group of Team VeryGames, ScreaM's team in 2013 and not one Liquipedia lists Snax with. So it seems to descend from a config of ScreaM's from early 2013: the timestamp is ScreaM's, and only what Snax changed, such as the name and sensitivity and probably the crosshair size and gap, is his. setup.gg later edited the gap from -2 to 0 (1 May 2016); the original -2 is used.",
       "sources": [
        "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/Snax/config.cfg",
        "https://github.com/setupgg/csgo/commit/d68f4bc77ff061f25cbd3b3e3c598ea63444e12b"
       ],
-      "confidence": "medium",
+      "confidence": "low",
       "convars": {
        "cl_crosshairstyle": "4",
        "cl_crosshairsize": "4",
@@ -3232,12 +3384,12 @@
        {
         "what": "Crosshair, viewmodel, HUD and radar",
         "date": "2013",
-        "date_basis": "Game-written config.cfg from setup.gg's archive. The only timestamp in it is from 13 Jan 2013, and its game-written lines lack the radar settings added on 25 Apr 2013 (the unquoted cl_radar_scale line at the end was added by hand), so it was saved between those dates. setup.gg later edited the gap from -2 to 0 (1 May 2016); the original -2 is used.",
+        "date_basis": "Game-written config.cfg from setup.gg's archive. The only timestamp in it is a medal time of 13 Jan 2013, and its game-written lines lack the radar settings added on 25 Apr 2013 (the unquoted cl_radar_scale line at the end was added by hand), so it was saved between those dates. The file is not wholly his. Its medal time is also in both of ScreaM's configs in the archive (from early 2014 and from 2016) and in no other player's file, it shares the rare cl_crosshairalpha 9999 and cl_crosshairscale 1000 with ScreaM's 2014 file, and its cl_clanid is the Steam group of Team VeryGames, ScreaM's team in 2013 and not one Liquipedia lists Snax with. So it seems to descend from a config of ScreaM's from early 2013: the timestamp is ScreaM's, and only what Snax changed, such as the name and sensitivity and probably the crosshair size and gap, is his. setup.gg later edited the gap from -2 to 0 (1 May 2016); the original -2 is used.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/Snax/config.cfg",
          "https://github.com/setupgg/csgo/commit/d68f4bc77ff061f25cbd3b3e3c598ea63444e12b"
         ],
-        "confidence": "medium",
+        "confidence": "low",
         "window": [
          "2013-01-13",
          "2013-04-25"
@@ -3267,14 +3419,17 @@
        },
        {
         "what": "Resolution",
-        "date": "2016-12-13",
-        "date_basis": "From setup.gg's profile for Snax (data.yml), added to its data repository on 13 Dec 2016 and never changed. It doesn't say when the settings were collected.",
+        "date": "2014-06-12",
+        "date_basis": "The video.txt in CSGO-Optimiser's snax profile lists 800x600 at 4:3. It was added to that repository on 12 Jun 2014, the latest date it can be from; the profile's config.cfg is a copy of the crosshair's source file (see the note). Liquipedia's Snax page lists 800x600 with black bars in revision 247169 of 16 Nov 2015, and setup.gg's profile (data.yml, added 13 Dec 2016) lists the same.",
         "sources": [
+         "https://github.com/CSGO-Analysis/CSGO-Optimiser/blob/1bc2f99948868f85658ceea32ebed610af4cd440/CSGO%20Optimiser/CSGO%20Optimiser/CSGO%20Optimiser/Resources/Profiles/snax/video.txt",
+         "https://liquipedia.net/counterstrike/index.php?oldid=247169",
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/snax/data.yml"
         ],
-        "confidence": "low"
+        "confidence": "medium"
        }
-      ]
+      ],
+      "notes": "No crosshair of his known to be from 2014 or 2015 was found. A copy of this file in the CSGO-Optimiser repository, added on 12 Jun 2014, is identical except for crosshair style 5 and gap 0 and the missing hand-added cl_radar_scale line, so one of the two was edited by hand, and which came first is unknown. setup.gg's own edit of 1 May 2016 and Liquipedia's first crosshair table for him (revision 576120 of 9 Feb 2017: style 4, size 4, thickness 1, gap 0, cyan) also have gap 0."
      },
      "photo": {
       "src": "data/avatars/classic/snax-2014.webp",
@@ -3552,26 +3707,24 @@
      "id": "f0rest",
      "current_slug": null,
      "config": {
-      "date": "2013-12-06",
-      "date_basis": "A 'NiP f0rest' block in a third-party autoexec.cfg gist, first added in its 6 Dec 2013 revision. Apart from cl_crosshairstyle 4, its size, thickness, gap and colour match his own 2012 config (used for the sensitivity).",
+      "date": "2014-11-07",
+      "date_basis": "Liquipedia's f0rest page got its crosshair table on 7 Nov 2014. Revision 127439 of that day has style 4, size 6, thickness 1, gap -1, dot 0, colour 1, alpha 255 and outlinethickness 0, read here as the outline off; it corrected the colour from 0 in the version added hours earlier. The table cites no source, but the same values are in his own game-written config saved between Sep 2012 and May 2013 (gamerconfig.eu config 2183), and they stayed on the page until at least Oct 2015.",
       "sources": [
-       "https://gist.github.com/StumblinGrumblin/7743218/0cbd932ee6cf85603d6267de262cf7cd9e07af28",
-       "https://gist.github.com/StumblinGrumblin/7743218/a674d39f8bb06a8a99c32be8dba44169104c163f"
+       "https://liquipedia.net/counterstrike/index.php?oldid=127439",
+       "https://www.gamerconfig.eu/config/counter-strike-global-offensive/nipf0rest+cfg,2183/"
       ],
       "confidence": "medium",
       "convars": {
        "cl_crosshairstyle": "4",
-       "cl_crosshaircolor": "1",
-       "cl_crosshaircolor_r": "0",
-       "cl_crosshaircolor_g": "0",
-       "cl_crosshaircolor_b": "0",
-       "cl_crosshairusealpha": "1",
-       "cl_crosshairalpha": "99999",
-       "cl_crosshairdot": "0",
        "cl_crosshairsize": "6",
        "cl_crosshairthickness": "1",
        "cl_crosshairgap": "-1",
-       "cl_crosshairscale": "0",
+       "cl_crosshairdot": "0",
+       "cl_crosshaircolor": "1",
+       "cl_crosshairalpha": "255",
+       "cl_crosshairusealpha": "1",
+       "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "0",
        "sensitivity": "3.28",
        "zoom_sensitivity_ratio_mouse": "1",
        "m_rawinput": "1",
@@ -3591,11 +3744,11 @@
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2013-12-06",
-        "date_basis": "A 'NiP f0rest' block in a third-party autoexec.cfg gist, first added in its 6 Dec 2013 revision. Apart from cl_crosshairstyle 4, its size, thickness, gap and colour match his own 2012 config (used for the sensitivity).",
+        "date": "2014-11-07",
+        "date_basis": "Liquipedia's f0rest page got its crosshair table on 7 Nov 2014. Revision 127439 of that day has style 4, size 6, thickness 1, gap -1, dot 0, colour 1, alpha 255 and outlinethickness 0, read here as the outline off; it corrected the colour from 0 in the version added hours earlier. The table cites no source, but the same values are in his own game-written config saved between Sep 2012 and May 2013 (gamerconfig.eu config 2183), and they stayed on the page until at least Oct 2015.",
         "sources": [
-         "https://gist.github.com/StumblinGrumblin/7743218/0cbd932ee6cf85603d6267de262cf7cd9e07af28",
-         "https://gist.github.com/StumblinGrumblin/7743218/a674d39f8bb06a8a99c32be8dba44169104c163f"
+         "https://liquipedia.net/counterstrike/index.php?oldid=127439",
+         "https://www.gamerconfig.eu/config/counter-strike-global-offensive/nipf0rest+cfg,2183/"
         ],
         "confidence": "medium"
        },
@@ -3616,11 +3769,13 @@
        {
         "what": "Resolution",
         "date": "2016-12-13",
-        "date_basis": "setup.gg's player profile (1600x900, 16:9), created in setupgg/data's first commit on 13 Dec 2016 and never changed. It gives no date or source, so this is only when it was published.",
+        "date_basis": "setup.gg's player profile (1600x900, 16:9), created in setupgg/data's first commit on 13 Dec 2016 and never changed. It gives no date or source, so this is only when it was published. No source from before 2015 gives his resolution, and later ones disagree: Liquipedia first listed one on 10 Jul 2015 (revision 169989), 1600x900, then 1024x768 with black bars from 11 Oct 2015 (revision 224614), 1600x900 again by 23 Nov 2015 (revision 249916), 1280x960 on 20 Feb 2016 (revision 304995) and 1024x768 with black bars from 17 Apr 2016 (revision 343725) to 2019; the CS:GO Player Setups sheet (row updated 15 May 2016) lists 1280x960 4:3.",
         "sources": [
-         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/f0rest/data.yml"
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/f0rest/data.yml",
+         "https://liquipedia.net/counterstrike/index.php?oldid=169989",
+         "https://liquipedia.net/counterstrike/index.php?oldid=224614"
         ],
-        "confidence": "medium"
+        "confidence": "low"
        }
       ],
       "dpi_hint": {
@@ -3847,8 +4002,8 @@
       },
       "mouse": {},
       "video": {
-       "Resolution": "1280x1024",
-       "Aspect Ratio": "5:4"
+       "Resolution": "1024x768",
+       "Aspect Ratio": "4:3"
       },
       "provenance": [
        {
@@ -3880,9 +4035,14 @@
        },
        {
         "what": "Resolution",
-        "date": "2016-12-13",
-        "date_basis": "setup.gg's profile for KRIMZ (data.yml), added to its data repository on 13 Dec 2016 and never changed. It doesn't say when the settings were collected, and its sensitivity (1.8) differs from the 2014 config's 1.3, so its DPI isn't used.",
+        "date": "2015-10-11",
+        "date_basis": "Liquipedia's KRIMZ page lists 1024x768 with black bars from revision 224572 of 11 Oct 2015, unchanged in revision 265885 of 31 Dec 2015 and still in revision 358388 of 10 May 2016; its hardware table cites no source. Later revisions list 1920x1080 (380532, 14 Jun 2016) and 1600x900 (529963, 21 Nov 2016), and setup.gg's profile (data.yml, added 13 Dec 2016) lists 1280x1024 at 5:4, so he changed resolution often. What he used in 2014, when the crosshair's config was saved, is not known.",
         "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=224572",
+         "https://liquipedia.net/counterstrike/index.php?oldid=265885",
+         "https://liquipedia.net/counterstrike/index.php?oldid=358388",
+         "https://liquipedia.net/counterstrike/index.php?oldid=380532",
+         "https://liquipedia.net/counterstrike/index.php?oldid=529963",
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/krimz/data.yml"
         ],
         "confidence": "low"
@@ -3962,7 +4122,10 @@
        "m_pitch": "0.022",
        "m_yaw": "0.022"
       },
-      "mouse": {},
+      "mouse": {
+       "DPI": "400",
+       "Polling rate": "1000 Hz"
+      },
       "video": {
        "Resolution": "1024x768",
        "Aspect Ratio": "4:3"
@@ -3997,6 +4160,16 @@
         ]
        },
        {
+        "what": "DPI (same sensitivity)",
+        "date": "2015-02-01",
+        "date_basis": "Liquipedia's Happy page lists 400 DPI and 1000 Hz with sensitivity 2.9, the same as the 2013 config, in revision 116406 of 1 Feb 2015. Its revision 116398 of 6 Dec 2014 also lists 400 DPI and 1000 Hz, with sensitivity 3.2. The tables cite no source.",
+        "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=116406",
+         "https://liquipedia.net/counterstrike/index.php?oldid=116398"
+        ],
+        "confidence": "medium"
+       },
+       {
         "what": "Resolution",
         "date": "2016-12-13",
         "date_basis": "Happy's setup.gg profile (data.yml), added on 13 Dec 2016 and unchanged since, lists 1024x768 at 4:3; that is the latest date it can be from. Its team field is envyus (Team EnVyUs), which Liquipedia lists him with from 1 Feb 2015.",
@@ -4008,6 +4181,7 @@
         "confidence": "medium"
        }
       ],
+      "notes": "Liquipedia's Happy page lists the same crosshair from 1 Feb 2015 (revision 116406) with thickness 0.9 instead of 1, which converts to a thinner line; the 2015 entry uses it. Which of the two he used in 2014 is not known.",
       "dpi_hint": {
        "dpi": "450",
        "sens": "2.6",
@@ -4158,9 +4332,11 @@
        },
        {
         "what": "Resolution",
-        "date": "2016-12-13",
-        "date_basis": "Same setup.gg profile (data.yml), added on 13 Dec 2016 and unchanged since, lists 1024x768 at 4:3. 13 Dec 2016 is the latest date this can be from.",
+        "date": "2015-06-11",
+        "date_basis": "Liquipedia's olofmeister page lists 1024x768 with black bars from revision 151609 of 11 Jun 2015 (edit summary 'change his resolution'), and still in revision 257732 of 4 Dec 2015; the table cites no source. setup.gg's profile (data.yml), added on 13 Dec 2016 and unchanged since, lists the same 1024x768 at 4:3.",
         "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=151609",
+         "https://liquipedia.net/counterstrike/index.php?oldid=257732",
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/olofmeister/data.yml",
          "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
         ],
@@ -4188,26 +4364,24 @@
      "id": "guardian",
      "current_slug": null,
      "config": {
-      "date": "2022-04-30",
-      "date_basis": "From the Crosshair Settings table on GuardiaN's Liquipedia page (copy cached in Oct 2023), marked 'Updated as of 2022-04-30' and citing a FACEIT match played that day.",
+      "date": "2015-06-15",
+      "date_basis": "Liquipedia's GuardiaN page has had this Crosshair table since revision 156446 of 15 Jun 2015, and it is unchanged in revision 247084 of 16 Nov 2015. The table cites no source (the gear table beside it cites his Twitch chat commands), so the date is when it was added to the page, not when he set it. Both revisions list 800x600 with black bars, the resolution shown here. Its outline thickness 0 is read as the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 255, as the table gives no usealpha.",
       "sources": [
-       "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip",
-       "https://liquipedia.net/counterstrike/GuardiaN",
-       "https://www.faceit.com/en/csgo/room/1-fdbc3d94-fb03-43db-92ba-23337c72b473"
+       "https://liquipedia.net/counterstrike/index.php?oldid=156446",
+       "https://liquipedia.net/counterstrike/index.php?oldid=247084"
       ],
       "confidence": "medium",
       "convars": {
        "cl_crosshairstyle": "4",
-       "cl_crosshairsize": "1",
-       "cl_crosshairthickness": "0",
-       "cl_crosshairgap": "-2",
-       "cl_crosshairdot": "1",
-       "cl_crosshaircolor": "4",
+       "cl_crosshairsize": "2",
+       "cl_crosshairthickness": "1",
+       "cl_crosshairgap": "0",
+       "cl_crosshairdot": "0",
+       "cl_crosshaircolor": "1",
        "cl_crosshairalpha": "255",
        "cl_crosshairusealpha": "1",
-       "cl_crosshair_sniper_width": "1",
-       "cl_crosshair_outlinethickness": "0",
        "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "0",
        "sensitivity": "1.3",
        "zoom_sensitivity_ratio_mouse": "1.2",
        "m_rawinput": "0",
@@ -4232,12 +4406,11 @@
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2022-04-30",
-        "date_basis": "From the Crosshair Settings table on GuardiaN's Liquipedia page (copy cached in Oct 2023), marked 'Updated as of 2022-04-30' and citing a FACEIT match played that day.",
+        "date": "2015-06-15",
+        "date_basis": "Liquipedia's GuardiaN page has had this Crosshair table since revision 156446 of 15 Jun 2015, and it is unchanged in revision 247084 of 16 Nov 2015. The table cites no source (the gear table beside it cites his Twitch chat commands), so the date is when it was added to the page, not when he set it. Both revisions list 800x600 with black bars, the resolution shown here. Its outline thickness 0 is read as the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 255, as the table gives no usealpha.",
         "sources": [
-         "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip",
-         "https://liquipedia.net/counterstrike/GuardiaN",
-         "https://www.faceit.com/en/csgo/room/1-fdbc3d94-fb03-43db-92ba-23337c72b473"
+         "https://liquipedia.net/counterstrike/index.php?oldid=156446",
+         "https://liquipedia.net/counterstrike/index.php?oldid=247084"
         ],
         "confidence": "medium"
        },
@@ -4273,7 +4446,7 @@
         "confidence": "low"
        }
       ],
-      "notes": "His own game-written config from July 2014 is closer to 2015, but its crosshair uses style 6, which has no known conversion, so the crosshair comes from the closest source that can be converted, his Liquipedia settings from 30 Apr 2022."
+      "notes": "His own config from July 2014, the source of the sensitivity here, has a similar crosshair: style 6, size 2, thickness 0.5, gap 0, green, alpha 200."
      },
      "photo": {
       "src": "data/avatars/classic/guardian-2015.webp",
@@ -4356,7 +4529,7 @@
        "Polling rate": "500 Hz"
       },
       "video": {
-       "Resolution": "1280x960",
+       "Resolution": "1024x768",
        "Aspect Ratio": "4:3"
       },
       "provenance": [
@@ -4401,17 +4574,19 @@
        },
        {
         "what": "Resolution",
-        "date": "2016-12-13",
-        "date_basis": "Same setup.gg profile (data.yml), added on 13 Dec 2016 and unchanged since, lists 1280x960 at 4:3; that is the latest date it can be from. Its team field is astralis, which Liquipedia lists him with from 18 Jan 2016.",
+        "date": "2015-04-26",
+        "date_basis": "Liquipedia's device page lists 1024x768 with black bars in revision 119841 of 26 Apr 2015, three months after he joined Team SoloMid, and still in revision 192000 of 23 Aug 2015; the table cites no source. 1280x960 appears in revision 290472 of 1 Feb 2016, after his move to Astralis, and is what setup.gg's profile (data.yml, added 13 Dec 2016) lists. His resolution when the 2014 config was saved is not known.",
         "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=119841",
+         "https://liquipedia.net/counterstrike/index.php?oldid=192000",
+         "https://liquipedia.net/counterstrike/index.php?oldid=290472",
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/dev1ce/data.yml",
-         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2",
-         "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip"
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
         ],
-        "confidence": "medium"
+        "confidence": "low"
        }
       ],
-      "notes": "The game wrote this config.cfg in early 2014; it was later edited by hand. cl_hud_color (a setting added on 1 May 2014, here without the six HUD settings added with it) and cl_showfps were inserted, and interp, rate and fps_max lines were appended at the end. The crosshair and sensitivity lines sit in the game-written, alphabetically sorted part."
+      "notes": "The game wrote this config.cfg in early 2014; it was later edited by hand. cl_hud_color (a setting added on 1 May 2014, here without the six HUD settings added with it) and cl_showfps were inserted, and interp, rate and fps_max lines were appended at the end. The crosshair and sensitivity lines sit in the game-written, alphabetically sorted part. This crosshair is from his time at Team Dignitas (Liquipedia lists him there from 16 Feb 2014 to 25 Jan 2015), before Team SoloMid. Liquipedia's page from 26 Apr 2015 (revision 119841, unchanged into 2016) lists a different crosshair, style 2, size 2.7, thickness 1, gap -2, green, without a source; its mouse settings, 450 DPI with sensitivity 2.66, also differ from the sensitivity 2.2 of his 2014 config and of his 2016 sources, so it is not used here."
      },
      "photo": {
       "src": "data/avatars/classic/device-2015.webp",
@@ -4438,12 +4613,12 @@
        "2013-01-13",
        "2013-04-25"
       ],
-      "date_basis": "Game-written config.cfg from setup.gg's archive. The only timestamp in it is from 13 Jan 2013, and its game-written lines lack the radar settings added on 25 Apr 2013 (the unquoted cl_radar_scale line at the end was added by hand), so it was saved between those dates. setup.gg later edited the gap from -2 to 0 (1 May 2016); the original -2 is used.",
+      "date_basis": "Game-written config.cfg from setup.gg's archive. The only timestamp in it is a medal time of 13 Jan 2013, and its game-written lines lack the radar settings added on 25 Apr 2013 (the unquoted cl_radar_scale line at the end was added by hand), so it was saved between those dates. The file is not wholly his. Its medal time is also in both of ScreaM's configs in the archive (from early 2014 and from 2016) and in no other player's file, it shares the rare cl_crosshairalpha 9999 and cl_crosshairscale 1000 with ScreaM's 2014 file, and its cl_clanid is the Steam group of Team VeryGames, ScreaM's team in 2013 and not one Liquipedia lists Snax with. So it seems to descend from a config of ScreaM's from early 2013: the timestamp is ScreaM's, and only what Snax changed, such as the name and sensitivity and probably the crosshair size and gap, is his. setup.gg later edited the gap from -2 to 0 (1 May 2016); the original -2 is used.",
       "sources": [
        "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/Snax/config.cfg",
        "https://github.com/setupgg/csgo/commit/d68f4bc77ff061f25cbd3b3e3c598ea63444e12b"
       ],
-      "confidence": "medium",
+      "confidence": "low",
       "convars": {
        "cl_crosshairstyle": "4",
        "cl_crosshairsize": "4",
@@ -4480,12 +4655,12 @@
        {
         "what": "Crosshair, viewmodel, HUD and radar",
         "date": "2013",
-        "date_basis": "Game-written config.cfg from setup.gg's archive. The only timestamp in it is from 13 Jan 2013, and its game-written lines lack the radar settings added on 25 Apr 2013 (the unquoted cl_radar_scale line at the end was added by hand), so it was saved between those dates. setup.gg later edited the gap from -2 to 0 (1 May 2016); the original -2 is used.",
+        "date_basis": "Game-written config.cfg from setup.gg's archive. The only timestamp in it is a medal time of 13 Jan 2013, and its game-written lines lack the radar settings added on 25 Apr 2013 (the unquoted cl_radar_scale line at the end was added by hand), so it was saved between those dates. The file is not wholly his. Its medal time is also in both of ScreaM's configs in the archive (from early 2014 and from 2016) and in no other player's file, it shares the rare cl_crosshairalpha 9999 and cl_crosshairscale 1000 with ScreaM's 2014 file, and its cl_clanid is the Steam group of Team VeryGames, ScreaM's team in 2013 and not one Liquipedia lists Snax with. So it seems to descend from a config of ScreaM's from early 2013: the timestamp is ScreaM's, and only what Snax changed, such as the name and sensitivity and probably the crosshair size and gap, is his. setup.gg later edited the gap from -2 to 0 (1 May 2016); the original -2 is used.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/Snax/config.cfg",
          "https://github.com/setupgg/csgo/commit/d68f4bc77ff061f25cbd3b3e3c598ea63444e12b"
         ],
-        "confidence": "medium",
+        "confidence": "low",
         "window": [
          "2013-01-13",
          "2013-04-25"
@@ -4502,14 +4677,17 @@
        },
        {
         "what": "Resolution",
-        "date": "2016-12-13",
-        "date_basis": "From setup.gg's profile for Snax (data.yml), added to its data repository on 13 Dec 2016 and never changed. It doesn't say when the settings were collected.",
+        "date": "2015-11-16",
+        "date_basis": "Liquipedia's Snax page lists 800x600 with black bars in revision 247169 of 16 Nov 2015; its hardware table cites no source. The same resolution is in the video.txt of CSGO-Optimiser's snax profile (added 12 Jun 2014) and in setup.gg's profile (data.yml, added 13 Dec 2016).",
         "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=247169",
+         "https://github.com/CSGO-Analysis/CSGO-Optimiser/blob/1bc2f99948868f85658ceea32ebed610af4cd440/CSGO%20Optimiser/CSGO%20Optimiser/CSGO%20Optimiser/Resources/Profiles/snax/video.txt",
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/snax/data.yml"
         ],
-        "confidence": "low"
+        "confidence": "medium"
        }
-      ]
+      ],
+      "notes": "No crosshair of his known to be from 2014 or 2015 was found. A copy of this file in the CSGO-Optimiser repository, added on 12 Jun 2014, is identical except for crosshair style 5 and gap 0 and the missing hand-added cl_radar_scale line, so one of the two was edited by hand, and which came first is unknown. setup.gg's own edit of 1 May 2016 and Liquipedia's first crosshair table for him (revision 576120 of 9 Feb 2017: style 4, size 4, thickness 1, gap 0, cyan) also have gap 0."
      },
      "photo": {
       "src": "data/avatars/classic/snax-2015.webp",
@@ -4531,31 +4709,28 @@
      "id": "flusha",
      "current_slug": "flusha",
      "config": {
-      "date": "2013",
-      "window": [
-       "2013-06-12",
-       "2014-02-12"
-      ],
-      "date_basis": "A config.cfg written by flusha's game, from setup.gg's archive. Its competitive map list includes de_mirage (added 12 Jun 2013), and it lacks the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between those dates. Its in-game name, 'fnatic flusha #9767', fits his time at fnatic from Aug 2013.",
+      "date": "2016-08-08",
+      "date_basis": "Liquipedia's flusha page lists this crosshair in revision 410665 of 8 Aug 2016: style 4, size 3, thickness 1, gap -3, no dot, colour 0 (red) with r, g and b 0, and alpha written 999'. The table was added on 10 May 2016 (revision 358390); its size, thickness, gap and dot have been the same since revision 358392 of that day (then with custom colour 5 and red 250; colour 0 by revision 374105 of 4 Jun 2016). The table cites no source, so the date is when it was on the page, not when he set it; its alpha 999' has the same stray apostrophe as his own 2013 config, which suggests it was copied from a later config of his. The page lists 1280x1024 stretched, the resolution shown here. The alpha is read as 999 (drawn as 255), its outline thickness 0 as the outline off, and cl_crosshairusealpha 1 is assumed, as the table gives no usealpha.",
       "sources": [
-       "https://github.com/setupgg/csgo/blob/a7612a6101f6a0c188df8867e8f991578cbfe63b/flusha/config.cfg"
+       "https://liquipedia.net/counterstrike/index.php?oldid=410665",
+       "https://liquipedia.net/counterstrike/index.php?oldid=358392",
+       "https://liquipedia.net/counterstrike/index.php?oldid=374105"
       ],
       "confidence": "medium",
       "convars": {
        "cl_crosshairstyle": "4",
        "cl_crosshairsize": "3",
-       "cl_crosshairthickness": "1.5",
-       "cl_crosshairgap": "-0.5",
-       "cl_crosshaircolor": "4",
+       "cl_crosshairthickness": "1",
+       "cl_crosshairgap": "-3",
+       "cl_crosshairdot": "0",
+       "cl_crosshaircolor": "0",
        "cl_crosshaircolor_r": "0",
        "cl_crosshaircolor_g": "0",
        "cl_crosshaircolor_b": "0",
        "cl_crosshairalpha": "999",
        "cl_crosshairusealpha": "1",
-       "cl_crosshairdot": "1",
        "cl_crosshair_drawoutline": "0",
-       "cl_crosshair_outlinethickness": "1",
-       "cl_crosshairscale": "0",
+       "cl_crosshair_outlinethickness": "0",
        "viewmodel_fov": "68",
        "viewmodel_offset_x": "2.5",
        "viewmodel_offset_y": "0",
@@ -4569,7 +4744,7 @@
        "cl_radar_icon_scale_min": "0.6",
        "safezonex": "1",
        "safezoney": "1",
-       "sensitivity": "1.7",
+       "sensitivity": "1.8",
        "m_rawinput": "1",
        "m_customaccel": "0"
       },
@@ -4579,11 +4754,23 @@
       },
       "video": {
        "Resolution": "1280x1024",
-       "Aspect Ratio": "5:4"
+       "Aspect Ratio": "5:4",
+       "Scaling Mode": "Stretched"
       },
       "provenance": [
        {
-        "what": "Crosshair, viewmodel, HUD and radar",
+        "what": "Crosshair",
+        "date": "2016-08-08",
+        "date_basis": "Liquipedia's flusha page lists this crosshair in revision 410665 of 8 Aug 2016: style 4, size 3, thickness 1, gap -3, no dot, colour 0 (red) with r, g and b 0, and alpha written 999'. The table was added on 10 May 2016 (revision 358390); its size, thickness, gap and dot have been the same since revision 358392 of that day (then with custom colour 5 and red 250; colour 0 by revision 374105 of 4 Jun 2016). The table cites no source, so the date is when it was on the page, not when he set it; its alpha 999' has the same stray apostrophe as his own 2013 config, which suggests it was copied from a later config of his. The page lists 1280x1024 stretched, the resolution shown here. The alpha is read as 999 (drawn as 255), its outline thickness 0 as the outline off, and cl_crosshairusealpha 1 is assumed, as the table gives no usealpha.",
+        "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=410665",
+         "https://liquipedia.net/counterstrike/index.php?oldid=358392",
+         "https://liquipedia.net/counterstrike/index.php?oldid=374105"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Viewmodel, HUD and radar",
         "date": "2013",
         "window": [
          "2013-06-12",
@@ -4597,8 +4784,19 @@
        },
        {
         "what": "Sensitivity",
+        "date": "2015-06-11",
+        "date_basis": "Liquipedia's flusha page lists sensitivity 1.8 at 400 DPI and 1000 Hz from revision 151453 of 11 Jun 2015, unchanged in revision 169462 of 8 Jul 2015; the table cites no source. From 2 Oct 2015 (revision 215889) the page lists 1.725 with zoom 0.875 at 400 DPI and 500 Hz, citing the 'CS:GO Player Setups' spreadsheet from revision 224566 of 11 Oct 2015; setup.gg's profile (data.yml, published 13 Dec 2016) lists 1.7 at 400 DPI and 1000 Hz.",
+        "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=151453",
+         "https://liquipedia.net/counterstrike/index.php?oldid=169462",
+         "https://liquipedia.net/counterstrike/index.php?oldid=224566"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Raw input and acceleration",
         "date": "2016-12-13",
-        "date_basis": "From setup.gg's profile for flusha (data.yml), published on 13 Dec 2016, which gives sensitivity 1.7 at 400 DPI and 1000 Hz. It still lists him at fnatic, which he left on 15 Aug 2016 (Liquipedia), so the values may be older.",
+        "date_basis": "From setup.gg's profile for flusha (data.yml), published on 13 Dec 2016, which lists raw input on and no acceleration. It still lists him at fnatic, which he left on 15 Aug 2016 (Liquipedia), so the values may be older.",
         "sources": [
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/flusha/data.yml",
          "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip"
@@ -4607,15 +4805,17 @@
        },
        {
         "what": "Resolution",
-        "date": "2016-12-13",
-        "date_basis": "From setup.gg's profile for flusha (data.yml), published on 13 Dec 2016. It still lists him at fnatic, which he left on 15 Aug 2016 (Liquipedia), so the values may be older.",
+        "date": "2015-10-02",
+        "date_basis": "Liquipedia's flusha page lists 1280x1024 stretched from revision 215889 of 2 Oct 2015, unchanged in revision 256575 of 1 Dec 2015 and in the 2016 revisions with the crosshair; its hardware table cites no source. setup.gg's profile (data.yml, published 13 Dec 2016) lists the same 1280x1024 at 5:4.",
         "sources": [
-         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/flusha/data.yml",
-         "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip"
+         "https://liquipedia.net/counterstrike/index.php?oldid=215889",
+         "https://liquipedia.net/counterstrike/index.php?oldid=256575",
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/flusha/data.yml"
         ],
-        "confidence": "low"
+        "confidence": "medium"
        }
-      ]
+      ],
+      "notes": "His game-written config from 2013, the source of the viewmodel here and of the 2014 entry, has a cyan crosshair with a dot instead: style 4, size 3, thickness 1.5, gap -0.5. Search-engine summaries of a forum post of 20 Jun 2015 (globalelite.pl, 'Celownik+Config | Fnatic Flusha') give the red crosshair shown here, but the post itself could not be opened to check."
      },
      "photo": {
       "src": "data/avatars/classic/flusha-2015.webp",
@@ -4827,8 +5027,8 @@
       },
       "mouse": {},
       "video": {
-       "Resolution": "1280x1024",
-       "Aspect Ratio": "5:4"
+       "Resolution": "1024x768",
+       "Aspect Ratio": "4:3"
       },
       "provenance": [
        {
@@ -4860,12 +5060,17 @@
        },
        {
         "what": "Resolution",
-        "date": "2016-12-13",
-        "date_basis": "setup.gg's profile for KRIMZ (data.yml), added to its data repository on 13 Dec 2016 and never changed. It doesn't say when the settings were collected, and its sensitivity (1.8) differs from the 2014 config's 1.3, so its DPI isn't used.",
+        "date": "2015-10-11",
+        "date_basis": "Liquipedia's KRIMZ page lists 1024x768 with black bars from revision 224572 of 11 Oct 2015, unchanged in revision 265885 of 31 Dec 2015 and still in revision 358388 of 10 May 2016; its hardware table cites no source. Later revisions list 1920x1080 (380532, 14 Jun 2016) and 1600x900 (529963, 21 Nov 2016), and setup.gg's profile (data.yml, added 13 Dec 2016) lists 1280x1024 at 5:4, so he changed resolution often. What he used before October 2015 is not known.",
         "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=224572",
+         "https://liquipedia.net/counterstrike/index.php?oldid=265885",
+         "https://liquipedia.net/counterstrike/index.php?oldid=358388",
+         "https://liquipedia.net/counterstrike/index.php?oldid=380532",
+         "https://liquipedia.net/counterstrike/index.php?oldid=529963",
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/krimz/data.yml"
         ],
-        "confidence": "low"
+        "confidence": "medium"
        }
       ],
       "dpi_hint": {
@@ -4895,32 +5100,24 @@
      "id": "happy",
      "current_slug": null,
      "config": {
-      "date": "2013",
-      "window": [
-       "2013-10-01",
-       "2014-02-12"
-      ],
-      "date_basis": "Happy's game-written config.cfg from setup.gg's archive. Its player_medalstats_most_recent_time is 1 Oct 2013, and it lacks the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so the game saved it between those dates; most of that window is in 2013.",
+      "date": "2015-02-01",
+      "date_basis": "Liquipedia's Happy page has had this Crosshair table since revision 116406 of 1 Feb 2015, the day Liquipedia lists him joining Team EnVyUs, and it is unchanged in revision 265173 of 27 Dec 2015. The table cites no source, so the date is when it was added to the page, not when he set it. Both revisions list 1024x768 with black bars, the resolution shown here (revisions 116420 and 141305, of 27 Apr and 4 Jun 2015, list 1680x1050). Its outline thickness 0 is read as the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 255, as the table gives no usealpha.",
       "sources": [
-       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Happy/config.cfg",
-       "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Happy/autoexec.cfg"
+       "https://liquipedia.net/counterstrike/index.php?oldid=116406",
+       "https://liquipedia.net/counterstrike/index.php?oldid=265173"
       ],
       "confidence": "medium",
       "convars": {
        "cl_crosshairstyle": "4",
        "cl_crosshairsize": "2",
-       "cl_crosshairthickness": "1",
+       "cl_crosshairthickness": "0.9",
        "cl_crosshairgap": "-2",
+       "cl_crosshairdot": "0",
        "cl_crosshaircolor": "4",
-       "cl_crosshaircolor_r": "50",
-       "cl_crosshaircolor_g": "250",
-       "cl_crosshaircolor_b": "50",
        "cl_crosshairalpha": "255",
        "cl_crosshairusealpha": "1",
-       "cl_crosshairdot": "0",
        "cl_crosshair_drawoutline": "0",
-       "cl_crosshair_outlinethickness": "1",
-       "cl_crosshairscale": "0",
+       "cl_crosshair_outlinethickness": "0",
        "viewmodel_fov": "68",
        "viewmodel_offset_x": "2.5",
        "viewmodel_offset_y": "0",
@@ -4932,7 +5129,7 @@
        "cl_radar_always_centered": "1",
        "cl_radar_rotate": "1",
        "cl_radar_icon_scale_min": "0.6",
-       "sensitivity": "2.9",
+       "sensitivity": "2.6",
        "zoom_sensitivity_ratio_mouse": "1",
        "m_rawinput": "1",
        "m_customaccel": "0",
@@ -4942,39 +5139,64 @@
        "m_pitch": "0.022",
        "m_yaw": "0.022"
       },
-      "mouse": {},
+      "mouse": {
+       "DPI": "450",
+       "Polling rate": "1000 Hz"
+      },
       "video": {
        "Resolution": "1024x768",
        "Aspect Ratio": "4:3"
       },
       "provenance": [
        {
-        "what": "Crosshair, viewmodel, HUD and radar",
+        "what": "Crosshair",
+        "date": "2015-02-01",
+        "date_basis": "Liquipedia's Happy page has had this Crosshair table since revision 116406 of 1 Feb 2015, the day Liquipedia lists him joining Team EnVyUs, and it is unchanged in revision 265173 of 27 Dec 2015. The table cites no source, so the date is when it was added to the page, not when he set it. Both revisions list 1024x768 with black bars, the resolution shown here (revisions 116420 and 141305, of 27 Apr and 4 Jun 2015, list 1680x1050). Its outline thickness 0 is read as the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 255, as the table gives no usealpha.",
+        "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=116406",
+         "https://liquipedia.net/counterstrike/index.php?oldid=265173"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Viewmodel, HUD and radar",
         "date": "2013",
+        "window": [
+         "2013-10-01",
+         "2014-02-12"
+        ],
         "date_basis": "Happy's game-written config.cfg from setup.gg's archive. Its player_medalstats_most_recent_time is 1 Oct 2013, and it lacks the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so the game saved it between those dates; most of that window is in 2013.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Happy/config.cfg",
          "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Happy/autoexec.cfg"
         ],
-        "confidence": "medium",
-        "window": [
-         "2013-10-01",
-         "2014-02-12"
-        ]
+        "confidence": "medium"
        },
        {
         "what": "Sensitivity",
+        "date": "2015-05-06",
+        "date_basis": "Liquipedia's Happy page lists sensitivity 2.6 at 450 DPI and 1000 Hz, with raw input on, in revision 118012 of 6 May 2015 and still in revision 265173 of 27 Dec 2015, which cites the 'CS:GO Player Setups' spreadsheet. Earlier in 2015 it listed 2.9, the sensitivity of his 2013 config: at 400 DPI in revision 116406 of 1 Feb and at 450 DPI in revision 116420 of 27 Apr.",
+        "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=118012",
+         "https://liquipedia.net/counterstrike/index.php?oldid=265173",
+         "https://liquipedia.net/counterstrike/index.php?oldid=116406",
+         "https://liquipedia.net/counterstrike/index.php?oldid=116420"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Zoom sensitivity, raw input and acceleration",
         "date": "2013",
-        "date_basis": "Same game-written config.cfg as the crosshair (sensitivity 2.9). Its medal timestamp of 1 Oct 2013 and the missing cl_crosshair_dynamic_* settings (added 12 Feb 2014) date it between those days.",
+        "window": [
+         "2013-10-01",
+         "2014-02-12"
+        ],
+        "date_basis": "From the same 2013 game-written config.cfg as the viewmodel (zoom ratio 1, raw input on, no acceleration). Its medal timestamp of 1 Oct 2013 and the missing cl_crosshair_dynamic_* settings (added 12 Feb 2014) date it between those days.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Happy/config.cfg",
          "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Happy/autoexec.cfg"
         ],
-        "confidence": "medium",
-        "window": [
-         "2013-10-01",
-         "2014-02-12"
-        ]
+        "confidence": "medium"
        },
        {
         "what": "Resolution",
@@ -4988,6 +5210,7 @@
         "confidence": "medium"
        }
       ],
+      "notes": "His game-written config from 2013, the source of the viewmodel here and of the 2014 entry, has the same crosshair with thickness 1 instead of 0.9.",
       "dpi_hint": {
        "dpi": "450",
        "sens": "2.6",
@@ -5301,10 +5524,10 @@
      "config": {
       "date": "2013",
       "window": [
-       "2013-06-27",
+       "2013-08-14",
        "2014-02-12"
       ],
-      "date_basis": "His own game-written config.cfg (in-game name 'coL.n0thing', sensitivity 1.85) from setup.gg's archive. It stores a medal-stats timestamp of 27 Jun 2013 and lacks the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between those dates.",
+      "date_basis": "His own game-written config.cfg (in-game name 'coL.n0thing', sensitivity 1.85) from setup.gg's archive. It binds +lookatweapon, which the 14 Aug 2013 update added (its medal-stats timestamp, 27 Jun 2013, is older), and lacks the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between 14 Aug 2013 and 12 Feb 2014.",
       "sources": [
        "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/n0thing/config.cfg",
        "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
@@ -5361,10 +5584,10 @@
         "what": "Crosshair, viewmodel, HUD and radar",
         "date": "2013",
         "window": [
-         "2013-06-27",
+         "2013-08-14",
          "2014-02-12"
         ],
-        "date_basis": "His own game-written config.cfg (in-game name 'coL.n0thing', sensitivity 1.85) from setup.gg's archive. It stores a medal-stats timestamp of 27 Jun 2013 and lacks the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between those dates.",
+        "date_basis": "His own game-written config.cfg (in-game name 'coL.n0thing', sensitivity 1.85) from setup.gg's archive. It binds +lookatweapon, which the 14 Aug 2013 update added (its medal-stats timestamp, 27 Jun 2013, is older), and lacks the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between 14 Aug 2013 and 12 Feb 2014.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/n0thing/config.cfg",
          "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
@@ -5375,10 +5598,10 @@
         "what": "Sensitivity",
         "date": "2013",
         "window": [
-         "2013-06-27",
+         "2013-08-14",
          "2014-02-12"
         ],
-        "date_basis": "His own game-written config.cfg (in-game name 'coL.n0thing', sensitivity 1.85) from setup.gg's archive. It stores a medal-stats timestamp of 27 Jun 2013 and lacks the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between those dates.",
+        "date_basis": "His own game-written config.cfg (in-game name 'coL.n0thing', sensitivity 1.85) from setup.gg's archive. It binds +lookatweapon, which the 14 Aug 2013 update added (its medal-stats timestamp, 27 Jun 2013, is older), and lacks the cl_crosshair_dynamic_* settings added on 12 Feb 2014, so it was saved between 14 Aug 2013 and 12 Feb 2014.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/n0thing/config.cfg",
          "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
@@ -5388,15 +5611,17 @@
        {
         "what": "Resolution",
         "date": "2016-12-13",
-        "date_basis": "setup.gg's profile for n0thing (data.yml), added on 13 Dec 2016 and unchanged since, lists 1280x1024 at 5:4. The profile has no date of its own, so 13 Dec 2016 is only the latest date this can be from.",
+        "date_basis": "setup.gg's profile for n0thing (data.yml), added on 13 Dec 2016 and unchanged since, lists 1280x1024 at 5:4. The profile has no date of its own, so 13 Dec 2016 is only the latest date this can be from. The earliest dated listing is Liquipedia's of 18 Oct 2015 (revision 229888): 1280x960 with black bars. The page changed to 1280x1024 on 21 Jan 2016 (revision 284812) and to 1024x768 in May 2016 (revision 364926); no source from 2013 to January 2015 gives his resolution. At 1280x960 the crosshair converts to length 10 instead of 11.",
         "sources": [
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/n0thing/data.yml",
-         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2",
+         "https://liquipedia.net/counterstrike/index.php?oldid=229888",
+         "https://liquipedia.net/counterstrike/index.php?oldid=284812"
         ],
         "confidence": "low"
        }
       ],
-      "notes": "A third-party alias from September 2015 (in luckolen's autoexec.cfg) is closer in time and similar (style 4, size 5.5, gap 0), but it sets no colour and names no source, so his own config is used.",
+      "notes": "His crosshair in January 2015, 11 to 17 months after this config, probably differed slightly: a third-party blog post of 21 Nov 2014 gives size 5, thickness 1, gap 1 and style '4 or 5', with no colour or alpha. A third-party alias from September 2015 (in luckolen's autoexec.cfg) is closer in time and similar (style 4, size 5.5, gap 0), but it sets no colour and names no source, so his own config is used.",
       "dpi_hint": {
        "dpi": "400",
        "sens": "1.9",
@@ -5423,26 +5648,27 @@
      "id": "seangares",
      "current_slug": null,
      "config": {
-      "date": "2019-04-09",
-      "date_basis": "Liquipedia's seang@res page (revision 2624925, cached on 21 Oct 2023 in Lindeneg/csgo-pro-settings) marks its crosshair table 'Updated as of 2019-04-09' and cites a Twitch clip. Its hardware table (updated 31 Oct 2020) lists 1280x960 stretched, so the crosshair is converted at 960p.",
+      "date": "2017-01-15",
+      "date_basis": "Liquipedia's seang@res page got this Crosshair table in revision 559016 of 15 Jan 2017, an edit that cites his Twitch chat commands (!sens, !crosshair) as its source, and it is unchanged in revision 576108 of 9 Feb 2017. The same revision lists 1280x960 stretched, so the crosshair is converted at 960p. The table has an outline thickness of 1 but no outline on/off field; the outline is read as on, a mapping choice that matches the share code Liquipedia's page generates for his 2019 table, which has the same fields. cl_crosshairusealpha 1 is assumed for its alpha 255, as the table gives no usealpha, and its r/g/b 255 do nothing with colour 1, the green preset.",
       "sources": [
-       "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip",
-       "https://liquipedia.net/counterstrike/index.php?title=Sgares&oldid=2624925",
-       "https://clips.twitch.tv/BlindingAverageBottlePoooound"
+       "https://liquipedia.net/counterstrike/index.php?oldid=559016",
+       "https://liquipedia.net/counterstrike/index.php?oldid=576108"
       ],
       "confidence": "low",
       "convars": {
        "cl_crosshairstyle": "4",
-       "cl_crosshairsize": "1",
-       "cl_crosshairthickness": "0.4",
+       "cl_crosshairsize": "2",
+       "cl_crosshairthickness": "1",
        "cl_crosshairgap": "-1",
        "cl_crosshairdot": "0",
        "cl_crosshaircolor": "1",
+       "cl_crosshaircolor_r": "255",
+       "cl_crosshaircolor_g": "255",
+       "cl_crosshaircolor_b": "255",
        "cl_crosshairalpha": "255",
        "cl_crosshairusealpha": "1",
        "cl_crosshair_drawoutline": "1",
        "cl_crosshair_outlinethickness": "1",
-       "cl_crosshair_sniper_width": "1",
        "sensitivity": "1.9",
        "m_customaccel": "0",
        "m_rawinput": "0"
@@ -5458,12 +5684,11 @@
       "provenance": [
        {
         "what": "Crosshair",
-        "date": "2019-04-09",
-        "date_basis": "Liquipedia's seang@res page (revision 2624925, cached on 21 Oct 2023 in Lindeneg/csgo-pro-settings) marks its crosshair table 'Updated as of 2019-04-09' and cites a Twitch clip. Its hardware table (updated 31 Oct 2020) lists 1280x960 stretched, so the crosshair is converted at 960p.",
+        "date": "2017-01-15",
+        "date_basis": "Liquipedia's seang@res page got this Crosshair table in revision 559016 of 15 Jan 2017, an edit that cites his Twitch chat commands (!sens, !crosshair) as its source, and it is unchanged in revision 576108 of 9 Feb 2017. The same revision lists 1280x960 stretched, so the crosshair is converted at 960p. The table has an outline thickness of 1 but no outline on/off field; the outline is read as on, a mapping choice that matches the share code Liquipedia's page generates for his 2019 table, which has the same fields. cl_crosshairusealpha 1 is assumed for its alpha 255, as the table gives no usealpha, and its r/g/b 255 do nothing with colour 1, the green preset.",
         "sources": [
-         "https://github.com/Lindeneg/csgo-pro-settings/blob/f6fe6bded2b47286b76d27f25cbb47e5012043a8/scraper-cache.zip",
-         "https://liquipedia.net/counterstrike/index.php?title=Sgares&oldid=2624925",
-         "https://clips.twitch.tv/BlindingAverageBottlePoooound"
+         "https://liquipedia.net/counterstrike/index.php?oldid=559016",
+         "https://liquipedia.net/counterstrike/index.php?oldid=576108"
         ],
         "confidence": "low"
        },
@@ -5488,7 +5713,7 @@
         "confidence": "low"
        }
       ],
-      "notes": "No crosshair of his from closer to 2015 is known. Liquipedia's table is marked as updated in April 2019, more than four years after this lineup, so it may differ from what he used on Cloud9."
+      "notes": "This is the earliest crosshair of his with a source, two years after this lineup, so it may differ from what he used on Cloud9. From 1 Jun 2016 (revision 372464) the page had listed, without a source, the same size, thickness and gap but style 5, a dot and no outline, until this January 2017 edit replaced it. His Liquipedia table of 9 Apr 2019, from a Twitch clip, gives a smaller crosshair: size 1, thickness 0.4, gap -1."
      },
      "photo": {
       "src": "data/avatars/classic/seangares-c9-ibp-2015.webp",
@@ -5687,7 +5912,7 @@
        "cl_showloadout": "1",
        "safezonex": "1",
        "safezoney": "1",
-       "sensitivity": "1.7",
+       "sensitivity": "1.5",
        "zoom_sensitivity_ratio_mouse": "1",
        "m_rawinput": "1",
        "m_customaccel": "0",
@@ -5700,7 +5925,10 @@
        "m_pitch": "0.022",
        "m_yaw": "0.022"
       },
-      "mouse": {},
+      "mouse": {
+       "DPI": "450",
+       "Polling rate": "500 Hz"
+      },
       "video": {
        "Resolution": "1600x900"
       },
@@ -5720,13 +5948,24 @@
         "confidence": "medium"
        },
        {
-        "what": "Sensitivity",
+        "what": "Sensitivity, DPI and polling rate",
+        "date": "2014-08-16",
+        "date_basis": "Liquipedia's SEMPHIS page has listed sensitivity 1.5 at 450 DPI and 500 Hz since revision 120443 of 16 Aug 2014, two weeks after he joined Cloud9 (1 Aug 2014 in its team history), and still did in revision 120452 of 21 Dec 2014 and revision 120456 of 2 Feb 2015, the revisions just before and just after this lineup (edits on the KnifeRound.net wiki, whose history Liquipedia imported in May 2015). The table cites no source, so the date is when it was added to the page, not when he set it. His 2013 config has sensitivity 1.7.",
+        "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=120443",
+         "https://liquipedia.net/counterstrike/index.php?oldid=120452",
+         "https://liquipedia.net/counterstrike/index.php?oldid=120456"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Zoom sensitivity, raw input and acceleration",
         "date": "2013",
         "window": [
          "2013-08-28",
          "2014-01-23"
         ],
-        "date_basis": "Same game-written config.cfg as the crosshair (sensitivity 1.7, zoom ratio 1), saved between 28 Aug 2013 (its medal-stats timestamp) and 23 Jan 2014 (lobby_voice_chat_enabled missing).",
+        "date_basis": "Same game-written config.cfg as the crosshair (zoom ratio 1, raw input on, acceleration off), saved between 28 Aug 2013 (its medal-stats timestamp) and 23 Jan 2014 (lobby_voice_chat_enabled missing). Its sensitivity, 1.7, is not used, because Liquipedia lists 1.5 from August 2014 on.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/Semphis/config.cfg",
          "https://github.com/setupgg/csgo/commit/e03e8c36c84ab0834c79cf05661cd08707e9ea7a"
@@ -5736,54 +5975,45 @@
        {
         "what": "Resolution",
         "date": "2016-12-13",
-        "date_basis": "Semphis's setup.gg profile (data.yml), added on 13 Dec 2016 with his team as TSM and unchanged since, lists 1600x900; that is the latest date it can be from. Its aspect-ratio field says 4:3, which doesn't fit 1600x900, so only the resolution is shown, and its sensitivity (1.5 at 450 DPI) differs from the config's 1.7, so its DPI is not used.",
+        "date_basis": "Semphis's setup.gg profile (data.yml), added on 13 Dec 2016 with his team as TSM and unchanged since, lists 1600x900; that is the latest date it can be from. Its aspect-ratio field says 4:3, which doesn't fit 1600x900, so only the resolution is shown. Liquipedia lists 1280x960 instead from 8 Jul 2016 (revision 391566) to Feb 2017, and no source from 2014 or 2015 gives his resolution; the crosshair converts to the same length, thickness and gap at either height.",
         "sources": [
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/semphis/data.yml",
-         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2",
+         "https://liquipedia.net/counterstrike/index.php?oldid=391566"
         ],
         "confidence": "low"
        }
       ],
-      "notes": "Some key-bind lines in the archived file are garbled (\"+ USE\", a bind split across two lines), which setup.gg corrected in a later commit; the settings lines, the crosshair included, are in the game's own sorted format.",
-      "dpi_hint": {
-       "dpi": "450",
-       "sens": "1.5",
-       "date": "2016-12-13",
-       "source": "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/semphis/data.yml"
-      }
+      "notes": "No crosshair of his from his Cloud9 time (Aug 2014 to Apr 2015) is known: this one is from his compLexity config, saved 12 to 17 months before this lineup. The first crosshair Liquipedia lists for him, added on 18 Aug 2016 when he played for TSM (revision 416323), has the same style, size and thickness but gap -2 and green (colour 1) instead of red. Some key-bind lines in the archived file are garbled (\"+ USE\", a bind split across two lines), which setup.gg corrected in a later commit; the settings lines, the crosshair included, are in the game's own sorted format."
      }
     },
     {
      "nick": "ShahZaM",
-     "real_name": "Shahzeeb Khan",
+     "real_name": "Shahzeb Khan",
      "team": "Cloud9",
      "game": "CS:GO",
      "id": "shahzam",
      "current_slug": null,
      "config": {
-      "date": "2023-10-19",
-      "date_basis": "ProSettings.net's page for him, last updated on 19 Oct 2023, after he had moved to VALORANT, as saved in a scrape of its CS2 player pages uploaded to GitHub on 10 Jan 2024 (a scrape of 20 Mar 2024 gives the same last-updated date). The crosshair is decoded from the page's share code; the viewmodel, HUD and radar come from its tables.",
+      "date": "2015-05-11",
+      "date_basis": "Liquipedia's ShahZaM page has had this Crosshair table since revision 125702 of 11 May 2015, the day he joined Tempo Storm and 17 days after his time on Cloud9 ended (15 Dec 2014 to 24 Apr 2015 in the same revision's infobox), and it is unchanged in revision 234681 of 24 Oct 2015. The table cites no source, so the date is when it was added to the page, not when he set it. The same revision lists 1024x768 with black bars, the resolution shown here. Its outline thickness 0 is read as the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 255, as the table gives no usealpha.",
       "sources": [
-       "https://github.com/miahj1/prosettings-scraper/blob/16e579e4cc2805cb778214cb5a1bc2f3c3f555b5/prosettings_cs2_scrape.csv",
-       "https://github.com/rennyS/prosettings_scraper/blob/323215aa819885776252a79933e8750a3e345e17/player_info.csv",
-       "https://prosettings.net/players/shahzam/"
+       "https://liquipedia.net/counterstrike/index.php?oldid=125702",
+       "https://liquipedia.net/counterstrike/index.php?oldid=234681",
+       "https://liquipedia.net/counterstrike/index.php?oldid=243270"
       ],
       "confidence": "low",
       "convars": {
        "cl_crosshairstyle": "4",
        "cl_crosshairsize": "2",
        "cl_crosshairthickness": "0.5",
-       "cl_crosshairgap": "-2",
+       "cl_crosshairgap": "0",
        "cl_crosshairdot": "0",
        "cl_crosshaircolor": "1",
-       "cl_crosshaircolor_r": "50",
-       "cl_crosshaircolor_g": "250",
-       "cl_crosshaircolor_b": "50",
-       "cl_crosshairalpha": "200",
+       "cl_crosshairalpha": "255",
        "cl_crosshairusealpha": "1",
-       "cl_crosshair_t": "0",
-       "cl_crosshairgap_useweaponvalue": "0",
-       "cl_crosshair_recoil": "0",
+       "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "0",
        "viewmodel_fov": "60",
        "viewmodel_offset_x": "1",
        "viewmodel_offset_y": "1",
@@ -5808,9 +6038,20 @@
       },
       "provenance": [
        {
-        "what": "Crosshair, viewmodel, HUD and radar",
+        "what": "Crosshair",
+        "date": "2015-05-11",
+        "date_basis": "Liquipedia's ShahZaM page has had this Crosshair table since revision 125702 of 11 May 2015, the day he joined Tempo Storm and 17 days after his time on Cloud9 ended (15 Dec 2014 to 24 Apr 2015 in the same revision's infobox), and it is unchanged in revision 234681 of 24 Oct 2015. The table cites no source, so the date is when it was added to the page, not when he set it. The same revision lists 1024x768 with black bars, the resolution shown here. Its outline thickness 0 is read as the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 255, as the table gives no usealpha.",
+        "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=125702",
+         "https://liquipedia.net/counterstrike/index.php?oldid=234681",
+         "https://liquipedia.net/counterstrike/index.php?oldid=243270"
+        ],
+        "confidence": "low"
+       },
+       {
+        "what": "Viewmodel, HUD and radar",
         "date": "2023-10-19",
-        "date_basis": "ProSettings.net's page for him, last updated on 19 Oct 2023, after he had moved to VALORANT, as saved in a scrape of its CS2 player pages uploaded to GitHub on 10 Jan 2024 (a scrape of 20 Mar 2024 gives the same last-updated date). The crosshair is decoded from the page's share code; the viewmodel, HUD and radar come from its tables.",
+        "date_basis": "ProSettings.net's page for him, last updated on 19 Oct 2023, after he had moved to VALORANT, as saved in a scrape of its CS2 player pages uploaded to GitHub on 10 Jan 2024 (a scrape of 20 Mar 2024 gives the same last-updated date). The viewmodel, HUD and radar come from its tables. 19 Oct 2023 is when the page as a whole was last updated, not when these settings were entered.",
         "sources": [
          "https://github.com/miahj1/prosettings-scraper/blob/16e579e4cc2805cb778214cb5a1bc2f3c3f555b5/prosettings_cs2_scrape.csv",
          "https://github.com/rennyS/prosettings_scraper/blob/323215aa819885776252a79933e8750a3e345e17/player_info.csv",
@@ -5848,7 +6089,7 @@
         "confidence": "low"
        }
       ],
-      "notes": "No convertible crosshair of his from closer to this lineup could be found: this one is from ProSettings.net's page for him as last updated in October 2023, almost nine years after this lineup and after he had left Counter-Strike for VALORANT, and may differ from what he used then. It is a third-party listing decoded from a share code, not his own config; the code's outline and split settings are the same in every code in that scrape, so they are left out. The saved copy has only his VALORANT video settings, so the crosshair is converted at the 1024x768 from setup.gg."
+      "notes": "No crosshair of his from his Cloud9 time itself is known: this one was added to Liquipedia 17 days after it ended and may differ from what he used in January 2015. From revision 243270 of 7 Nov 2015 the page gives style 6 instead, with every other value unchanged; the earlier style 4 is used here. ProSettings.net's page for him, last updated in October 2023 and the source of the viewmodel, HUD and radar here, lists a later crosshair with gap -2."
      },
      "photo": {
       "src": "data/avatars/classic/shahzam-c9-ibp-2015.webp",
@@ -6253,12 +6494,14 @@
        {
         "what": "Resolution",
         "date": "2016-12-13",
-        "date_basis": "From setup.gg's profile for Hiko (data.yml), published on 13 Dec 2016 and not changed since. It doesn't say when the values were collected, so this is the latest possible date.",
+        "date_basis": "From setup.gg's profile for Hiko (data.yml), published on 13 Dec 2016 and not changed since. It doesn't say when the values were collected, so this is the latest possible date. No source from 2013 to 2015 gives 1280x960: Liquipedia lists 1920x1080 on 23 Oct 2015 (revision 234246) and 1024x768 stretched from 15 Dec 2015 (revision 261904), changes between 1280x1024, 1920x1080 and 1024x768 during 2016, and first gives 1280x960 in Feb 2017. At 1024x768 the crosshair converts to length 3 instead of 4; at 1920x1080 it is the same as at 1280x960.",
         "sources": [
          "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/hiko/data.yml",
-         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2",
+         "https://liquipedia.net/counterstrike/index.php?oldid=234246",
+         "https://liquipedia.net/counterstrike/index.php?oldid=261904"
         ],
-        "confidence": "medium"
+        "confidence": "low"
        }
       ],
       "dpi_hint": {
@@ -6266,7 +6509,8 @@
        "sens": "3.7",
        "date": "2016-12-13",
        "source": "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/hiko/data.yml"
-      }
+      },
+      "notes": "A third-party blog post of 21 Nov 2014, three weeks before he joined iBUYPOWER, gives a different crosshair: style 4, size 4.5, thickness 1, gap -1, outline 0.5, with the same colour settings as this config (colour 6, RGB 255/255/255). It names no source and gives no alpha, so his own game-written config, saved 3 to 5 months before this lineup, is used. Liquipedia lists the same size, thickness and gap for him from 27 May 2016 (revision 370113)."
      },
      "photo": {
       "src": "data/avatars/classic/hiko-c9-ibp-2015.webp",
@@ -6287,33 +6531,25 @@
      "id": "skadoodle",
      "current_slug": null,
      "config": {
-      "date": "2025-01-28",
-      "date_basis": "ProSettings.net's Counter-Strike 2 settings for him, from a copy of the page saved to GitHub on 3 Nov 2025 and marked last updated 28 Jan 2025. A scrape of the page uploaded to GitHub on 10 Jan 2024 already listed the same length, thickness, gap and colour but gave the style as Unknown.",
+      "date": "2016-05-27",
+      "date_basis": "Liquipedia's Skadoodle page got its first Crosshair table on 27 May 2016, 16 months after this lineup, in revisions 370123 to 370125: three edits by one editor within two minutes, the last two changing the colour from 5 to 1 and the outline thickness from 1 to 0. The table was unchanged until 16 Aug 2016 (revision 414796). It cites no source, so the date is when it was added to the page, not when he set it; the same editor had entered the same size, thickness and gap for Hiko 37 minutes earlier (revision 370113). The same revision lists 1024x768 with black bars, the resolution shown here. Its outline 0 is the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 200, as the table gives no usealpha.",
       "sources": [
-       "https://github.com/Colxinn/OptiPlay/blob/39dfe2432278078e4621032ce0280f3bfcd56d4d/cache/prosettings/aHR0cHM6Ly9wcm9zZXR0aW5ncy5uZXQvcGxheWVycy9za2Fkb29kbGUv.html",
-       "https://github.com/miahj1/prosettings-scraper/blob/16e579e4cc2805cb778214cb5a1bc2f3c3f555b5/prosettings_cs2_scrape.csv",
-       "https://prosettings.net/players/skadoodle/"
+       "https://liquipedia.net/counterstrike/index.php?oldid=370125",
+       "https://liquipedia.net/counterstrike/index.php?oldid=370123",
+       "https://liquipedia.net/counterstrike/index.php?oldid=414796"
       ],
       "confidence": "low",
       "convars": {
        "cl_crosshairstyle": "4",
-       "cl_crosshairsize": "3",
-       "cl_crosshairthickness": "0.5",
-       "cl_crosshairgap": "-2",
+       "cl_crosshairsize": "4.5",
+       "cl_crosshairthickness": "1",
+       "cl_crosshairgap": "-1",
        "cl_crosshairdot": "0",
-       "cl_crosshair_drawoutline": "0",
-       "cl_crosshair_outlinethickness": "1",
        "cl_crosshaircolor": "1",
+       "cl_crosshairalpha": "200",
        "cl_crosshairusealpha": "1",
-       "cl_crosshair_t": "0",
-       "cl_crosshair_recoil": "0",
-       "cl_crosshairgap_useweaponvalue": "0",
-       "cl_crosshair_dynamic_splitdist": "7",
-       "cl_fixedcrosshairgap": "3",
-       "cl_crosshair_dynamic_splitalpha_innermod": "1",
-       "cl_crosshair_dynamic_splitalpha_outermod": "0.5",
-       "cl_crosshair_dynamic_maxdist_splitratio": "0.5",
-       "cl_crosshair_sniper_width": "0",
+       "cl_crosshair_drawoutline": "0",
+       "cl_crosshair_outlinethickness": "0",
        "viewmodel_fov": "68",
        "viewmodel_offset_x": "2.5",
        "viewmodel_offset_y": "0",
@@ -6332,12 +6568,22 @@
       },
       "provenance": [
        {
-        "what": "Crosshair and viewmodel",
+        "what": "Crosshair",
+        "date": "2016-05-27",
+        "date_basis": "Liquipedia's Skadoodle page got its first Crosshair table on 27 May 2016, 16 months after this lineup, in revisions 370123 to 370125: three edits by one editor within two minutes, the last two changing the colour from 5 to 1 and the outline thickness from 1 to 0. The table was unchanged until 16 Aug 2016 (revision 414796). It cites no source, so the date is when it was added to the page, not when he set it; the same editor had entered the same size, thickness and gap for Hiko 37 minutes earlier (revision 370113). The same revision lists 1024x768 with black bars, the resolution shown here. Its outline 0 is the outline off, and cl_crosshairusealpha 1 is assumed for its alpha 200, as the table gives no usealpha.",
+        "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=370125",
+         "https://liquipedia.net/counterstrike/index.php?oldid=370123",
+         "https://liquipedia.net/counterstrike/index.php?oldid=414796"
+        ],
+        "confidence": "low"
+       },
+       {
+        "what": "Viewmodel",
         "date": "2025-01-28",
-        "date_basis": "ProSettings.net's Counter-Strike 2 settings for him, from a copy of the page saved to GitHub on 3 Nov 2025 and marked last updated 28 Jan 2025. A scrape of the page uploaded to GitHub on 10 Jan 2024 already listed the same length, thickness, gap and colour but gave the style as Unknown.",
+        "date_basis": "ProSettings.net's Counter-Strike 2 settings for him, from a copy of the page saved to GitHub on 3 Nov 2025 and marked last updated 28 Jan 2025.",
         "sources": [
          "https://github.com/Colxinn/OptiPlay/blob/39dfe2432278078e4621032ce0280f3bfcd56d4d/cache/prosettings/aHR0cHM6Ly9wcm9zZXR0aW5ncy5uZXQvcGxheWVycy9za2Fkb29kbGUv.html",
-         "https://github.com/miahj1/prosettings-scraper/blob/16e579e4cc2805cb778214cb5a1bc2f3c3f555b5/prosettings_cs2_scrape.csv",
          "https://prosettings.net/players/skadoodle/"
         ],
         "confidence": "low"
@@ -6372,7 +6618,7 @@
         "confidence": "low"
        }
       ],
-      "notes": "No convertible crosshair of his from closer to this lineup could be found: this one is ProSettings.net's listing of his Counter-Strike 2 settings, last updated in January 2025, ten years after this lineup, and may differ from what he used then. It is a third-party table, not his own config. It gives an alpha value of 1, which would make the crosshair almost invisible, so that value is left out and the default opacity is used. Two fan apps from 2017 list the same sensitivity, 1.4, at 800 DPI instead of 400."
+      "notes": "No crosshair of his from 2014 or 2015 is known: this is the first one Liquipedia lists for him, 16 months after this lineup, and it may differ from what he used then. Later in 2016 the page gave size 5, thickness 1.5, gap -3 with the outline on (16 Aug and 16 Dec) and size 4.5, thickness 1, gap -3 (9 Sep), none with a source. ProSettings.net's Counter-Strike 2 settings for him (last updated January 2025), the source of the viewmodel here, list size 3, thickness 0.5, gap -2, which its own share code (style 2, alpha 1) and config download (size 2, gap -3) contradict. Two fan apps from 2017 list the same sensitivity, 1.4, at 800 DPI instead of 400."
      },
      "photo": {
       "src": "data/avatars/classic/skadoodle-c9-ibp-2015.webp",
@@ -6395,10 +6641,10 @@
      "config": {
       "date": "2016",
       "window": [
-       "2016-01-20",
+       "2016-02-17",
        "2016-06-06"
       ],
-      "date_basis": "A config.cfg written by swag's game (in-game name 'brax'), added to setup.gg's archive on 6 Jun 2016. It has cl_crosshair_sniper_width, added on 20 Jan 2016, so it was saved between those dates.",
+      "date_basis": "A config.cfg written by swag's game (in-game name 'brax'), added to setup.gg's archive on 6 Jun 2016. It has cl_crosshair_sniper_width, added on 20 Jan 2016, and its competitive map list has the seven community maps (Coast, Cruise, Empire, Mikla, Royal, Santorini and Tulip) that the 17 Feb 2016 update (Operation Wildfire) added to competitive matchmaking, so it was saved between 17 Feb and 6 Jun 2016.",
       "sources": [
        "https://github.com/setupgg/csgo/blob/2294eb42e6d4f16ffad391ad647c9660643b41d5/swag/config.cfg",
        "https://github.com/setupgg/csgo/commit/2294eb42e6d4f16ffad391ad647c9660643b41d5",
@@ -6457,7 +6703,7 @@
        "m_yaw": "0.022",
        "safezonex": "1",
        "safezoney": "1",
-       "sensitivity": "1.1",
+       "sensitivity": "2.15",
        "viewmodel_fov": "68",
        "viewmodel_offset_x": "2.5",
        "viewmodel_offset_y": "0",
@@ -6465,7 +6711,9 @@
        "viewmodel_presetpos": "3",
        "zoom_sensitivity_ratio_mouse": "1"
       },
-      "mouse": {},
+      "mouse": {
+       "DPI": "400"
+      },
       "video": {
        "Resolution": "1920x1080",
        "Aspect Ratio": "16:9"
@@ -6475,10 +6723,10 @@
         "what": "Crosshair, viewmodel, HUD and radar",
         "date": "2016",
         "window": [
-         "2016-01-20",
+         "2016-02-17",
          "2016-06-06"
         ],
-        "date_basis": "A config.cfg written by swag's game (in-game name 'brax'), added to setup.gg's archive on 6 Jun 2016. It has cl_crosshair_sniper_width, added on 20 Jan 2016, so it was saved between those dates.",
+        "date_basis": "A config.cfg written by swag's game (in-game name 'brax'), added to setup.gg's archive on 6 Jun 2016. It has cl_crosshair_sniper_width, added on 20 Jan 2016, and its competitive map list has the seven community maps (Coast, Cruise, Empire, Mikla, Royal, Santorini and Tulip) that the 17 Feb 2016 update (Operation Wildfire) added to competitive matchmaking, so it was saved between 17 Feb and 6 Jun 2016.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/2294eb42e6d4f16ffad391ad647c9660643b41d5/swag/config.cfg",
          "https://github.com/setupgg/csgo/commit/2294eb42e6d4f16ffad391ad647c9660643b41d5",
@@ -6487,13 +6735,25 @@
         "confidence": "medium"
        },
        {
-        "what": "Sensitivity",
+        "what": "Sensitivity (and DPI)",
+        "date": "2014-08-14",
+        "date_basis": "Liquipedia's swag page has listed sensitivity 2.15 at 400 DPI since revision 126904 of 14 Aug 2014, while he played for iBUYPOWER, and still did in revision 126918 of 5 Jan 2015 and revision 126921 of 27 Jan 2015, just after his ban (edits on the KnifeRound.net wiki, whose history Liquipedia imported in May 2015). The table cites no source, so the date is when it was added to the page, not when he set it. His own config from 2012-13 in setup.gg's archive has the same sensitivity, 2.15; the 2016 config has 1.1.",
+        "sources": [
+         "https://liquipedia.net/counterstrike/index.php?oldid=126904",
+         "https://liquipedia.net/counterstrike/index.php?oldid=126918",
+         "https://liquipedia.net/counterstrike/index.php?oldid=126921",
+         "https://github.com/setupgg/csgo/blob/e03e8c36c84ab0834c79cf05661cd08707e9ea7a/swag/config.cfg"
+        ],
+        "confidence": "medium"
+       },
+       {
+        "what": "Zoom sensitivity, raw input and acceleration",
         "date": "2016",
         "window": [
-         "2016-01-20",
+         "2016-02-17",
          "2016-06-06"
         ],
-        "date_basis": "A config.cfg written by swag's game (in-game name 'brax'), added to setup.gg's archive on 6 Jun 2016. It has cl_crosshair_sniper_width, added on 20 Jan 2016, so it was saved between those dates.",
+        "date_basis": "Same game-written config.cfg as the crosshair (zoom ratio 1, raw input off, m_customaccel 3), saved between 17 Feb 2016 (the Operation Wildfire maps in its map list) and 6 Jun 2016. Its sensitivity, 1.1, is not used, because Liquipedia's January 2015 table gives 2.15.",
         "sources": [
          "https://github.com/setupgg/csgo/blob/2294eb42e6d4f16ffad391ad647c9660643b41d5/swag/config.cfg",
          "https://github.com/setupgg/csgo/commit/2294eb42e6d4f16ffad391ad647c9660643b41d5",
@@ -6512,13 +6772,7 @@
         "confidence": "medium"
        }
       ],
-      "notes": "Every crosshair of his own that is dated (spring 2013, early 2016, Liquipedia's 2018 table) uses style 1, the default static crosshair, which can't be converted. This is his early-2016 config, the closest to January 2015.",
-      "dpi_hint": {
-       "dpi": "400",
-       "sens": "1.5",
-       "date": "2016-12-13",
-       "source": "https://github.com/setupgg/data/blob/5ba7974df66f1f7df3096f47206569f34c8b666e/player/swag/data.yml"
-      }
+      "notes": "Every crosshair of his own that is dated (spring 2013, early 2016, Liquipedia's 2018 table) uses style 1, the default static crosshair, which can't be converted. This is his early-2016 config, the closest to January 2015. The sensitivity is not taken from it: Liquipedia's table, unchanged from August 2014 to January 2015, gives 2.15 at 400 DPI, the same 2.15 as his 2012-13 config, where this one has 1.1."
      }
     },
     {
@@ -6599,8 +6853,8 @@
       },
       "mouse": {},
       "video": {
-       "Resolution": "1280x720",
-       "Aspect Ratio": "16:9"
+       "Resolution": "1280x960",
+       "Aspect Ratio": "4:3"
       },
       "provenance": [
        {
@@ -6634,13 +6888,16 @@
        },
        {
         "what": "Resolution",
-        "date": "2016-12-13",
-        "date_basis": "setup.gg's profile for steel (data.yml), first published on 13 Dec 2016, lists 1280x720 at 16:9; the resolution has not changed since. It doesn't say when the values were collected, so this is the latest possible date.",
+        "date": "2015-06-15",
+        "date_basis": "Liquipedia's steel page first listed his resolution in revision 157022 of 15 Jun 2015: 1280x960, the listing closest to this lineup. The table cites no source, so the date is when it was added to the page, not when he set it. By 24 Aug 2015 (revision 192244) the page gave 1920x1080, which it still did on 22 Jul 2016 (revision 398004), and on 6 Dec 2016 (revision 538821) 1280x720, the value in setup.gg's profile of 13 Dec 2016. No source from 2014 or January 2015 gives his resolution.",
         "sources": [
-         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/steel/data.yml",
-         "https://github.com/setupgg/data/commit/afdec47f9b60db5430e503dce557a106792534b2"
+         "https://liquipedia.net/counterstrike/index.php?oldid=157022",
+         "https://liquipedia.net/counterstrike/index.php?oldid=192244",
+         "https://liquipedia.net/counterstrike/index.php?oldid=398004",
+         "https://liquipedia.net/counterstrike/index.php?oldid=538821",
+         "https://github.com/setupgg/data/blob/afdec47f9b60db5430e503dce557a106792534b2/player/steel/data.yml"
         ],
-        "confidence": "medium"
+        "confidence": "low"
        }
       ],
       "notes": "His config binds C to switch cl_righthand between left and right hand, so the left-handed view model saved here (cl_righthand 0) may only be the side he had last switched to.",
