@@ -19,9 +19,7 @@
 
 <br>
 
-[![Copying donk's crosshair on copyprosta.com](media/demo.gif)](media/demo.mp4)
-
-<sub>Click to watch the full 45-second demo with sound (MP4)</sub>
+https://github.com/user-attachments/assets/9e4f7a5b-64e6-4a02-bd1b-1c94435153d5
 
 </div>
 
