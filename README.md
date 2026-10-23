@@ -4,6 +4,10 @@ Browse CS2 pro players' full settings and copy ready-to-paste console commands t
 
 **Live site:** https://copyprosta.com
 
+[![Watch the 45-second demo: copying donk's crosshair](media/demo.jpg)](media/demo.mp4)
+
+*Click the image to watch the 45-second demo (MP4).*
+
 ## How to use
 
 1. Open a player page from the list on the site.
