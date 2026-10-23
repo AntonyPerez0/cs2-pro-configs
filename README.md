@@ -19,9 +19,9 @@
 
 <br>
 
-[![Watch the 45-second demo: copying donk's crosshair](media/demo.jpg)](media/demo.mp4)
+[![Copying donk's crosshair on copyprosta.com](media/demo.gif)](media/demo.mp4)
 
-<sub>Click to watch the 45-second demo (MP4)</sub>
+<sub>Click to watch the full 45-second demo with sound (MP4)</sub>
 
 </div>
 
