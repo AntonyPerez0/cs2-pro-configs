@@ -1,14 +1,33 @@
+<div align="center">
+
+<a href="https://copyprosta.com"><img src="media/banner.png" alt="CS2//PROS — Copy, paste, play." width="100%"></a>
+
 # CS2 Pro Configs
 
-Browse CS2 pro players' full settings and copy ready-to-paste console commands to apply any pro's crosshair (converted to the new CS2 crosshair system), sensitivity, viewmodel, HUD and radar.
+**Browse CS2 pro players' full settings and copy ready-to-paste console commands to apply any pro's crosshair (converted to the new CS2 crosshair system), sensitivity, viewmodel, HUD and radar.**
 
-**Live site:** https://copyprosta.com
+[![Live site](https://img.shields.io/badge/live-copyprosta.com-ff8a3c?style=for-the-badge)](https://copyprosta.com)
+[![Pro configs](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FAntonyPerez0%2Fcs2-pro-configs%2Fmain%2Fdata%2Fmeta.json&query=%24.count&label=pro%20configs&color=3ddc84&style=for-the-badge)](https://copyprosta.com)
+[![Data refresh](https://img.shields.io/github/actions/workflow/status/AntonyPerez0/cs2-pro-configs/update-data.yml?label=weekly%20refresh&style=for-the-badge)](https://github.com/AntonyPerez0/cs2-pro-configs/actions/workflows/update-data.yml)
+[![License: MIT](https://img.shields.io/github/license/AntonyPerez0/cs2-pro-configs?style=for-the-badge&color=4da3ff)](LICENSE)
+
+[**Open the site**](https://copyprosta.com) ·
+[How to use](#-how-to-use) ·
+[Features](#-features) ·
+[How the crosshair conversion works](#-the-crosshair) ·
+[Run it locally](#-updating-the-data)
+
+<br>
 
 [![Watch the 45-second demo: copying donk's crosshair](media/demo.jpg)](media/demo.mp4)
 
-*Click the image to watch the 45-second demo (MP4).*
+<sub>▶ Click to watch the 45-second demo (MP4)</sub>
 
-## How to use
+</div>
+
+<br>
+
+## ⚡ How to use
 
 1. Open a player page from the list on the site.
 2. Hit **Copy crosshair**, a single section, or the **full config**, which comes in
@@ -16,18 +35,26 @@ Browse CS2 pro players' full settings and copy ready-to-paste console commands t
 3. In CS2, open the console (`~` or `` ` `` key), paste, press Enter. For the full
    config, paste and Enter each part in turn.
 
-Or download the player's **.cfg**, save it in
-`Counter-Strike Global Offensive/game/csgo/cfg/` and run `exec <name>` in the
-console (for example `exec donk`). It holds the same converted commands, one per line.
+> [!TIP]
+> Or download the player's **.cfg**, save it in `Counter-Strike Global Offensive/game/csgo/cfg/` and run `exec <name>` in the console (for example `exec donk`). It holds the same converted commands, one per line.
 
-Why parts: CS2 still ships the Source tokenizer, which rejects a console line
-longer than 510 characters ("…overflows the tokenizer buffer.. Skipping!"), and
-most pros' full configs are longer (up to about 1,200 characters). So the full
-config is split by section (crosshair; mouse, viewmodel & radar; HUD & other).
-Every copy button on the site is kept at 500 characters or less, and the build
-fails if one isn't.
+> [!NOTE]
+> Why parts: CS2 still ships the Source tokenizer, which rejects a console line longer than 510 characters ("…overflows the tokenizer buffer.. Skipping!"), and most pros' full configs are longer (up to about 1,200 characters). So the full config is split by section (crosshair; mouse, viewmodel & radar; HUD & other). Every copy button on the site is kept at 500 characters or less, and the build fails if one isn't.
 
-### The crosshair
+## ✨ Features
+
+- Search and sort across 620 pro players
+- **HLTV Top 10 section** on the front page (latest official HLTV player ranking, links straight to each pro's config)
+- **Classic configs** (`/classic/`): the top 10 players of each year from 2011 to 2015, plus Cloud9 and iBUYPOWER as they were in January 2015, with their dated CS:GO settings converted for CS2 and period photos (see below)
+- **Your-DPI sensitivity matcher**: enter your mouse DPI once, get the in-game sensitivity that matches each pro's speed (eDPI match), or copy the config part with the sensitivity rewritten for your DPI
+- Crosshair converted to the current CS2 crosshair system, with a pixel preview (inline SVG, works without JavaScript)
+- Per-category copy blocks (crosshair, sensitivity, viewmodel, radar, HUD, other)
+- Launch options for forcing resolution
+- Downloadable, converted per-player `.cfg` file
+- Fully prerendered static pages (one per player at `/p/<slug>/`), sitemap and structured data for search engines
+- Weekly auto-refresh of data via a GitHub Action
+
+## 🎯 The crosshair
 
 CS2's Sept 22, 2026 "Rush Hour" update replaced the crosshair system. Sizes are now
 pixels at the resolution they were authored at (`cl_crosshair_screen_height`), and
@@ -76,6 +103,11 @@ through 2000930), vendored under `scraper/vendor/`:
   lines over 510 characters; a longer paste comes in parts, with the size
   settings and screen height together in the last).
 
+<details>
+<summary><b>Accuracy: how the conversion was checked, and where a pro's current crosshair may differ</b></summary>
+
+<br>
+
 Valve published no conversion formula, so this is a community reconstruction. For
 Static Cross (style 4) at 1920x1080 and 1280x960, its sizes agree with the rule
 crosshairrestore.com measured from its owner's old- and new-game screenshots (builds
@@ -107,7 +139,9 @@ the only one with captures, gives the same crosshair for 286 of the 297 pros it
 converts; the rest differ only where the old arms touched (gap -5) or in how a 1.5
 outline is handled.
 
-Notes:
+</details>
+
+### Good to know
 
 - **Mouse DPI / polling rate** are set in your mouse software, not the game. Make
   sure your driver matches the player's DPI shown on their page.
@@ -122,20 +156,29 @@ Notes:
 - Each page also shows the original settings.gg `autoexec.cfg` (pre-patch format,
   `cfg/raw/`). Don't exec it: its crosshair settings no longer work.
 
-## Features
+## 🛠️ Updating the data
 
-- Search and sort across 620 pro players
-- **HLTV Top 10 section** on the front page (latest official HLTV player ranking, links straight to each pro's config)
-- **Classic configs** (`/classic/`): the top 10 players of each year from 2011 to 2015, plus Cloud9 and iBUYPOWER as they were in January 2015, with their dated CS:GO settings converted for CS2 and period photos (see below)
-- **Your-DPI sensitivity matcher**: enter your mouse DPI once, get the in-game sensitivity that matches each pro's speed (eDPI match), or copy the config part with the sensitivity rewritten for your DPI
-- Crosshair converted to the current CS2 crosshair system, with a pixel preview (inline SVG, works without JavaScript)
-- Per-category copy blocks (crosshair, sensitivity, viewmodel, radar, HUD, other)
-- Launch options for forcing resolution
-- Downloadable, converted per-player `.cfg` file
-- Fully prerendered static pages (one per player at `/p/<slug>/`), sitemap and structured data for search engines
-- Weekly auto-refresh of data via a GitHub Action
+- The workflow runs **weekly** automatically (scheduled via GitHub Actions).
+- To trigger a manual refresh, go to the **Actions** tab in this repo and click **Run workflow**.
+- Or run it locally (Python 3.10+ and Node 22.12+):
 
-## Repo layout
+```bash
+pip install -r scraper/requirements.txt
+node scraper/test_crosshair.mjs         # conversion checks
+python3 scraper/scrape.py               # refresh data/ and cfg/raw/ from settings.gg
+python3 scraper/top10.py                # optional, usually blocked by HLTV
+node scraper/crosshair.mjs              # convert crosshairs -> data/crosshair.json
+python3 scraper/sitegen.py              # rebuild the HTML pages, cfg files and sitemap
+python3 scraper/test_site.py            # check the result
+```
+
+To preview the site locally, serve the repo root (the pages use root-relative
+links): `python3 -m http.server` and open http://localhost:8000.
+
+<details>
+<summary><b>Repo layout</b></summary>
+
+<br>
 
 ```
 .
@@ -177,26 +220,14 @@ Notes:
 The HTML pages and `cfg/<slug>.cfg` are generated: edit `scraper/sitegen.py` (or
 `assets/`), not the generated files, then rebuild.
 
-## Updating the data
+</details>
 
-- The workflow runs **weekly** automatically (scheduled via GitHub Actions).
-- To trigger a manual refresh, go to the **Actions** tab in this repo and click **Run workflow**.
-- Or run it locally (Python 3.10+ and Node 22.12+):
+## 🏛️ Classic configs (2011-2015)
 
-```bash
-pip install -r scraper/requirements.txt
-node scraper/test_crosshair.mjs         # conversion checks
-python3 scraper/scrape.py               # refresh data/ and cfg/raw/ from settings.gg
-python3 scraper/top10.py                # optional, usually blocked by HLTV
-node scraper/crosshair.mjs              # convert crosshairs -> data/crosshair.json
-python3 scraper/sitegen.py              # rebuild the HTML pages, cfg files and sitemap
-python3 scraper/test_site.py            # check the result
-```
+<details>
+<summary><b>How the 2011-2015 configs were sourced, dated and converted</b></summary>
 
-To preview the site locally, serve the repo root (the pages use root-relative
-links): `python3 -m http.server` and open http://localhost:8000.
-
-## Classic configs (2011-2015)
+<br>
 
 `data/classic.json` is curated by hand; the weekly run only re-converts it.
 
@@ -257,10 +288,20 @@ converted at when its source differs from the video settings shown.
 To change an entry, edit `data/classic.json`, then run `node scraper/crosshair.mjs`,
 `python3 scraper/sitegen.py` and `python3 scraper/test_site.py`.
 
-## Data source & credits
+</details>
+
+## 🙏 Data source & credits
 
 All settings data is sourced from [settings.gg](https://settings.gg) (community-generated pro configs). Classic section: rankings from [HLTV](https://www.hltv.org) and [Esports Earnings](https://www.esportsearnings.com), configs from the public archives linked on each page. Crosshair conversion: [small-indie-crosshair-company](https://github.com/sebastianspicker/small-indie-crosshair-company) (MIT). This project is an unofficial, fan-made convenience tool and is **not** affiliated with settings.gg, Valve, or any player. Data is updated weekly.
 
-## Disclaimer
+## ⚠️ Disclaimer
 
 This project is for personal use only. Settings accuracy depends on contributions to settings.gg.
+
+<div align="center">
+
+<br>
+
+**[copyprosta.com](https://copyprosta.com)** · MIT licensed · Not affiliated with Valve or settings.gg
+
+</div>
