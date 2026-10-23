@@ -12,22 +12,22 @@
 [![License: MIT](https://img.shields.io/github/license/AntonyPerez0/cs2-pro-configs?style=for-the-badge&color=4da3ff)](LICENSE)
 
 [**Open the site**](https://copyprosta.com) ·
-[How to use](#-how-to-use) ·
-[Features](#-features) ·
-[How the crosshair conversion works](#-the-crosshair) ·
-[Run it locally](#-updating-the-data)
+[How to use](#how-to-use) ·
+[Features](#features) ·
+[How the crosshair conversion works](#the-crosshair) ·
+[Run it locally](#updating-the-data)
 
 <br>
 
 [![Watch the 45-second demo: copying donk's crosshair](media/demo.jpg)](media/demo.mp4)
 
-<sub>▶ Click to watch the 45-second demo (MP4)</sub>
+<sub>Click to watch the 45-second demo (MP4)</sub>
 
 </div>
 
 <br>
 
-## ⚡ How to use
+## How to use
 
 1. Open a player page from the list on the site.
 2. Hit **Copy crosshair**, a single section, or the **full config**, which comes in
@@ -41,7 +41,7 @@
 > [!NOTE]
 > Why parts: CS2 still ships the Source tokenizer, which rejects a console line longer than 510 characters ("…overflows the tokenizer buffer.. Skipping!"), and most pros' full configs are longer (up to about 1,200 characters). So the full config is split by section (crosshair; mouse, viewmodel & radar; HUD & other). Every copy button on the site is kept at 500 characters or less, and the build fails if one isn't.
 
-## ✨ Features
+## Features
 
 - Search and sort across 620 pro players
 - **HLTV Top 10 section** on the front page (latest official HLTV player ranking, links straight to each pro's config)
@@ -54,7 +54,7 @@
 - Fully prerendered static pages (one per player at `/p/<slug>/`), sitemap and structured data for search engines
 - Weekly auto-refresh of data via a GitHub Action
 
-## 🎯 The crosshair
+## The crosshair
 
 CS2's Sept 22, 2026 "Rush Hour" update replaced the crosshair system. Sizes are now
 pixels at the resolution they were authored at (`cl_crosshair_screen_height`), and
@@ -156,7 +156,7 @@ outline is handled.
 - Each page also shows the original settings.gg `autoexec.cfg` (pre-patch format,
   `cfg/raw/`). Don't exec it: its crosshair settings no longer work.
 
-## 🛠️ Updating the data
+## Updating the data
 
 - The workflow runs **weekly** automatically (scheduled via GitHub Actions).
 - To trigger a manual refresh, go to the **Actions** tab in this repo and click **Run workflow**.
@@ -222,7 +222,7 @@ The HTML pages and `cfg/<slug>.cfg` are generated: edit `scraper/sitegen.py` (or
 
 </details>
 
-## 🏛️ Classic configs (2011-2015)
+## Classic configs (2011-2015)
 
 <details>
 <summary><b>How the 2011-2015 configs were sourced, dated and converted</b></summary>
@@ -290,11 +290,11 @@ To change an entry, edit `data/classic.json`, then run `node scraper/crosshair.m
 
 </details>
 
-## 🙏 Data source & credits
+## Data source & credits
 
 All settings data is sourced from [settings.gg](https://settings.gg) (community-generated pro configs). Classic section: rankings from [HLTV](https://www.hltv.org) and [Esports Earnings](https://www.esportsearnings.com), configs from the public archives linked on each page. Crosshair conversion: [small-indie-crosshair-company](https://github.com/sebastianspicker/small-indie-crosshair-company) (MIT). This project is an unofficial, fan-made convenience tool and is **not** affiliated with settings.gg, Valve, or any player. Data is updated weekly.
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 This project is for personal use only. Settings accuracy depends on contributions to settings.gg.
 
