@@ -3,7 +3,7 @@
   "nick": "kaze",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy91b2Q1dVNPcHcxYzl0d3VPbkIxMW9tLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.6lxHb_He3oi9UjAORTQsz4HRksINCc31JDrcHeAF0rU",
   "real_name": "Andrew Khong",
-  "crosshair_code": "CSGO-PxuDy-ccOH8-fVAAV-RqdfQ-dG8nM",
+  "crosshair_code": null,
   "steamid64": "76561197976393269",
   "launch_options": "-novid -high -freq 240 -tickrate 128 +rate 786432",
   "tables": {

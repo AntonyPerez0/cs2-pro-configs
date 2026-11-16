@@ -3,7 +3,7 @@
   "nick": "twenty3",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy81Y0JxcXdWSXVKTmVCcmxyc2RXNUZzLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.n0deaFZskLDNe7NEw1spe7B2wI-TV5dZYQeZRI_EXww",
   "real_name": "Alexandra Timonina",
-  "crosshair_code": "CSGO-fuVV5-5d3o9-6mbq8-DrMFY-Q6XXC",
+  "crosshair_code": null,
   "steamid64": "76561198809859276",
   "launch_options": "-freq 240 -novid -tickrate 128 +mat_disable_fancy_blending 1 +fps_max 400 +cl_updaterate 128 +cl_cmdrate 128 -allow_third_party_software",
   "tables": {

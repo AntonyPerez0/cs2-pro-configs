@@ -3,7 +3,7 @@
   "nick": "rigoN",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9KVVlsb3dublNBU1cya24ycXhMd3h4LnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.S5XvrY_Ht4iBWFbXXGwmTz7bJmXy_LhSFSqI2f6bExI",
   "real_name": "Rigon Gashi",
-  "crosshair_code": "CSGO-4fod7-hk7Cu-GcEud-dGwCU-zqLDR",
+  "crosshair_code": null,
   "steamid64": "76561198172837021",
   "launch_options": "-freq 240 -novid -nojoy -noforcemaccel -noforcemparms -noforcemspd -tickrate 128 -allow_third_party_software -high",
   "tables": {

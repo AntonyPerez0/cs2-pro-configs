@@ -3,7 +3,7 @@
   "nick": "Queenix",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9OWXYwNnNTWDAxQlFkeTZhSkZTaXVqLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.hVVq1zsLHvO592eGEupByw3NKmpCDaXC0R1JnH1Z0aQ",
   "real_name": "Jonas Dideriksen",
-  "crosshair_code": "CSGO-4aVA3-mPqH8-EdPTN-Kf9tc-SHjeC",
+  "crosshair_code": null,
   "steamid64": "76561198030545997",
   "launch_options": "-console -novid -freq 240 -tickrate 128 -language bananagaming -high -nojoy",
   "tables": {

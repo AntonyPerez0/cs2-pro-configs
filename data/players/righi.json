@@ -3,7 +3,7 @@
   "nick": "righi",
   "avatar_url": null,
   "real_name": "João Righi",
-  "crosshair_code": "CSGO-EfsQE-3wm9h-tF55P-SzHqQ-WuPcF",
+  "crosshair_code": null,
   "steamid64": "76561198030305992",
   "launch_options": "-console -freq 240 -tickrate 128 -high +r_dynamic \"0\" -allow_third_party_software",
   "tables": {

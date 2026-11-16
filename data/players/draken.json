@@ -3,7 +3,7 @@
   "nick": "draken",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9FVXJsNzRGTHNrWjZwMGFBSnlNb28yLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.HZrICn0orNjCFUhr3aCN_0yotB3Ml0kHR8F1K6BoW1M",
   "real_name": "William Sundin",
-  "crosshair_code": "CSGO-J29Jc-WDCwx-VdLUG-szY5O-33LsE",
+  "crosshair_code": null,
   "steamid64": "76561198119388735",
   "launch_options": "-freq 240 -refresh 240 -novid -console -high +exec autoexec +cl_updaterate 128 -tickrate 128 -nod3d9ex",
   "tables": {

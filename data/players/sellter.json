@@ -3,7 +3,7 @@
   "nick": "SELLTER",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy83Tm44ZkU5X3hFaTNRbmlCNl95UnhELnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.yahC49oh83RLwsK3iGsXFFHk4VzMDAa6aglzjCVBEM0",
   "real_name": "Ivan Miroshnikov",
-  "crosshair_code": "CSGO-BtPZK-bqxtO-JjeEm-mPMAf-pL3ED",
+  "crosshair_code": null,
   "steamid64": "76561198119088041",
   "launch_options": "-novid -console -tickrate 128 +cl_updaterate 128 +cl_cmdrate 128 +cl_interp_ratio 1 -rate 999999 -fps_max_menu 0 +cl_show_team_equipment +fps_max 700",
   "tables": {

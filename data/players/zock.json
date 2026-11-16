@@ -3,7 +3,7 @@
   "nick": "zock",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9ETkV3NDNqNTRKR3BUVzRZVUg3SmxaLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.ysSGEZk8uNilHz9Adltaxh4VMz0FnK8ALBGhS8hor0U",
   "real_name": "Mauro Da Silva",
-  "crosshair_code": "CSGO-Mb7PU-8CbBw-ukKDK-yTCcC-EtFKO",
+  "crosshair_code": null,
   "steamid64": "76561198839451691",
   "launch_options": "-allow_third_party_software +exec autoexec.cfg",
   "tables": {

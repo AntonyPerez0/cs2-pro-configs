@@ -3,7 +3,7 @@
   "nick": "Beccie",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy91RUw0LTl2V19iQjRwLVdWZUptYkZ5LnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.HhyVEGnZn13tc71LOyYIRWaG4dDeeF5nS9CTosEXHhI",
   "real_name": "Lukas Bauder Balcells",
-  "crosshair_code": "CSGO-JTjR5-dUAi7-wdkAA-BFfxK-CFCEB",
+  "crosshair_code": null,
   "steamid64": "76561198093176122",
   "launch_options": "-cl_cmdrate 128 -tickrate 128 +cl_updaterate 128 -nojoy -novid",
   "tables": {

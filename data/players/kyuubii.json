@@ -3,7 +3,7 @@
   "nick": "kyuubii",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9yZ3B1UUQ3Yy1ucWI2WlFwYkNrZ2tDLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.UDGoK-GZwV51A7_FOabG0z3W51JOGpfteC-xhHygnxo",
   "real_name": "Can Ali",
-  "crosshair_code": "CSGO-QFoRz-qvhM7-zb5qw-tsQhX-zB5RG",
+  "crosshair_code": null,
   "steamid64": "76561198144926364",
   "launch_options": "-tickrate 128 -freq 240 -novid -nojoy -high -allow_third_party_software",
   "tables": {

@@ -3,7 +3,7 @@
   "nick": "Patsi",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9uanVyajZ3QVkxR3hMTXR5V09HdWN6LnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.O_gvQyuZH_sG1UB9hhyR4xZTkx7MO1QMBLs1TOBOvyo",
   "real_name": "Robert Isyanov",
-  "crosshair_code": "CSGO-bvsru-pSBJu-dUx8r-SD6Y5-6QBUM",
+  "crosshair_code": null,
   "steamid64": "76561198288540801",
   "launch_options": "-novid -language english +cl_interp_ratio 1 -freq 240 -tickrate 128 +rate 786432 +fps_max 0 -console",
   "tables": {

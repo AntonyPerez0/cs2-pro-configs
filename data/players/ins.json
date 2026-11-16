@@ -3,7 +3,7 @@
   "nick": "INS",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy80Z09hNjA4STBBVVZjdzlyRjZSbUJxLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.4zmhj6rI9GT5bADzP1b5PKia8Nt0mHrlDCjWajqvHmM",
   "real_name": "Joshua Potter",
-  "crosshair_code": "CSGO-ypC4V-mQvoJ-GoHFj-htAA6-9DmDA",
+  "crosshair_code": null,
   "steamid64": "76561197987212623",
   "launch_options": "-useforcedmparms -noforcemparms -noforcemaccel -noforcemspd -freq 240 -noaafonts -novid -high -console -nojoy -d3d9ex +mat_queue_mode 2 +mat_vignette_enable 0 -tickrate 128 -untrusted -allow_third_party_software",
   "tables": {

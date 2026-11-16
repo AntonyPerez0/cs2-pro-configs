@@ -3,7 +3,7 @@
   "nick": "DD",
   "avatar_url": null,
   "real_name": "Hui Wu",
-  "crosshair_code": "CSGO-jQx5T-f7moo-kwd7v-om3hc-RMQNN",
+  "crosshair_code": null,
   "steamid64": "76561198130248345",
   "launch_options": "-noforcemaccel -noforcemparms -refresh 240 -processheap -tickrate 128 -novid -threads 4 -freq 240",
   "tables": {

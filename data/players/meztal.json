@@ -3,7 +3,7 @@
   "nick": "meztal",
   "avatar_url": null,
   "real_name": "Tal Hahiashvili",
-  "crosshair_code": "CSGO-NRwft-SHvpA-Ph6NM-dXNEQ-Rx6KQ",
+  "crosshair_code": null,
   "steamid64": "76561198058883409",
   "launch_options": "-freq 240 -console -novid -tickrate 128 +exec autoexec.cfg -allow_third_party_software",
   "tables": {

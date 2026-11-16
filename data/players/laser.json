@@ -3,7 +3,7 @@
   "nick": "laser",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy8xc0dRcksweS1LZ2RkOW9VdElheEl1LnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.zvgjm6iSd4jpYafStkcAYMwWVlJhcjx-zaDBofp3y0I",
   "real_name": "Eduardo Chshekin",
-  "crosshair_code": "CSGO-QKB9N-pqqyO-OX8bw-n78wK-5tbJD",
+  "crosshair_code": null,
   "steamid64": "76561198192352118",
   "launch_options": "-tickrate 128 -novid -console -freq 240 +cl_interp_ratio 1 +fps_max 999",
   "tables": {

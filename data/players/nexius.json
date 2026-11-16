@@ -3,7 +3,7 @@
   "nick": "Nexius",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9FUHVjemxzMF9zTDFSSlZ2aXI3SVJILnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.Doafx1wxPRIBw8pIUbRX_zMkMerastpyTq6Ze0849PA",
   "real_name": "Bram Campana",
-  "crosshair_code": "CSGO-ZFcz7-LNrML-Qw7qY-4Ejsw-eJAMK",
+  "crosshair_code": null,
   "steamid64": "76561198170578957",
   "launch_options": "+exec autoexec.cfg +fps_max 999 +fps_max_menu 999 -novid -tickrate 128 -rate 786432",
   "tables": {

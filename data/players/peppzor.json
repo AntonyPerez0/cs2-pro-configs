@@ -3,7 +3,7 @@
   "nick": "Peppzor",
   "avatar_url": null,
   "real_name": "Peppe Borak",
-  "crosshair_code": "CSGO-m5XOa-4DWSj-X8rX3-9itAf-ZbJaA",
+  "crosshair_code": null,
   "steamid64": "76561198288390068",
   "launch_options": "-novid -console -freq 240 -tickrate 128 +exec Peppzor -allow_third_party_software",
   "tables": {

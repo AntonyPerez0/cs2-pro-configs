@@ -3,7 +3,7 @@
   "nick": "dupreeh",
   "avatar_url": null,
   "real_name": "Peter Rasmussen",
-  "crosshair_code": "CSGO-ULZbY-ksYTc-2sQmx-moFkY-nHL9P",
+  "crosshair_code": null,
   "steamid64": "76561198004854956",
   "launch_options": "-console -freq 360 -tickrate 128 +rate 786432 +cl_interp_ratio 1 +fps_max 0 +cl_updaterate 128 +cl_cmdrate 128 +cl_interp 0",
   "tables": {

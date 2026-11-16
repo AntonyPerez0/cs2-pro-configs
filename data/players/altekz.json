@@ -3,7 +3,7 @@
   "nick": "Altekz",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9rS0RfTGtWd2JpMUltQVhNUzk2TDROLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.EeyE8vVr8kiY7h1kohjxsrtLix0BxREG9JJinekXKw8",
   "real_name": "Alexander Givskov",
-  "crosshair_code": "CSGO-GerbA-eCwcS-oHEGu-kmLrH-ERNMB",
+  "crosshair_code": null,
   "steamid64": "76561198209342312",
   "launch_options": "+fps_max 400 -freq 240 -console -tickrate 128 -novid -rate 786432 +cl_interp_ratio 1",
   "tables": {

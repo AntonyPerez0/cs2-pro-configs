@@ -3,7 +3,7 @@
   "nick": "joel",
   "avatar_url": null,
   "real_name": "Joel Holmlund",
-  "crosshair_code": "CSGO-rpUU2-AwCBF-DOCG8-Dhwwy-f86yD",
+  "crosshair_code": null,
   "steamid64": "76561198799702935",
   "launch_options": "-freq 240 -novid -tickrate 128 -exec autoexec -allow_third_party_software",
   "tables": {

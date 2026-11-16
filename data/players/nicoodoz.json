@@ -3,7 +3,7 @@
   "nick": "nicoodoz",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9yOVVqQnNweTBrRVRZSWMtVXlrTjEtLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.JdspHVBCM6FlaowKhaGKxMEFbpoIhJQ10IWa5461lBk",
   "real_name": "Nico Tamjidi",
-  "crosshair_code": "CSGO-nkvHm-GPxNn-B4Xaq-kGezm-bFPYE",
+  "crosshair_code": null,
   "steamid64": "76561198073117127",
   "launch_options": "-tickrate 128 -novid -allow_third_party_software -nojoy -high",
   "tables": {

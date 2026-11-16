@@ -3,7 +3,7 @@
   "nick": "togs",
   "avatar_url": null,
   "real_name": "Victor Rapassi",
-  "crosshair_code": "CSGO-D37A2-BkdYO-9EMny-UhtQu-Zzn6J",
+  "crosshair_code": null,
   "steamid64": "76561198453919902",
   "launch_options": "-novid -tickrate 128 +cl_interp_ratio 1 -allow_third_party_software",
   "tables": {

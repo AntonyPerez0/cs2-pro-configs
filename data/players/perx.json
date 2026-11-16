@@ -3,7 +3,7 @@
   "nick": "PerX",
   "avatar_url": null,
   "real_name": "Paul von Erdmannsdorff",
-  "crosshair_code": "CSGO-8ay3p-vt27Y-XE32n-KA4Mp-fFuCQ",
+  "crosshair_code": null,
   "steamid64": "76561198168694063",
   "launch_options": "-console -novid -tickrate 128 -freq 360 -language english -nod3d9ex1 -threads 4 -no-browser -nojoy +fps_max 590 -allow_third_party_software +exec autoexec.cfg",
   "tables": {

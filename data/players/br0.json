@@ -3,7 +3,7 @@
   "nick": "br0",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9HVVE5SkJZTV9lSUp0Vy0wamJDZUJNLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.ZcYAwxGSk0-bzLKqPcg4wfE-y-lgPP4TXYGaWiUYgE8",
   "real_name": "Alexander Bro",
-  "crosshair_code": "CSGO-6aFcp-ZehmO-V8qjx-NLu7y-L4hWA",
+  "crosshair_code": null,
   "steamid64": "76561198060483793",
   "launch_options": "-freq 240 -novid -tickrate 128 -console +cl_forcepreload 1 +rate 786432 +mat_queue_mode 2 +cl_interp 0",
   "tables": {

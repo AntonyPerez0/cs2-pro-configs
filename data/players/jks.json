@@ -3,7 +3,7 @@
   "nick": "jks",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy83ZXhwNkFrTWdDclU5c09CRVEydDhxLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.1UGrIHl3udgbN9aVUCNlFp0dbZHxyhllYI7Yxn5UQXQ",
   "real_name": "Justin Savage",
-  "crosshair_code": "CSGO-vSd2F-Pq6oO-DvDqZ-khYM3-ZmRBD",
+  "crosshair_code": null,
   "steamid64": "76561197977105184",
   "launch_options": "-noforcemaccel -noforcemparms -freq 240 -novid -tickrate 128 -high",
   "tables": {

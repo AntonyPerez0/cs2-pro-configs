@@ -3,7 +3,7 @@
   "nick": "Tapewaare",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy90ZXk1dlJpNklNVmlxYmZ1Zm4yNjRqLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.80CcdPXZYvu88jGTi1BJbDH9u3ZfDTMwzr2dvLO1_wY",
   "real_name": "Sindre Ellefsen",
-  "crosshair_code": "CSGO-929D7-MtJYJ-D6pdB-5iP5j-b3pxA",
+  "crosshair_code": null,
   "steamid64": "76561198930218135",
   "launch_options": "-freq 360 +exec autoexec.cfg",
   "tables": {

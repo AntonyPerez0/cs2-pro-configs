@@ -3,7 +3,7 @@
   "nick": "Vexite",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy95blU5NjBCTmJDMUZWZG5QQjRSSUNwLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.6p3mhvAa2bwy79mIo_yYt9KS5jcQaZW0dd82502TM4g",
   "real_name": "Declan Portelli",
-  "crosshair_code": "CSGO-txW8h-oXVqH-3z9kX-ZunXT-Xh5BO",
+  "crosshair_code": null,
   "steamid64": "76561198052888143",
   "launch_options": "-tickrate 128 -high -cl_updaterate 128 -cl_cmdrate 128 -novid -freq 360 -allow_third_party_software",
   "tables": {

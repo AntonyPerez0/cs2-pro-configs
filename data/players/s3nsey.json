@@ -3,7 +3,7 @@
   "nick": "S3NSEY",
   "avatar_url": null,
   "real_name": "Efekan Topaloglu",
-  "crosshair_code": "CSGO-peeQS-LWdOV-Kq5mA-SoYsx-wRQhG",
+  "crosshair_code": null,
   "steamid64": "76561198064010365",
   "launch_options": "+exec autoexec -novid -language english -tickrate 128 -high +fps_max 0 +cl_interp 0.31000 +cl_interp_ratio 2 +rate 786432 +cl_updaterate 128 +cl_cmdrate 128 +mat_queue_mode 2 +r_dynamic 0 -d3d9ex -nojoy -freq 240 -allow_third_party_software",
   "tables": {

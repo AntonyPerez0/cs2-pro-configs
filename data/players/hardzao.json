@@ -3,7 +3,7 @@
   "nick": "hardzao",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9raFJxcFoteW9CVURmVzdkQjJZTWYyLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.k-vio-AA6OnFTC-X4WI94TZl1cOfsQqjmcsZEaMp8XY",
   "real_name": "Wesley Lopes",
-  "crosshair_code": "CSGO-6bRik-LSE3G-5sa7v-U72Qu-f86yD",
+  "crosshair_code": null,
   "steamid64": "76561198249302730",
   "launch_options": "+clientport 27032 -high -freq 240 +mat_queue_mode 2 -nojoy 1 -novid -noaafonts -tickrate 128 -allow_third_party_software -insecure",
   "tables": {

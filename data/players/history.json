@@ -3,7 +3,7 @@
   "nick": "history",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy93eWptejJEeF9WMG95UDlPcnNRZkxjLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.cOkDcNj4Mb1VidO19D4qxHrMaBjpJODXt_YKOoO7v4Q",
   "real_name": "Allan Lawrenz",
-  "crosshair_code": "CSGO-xi4pv-n6wQn-5UQX6-GMAkA-CW9vO",
+  "crosshair_code": null,
   "steamid64": "76561198885430317",
   "launch_options": "-allow_third_party_software -novid -tickrate 128 -freq 240 +mat_queue_mode 2",
   "tables": {

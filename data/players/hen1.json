@@ -3,7 +3,7 @@
   "nick": "HEN1",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9nOHlDQ2s4QkdaeU41S0lGS0F4NGh2LnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.6-bgFXU-zheZF9eUaS-ZNSgmXKo77BN_F5IDHCjJcbs",
   "real_name": "Henrique Teles",
-  "crosshair_code": "CSGO-MXQrt-xQWeR-wnuzU-t4cLq-qKwLA",
+  "crosshair_code": null,
   "steamid64": "76561198018027263",
   "launch_options": "-freq 240 -refresh 240 -novid -high -console -tickrate 128 -console -novid",
   "tables": {

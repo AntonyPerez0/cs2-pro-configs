@@ -3,7 +3,7 @@
   "nick": "Maze",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy81NDVaZ0txWUFqOUdMZFpLRUlJV1FULnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.qPKIXoh__DL9PlML53xb30Yyt9scxhE-8eP1IJjnaeE",
   "real_name": "Mikkel Sparvath",
-  "crosshair_code": "CSGO-GJ89F-Pem7t-CSQuv-kijeX-A7QBD",
+  "crosshair_code": null,
   "steamid64": "76561198212412773",
   "launch_options": "-novid -freq 360 -console +exec autoexec.cfg -tickrate 128",
   "tables": {

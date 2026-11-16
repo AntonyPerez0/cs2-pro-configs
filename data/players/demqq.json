@@ -3,7 +3,7 @@
   "nick": "DemQQ",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9hOW1Iak03UndUMDFhRmhCVnd6dkd1LnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.nDWdRSmEnLW0etFImsAU0i2Dq4_FEh1oU6kP6TgBFxs",
   "real_name": "Sergiy Demchenko",
-  "crosshair_code": "CSGO-tiH5B-Z7jQJ-rDEYB-DdjWD-r9MfN",
+  "crosshair_code": null,
   "steamid64": "76561198126171426",
   "launch_options": "-forcemspd -noforcemparms -tickrate 128; -cl_forcepreload 1; +cl_updrate 128 +cl_cmdrate 128",
   "tables": {

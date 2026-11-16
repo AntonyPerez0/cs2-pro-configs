@@ -3,7 +3,7 @@
   "nick": "Keoz",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy93bjZTSWFKRGZsWEN3UHJlODVaVXlHLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19._D9I_SOU-aj_f72RvQo5ZDImJ-AacqRErMu5H_oIPgg",
   "real_name": "Nicolas Dgus",
-  "crosshair_code": "CSGO-SjKEt-tcrfL-SxbjY-bBFQ4-C8XXC",
+  "crosshair_code": null,
   "steamid64": "76561198098344244",
   "launch_options": "-freq 240 -console -novid -tickrate 128 -allow_third_party_software",
   "tables": {

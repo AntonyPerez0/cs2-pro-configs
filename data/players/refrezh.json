@@ -3,7 +3,7 @@
   "nick": "refrezh",
   "avatar_url": null,
   "real_name": "Ismail Ali",
-  "crosshair_code": "CSGO-wf22h-BjGSs-seFGj-C8Xew-piWjM",
+  "crosshair_code": null,
   "steamid64": "76561198064864198",
   "launch_options": "+cl_forcepreload 1 -novid -tickrate 128 +exec autoexec +mat_queue_mode -1 +fps_max 400 +cl_interp_ratio 1 +cl_interp 0.1 -refresh 240 -d3d9ex -allow_third_party_software -language english",
   "tables": {

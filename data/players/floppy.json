@@ -3,7 +3,7 @@
   "nick": "floppy",
   "avatar_url": null,
   "real_name": "Ricky Kemery",
-  "crosshair_code": "CSGO-e3OD6-HvJdM-r57xw-64ycw-RVYwP",
+  "crosshair_code": null,
   "steamid64": "76561198306519263",
   "launch_options": "-novid -freq 240 -tickrate 128 +cl_interp_ratio 1 +fps_max 999 +r_dynamic 0 -allow_third_party_software",
   "tables": {

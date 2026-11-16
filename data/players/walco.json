@@ -3,7 +3,7 @@
   "nick": "Walco",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy8xZGlSMlRnX0RkeEIwc0lubkJlT2s2LnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.w0vJHp_K_XKO691HAmZlRkbwhDjQqAH2eBdXmdYpUO4",
   "real_name": "Colby Walsh",
-  "crosshair_code": "CSGO-b3aCE-sRFzu-wpWXQ-5vKsU-vAtdA",
+  "crosshair_code": null,
   "steamid64": "76561198089905186",
   "launch_options": "-tickrate 128 -exec prac -novid +exec jumpthrow -allow_third_party_software",
   "tables": {

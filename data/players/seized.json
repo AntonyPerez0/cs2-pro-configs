@@ -3,7 +3,7 @@
   "nick": "seized",
   "avatar_url": null,
   "real_name": "Denis Kostin",
-  "crosshair_code": "CSGO-ZjzUZ-bRx8A-KVjeG-BOCyZ-kSLoD",
+  "crosshair_code": null,
   "steamid64": "76561197963914156",
   "launch_options": "+exec autoexec.cfg -tickrate 128 -console -novid -allow_third_party_software +clientport 27020 -nojoy",
   "tables": {

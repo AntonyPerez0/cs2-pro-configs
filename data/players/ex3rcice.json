@@ -3,7 +3,7 @@
   "nick": "Ex3rcice",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9JWVZnenFCYWxFSlExeWZZNDR0LXRiLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.yrFzQi8FbXeS07ptvZgb3xXiHVWf-hiCPt-Wgb6t_fg",
   "real_name": "Pierre Bulinge",
-  "crosshair_code": "CSGO-UDUHi-TkVBx-O9kpp-3cbHQ-fZcNE",
+  "crosshair_code": null,
   "steamid64": "76561198168198200",
   "launch_options": "-novid -console -freq 240 +exec autoexec.cfg -tickrate 128 -cl_cmdrate 128 -cl_updaterate 128 -allow_third_party_software",
   "tables": {

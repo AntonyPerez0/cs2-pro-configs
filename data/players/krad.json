@@ -3,7 +3,7 @@
   "nick": "Krad",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9WX1d4b1YybFBINjFhbnhnT2ItQzVELnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.7Fi5dxYyXcNDAYYe6AehzwUSkvNllu_jRibdSop9r9A",
   "real_name": "Vladislav Kravchenko",
-  "crosshair_code": "CSGO-auwDJ-SUEwf-S2UiD-UtbrR-TA7yD",
+  "crosshair_code": null,
   "steamid64": "76561198031908632",
   "launch_options": "+cl_interp_ratio 1 -freq 240 -tickrate 128 +rate 786432 +cl_cmdrate 128 +cl_upderate 128 +fps_max 301 -console +voice_mixer_volume 0.85",
   "tables": {

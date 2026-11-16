@@ -3,7 +3,7 @@
   "nick": "nython",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy9ZRzNoSXJuTGxlWmJqZTE4bTA1ZWZBLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.e1FAiRdRJwNOt5uiOiDQFWJEN44g1BFuAoUC-w_WcQg",
   "real_name": "Gabriel Lino",
-  "crosshair_code": "CSGO-OZoMU-3ncCn-XMJRV-DAMMx-dsUWJ",
+  "crosshair_code": null,
   "steamid64": "76561198130490651",
   "launch_options": "-noforcemaccel -noforcemparms -novid -freq 240 -refresh 240 -console -tickrate 128 -high",
   "tables": {

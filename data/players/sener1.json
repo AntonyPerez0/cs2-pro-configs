@@ -3,7 +3,7 @@
   "nick": "SENER1",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy96Vjd6NkFONlMtOTNCRjJ1Z0c2LTVuLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.Q2m67OKIgLJbqC7-5B79HwxRboZbgnmq318cdmdxnzA",
   "real_name": "Sener Mahmuti",
-  "crosshair_code": "CSGO-OswEs-epn7J-QZvPp-SRxbP-aUeuB",
+  "crosshair_code": null,
   "steamid64": "76561198152378187",
   "launch_options": "-noforcemaccel -noforcemparms -high -console -novid -tickrate 128 -freq",
   "tables": {

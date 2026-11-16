@@ -3,7 +3,7 @@
   "nick": "vsm",
   "avatar_url": "https://d2u7lpenthl7es.cloudfront.net/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3aWR0aCI6MjAwLCJoZWlnaHQiOjIwMCwia2V5IjoiYXZhdGFycy85bDRmbXF0UHBuWVRWTFNwSXN6ZnRwLnBuZyIsImlhdCI6MSwicmVjdCI6eyJsZWZ0Ijo4MCwidG9wIjowLCJ3aWR0aCI6MjQwLCJoZWlnaHQiOjI0MH19.wQURSS_IK2uhm-Wt9MHf6On-yV9uv_dkT7_dSfmj6SY",
   "real_name": "Vinicius Moreira",
-  "crosshair_code": "CSGO-K7Ek7-9hbMB-OLHW7-4GRNh-xGCEB",
+  "crosshair_code": null,
   "steamid64": "76561198011732823",
   "launch_options": "-tickrate 128 -novid +exec autoexec +mat_queue_mode 2 -d3d9ex",
   "tables": {
